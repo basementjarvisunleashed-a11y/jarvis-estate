@@ -42,3 +42,14 @@ week to `scores/STABILITY.md` history (never rewrite). Log new corrections in
 
 Commit to `audits/<tier>/` in the repo, upload to Dropbox
 `/J.A.R.V.I.S./audits/<tier>/`, append the outcome to the build log.
+
+
+## Phase reporting standard
+
+Doctoral phases in progress are reported by layer and gate status only —
+for example: "Phase 2: Layer 1 verified (39 of 39 tests passing); Layer 2
+not yet open; current gate: Layer 2 entry." Never report a phase as a
+percentage unless the percentage is itself a counted, stated fact (tests
+passed of tests run; states explored of a stated bound). Set 2026-10-20 on
+HgX's pacing directive: Layers 1–3 of Phase 2 run across Months 2–4 of the
+roadmap calendar.
