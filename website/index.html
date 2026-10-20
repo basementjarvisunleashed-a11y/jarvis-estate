@@ -3509,22 +3509,22 @@
   <!-- ================= BUILD ================= -->
   <section id="build" aria-labelledby="build-h">
     <div class="sec-head"><span class="sec-label">BUILD</span><h2 id="build-h">Build-out</h2></div>
-    <p class="sec-sub">The doctoral validation programme is under construction now. Phase 0 froze the contracts; Phase 1 is proving them. Every step is logged below and versioned in the archive.</p>
+    <p class="sec-sub">The doctoral validation programme is under construction now. Phase 0 froze the contracts; Phase 1 proved them — 3,266,929 states model-checked, zero invariant violations. Every step is logged below and versioned in the archive.</p>
 
     <div class="now-building">
-      <div class="nb-head"><span class="dot" aria-hidden="true"></span><h3>NOW BUILDING</h3><span class="nb-phase">PHASE 0 DELIVERABLES · PHASE 1 UNDER WAY</span></div>
+      <div class="nb-head"><span class="dot" aria-hidden="true"></span><h3>NOW BUILDING</h3><span class="nb-phase">PHASE 0 DELIVERABLES · PHASE 1 PROVEN</span></div>
       <ul class="build-items">
         <li><span class="st st-done">Ratified</span><span class="bi-name">Canonical glossary</span><span class="bi-note">One owner per concept, one definition per term — ratified and frozen into the contracts.</span></li>
-        <li><span class="st st-now">Model-checking</span><span class="bi-name">TLA+ state machine</span><span class="bi-note">The work-state machine, formally modelled in TLA+ — the ratified proof language. TLC is now proving the illegal transitions unreachable.</span></li>
+        <li><span class="st st-now">Model-checking</span><span class="bi-name">TLA+ state machine</span><span class="bi-note">The work-state machine, formally modelled in TLA+ — the ratified proof language. TLC proved the illegal transitions unreachable across every reachable state.</span></li>
         <li><span class="st st-done">Frozen</span><span class="bi-name">Event vocabulary</span><span class="bi-note">State and event names fixed in the canonical vocabulary; contracts stand at v1.0.0 normative.</span></li>
       </ul>
     </div>
 
     <div class="phase-rail" aria-label="Programme phases">
       <div class="phase done"><span class="ph-num">PHASE 0</span><p class="ph-name">Freeze the contracts</p><p class="ph-note">Complete — glossary ratified, contracts v1.0.0 normative.</p></div>
-      <div class="phase current"><span class="ph-num">PHASE 1</span><p class="ph-name">Model-check the machine</p><p class="ph-note">Under way — TLC over the TLA+ state machine.</p></div>
+      <div class="phase current"><span class="ph-num">PHASE 1</span><p class="ph-name">Model-check the machine</p><p class="ph-note">Complete — TLC over the TLA+ state machine: 3,266,929 states, zero violations.</p></div>
       <div class="phase"><span class="ph-num">PHASES 2–6</span><p class="ph-name">Verify, specify, measure</p><p class="ph-note">Invariants, consistency, idempotency, security, the router trial.</p></div>
-      <div class="phase"><span class="ph-num">PHASE 7</span><p class="ph-name">Doctoral evidence</p><p class="ph-note">The integrated evidence package — and the open-source release.</p></div>
+      <div class="phase"><span class="ph-num">PHASE 7</span><p class="ph-name">Doctoral evidence</p><p class="ph-note">The integrated evidence package. The open-source release is live on GitHub.</p></div>
     </div>
   </section>
 
@@ -3705,7 +3705,7 @@
   <!-- ================= CONNECT ================= -->
   <section id="connect" aria-labelledby="connect-h">
     <div class="sec-head"><span class="sec-label">CONNECT</span><h2 id="connect-h">Follow the build</h2></div>
-    <p class="sec-sub">Two X handles, one inbox, and the versioned archive. The code joins them when the repository opens.</p>
+    <p class="sec-sub">Two X handles, one inbox, the versioned archive, and the open repository — code, wiki, and the full build history.</p>
 
     <div class="connect-grid">
       <a class="connect-card" href="https://x.com/hgxengineering" target="_blank" rel="noopener">
@@ -3728,12 +3728,16 @@
         <span class="cc-main">The full archive</span>
         <span class="cc-note">The entire /J.A.R.V.I.S./ folder — papers, roadmap, logs, audits, and scores. Every version kept, nothing overwritten.</span>
       </a>
-      <div class="connect-card soon" aria-disabled="true">
+      <a class="connect-card" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate" target="_blank" rel="noopener">
         <span class="cc-kind">GitHub</span>
         <span class="cc-main">The release repository</span>
         <span class="cc-note">Doctrine, skills, contracts, and the reference implementation, with the full build history.</span>
-        <span class="cc-soon">Opens with the first push</span>
-      </div>
+      </a>
+      <a class="connect-card" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/wiki" target="_blank" rel="noopener">
+        <span class="cc-kind">GitHub Wiki</span>
+        <span class="cc-main">The full wiki</span>
+        <span class="cc-note">Eleven pages: the papers, the architecture, the glossary, the doctoral programme, versioning, and the build log.</span>
+      </a>
     </div>
   </section>
 </main>
@@ -3754,6 +3758,34 @@
 -->
 <script type="application/json" id="buildlog-data">
 [
+  {
+    "date": "2026-10-20",
+    "time": "06:11",
+    "approx": true,
+    "tag": "Release",
+    "text": "Website GitHub links fixed — the Connect section's GitHub card now links to the live repository (it previously read 'Opens with the first push' and linked nowhere), a Wiki card was added beside it, and the Build-out section now records Phase 1 as proven rather than under way."
+  },
+  {
+    "date": "2026-10-19",
+    "time": "22:59",
+    "approx": true,
+    "tag": "Release",
+    "text": "GitHub project board stood up — J.A.R.V.I.S. Build-out with Table, Board, and Roadmap views, thirteen items in their true states, eight phase milestones (Phases 0 and 1 closed), and eight labels. The repo About now carries the description, the website link, and topics."
+  },
+  {
+    "date": "2026-10-19",
+    "time": "22:14",
+    "approx": true,
+    "tag": "Release",
+    "text": "Full GitHub wiki published — eleven pages: Home, the Papers, Architecture, Glossary, Doctoral Programme, Versioning, Build Log, Skills, Watchtower, Contributing, FAQ."
+  },
+  {
+    "date": "2026-10-19",
+    "time": "21:30",
+    "approx": true,
+    "tag": "Release",
+    "text": "GitHub repository live — jarvis-estate pushed under the release identity: all four papers, the formal spec, the proofs, the TLC run logs, the skills, the watchtower, the versioning law, and the changelog. The repository is public; the principal's private life is not in it."
+  },
   {
     "date": "2026-10-19",
     "time": "17:58",
