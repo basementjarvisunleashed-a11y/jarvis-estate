@@ -1,0 +1,54 @@
+name: Validate
+
+# Keeps the public record honest: the website's build-log data must parse,
+# and every relative link in the README must point at a real path.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate build-log data and README links
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, re, sys
+
+          failures = []
+
+          # 1. The website build-log JSON must parse and be non-empty.
+          html = open("index.html", encoding="utf-8").read()
+          m = re.search(r'id="buildlog-data">\s*(\[.*?\])\s*</script>', html, re.S)
+          if not m:
+              failures.append("index.html: buildlog-data block not found")
+          else:
+              entries = json.loads(m.group(1))
+              if not entries:
+                  failures.append("index.html: buildlog-data is empty")
+              else:
+                  print(f"buildlog-data: {len(entries)} entries, newest "
+                        f"{entries[0].get('date')} {entries[0].get('time')}")
+
+          # 2. Every relative link in README.md must resolve.
+          readme = open("README.md", encoding="utf-8").read()
+          for target in re.findall(r'\]\(([^)]+)\)', readme):
+              if target.startswith(("http://", "https://", "#", "mailto:")):
+                  continue
+              path = target.split("#")[0]
+              if path and not os.path.exists(path):
+                  failures.append(f"README.md: link target missing: {target}")
+          print("README relative links checked")
+
+          if failures:
+              print("\n".join("FAIL: " + f for f in failures))
+              sys.exit(1)
+          print("All checks passed")
+          PYEOF
