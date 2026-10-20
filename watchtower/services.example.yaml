@@ -1,0 +1,26 @@
+# Example Watchtower manifest — copy to services.yaml and make it yours.
+# State (operational/paused/degraded) is resolved at sweep time, never stored here.
+services:
+  - name: morning-briefing
+    kind: cron
+    cron_id: morning-briefing
+    cadence: daily 08:15
+    description: Day-plan briefing.
+
+  - name: anomaly-watch
+    kind: cron
+    cron_id: anomaly-watch
+    cadence: daily 21:11
+    description: Silent unless a threshold is met.
+
+  - name: public-docs
+    kind: http
+    target: https://example.com/white-paper
+    cadence: continuous
+    description: Public white paper page.
+
+  - name: skill-library
+    kind: file
+    target: ~/skills
+    cadence: continuous
+    description: Skill library present on disk.
