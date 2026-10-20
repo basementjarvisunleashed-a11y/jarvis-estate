@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "J.A.R.V.I.S.: an open-source operating system for personal AI"
+message: "If you use this software or its doctrine, please cite it as below."
+type: software
+authors:
+  - alias: hgxengineering
+license: MIT
+keywords:
+  - personal-ai
+  - agent-operating-system
+  - formal-verification
+  - evidence-led-automation
+  - open-source
+abstract: "The complete, sanitized J.A.R.V.I.S. estate: doctrine (four white papers —
+  vision, technical architecture, front-end, doctoral roadmap), executable skills,
+  honest monitoring, and a doctoral formal-verification programme. Every version
+  kept, every claim evidenced, every release logged."
