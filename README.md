@@ -17,6 +17,15 @@ evidence, and human authority at every consequential boundary.**
 [Audits](audits/) ·
 [Release log](release-log/)**
 
+## Right now — the estate is live and moving
+
+> **2026-10-20:** Phase 2 of the doctoral programme — invariant verification —
+> is **open**. Layer 1 is verified: 39 of 39 contract tests passing against
+> the ratified contracts and the TLA+ specification. The pause→go mechanism
+> passed its live test at 96/100. Public audits run every week, and the
+> evidence ledger is current. This is not a demo and it is not vapourware —
+> every claim on this page is graded in the [evidence ledger](EVIDENCE.md).
+
 This repository is the complete, sanitized J.A.R.V.I.S. estate: the doctrine,
 the skills, the formal specification, the evidence ledger, the public audits —
 and the Watchtower that proves it's running. Everything here runs today on a
