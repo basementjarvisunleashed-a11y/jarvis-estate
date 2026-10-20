@@ -1,3 +1,5 @@
+![J.A.R.V.I.S. — the arc reactor over the Toronto skyline](assets/banner.png)
+
 # J.A.R.V.I.S. — an open-source operating system for personal AI
 
 **One principal. A federation of durable roles. Current facts, inspectable
