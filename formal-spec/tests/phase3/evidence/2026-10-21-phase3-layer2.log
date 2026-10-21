@@ -1,0 +1,89 @@
+test_ct1_two_surfaces_disagree_server_wins (test_conflict_table.TestConflictTable.test_ct1_two_surfaces_disagree_server_wins)
+CR-1: iPhone renders r0, Watch renders r1 (S1 != S2). Both ... ok
+test_ct2_expired_cache_renders_unknown (test_conflict_table.TestConflictTable.test_ct2_expired_cache_renders_unknown)
+CR-3 / cache-policy.md section 4: the Watch's cache says ... ok
+test_ct3_live_source_beats_memory (test_conflict_table.TestConflictTable.test_ct3_live_source_beats_memory)
+CR-4 / HC-6: durable memory holds X; the live source says Y. ... ok
+test_ct4_orchestrator_reconciles_contradiction (test_conflict_table.TestConflictTable.test_ct4_orchestrator_reconciles_contradiction)
+CR-5: a durable contradiction is reconciled by the ... ok
+test_ct5_notification_is_hint_not_truth (test_conflict_table.TestConflictTable.test_ct5_notification_is_hint_not_truth)
+CR-6 / HC-8: a hint describing S_old arrives after the ... ok
+test_ct6_evidence_new_revision_old_immutable (test_conflict_table.TestConflictTable.test_ct6_evidence_new_revision_old_immutable)
+CR-7: evidence packet updated — new revision sealed, old ... ok
+test_da1_matching_digest_binds (test_digest_approval.TestDigestBoundApproval.test_da1_matching_digest_binds)
+D_seen == D: the decision is recorded exactly once, executed ... ok
+test_da2_mismatch_lapses_no_execution (test_digest_approval.TestDigestBoundApproval.test_da2_mismatch_lapses_no_execution)
+D_seen != D: the ceremony LAPSES — no execution, attested ... ok
+test_da3_independent_digest_agreement (test_digest_approval.TestDigestBoundApproval.test_da3_independent_digest_agreement)
+The digest the model computed matches an independent ... ok
+test_da4_mutation_between_tap_and_record_refused (test_digest_approval.TestDigestBoundApproval.test_da4_mutation_between_tap_and_record_refused)
+The card is tapped with digest D; the intent mutates before ... ok
+test_da5_artifact_change_invalidates_approval (test_digest_approval.TestDigestBoundApproval.test_da5_artifact_change_invalidates_approval)
+CR-8: an approval recorded against artifact digest D1; the ... ok
+test_da6_lapse_is_attested_and_sealed (test_digest_approval.TestDigestBoundApproval.test_da6_lapse_is_attested_and_sealed)
+The lapse is not silent: it is attested (lapses ledger) and ... ok
+test_fv1_iphone_first_watch_second (test_first_valid_decision.TestFirstValidDecisionWins.test_fv1_iphone_first_watch_second)
+iPhone's valid decision records; the Watch's later decision — ... ok
+test_fv2_watch_first_iphone_second (test_first_valid_decision.TestFirstValidDecisionWins.test_fv2_watch_first_iphone_second)
+Symmetric: the Watch wins the race; the iPhone reads. ... ok
+test_fv3_both_invalid_nothing_recorded (test_first_valid_decision.TestFirstValidDecisionWins.test_fv3_both_invalid_nothing_recorded)
+If neither passes the five checks, nothing is recorded. ... ok
+test_fv4_validity_not_arrival_order (test_first_valid_decision.TestFirstValidDecisionWins.test_fv4_validity_not_arrival_order)
+The first ARRIVAL that is invalid does not block the first ... ok
+test_fv5_duplicate_taps_one_device (test_first_valid_decision.TestFirstValidDecisionWins.test_fv5_duplicate_taps_one_device)
+Duplicate taps on one device return the existing decision — ... ok
+test_fv6_loser_path_refuse_name_current_repull (test_first_valid_decision.TestFirstValidDecisionWins.test_fv6_loser_path_refuse_name_current_repull)
+Sequence (b), step by step: refuse names the current revision; ... ok
+test_ot1_offline_tap_never_reaches_orchestrator (test_offline_tap.TestOfflineTap.test_ot1_offline_tap_never_reaches_orchestrator)
+The tap while offline: one local gesture, zero orchestrator ... ok
+test_ot2_reconnect_discards_gesture_fresh_tap_required (test_offline_tap.TestOfflineTap.test_ot2_reconnect_discards_gesture_fresh_tap_required)
+On reconnect the pending gesture is discarded — never ... ok
+test_ot3_reconnect_after_expiry_discards_and_renders_current (test_offline_tap.TestOfflineTap.test_ot3_reconnect_after_expiry_discards_and_renders_current)
+If the intent expired while offline, the gesture dies and the ... ok
+test_ot4_long_offline_no_authority_on_reconnect (test_offline_tap.TestOfflineTap.test_ot4_long_offline_no_authority_on_reconnect)
+NT-4: a surface offline for any duration holds no authority ... ok
+test_ot5_tap_on_unknown_card_is_disabled (test_offline_tap.TestOfflineTap.test_ot5_tap_on_unknown_card_is_disabled)
+cache-policy.md section 4: an approval action on an unknown ... ok
+test_rt10_refusal_names_current_revision (test_revision_token.TestRevisionToken.test_rt10_refusal_names_current_revision)
+revision-protocol.md section 5: the 'stale-revision' refusal ... ok
+test_rt11_orchestrator_is_only_writer (test_revision_token.TestRevisionToken.test_rt11_orchestrator_is_only_writer)
+NT-1: every state transition in the event log names the ... ok
+test_rt1_stale_revision_refused (test_revision_token.TestRevisionToken.test_rt1_stale_revision_refused)
+R2: held < current is refused 'stale-revision'; nothing changes. ... ok
+test_rt2_future_revision_refused (test_revision_token.TestRevisionToken.test_rt2_future_revision_refused)
+R2: held > current is refused — no skip-ahead, no missing. ... ok
+test_rt3_missing_revision_refused (test_revision_token.TestRevisionToken.test_rt3_missing_revision_refused)
+R2: no revision at all is refused. ... ok
+test_rt4_monotonic_accept_and_represent (test_revision_token.TestRevisionToken.test_rt4_monotonic_accept_and_represent)
+R1/R3: acceptance moves revision by exactly 1; the response ... ok
+test_rt5_no_force_no_retry_upgrade (test_revision_token.TestRevisionToken.test_rt5_no_force_no_retry_upgrade)
+R4: no force flag, no override path. Re-presenting the same ... ok
+test_rt6_request_freshness_boundary (test_revision_token.TestRevisionToken.test_rt6_request_freshness_boundary)
+Five-step check #2, request bound (300 s): |now-ts|=300 passes, ... ok
+test_rt7_event_freshness_boundary (test_revision_token.TestRevisionToken.test_rt7_event_freshness_boundary)
+Five-step check #2, state/event bound (60 s, ratified U-5/D7): ... ok
+test_rt8_unknown_session_refused_first (test_revision_token.TestRevisionToken.test_rt8_unknown_session_refused_first)
+Check #1: an unenrolled session is refused before any other ... ok
+test_rt9_revoked_session_refused (test_revision_token.TestRevisionToken.test_rt9_revoked_session_refused)
+Check #1: a revoked enrollment is refused. ... ok
+test_sm1_order_session_before_all (test_stale_mutation.TestStaleMutationOrder.test_sm1_order_session_before_all)
+A request failing session AND freshness AND liveness AND ... ok
+test_sm2_order_freshness_before_liveness (test_stale_mutation.TestStaleMutationOrder.test_sm2_order_freshness_before_liveness)
+Failing freshness + liveness reports 'stale-request'. ... ok
+test_sm3_order_liveness_before_currency (test_stale_mutation.TestStaleMutationOrder.test_sm3_order_liveness_before_currency)
+Failing liveness + currency reports 'intent-invalid'. ... ok
+test_sm4_order_currency_before_digest (test_stale_mutation.TestStaleMutationOrder.test_sm4_order_currency_before_digest)
+Failing currency + digest reports 'stale-revision' — the ... ok
+test_sm5_each_step_individually (test_stale_mutation.TestStaleMutationOrder.test_sm5_each_step_individually)
+Every step, failed alone, yields its own reason. ... ok
+test_sm6_refused_mutation_changes_nothing (test_stale_mutation.TestStaleMutationOrder.test_sm6_refused_mutation_changes_nothing)
+A refused mutation changes nothing: revision, state, and log ... ok
+test_sm7_mutated_intent_reproposed_not_updated (test_stale_mutation.TestStaleMutationOrder.test_sm7_mutated_intent_reproposed_not_updated)
+A changed target is never 'updated in place': the old intent ... ok
+test_sm8_expired_intent_refused_at_boundary (test_stale_mutation.TestStaleMutationOrder.test_sm8_expired_intent_refused_at_boundary)
+Expiry is integer epoch seconds (Phase 2 Q1); now == expiry is ... ok
+
+----------------------------------------------------------------------
+Ran 42 tests in 0.005s
+
+OK

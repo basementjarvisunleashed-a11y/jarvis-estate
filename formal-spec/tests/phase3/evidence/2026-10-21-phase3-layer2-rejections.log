@@ -1,0 +1,33 @@
+2:0	intent-invalid	decide	intent-x	live source moved (CR-4): expected 'X', live is 'Y'
+7:0	digest-lapse	decide	intent-1	D_seen != D: ceremony lapsed, no execution, attested lapse
+9:0	intent-invalid	decide	intent-1	intent mutated since proposal; propose a new intent
+10:0	intent-invalid	decide	intent-1	approval invalidated by artifact change; propose a new intent
+11:0	digest-lapse	decide	intent-1	D_seen != D: ceremony lapsed, no execution, attested lapse
+12:0	stale-revision	decide	intent-1	held=0 current=1 (R2: no older, no newer, no missing)
+13:0	stale-revision	decide	intent-1	held=0 current=1 (R2: no older, no newer, no missing)
+14:0	digest-lapse	decide	intent-1	D_seen != D: ceremony lapsed, no execution, attested lapse
+14:1	stale-revision	decide	intent-1	held=99 current=0 (R2: no older, no newer, no missing)
+15:0	stale-request	decide	intent-1	|now-ts|=10000 > 300 (request bound)
+17:0	stale-revision	decide	intent-1	held=0 current=1 (R2: no older, no newer, no missing)
+20:0	intent-invalid	decide	intent-1	intent expired
+23:0	stale-revision	mutate	work-1	held=0 current=1 (R2: no older, no newer, no missing)
+25:0	stale-revision	mutate	work-1	held=0 current=1 (R2: no older, no newer, no missing)
+26:0	stale-revision	mutate	work-1	held=5 current=0 (R2: no older, no newer, no missing)
+27:0	stale-revision	mutate	work-1	held=None current=0 (R2: no older, no newer, no missing)
+29:0	stale-revision	mutate	work-1	held=9 current=0 (R2: no older, no newer, no missing)
+29:1	stale-revision	mutate	work-1	held=9 current=0 (R2: no older, no newer, no missing)
+31:0	stale-request	mutate	work-1	|now-ts|=301 > 300 (request bound)
+33:0	stale-event	mutate	work-1	event age 61 s > 60 s (state/event bound)
+34:0	unknown-session	mutate	work-1	session not enrolled or revoked
+35:0	unknown-session	mutate	work-1	session not enrolled or revoked
+36:0	unknown-session	mutate	nope	session not enrolled or revoked
+37:0	stale-request	mutate	nope	|now-ts|=10000 > 300 (request bound)
+38:0	intent-invalid	mutate	nope	intent unknown
+39:0	stale-revision	decide	intent-1	held=99 current=0 (R2: no older, no newer, no missing)
+40:0	unknown-session	mutate	intent-1	session not enrolled or revoked
+40:1	stale-request	mutate	intent-1	|now-ts|=10000 > 300 (request bound)
+40:2	intent-invalid	mutate	nope	intent unknown
+40:3	stale-revision	mutate	intent-1	held=99 current=0 (R2: no older, no newer, no missing)
+41:0	stale-revision	mutate	intent-1	held=99 current=0 (R2: no older, no newer, no missing)
+42:0	intent-invalid	decide	intent-1	intent mutated since proposal; propose a new intent
+43:0	intent-invalid	decide	intent-x	intent expired
