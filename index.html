@@ -163,199 +163,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:30px 0;color:v
   </div>
 </footer>
 
-<script>
-/* ============ DATA-DRIVEN VIEWS — content lives in the JSON blocks above.
-   To grow the site, append to the data. No HTML surgery needed. ============ */
-var QA = {
-  paper1: [
-    {q:"Recite the fifth principle verbatim, and explain the distinction between open source as \u201cfoundation\u201d versus \u201crelease strategy.\u201d",
-     a:"\u201cA fifth principle stands alongside the four above: Open source from day one. J.A.R.V.I.S. is built in the open as a matter of foundation, not as a release strategy.\u201d Foundation means produced to be publishable from day one; release strategy would be a timing decision. The paper rejects that framing."},
-    {q:"State the absolute boundary, and name three things that go public and three that never do.",
-     a:"\u201cThe boundary is absolute: the system goes public; the principal\u2019s private life never does.\u201d Public: doctrine, skills, the reference implementation. Never: private life, finances, live estate data."},
-    {q:"State the five-part chain maxim verbatim.",
-     a:"\u201cKeep roles narrow. Keep facts current. Keep proof visible. Keep consequences reviewable. Keep the method publishable.\u201d"},
-    {q:"What does the paper say about who runs the reference implementation?",
-     a:"The reference implementation is released so that the principal may run it on his own machine; the publishing house never holds the principal\u2019s runtime."},
-    {q:"Why does the paper refuse the phrase \u201cartificial general intelligence\u201d?",
-     a:"The paper treats generality as an architectural claim requiring proof, not a marketing label. The system is specified by its invariants, not its aspirations."}
-  ],
-  paper2: [
-    {q:"Name the five engineering invariants.",
-     a:"No proof, no done. Current facts stay live. Automate preparation first. Persistence is explicit. Failure is visible."},
-    {q:"What makes a subagent\u2019s \u201cdone\u201d an input rather than a result?",
-     a:"The delegation boundary: \u201cA subagent response is an input to verification, not a completion signal.\u201d"},
-    {q:"Does one approval cover a second publish tomorrow?",
-     a:"No. \u201cApproval does not authorize adjacent actions or future repetitions.\u201d"},
-    {q:"What is the difference between a checkpoint and a gate?",
-     a:"A checkpoint records state; a gate requires a decision. The paper gates consequential actions, not preparation."},
-    {q:"Why is failure made visible instead of retried silently?",
-     a:"Silent retries hide the evidence a reviewer needs. The paper requires failure to be inspectable so the principal can judge."}
-  ],
-  sessions: [
-    {q:"Why does the Academy refuse to delete or overwrite materials?",
-     a:"Every version is kept so the course\u2019s growth is visible a year from now. Nothing is ever deleted or overwritten."},
-    {q:"What is the standing rule for lecture records?",
-     a:"Each lecture is documented, commented, and versioned the same morning it is taught — \u201cat eight o\u2019clock, all of it on GitHub.\u201d"}
-  ]
-};
-var RESEARCH = [
-  {date:"2026-10-21", tag:"Bitcoin", title:"Hashrate, Satoshis, and Dollars \u2014 the Full Ratio Set per Halving",
-   summary:"Hash:USD, sats:USD, hash:sats per halving with factor changes; hash-per-subsidy-satoshi compounded 5 kH/s (2012) to 3.39 PH/s (today).",
-   href:"research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html"},
-  {date:"2026-10-21", tag:"Bitcoin", title:"Hashrate per Halving, as a Percentage Ratio to Price",
-   summary:"The hashrate-per-dollar ratio peaked at the 2020 halving (115% of today\u2019s); today 100%, up from 79% at the 2024 halving.",
-   href:"research/2026-10-21/hashrate-per-halving-vs-price.html"},
-  {date:"2026-10-21", tag:"Bitcoin", title:"Bitcoin Fee Rates per vByte \u2014 Six-Month Statistics",
-   summary:"Floor-fee regime: median 1.0 sat/vB; the largest intraday spike was p90 4.08 sat/vB (Jun 9); fees under 1% of miner revenue.",
-   href:"research/2026-10-21/bitcoin-vbyte-fee-stats.html"}
-];
 
-/* ============ RENDER (view shells) — edit only to add a new template ============ */
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-function renderQA(elId, items){
-  var el = document.getElementById(elId);
-  el.innerHTML = items.map(function(it){
-    return "<details><summary>"+esc(it.q)+"</summary><div class=\"detail-body\"><p>"+esc(it.a)+"</p></div></details>";
-  }).join("");
-}
-function renderResearch(){
-  var el = document.getElementById("research-grid");
-  el.innerHTML = RESEARCH.map(function(r){
-    return "<div class=\"card\"><div class=\"card-meta\">"+esc(r.date)+" \u00b7 "+esc(r.tag)+"</div>"+
-      "<h3><a href=\""+esc(r.href)+"\">"+esc(r.title)+"</a></h3><p>"+esc(r.summary)+"</p></div>";
-  }).join("");
-}
-function getJSON(id){ return JSON.parse(document.getElementById(id).textContent); }
-function badgeClass(status){
-  var m = {closed:"badge-done", proven:"badge-done", open:"badge-open",
-           planned:"badge-planned", tracked:"badge-planned"};
-  return m[status] || "badge-planned";
-}
-function kickerHTML(v){ return v.kicker ? '<div class="hero-kicker">'+esc(v.kicker)+'</div>' : ''; }
-var VIEWS = getJSON("views-data");
-
-/* Generic card-grid section (Papers, Academy, and any future card section). */
-function renderCardsView(viewId){
-  var v = VIEWS[viewId];
-  var items = getJSON(viewId + "-data");
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>";
-  if(v.section_title) html += "<h2>" + esc(v.section_title) + "</h2>";
-  html += '<div class="card-grid">' + items.map(function(it){
-    return '<div class="card"><h3>' + esc(it.title) + '</h3>' +
-      '<div class="card-meta">' + esc(it.meta) + '</div>' +
-      "<p>" + esc(it.desc) + "</p>" +
-      '<div class="dl-row">' + it.buttons.map(function(b){
-        return '<a class="btn btn-outline" href="' + b.href + '">' + esc(b.label) + "</a>";
-      }).join("") + "</div></div>";
-  }).join("") + "</div>" + v.after_html;
-  document.getElementById("view-" + viewId).innerHTML = html;
-}
-
-/* Doctoral programme: the phase list. */
-function renderPhasesView(){
-  var v = VIEWS["doctoral"];
-  var phases = getJSON("phases-data");
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    '<div class="phase-list">' + phases.map(function(p){
-    return '<div class="phase-row"><div class="phase-num">PHASE ' + p.num + "</div><div><h3>" +
-      esc(p.title) + "</h3><p>" + esc(p.desc) + "</p>" +
-      '<p class="phase-links"><a href="' + p.milestone_url + '">Milestone</a> \u00b7 ' +
-      '<a href="' + p.issue_url + '">Tracking issue #' + p.issue_num + "</a> \u00b7 " +
-      '<a href="' + p.discussion_url + '">Discussion</a></p></div>' +
-      '<div><span class="badge ' + badgeClass(p.status) + '">' + esc(p.badge) + "</span></div></div>";
-  }).join("") + "</div>" + v.after_html;
-  document.getElementById("view-doctoral").innerHTML = html;
-}
-
-/* Evidence: the graded claims table. */
-function renderEvidenceView(){
-  var v = VIEWS["evidence"];
-  var claims = getJSON("evidence-data");
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    "<table><tr><th>Claim</th><th>Status</th><th>Evidence</th></tr>" +
-    claims.map(function(c){
-    return "<tr><td>" + esc(c.claim) + '</td><td><span class="badge ' +
-      badgeClass(c.status) + '">' + esc(c.badge) + "</span></td><td>" +
-      c.evidence_html + "</td></tr>";
-  }).join("") + "</table>" + v.after_html;
-  document.getElementById("view-evidence").innerHTML = html;
-}
-
-/* Q&A / Research shells (details render from the QA / RESEARCH data below). */
-function renderQAShell(){
-  var v = VIEWS["qa"];
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    v.sections.map(function(s){
-      return "<h2>" + esc(s.heading) + "</h2>" + '<div id="' + s.container + '"></div>';
-    }).join("") + v.after_html;
-  document.getElementById("view-qa").innerHTML = html;
-}
-function renderResearchShell(){
-  var v = VIEWS["research"];
-  document.getElementById("view-research").innerHTML =
-    kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    '<div class="card-grid" id="research-grid"></div>';
-}
-
-/* ---- RENDERER MAP: new section? add one line here (or reuse "cards") ---- */
-var SECTION_RENDERERS = {
-  papers: "cards",
-  academy: "cards",
-  doctoral: "phases",
-  evidence: "evidence",
-  qa: "qa-shell",
-  research: "research-shell"
-};
-function renderSection(viewId){
-  var kind = SECTION_RENDERERS[viewId];
-  if(kind === "cards") renderCardsView(viewId);
-  else if(kind === "phases") renderPhasesView();
-  else if(kind === "evidence") renderEvidenceView();
-  else if(kind === "qa-shell") renderQAShell();
-  else if(kind === "research-shell") renderResearchShell();
-}
-
-/* ---- navigation renders from nav-data ---- */
-var NAV_DATA = getJSON("nav-data");
-function trackTitle(t){
-  return t === "formal" ? "Formal track \u2014 watch the proof"
-       : t === "community" ? "Community track \u2014 join us" : "";
-}
-function renderNav(){
-  var nav = document.getElementById("main-nav");
-  nav.innerHTML = NAV_DATA.map(function(n, i){
-    var t = trackTitle(n.track);
-    return '<button class="nav-btn' + (i === 0 ? " active" : "") + '" data-view="' + n.id + '"' +
-      (t ? ' title="' + t + '"' : "") + ">" + esc(n.label) + "</button>";
-  }).join("");
-}
-
-/* ---- boot: shells first, then detail renders, then nav handler ---- */
-renderNav();
-NAV_DATA.forEach(function(n){ renderSection(n.id); });
-renderQA("qa-paper1", QA.paper1);
-renderQA("qa-paper2", QA.paper2);
-renderQA("qa-sessions", QA.sessions);
-renderResearch();
-
-document.querySelectorAll("[data-view]").forEach(function(el){
-  el.addEventListener("click", function(e){
-    e.preventDefault();
-    var v = el.getAttribute("data-view");
-    document.querySelectorAll(".view").forEach(function(s){ s.classList.remove("active"); });
-    var target = document.getElementById("view-"+v);
-    if(target) target.classList.add("active");
-    document.querySelectorAll(".nav-btn").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-view")===v); });
-    window.scrollTo(0,0);
-  });
-});
-
-</script>
 <!--
 ================================================================================
 HOW TO ADD A NEW SECTION (under 5 minutes — no JS logic changes):
@@ -708,5 +516,198 @@ HOW TO ADD A NEW SECTION (under 5 minutes — no JS logic changes):
   <p style="font-size:1.1em"><strong><a href="https://x.com/basementjarvisu">@basementjarvisu</a></strong> · <strong>basementjarvisunleashed@gmail.com</strong></p>
   <p style="font-size:0.7em;color:#999"><a href="https://x.com/hgxengineering">@hgxengineering</a> · HgXengineering@gmail.com</p>
 </footer>
+<script>
+/* ============ DATA-DRIVEN VIEWS — content lives in the JSON blocks above.
+   To grow the site, append to the data. No HTML surgery needed. ============ */
+var QA = {
+  paper1: [
+    {q:"Recite the fifth principle verbatim, and explain the distinction between open source as \u201cfoundation\u201d versus \u201crelease strategy.\u201d",
+     a:"\u201cA fifth principle stands alongside the four above: Open source from day one. J.A.R.V.I.S. is built in the open as a matter of foundation, not as a release strategy.\u201d Foundation means produced to be publishable from day one; release strategy would be a timing decision. The paper rejects that framing."},
+    {q:"State the absolute boundary, and name three things that go public and three that never do.",
+     a:"\u201cThe boundary is absolute: the system goes public; the principal\u2019s private life never does.\u201d Public: doctrine, skills, the reference implementation. Never: private life, finances, live estate data."},
+    {q:"State the five-part chain maxim verbatim.",
+     a:"\u201cKeep roles narrow. Keep facts current. Keep proof visible. Keep consequences reviewable. Keep the method publishable.\u201d"},
+    {q:"What does the paper say about who runs the reference implementation?",
+     a:"The reference implementation is released so that the principal may run it on his own machine; the publishing house never holds the principal\u2019s runtime."},
+    {q:"Why does the paper refuse the phrase \u201cartificial general intelligence\u201d?",
+     a:"The paper treats generality as an architectural claim requiring proof, not a marketing label. The system is specified by its invariants, not its aspirations."}
+  ],
+  paper2: [
+    {q:"Name the five engineering invariants.",
+     a:"No proof, no done. Current facts stay live. Automate preparation first. Persistence is explicit. Failure is visible."},
+    {q:"What makes a subagent\u2019s \u201cdone\u201d an input rather than a result?",
+     a:"The delegation boundary: \u201cA subagent response is an input to verification, not a completion signal.\u201d"},
+    {q:"Does one approval cover a second publish tomorrow?",
+     a:"No. \u201cApproval does not authorize adjacent actions or future repetitions.\u201d"},
+    {q:"What is the difference between a checkpoint and a gate?",
+     a:"A checkpoint records state; a gate requires a decision. The paper gates consequential actions, not preparation."},
+    {q:"Why is failure made visible instead of retried silently?",
+     a:"Silent retries hide the evidence a reviewer needs. The paper requires failure to be inspectable so the principal can judge."}
+  ],
+  sessions: [
+    {q:"Why does the Academy refuse to delete or overwrite materials?",
+     a:"Every version is kept so the course\u2019s growth is visible a year from now. Nothing is ever deleted or overwritten."},
+    {q:"What is the standing rule for lecture records?",
+     a:"Each lecture is documented, commented, and versioned the same morning it is taught — \u201cat eight o\u2019clock, all of it on GitHub.\u201d"}
+  ]
+};
+var RESEARCH = [
+  {date:"2026-10-21", tag:"Bitcoin", title:"Hashrate, Satoshis, and Dollars \u2014 the Full Ratio Set per Halving",
+   summary:"Hash:USD, sats:USD, hash:sats per halving with factor changes; hash-per-subsidy-satoshi compounded 5 kH/s (2012) to 3.39 PH/s (today).",
+   href:"research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html"},
+  {date:"2026-10-21", tag:"Bitcoin", title:"Hashrate per Halving, as a Percentage Ratio to Price",
+   summary:"The hashrate-per-dollar ratio peaked at the 2020 halving (115% of today\u2019s); today 100%, up from 79% at the 2024 halving.",
+   href:"research/2026-10-21/hashrate-per-halving-vs-price.html"},
+  {date:"2026-10-21", tag:"Bitcoin", title:"Bitcoin Fee Rates per vByte \u2014 Six-Month Statistics",
+   summary:"Floor-fee regime: median 1.0 sat/vB; the largest intraday spike was p90 4.08 sat/vB (Jun 9); fees under 1% of miner revenue.",
+   href:"research/2026-10-21/bitcoin-vbyte-fee-stats.html"}
+];
+
+/* ============ RENDER (view shells) — edit only to add a new template ============ */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function renderQA(elId, items){
+  var el = document.getElementById(elId);
+  el.innerHTML = items.map(function(it){
+    return "<details><summary>"+esc(it.q)+"</summary><div class=\"detail-body\"><p>"+esc(it.a)+"</p></div></details>";
+  }).join("");
+}
+function renderResearch(){
+  var el = document.getElementById("research-grid");
+  el.innerHTML = RESEARCH.map(function(r){
+    return "<div class=\"card\"><div class=\"card-meta\">"+esc(r.date)+" \u00b7 "+esc(r.tag)+"</div>"+
+      "<h3><a href=\""+esc(r.href)+"\">"+esc(r.title)+"</a></h3><p>"+esc(r.summary)+"</p></div>";
+  }).join("");
+}
+function getJSON(id){ return JSON.parse(document.getElementById(id).textContent); }
+function badgeClass(status){
+  var m = {closed:"badge-done", proven:"badge-done", open:"badge-open",
+           planned:"badge-planned", tracked:"badge-planned"};
+  return m[status] || "badge-planned";
+}
+function kickerHTML(v){ return v.kicker ? '<div class="hero-kicker">'+esc(v.kicker)+'</div>' : ''; }
+var VIEWS = getJSON("views-data");
+
+/* Generic card-grid section (Papers, Academy, and any future card section). */
+function renderCardsView(viewId){
+  var v = VIEWS[viewId];
+  var items = getJSON(viewId + "-data");
+  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
+    '<p class="lede">' + v.lede_html + "</p>";
+  if(v.section_title) html += "<h2>" + esc(v.section_title) + "</h2>";
+  html += '<div class="card-grid">' + items.map(function(it){
+    return '<div class="card"><h3>' + esc(it.title) + '</h3>' +
+      '<div class="card-meta">' + esc(it.meta) + '</div>' +
+      "<p>" + esc(it.desc) + "</p>" +
+      '<div class="dl-row">' + it.buttons.map(function(b){
+        return '<a class="btn btn-outline" href="' + b.href + '">' + esc(b.label) + "</a>";
+      }).join("") + "</div></div>";
+  }).join("") + "</div>" + v.after_html;
+  document.getElementById("view-" + viewId).innerHTML = html;
+}
+
+/* Doctoral programme: the phase list. */
+function renderPhasesView(){
+  var v = VIEWS["doctoral"];
+  var phases = getJSON("phases-data");
+  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
+    '<p class="lede">' + v.lede_html + "</p>" +
+    '<div class="phase-list">' + phases.map(function(p){
+    return '<div class="phase-row"><div class="phase-num">PHASE ' + p.num + "</div><div><h3>" +
+      esc(p.title) + "</h3><p>" + esc(p.desc) + "</p>" +
+      '<p class="phase-links"><a href="' + p.milestone_url + '">Milestone</a> \u00b7 ' +
+      '<a href="' + p.issue_url + '">Tracking issue #' + p.issue_num + "</a> \u00b7 " +
+      '<a href="' + p.discussion_url + '">Discussion</a></p></div>' +
+      '<div><span class="badge ' + badgeClass(p.status) + '">' + esc(p.badge) + "</span></div></div>";
+  }).join("") + "</div>" + v.after_html;
+  document.getElementById("view-doctoral").innerHTML = html;
+}
+
+/* Evidence: the graded claims table. */
+function renderEvidenceView(){
+  var v = VIEWS["evidence"];
+  var claims = getJSON("evidence-data");
+  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
+    '<p class="lede">' + v.lede_html + "</p>" +
+    "<table><tr><th>Claim</th><th>Status</th><th>Evidence</th></tr>" +
+    claims.map(function(c){
+    return "<tr><td>" + esc(c.claim) + '</td><td><span class="badge ' +
+      badgeClass(c.status) + '">' + esc(c.badge) + "</span></td><td>" +
+      c.evidence_html + "</td></tr>";
+  }).join("") + "</table>" + v.after_html;
+  document.getElementById("view-evidence").innerHTML = html;
+}
+
+/* Q&A / Research shells (details render from the QA / RESEARCH data below). */
+function renderQAShell(){
+  var v = VIEWS["qa"];
+  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
+    '<p class="lede">' + v.lede_html + "</p>" +
+    v.sections.map(function(s){
+      return "<h2>" + esc(s.heading) + "</h2>" + '<div id="' + s.container + '"></div>';
+    }).join("") + v.after_html;
+  document.getElementById("view-qa").innerHTML = html;
+}
+function renderResearchShell(){
+  var v = VIEWS["research"];
+  document.getElementById("view-research").innerHTML =
+    kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
+    '<p class="lede">' + v.lede_html + "</p>" +
+    '<div class="card-grid" id="research-grid"></div>';
+}
+
+/* ---- RENDERER MAP: new section? add one line here (or reuse "cards") ---- */
+var SECTION_RENDERERS = {
+  papers: "cards",
+  academy: "cards",
+  doctoral: "phases",
+  evidence: "evidence",
+  qa: "qa-shell",
+  research: "research-shell"
+};
+function renderSection(viewId){
+  var kind = SECTION_RENDERERS[viewId];
+  if(kind === "cards") renderCardsView(viewId);
+  else if(kind === "phases") renderPhasesView();
+  else if(kind === "evidence") renderEvidenceView();
+  else if(kind === "qa-shell") renderQAShell();
+  else if(kind === "research-shell") renderResearchShell();
+}
+
+/* ---- navigation renders from nav-data ---- */
+var NAV_DATA = getJSON("nav-data");
+function trackTitle(t){
+  return t === "formal" ? "Formal track \u2014 watch the proof"
+       : t === "community" ? "Community track \u2014 join us" : "";
+}
+function renderNav(){
+  var nav = document.getElementById("main-nav");
+  nav.innerHTML = NAV_DATA.map(function(n, i){
+    var t = trackTitle(n.track);
+    return '<button class="nav-btn' + (i === 0 ? " active" : "") + '" data-view="' + n.id + '"' +
+      (t ? ' title="' + t + '"' : "") + ">" + esc(n.label) + "</button>";
+  }).join("");
+}
+
+/* ---- boot: shells first, then detail renders, then nav handler ---- */
+renderNav();
+NAV_DATA.forEach(function(n){ renderSection(n.id); });
+renderQA("qa-paper1", QA.paper1);
+renderQA("qa-paper2", QA.paper2);
+renderQA("qa-sessions", QA.sessions);
+renderResearch();
+
+document.querySelectorAll("[data-view]").forEach(function(el){
+  el.addEventListener("click", function(e){
+    e.preventDefault();
+    var v = el.getAttribute("data-view");
+    document.querySelectorAll(".view").forEach(function(s){ s.classList.remove("active"); });
+    var target = document.getElementById("view-"+v);
+    if(target) target.classList.add("active");
+    document.querySelectorAll(".nav-btn").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-view")===v); });
+    window.scrollTo(0,0);
+  });
+});
+
+</script>
 </body>
 </html>
