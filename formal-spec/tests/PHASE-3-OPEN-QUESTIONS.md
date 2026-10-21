@@ -29,7 +29,7 @@ for the walkthrough.
   already implements the single-writer discipline; the iPhone stays the
   trusted surface (enrollment root, approval card presenter), not the
   writer.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (b) the deployment build's orchestrator loop as the reference implementation, with the iPhone as the trusted enrollment/command surface. Answered 2026-10-21 ~17:40 ET.
 
 ---
 
@@ -41,6 +41,7 @@ for the walkthrough.
   consistency model must cover every device that can observe or act on
   estate state — but writing the model for hardware he does not carry
   risks specifying fiction.
+- **HgX's answer:** (a) iPhone + Watch in scope; iPad, TV, Vision Pro pull-only under their contracts. Answered 2026-10-21 ~17:41 ET. (His lab's contract-freeze paper names all five surfaces — noted as the wider freeze, not the Phase 3 scope.)
 - **Options:** (a) iPhone + Watch in scope now; iPad/TV/Vision Pro as
   pull-only surfaces per their contracts (no consistency obligations
   beyond their pull contracts) until he carries them; (b) all five
@@ -49,7 +50,6 @@ for the walkthrough.
   it acts on state, so it is in scope. TV/headset never pull approvals
   or contents (§3.2 contracts); specifying consistency for them now is
   fiction. iPad joins the model the day it joins his pocket.
-- **HgX's answer:** _(blank — walkthrough pending)_
 
 ---
 
@@ -69,7 +69,7 @@ for the walkthrough.
   findings he has already said he will surpass. The survey's value is
   positioning (what the literature would reach for; where it is
   silent) — that informs the doctoral write-up, not the architecture.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) parallel — the survey informs positioning, not the design; it does not gate architecture decisions. Answered 2026-10-21 ~17:42 ET.
 
 ---
 
@@ -90,10 +90,13 @@ for the walkthrough.
   the build is the reference implementation, not the specification —
   where they disagree, the ratified contracts govern (same discipline
   as the TLA+ anchor in Phase 1).
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) adopt — the deployment build's pull + surface substrate (60 tests green) is the Phase 3 reference implementation; the spec stays normative. Answered 2026-10-21 ~17:44 ET.
 
 ---
 
 ## Changelog
 - 2026-10-21 ~17:29 ET: opened with Q1–Q4 on Phase 3 opening (HgX's
   order). Answers recorded here as given, one by one.
+
+## Walkthrough complete
+- 2026-10-21 ~17:44 ET: all four questions answered in the one-by-one walkthrough — Q1 deployment loop as reference (iPhone trusted surface), Q2 iPhone + Watch in scope (rest pull-only), Q3 survey parallel (informs, doesn't block), Q4 substrate adopted as reference. Phase 3 proceeds to the work layers on his word.
