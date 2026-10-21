@@ -129,3 +129,19 @@ Phases 0 and 1.
   mirror remains tracked pending HgX's token handover.
 - Dropbox: the phase record filed under /J.A.R.V.I.S./ per the
   versioning doctrine.
+
+## Session log — 2026-10-21 ~14:02 ET (HgX's order: close the gaps)
+
+- **CH-5/CH-6 depth note (recorded, not a failure):** CH-5 and CH-6 remain
+  contract-level chaos scenarios. Their full form needs Paper III
+  client/router artifacts, which are Phase 4/6 work — there is no further
+  Phase 2 action. Recorded here as a known limitation of the chaos layer,
+  alongside the router deferral (`tests/PHASE-2-ROUTER-DEFERRAL.md`).
+- **Rendering-side invariants closed:** `tests/layer1/render_model.py` +
+  `tests/layer1/test_rendering_invariants.py` — 19/19 pass (INV-E3 ×5,
+  INV-S3 ×3, INV-S5 ×3, INV-S1 ×3, INV-S2 ×2, INV-S4 ×3); status vocabulary
+  from `contracts/watchtower.schema.json`. Log:
+  `tests/evidence/2026-10-21-rendering-tests.log`.
+- **Third-party runbook written:** `tests/RUNBOOK.md` (Paper IV §8.4 gate).
+- **Router deferral recorded:** `tests/PHASE-2-ROUTER-DEFERRAL.md`
+  (INV-R2/R3/R4 uncovered by design; Phase 6 owns the proof).

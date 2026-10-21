@@ -1,0 +1,24 @@
+test_r_e3_01_missing_evidence_renders_missing (test_rendering_invariants.TestInvariantE3.test_r_e3_01_missing_evidence_renders_missing) ... ok
+test_r_e3_02_missing_evidence_never_operational (test_rendering_invariants.TestInvariantE3.test_r_e3_02_missing_evidence_never_operational) ... ok
+test_r_e3_03_missing_evidence_zero_confidence (test_rendering_invariants.TestInvariantE3.test_r_e3_03_missing_evidence_zero_confidence) ... ok
+test_r_e3_04_empty_evidence_dict_is_missing (test_rendering_invariants.TestInvariantE3.test_r_e3_04_empty_evidence_dict_is_missing) ... ok
+test_r_e3_05_present_evidence_renders_ref (test_rendering_invariants.TestInvariantE3.test_r_e3_05_present_evidence_renders_ref) ... ok
+test_r_s1_01_none_state_renders_unknown (test_rendering_invariants.TestInvariantS1.test_r_s1_01_none_state_renders_unknown) ... ok
+test_r_s1_02_unknown_enum_renders_unknown (test_rendering_invariants.TestInvariantS1.test_r_s1_02_unknown_enum_renders_unknown) ... ok
+test_r_s1_03_status_enum_from_watchtower_schema (test_rendering_invariants.TestInvariantS1.test_r_s1_03_status_enum_from_watchtower_schema) ... ok
+test_r_s2_01_paused_renders_paused (test_rendering_invariants.TestInvariantS2.test_r_s2_01_paused_renders_paused) ... ok
+test_r_s2_02_failed_never_appears (test_rendering_invariants.TestInvariantS2.test_r_s2_02_failed_never_appears) ... ok
+test_r_s3_01_degraded_with_impairment_renders_degraded (test_rendering_invariants.TestInvariantS3.test_r_s3_01_degraded_with_impairment_renders_degraded) ... ok
+test_r_s3_02_degraded_without_impairment_never_degraded (test_rendering_invariants.TestInvariantS3.test_r_s3_02_degraded_without_impairment_never_degraded) ... ok
+test_r_s3_03_impairment_contradicts_operational (test_rendering_invariants.TestInvariantS3.test_r_s3_03_impairment_contradicts_operational) ... ok
+test_r_s4_01_stale_reading_reduced_confidence (test_rendering_invariants.TestInvariantS4.test_r_s4_01_stale_reading_reduced_confidence) ... ok
+test_r_s4_02_fresh_reading_full_confidence (test_rendering_invariants.TestInvariantS4.test_r_s4_02_fresh_reading_full_confidence) ... ok
+test_r_s4_03_no_freshness_info_zero_confidence (test_rendering_invariants.TestInvariantS4.test_r_s4_03_no_freshness_info_zero_confidence) ... ok
+test_r_s5_01_restricted_fields_stripped (test_rendering_invariants.TestInvariantS5.test_r_s5_01_restricted_fields_stripped) ... ok
+test_r_s5_02_clean_input_not_flagged (test_rendering_invariants.TestInvariantS5.test_r_s5_02_clean_input_not_flagged) ... ok
+test_r_s5_03_render_keys_are_safe (test_rendering_invariants.TestInvariantS5.test_r_s5_03_render_keys_are_safe) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.001s
+
+OK
