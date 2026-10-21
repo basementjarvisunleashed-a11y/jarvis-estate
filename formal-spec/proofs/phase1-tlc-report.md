@@ -42,7 +42,7 @@ The TLC configuration parser cannot express set comprehensions, tuples, function
 
 ## Spec bugs found and fixed (via TLC counterexamples)
 
-TLC found **five** genuine spec bugs. Each was fixed and the fix re-verified:
+TLC found **six** genuine spec bugs. Each was fixed and the fix re-verified:
 
 ### Fix 1: OperatorTapsApprove — `tap_digest` both assigned and UNCHANGED
 TLC warning: "The variable tap_digest was changed while it is specified as UNCHANGED." The action assigned `tap_digest' = DigestOf(intent)` but also listed `tap_digest` in the UNCHANGED tuple — a contradiction. **Fix:** removed `tap_digest` from UNCHANGED.
@@ -86,3 +86,7 @@ Counterexample: approval flow to `executing` with `intent.expiry=1`, then Tick a
 - Config: `spec/state-machine.cfg`
 - TLC symlinks: `spec/StateMachine.tla`, `spec/StateMachine.cfg` (module name must match filename)
 - This report: `proofs/phase1-tlc-report.md`
+
+## Version history
+
+- **v1.1 (2026-10-20, on HgX's order):** corrected the intro count ("five" → "six") to match the six enumerated counterexample fixes (Fix 1–Fix 6) elsewhere in this report. Ratified findings unchanged.

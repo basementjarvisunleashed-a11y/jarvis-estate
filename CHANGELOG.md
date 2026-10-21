@@ -13,6 +13,25 @@ the papers; the repo itself is tagged at release milestones.
   regime: median 1.0 sat/vB nearly throughout; largest intraday spike p90
   4.08 sat/vB (Jun 9). Published on the hub (new Research section);
   scrubbed — public on-chain statistics only.
+- Proofs: `formal-spec/proofs/phase1-tlc-report.md` v1.0.0 → **v1.1** —
+  corrected the intro count ("five" → "six") to match the six enumerated
+  counterexample fixes; ratified findings unchanged.
+- Contracts: `formal-spec/contracts/README.md` v1.0.0 → **v1.1** — corrected
+  the glossary row's unresolved-term count ("6" → "3 open: U-2, U-3, U-4;
+  3 resolved at ratification: U-1, U-5, U-6"), matching the 2026-10-19
+  ratification record; no normative change.
+- Seven prescribed files promoted to canonical placement as **v0.1 drafts**
+  (on HgX's word; ratification to v1.0.0 remains his call):
+  `formal-spec/spec/state-machine.md`, `formal-spec/spec/approval-digest.md`,
+  and `formal-spec/contracts/*.schema.json` (approval-intent,
+  decision-packet, artifact-manifest, evidence-packet, watchtower). Open
+  questions OQ-1..OQ-6 flagged in
+  `formal-spec/tests/staging/prescribed-files/BUILD-NOTES.md`; interpretations
+  marked, nothing silently resolved.
+- Phase 2 sweep evidence filed: `formal-spec/tests/` complete — Layer 1
+  re-run 39/39, Layer 2 properties 10/10, Layer 3 chaos 10/10, crosscheck
+  12/12, evidence logs, backtrace manifest, roadmap test report, staging
+  records.
 - Release log begins: `release-log/2026-10-19.md` — dated build log with
   timestamps (America/Toronto), work hours, and comments. The formal log
   system started 2026-10-19 at HgX's order; entries before 16:30 ET are
