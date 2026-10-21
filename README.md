@@ -10,7 +10,7 @@ evidence, and human authority at every consequential boundary.**
 [![Status: Live](https://img.shields.io/badge/Status-Live-brightgreen)](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/)
 [![Phase 1: Proven](https://img.shields.io/badge/Phase%201-Proven-blue)](formal-spec/proofs/phase1-tlc-report.md)
 [![Audits: Public](https://img.shields.io/badge/Audits-Public-orange)](audits/)
-[![Phase 2: Closed](https://img.shields.io/badge/Phase%202-Closed-green)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3)
+[![Phase 2: Proven](https://img.shields.io/badge/Phase%202-Proven-blue)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3) [![Phase 3: Open](https://img.shields.io/badge/Phase%203-Open-yellow)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/9)
 
 **[Website](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/) ·
 [Wiki](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/wiki) ·
@@ -29,7 +29,7 @@ evidence, and human authority at every consequential boundary.**
 > Seven drafts ratified v1.0.0. All nine open questions answered. Full reports in
 > [`formal-spec/tests/`](formal-spec/tests/); the
 > [Phase 2 milestone](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3)
-> closed at 100% with 14 issues. Phase 3 awaits his word. The pause→go mechanism
+> closed at 100% with 14 issues. Phase 3 — consistency model — is **OPEN** (HgX's word ~17:31 ET): plan, Q1–Q4 answered, Layer 1 drafts v0.1 (six specs). The pause→go mechanism
 > passed its live test at 96/100. Public audits run every week, and the
 > evidence ledger is current. This is not a demo and it is not vapourware —
 > every claim on this page is graded in the [evidence ledger](EVIDENCE.md).
