@@ -1,0 +1,53 @@
+# Phase 2 — Layer 2 REJECTION LOG (evidence)
+# Produced by tests/layer2/test_layer2_properties.py at teardown:
+# every action the generators attempted that the machine refused,
+# counted by the guard that refused it. A guard with a count here
+# has demonstrably rejected something; a guard absent from this
+# list was never exercised by refusal in this run.
+# Written: 2026-10-20T18:34:24.391802-04:00
+# Seeds: PT-1 (20261020, 20261021, 20261022), PT-2 20261023, PT-3 20261024, PT-4 (20261025, 20261026, 20261027, 20261028, 20261029), PT-5 20261030
+
+TOTAL REFUSED: 53079
+
+By guard:
+  illegal-transition: 37765
+  duplicate-tap-noop: 3855
+  record-without-tap: 3778
+  tap-without-request: 2966
+  approval-not-recorded: 1933
+  approval-expired: 1476
+  digest-mismatch: 926
+  approval-not-expired: 210
+  stale-source: 95
+  completion-no-evidence: 49
+  completion-acceptance-not-passed: 26
+
+Attempts / accepted, by action:
+  acceptance_passed: attempted 2011, accepted 23
+  acceptance_result: attempted 3813, accepted 3813
+  approval_denied: attempted 1859, accepted 205
+  approval_expired: attempted 1948, accepted 5
+  approval_granted: attempted 12003, accepted 1810
+  approval_requested: attempted 6857, accepted 5070
+  artifact_produced: attempted 1873, accepted 55
+  blockage_cleared: attempted 1998, accepted 105
+  brief_accepted: attempted 7077, accepted 5324
+  brief_declined: attempted 1882, accepted 76
+  brief_received: attempted 7124, accepted 5806
+  delegated_claim: attempted 1886, accepted 1886
+  duplicate_tap: attempted 4962, accepted 0
+  evidence_packet_created: attempted 1807, accepted 48
+  execution_observed: attempted 1919, accepted 75
+  execution_started: attempted 1891, accepted 66
+  failure_observed: attempted 2094, accepted 832
+  mutate_intent: attempted 2828, accepted 2828
+  observation_restored: attempted 1866, accepted 235
+  observation_unavailable: attempted 1845, accepted 749
+  operator_paused: attempted 1842, accepted 511
+  operator_resumed: attempted 1962, accepted 106
+  plan_created: attempted 7049, accepted 5251
+  record: attempted 8806, accepted 3103
+  set_freshness: attempted 3839, accepted 3839
+  submit_evidence: attempted 1914, accepted 1914
+  tap: attempted 8010, accepted 5044
+  tick: attempted 1854, accepted 1854

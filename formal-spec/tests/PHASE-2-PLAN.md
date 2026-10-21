@@ -11,8 +11,9 @@
 
 Phase 2 closes when its exit criteria are met — not before, not on a date
 invented for convenience. The roadmap (ROADMAP.md §5; Paper IV §8) allots
-Phase 2 three layers run in sequence across the programme's Months 2–4
-window. Each layer has a gate; a layer opens only when the previous
+Phase 2's three layers run in sequence across the programme's Months 3–4
+window (Paper IV §14: Month 3 — Phase 2 contract tests; Month 4 — Phase 2
+property and chaos tests). Each layer has a gate; a layer opens only when the previous
 layer's gate has passed and been recorded.
 
 ## Layers and gates

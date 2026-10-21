@@ -1,0 +1,50 @@
+# Phase 2 — Layer 1 contract suite RE-RUN (evidence)
+# Command: cd tests/layer1 && python3 -m unittest test_layer1_contracts -v
+# Timestamp: 2026-10-20 18:26:26 EDT (America/Toronto)
+# Python: Python 3.12.3
+# Note: re-run of the suite as built 2026-10-20 (opening run: 39 tests). No suite files modified.
+
+test_adjacent_intent_not_authorised (test_layer1_contracts.TestApprovalGuards.test_adjacent_intent_not_authorised) ... ok
+test_each_bound_field_mutation_changes_digest (test_layer1_contracts.TestApprovalGuards.test_each_bound_field_mutation_changes_digest) ... ok
+test_expired_approval_cannot_be_recorded (test_layer1_contracts.TestApprovalGuards.test_expired_approval_cannot_be_recorded) ... ok
+test_expired_approval_refused (test_layer1_contracts.TestApprovalGuards.test_expired_approval_refused) ... ok
+test_missing_approval_refused (test_layer1_contracts.TestApprovalGuards.test_missing_approval_refused) ... ok
+test_mutated_digest_refused_at_gate (test_layer1_contracts.TestApprovalGuards.test_mutated_digest_refused_at_gate) ... ok
+test_mutation_between_tap_and_record_refused (test_layer1_contracts.TestApprovalGuards.test_mutation_between_tap_and_record_refused) ... ok
+test_operator_pause_blocks_the_gate (test_layer1_contracts.TestApprovalGuards.test_operator_pause_blocks_the_gate) ... ok
+test_revision_mismatch_refused (test_layer1_contracts.TestApprovalGuards.test_revision_mismatch_refused) ... ok
+test_tap_alone_is_not_authority (test_layer1_contracts.TestApprovalGuards.test_tap_alone_is_not_authority) ... ok
+test_unauthorised_session_refused (test_layer1_contracts.TestApprovalGuards.test_unauthorised_session_refused) ... ok
+test_valid_approval_enters_executing (test_layer1_contracts.TestApprovalGuards.test_valid_approval_enters_executing) ... ok
+test_completion_only_from_verifying (test_layer1_contracts.TestCompletionGuard.test_completion_only_from_verifying) ... ok
+test_completion_with_failure_observed_refused (test_layer1_contracts.TestCompletionGuard.test_completion_with_failure_observed_refused) ... ok
+test_completion_without_acceptance_refused (test_layer1_contracts.TestCompletionGuard.test_completion_without_acceptance_refused) ... ok
+test_completion_without_evidence_refused (test_layer1_contracts.TestCompletionGuard.test_completion_without_evidence_refused) ... ok
+test_delegated_claim_cannot_complete (test_layer1_contracts.TestCompletionGuard.test_delegated_claim_cannot_complete) ... ok
+test_valid_completion_allowed (test_layer1_contracts.TestCompletionGuard.test_valid_completion_allowed) ... ok
+test_blockage_cleared_requires_fresh_sources (test_layer1_contracts.TestFreshnessStructure.test_blockage_cleared_requires_fresh_sources) ... ok
+test_duplicate_tap_changes_nothing (test_layer1_contracts.TestFreshnessStructure.test_duplicate_tap_changes_nothing) ... ok
+test_observation_restored_re_reads (test_layer1_contracts.TestFreshnessStructure.test_observation_restored_re_reads) ... ok
+test_resumption_revalidates_against_live_sources (test_layer1_contracts.TestFreshnessStructure.test_resumption_revalidates_against_live_sources) ... ok
+test_illegal_transition_bypassing_approval (test_layer1_contracts.TestTransitionValidation.test_illegal_transition_bypassing_approval) ... ok
+test_illegal_transition_executing_to_completed (test_layer1_contracts.TestTransitionValidation.test_illegal_transition_executing_to_completed) ... ok
+test_illegal_transition_failed_to_completed (test_layer1_contracts.TestTransitionValidation.test_illegal_transition_failed_to_completed) ... ok
+test_legal_transitions_accepted (test_layer1_contracts.TestTransitionValidation.test_legal_transitions_accepted) ... ok
+test_second_grant_is_not_a_second_transition (test_layer1_contracts.TestTransitionValidation.test_second_grant_is_not_a_second_transition) ... ok
+test_unknown_event_rejected (test_layer1_contracts.TestTransitionValidation.test_unknown_event_rejected) ... ok
+test_unknown_state_rejected (test_layer1_contracts.TestTransitionValidation.test_unknown_state_rejected) ... ok
+test_events_exactly_nineteen (test_layer1_contracts.TestVocabularyAndStructure.test_events_exactly_nineteen) ... ok
+test_events_md_rows_match_spec_actions (test_layer1_contracts.TestVocabularyAndStructure.test_events_md_rows_match_spec_actions) ... ok
+test_every_transition_event_is_canonical (test_layer1_contracts.TestVocabularyAndStructure.test_every_transition_event_is_canonical) ... ok
+test_forbidden_pairs_absent (test_layer1_contracts.TestVocabularyAndStructure.test_forbidden_pairs_absent) ... ok
+test_only_one_road_into_completed (test_layer1_contracts.TestVocabularyAndStructure.test_only_one_road_into_completed) ... ok
+test_only_one_road_into_executing (test_layer1_contracts.TestVocabularyAndStructure.test_only_one_road_into_executing) ... ok
+test_states_exactly_twelve (test_layer1_contracts.TestVocabularyAndStructure.test_states_exactly_twelve) ... ok
+test_transition_endpoints_are_canonical_states (test_layer1_contracts.TestVocabularyAndStructure.test_transition_endpoints_are_canonical_states) ... ok
+test_transition_numbers_complete (test_layer1_contracts.TestVocabularyAndStructure.test_transition_numbers_complete) ... ok
+test_unknown_has_single_keyed_exit (test_layer1_contracts.TestVocabularyAndStructure.test_unknown_has_single_keyed_exit) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.022s
+
+OK

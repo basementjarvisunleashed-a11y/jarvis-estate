@@ -1,0 +1,31 @@
+=== PHASE 0/1 STRESS — evidence log ===
+Run: 2026-10-21 ~00:06 ET (before 02:12 ET deadline). Ordered by HgX 2026-10-20 23:51 ET.
+
+=== Layer 1 re-run: python3 -m unittest test_layer1_contracts (from tests/layer1/)
+Ran 39 tests in 0.016s
+
+OK
+
+=== Crosscheck: python3 tests/audit_crosscheck.py
+
+Crosscheck: 11/12 checks passed; FAILED: ['tests-md-phase1-citations']
+
+=== Evidence file digests (ratified files, for the record):
+4b86018784b06ba4 contracts/glossary.md
+39d38b45f77f5f25 contracts/events.md
+e69e9a9ce4e1b315 contracts/README.md
+9814c28fae3e8245 spec/state-machine.tla
+706dc17c021ab950 spec/state-machine.cfg
+22c2e9bdee1007e7 proofs/phase1-tlc-report.md
+bbe3b1cb34b03f8c proofs/tlc-exhaustive-run.log
+58d1e1f0def1bae3 proofs/tlc-retest-2026-10-19.log
+
+=== RE-RUN AT CLOSE (2026-10-21 ~00:32 ET):
+Layer 1:
+Ran 39 tests in 0.007s
+
+OK
+Crosscheck:
+
+Crosscheck: 11/12 checks passed; FAILED: ['tests-md-phase1-citations']
+NOTE: crosscheck 11/12 — the single failure is the documented check limitation (tests-md-phase1-citations), not a figure error.
