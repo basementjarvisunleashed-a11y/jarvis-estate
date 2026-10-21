@@ -164,3 +164,6 @@ Genuinely open — not claimed, not implied:
   explicit consent; ratified files untouched; no email/post/purchase
   without approval; the research pipeline stays sealed (survey in
   flight in the research section, never returns here).
+
+## Phase 3 CLOSED
+- **2026-10-21 ~18:07 ET, on HgX's word.** The consistency model is proven and closed: six drafts, 42 protocol tests, 80 adversarial cases, all five exit criteria met with covering tests. Closure committed and pushed per his order; the Phase 4 milestone opened.

@@ -100,3 +100,6 @@ for the walkthrough.
 
 ## Walkthrough complete
 - 2026-10-21 ~17:44 ET: all four questions answered in the one-by-one walkthrough — Q1 deployment loop as reference (iPhone trusted surface), Q2 iPhone + Watch in scope (rest pull-only), Q3 survey parallel (informs, doesn't block), Q4 substrate adopted as reference. Phase 3 proceeds to the work layers on his word.
+
+## Phase 3 CLOSED
+- **2026-10-21 ~18:07 ET, on HgX's word** ("Okay, close the phase"): Phase 3 — Consistency Model — is CLOSED. The path: PROVEN ~18:05 ET (full verification sweep: L2 42/42, L3 80/80, refusal ledgers byte-identical, every numbered claim audited, no ratified-file touch, integrity manifest of 32 files, all five exit criteria met — report `tests/PHASE-3-PROVEN-REPORT-2026-10-21.md`), then closed on his explicit order. Six v0.1-draft spec documents, the protocol harness, and the adversarial chaos harness all pushed to the three surfaces. Open points carried forward: OP-2 (laptop scope), OP-3 (session lifecycle), OP-5 (TTL numbers), OP-7 (tier table) await his word; OP-6 (formal proof of the hybrid table) recorded as beyond exit criteria.
