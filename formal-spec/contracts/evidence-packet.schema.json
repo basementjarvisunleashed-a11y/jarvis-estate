@@ -1,3 +1,78 @@
-{"$comment": "Field names per HgX's 2026-10-21 decision (Q5/OQ-5): Appendix C.1 sketch names. NOTE: this diverges from ratified contracts/events.md event 6 (section 6.6 names); a contract amendment needs HgX's word. Evidence packet - the structured proof bundle; the unit of verification ('no proof, no done', INV-C1). DRAFT 0.1 - built 2026-10-21 on HgX's order; reworked 2026-10-21 to the C.1 sketch on his word; awaiting ratification. Normative on ratification only.", "$id": "https://jarvis-estate/contracts/evidence-packet.schema.json", "$schema": "http://json-schema.org/draft-07/schema#", "additionalProperties": false, "properties": {"approval_ref": {"description": "intent_id, required if consequential", "type": "string"}, "artifact_revision": {"description": "must equal the artifact revision (INV-E2). Sketch types this as string; Q2 decided revision tokens are integer - type coherence pending HgX's word.", "type": "string"}, "checks": {"description": "acceptance checks, each observed", "items": {"properties": {"detail": {"description": "what was observed, not asserted", "type": "string"}, "name": {"type": "string"}, "observed_at": {"format": "date-time", "type": "string"}, "result": {"enum": ["pass", "fail"], "type": "string"}}, "required": ["name", "result", "observed_at"], "type": "object"}, "type": "array"}, "created_at": {"description": "when the packet was created", "format": "date-time", "type": "string"}, "gaps": {"description": "visible gaps (INV-E4)", "items": {"type": "string"}, "type": "array"}, "packet_id": {"description": "unique packet identifier", "type": "string"}, "work_id": {"description": "work item this packet proves", "type": "string"}}, "required": ["packet_id", "work_id", "artifact_revision", "created_at", "checks"], "title": "EvidencePacket", "type": "object", "version": "0.1-draft"}
-> Promotion note (2026-10-21, on HgX's order "push all of it"): promoted to canonical placement as v0.1 draft. Formal ratification to v1.0.0 remains HgX's call. Open questions OQ-1..OQ-6 recorded in tests/staging/prescribed-files/BUILD-NOTES.md.
-> Rework note (2026-10-21 ~12:46 ET, on HgX's order Q5/OQ-5): field names reworked to the Appendix C.1 sketch (packet_id, work_id, artifact_revision, created_at, approval_ref, checks, gaps). Diverges from ratified contracts/events.md event 6; amendment needs HgX's word.
+{
+  "$comment": "Field names per HgX's 2026-10-21 decision (Q5/OQ-5): Appendix C.1 sketch names. NOTE: this diverges from ratified contracts/events.md event 6 (section 6.6 names); a contract amendment needs HgX's word. Evidence packet - the structured proof bundle; the unit of verification ('no proof, no done', INV-C1). DRAFT 0.1 - built 2026-10-21 on HgX's order; reworked 2026-10-21 to the C.1 sketch on his word; awaiting ratification. Normative on ratification only.",
+  "$id": "https://jarvis-estate/contracts/evidence-packet.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "approval_ref": {
+      "description": "intent_id, required if consequential",
+      "type": "string"
+    },
+    "artifact_revision": {
+      "description": "must equal the artifact revision (INV-E2). Sketch types this as string; Q2 decided revision tokens are integer - type coherence pending HgX's word.",
+      "type": "string"
+    },
+    "checks": {
+      "description": "acceptance checks, each observed",
+      "items": {
+        "properties": {
+          "detail": {
+            "description": "what was observed, not asserted",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "result": {
+            "enum": [
+              "pass",
+              "fail"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "result",
+          "observed_at"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "created_at": {
+      "description": "when the packet was created",
+      "format": "date-time",
+      "type": "string"
+    },
+    "gaps": {
+      "description": "visible gaps (INV-E4)",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "packet_id": {
+      "description": "unique packet identifier",
+      "type": "string"
+    },
+    "work_id": {
+      "description": "work item this packet proves",
+      "type": "string"
+    }
+  },
+  "required": [
+    "packet_id",
+    "work_id",
+    "artifact_revision",
+    "created_at",
+    "checks"
+  ],
+  "title": "EvidencePacket",
+  "type": "object",
+  "version": "0.1-draft"
+}

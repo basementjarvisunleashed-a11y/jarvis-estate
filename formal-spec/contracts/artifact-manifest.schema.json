@@ -1,2 +1,50 @@
-{"$comment":"Owning contract: contracts/artifact-manifest.schema.json per ROADMAP.md §0.4, Paper IV §6.6. Artifact manifest — digest-bound manifest of inspectable output (glossary: Artifact). Binds INV-E2 (packet revision matches artifact revision) to bytes. DRAFT 0.1 — built 2026-10-21 on HgX's order; awaiting ratification. Normative on ratification only.","$id":"https://jarvis-estate/contracts/artifact-manifest.schema.json","$schema":"http://json-schema.org/draft-07/schema#","additionalProperties":false,"properties":{"artifact_id":{"description":"Unique artifact identifier","type":"string"},"digest":{"description":"Content digest of the artifact (SHA-256, 64 hex chars). Fluent text not observed against its acceptance test is not an artifact (glossary: Artifact)","pattern":"^[0-9a-f]{64}$","type":"string"},"location":{"description":"Where the artifact bytes live (path or URI)","type":"string"},"media_type":{"description":"Media type of the artifact (e.g. application/pdf, text/markdown)","type":"string"},"provenance":{"description":"Which worker produced it, from which sources, under which brief revision (Paper IV §6.6)","type":"string"},"revision":{"description":"Work-item revision the artifact is bound to (INV-E2; glossary: Revision)","minimum":0,"type":"integer"},"work_id":{"description":"Work item that produced the artifact","type":"string"}},"required":["artifact_id","work_id","revision","digest","media_type","location","provenance"],"title":"ArtifactManifest","type":"object","version":"0.1-draft"}
-> Promotion note (2026-10-21, on HgX's order "push all of it"): promoted to canonical placement as v0.1 draft. Formal ratification to v1.0.0 remains HgX's call. Open questions OQ-1..OQ-6 recorded in tests/staging/prescribed-files/BUILD-NOTES.md.
+{
+  "$comment": "Owning contract: contracts/artifact-manifest.schema.json per ROADMAP.md §0.4, Paper IV §6.6. Artifact manifest — digest-bound manifest of inspectable output (glossary: Artifact). Binds INV-E2 (packet revision matches artifact revision) to bytes. DRAFT 0.1 — built 2026-10-21 on HgX's order; awaiting ratification. Normative on ratification only.",
+  "$id": "https://jarvis-estate/contracts/artifact-manifest.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "description": "Unique artifact identifier",
+      "type": "string"
+    },
+    "digest": {
+      "description": "Content digest of the artifact (SHA-256, 64 hex chars). Fluent text not observed against its acceptance test is not an artifact (glossary: Artifact)",
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "location": {
+      "description": "Where the artifact bytes live (path or URI)",
+      "type": "string"
+    },
+    "media_type": {
+      "description": "Media type of the artifact (e.g. application/pdf, text/markdown)",
+      "type": "string"
+    },
+    "provenance": {
+      "description": "Which worker produced it, from which sources, under which brief revision (Paper IV §6.6)",
+      "type": "string"
+    },
+    "revision": {
+      "description": "Work-item revision the artifact is bound to (INV-E2; glossary: Revision)",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "work_id": {
+      "description": "Work item that produced the artifact",
+      "type": "string"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "work_id",
+    "revision",
+    "digest",
+    "media_type",
+    "location",
+    "provenance"
+  ],
+  "title": "ArtifactManifest",
+  "type": "object",
+  "version": "0.1-draft"
+}

@@ -87,6 +87,16 @@ completion fails tests; the suite is citable as empirical validation.
 Phase 2 closes on HgX's word, on evidence — the same discipline as
 Phases 0 and 1.
 
+## Session log — 2026-10-21 (full re-run with the nine answers, on HgX's order ~13:00 ET)
+
+- Re-ran the ENTIRE Phase 2 verification with all nine answered questions baked in as the run configuration (`tests/PHASE-2-OPEN-QUESTIONS.md`).
+- Fresh counts, quoted exactly: Layer 1 **64/64 OK** (39 contract + 25 schema); Layer 2 **10/10 OK** (PT-4: 2,000 sequences, 55,983 attempted steps, 168 executions, 22 completions — all invariant assertions held); **53,003** attempted actions refused, by guard; Layer 3 **10/10 OK**; crosscheck **12/12** (Q9 improvement exercised).
+- Configuration verified: integer expiry/revision in fixtures; eight-field digest bound in `INTENT_FIELDS` (CT-A2 + PT-1 mutation pool cover all eight); sketch names in EP schema tests; crosscheck 12/12.
+- Harness corrections (test code only, no ratified file touched): (1) all five `contracts/*.schema.json` stripped to pure JSON (trailing markdown promotion notes removed; content retained in `$comment` and BUILD-NOTES.md); (2) digest model extended six→eight fields per Q3, both layers' fixtures + mutation pools updated; (3) Layer 2 rejection-log filename made date-derived after the hardcoded 2026-10-20 name overwrote the prior day's local copy (2026-10-20 data survives in the committed repo and the 2026-10-20 report).
+- Evidence: `tests/evidence/2026-10-21-rerun-{layer1,layer2,layer3,crosscheck}.log`, `tests/evidence/2026-10-21-layer2-rejections.log`.
+- Report: `tests/PHASE-2-RUN-REPORT-2026-10-21.md` (committee-grade; nine answers as configuration; gaps stated plainly).
+- **Phase 2 remains OPEN** on HgX's word (Q8). Remaining by design: INV-R2/R3/R4 (Phase 6), CH-5/CH-6 depth, E3/S3/S5 rendering, events.md amendment pending, Q2-vs-sketch type coherence open, CI/third-party runnability.
+
 ## Session log — 2026-10-21 (day work, on HgX's order ~11:42 ET)
 
 - Fresh re-runs: Layer 1 39/39 OK; Layer 2 10/10 OK (PT-4: 2,000
