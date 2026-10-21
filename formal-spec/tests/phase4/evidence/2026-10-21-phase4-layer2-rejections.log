@@ -1,0 +1,4 @@
+2:0	unsafe-retry	idempotency	0ffce48f5e55	safe_to_retry=false (RF4/RF8): refusing
+5:0	needs-fresh-ceremony	idempotency	0ffce48f5e55	compensation requires its own key and approval (S6)
+6:0	digest-mismatch	idempotency	intent-w	worker digest != recomputed digest
+13:0	unsafe-retry	idempotency	0ffce48f5e55	safe_to_retry=false (RF4/RF8): refusing

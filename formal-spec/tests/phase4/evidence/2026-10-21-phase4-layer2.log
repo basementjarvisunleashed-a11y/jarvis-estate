@@ -1,0 +1,25 @@
+test_ab1_ambiguous_never_silently_completed (test_ambiguity.TestAmbiguity.test_ab1_ambiguous_never_silently_completed) ... ok
+test_ab2_unknown_surfaced_on_pull_with_hint (test_ambiguity.TestAmbiguity.test_ab2_unknown_surfaced_on_pull_with_hint) ... ok
+test_ab3_unknown_never_auto_retries (test_ambiguity.TestAmbiguity.test_ab3_unknown_never_auto_retries) ... ok
+test_ab4_external_verification_resolves_unknown (test_ambiguity.TestAmbiguity.test_ab4_external_verification_resolves_unknown) ... ok
+test_ab5_compensation_needs_fresh_ceremony (test_ambiguity.TestAmbiguity.test_ab5_compensation_needs_fresh_ceremony) ... ok
+test_ab6_worker_intent_signed_by_orchestrator (test_ambiguity.TestAmbiguity.test_ab6_worker_intent_signed_by_orchestrator) ... ok
+test_ab7_all_record_states_exercised (test_ambiguity.TestAmbiguity.test_ab7_all_record_states_exercised) ... ok
+test_dt1_second_tap_same_device_never_executes_twice (test_duplicate_tap.TestDuplicateTap.test_dt1_second_tap_same_device_never_executes_twice) ... ok
+test_dt2_two_devices_one_intent_one_key_one_execution (test_duplicate_tap.TestDuplicateTap.test_dt2_two_devices_one_intent_one_key_one_execution) ... ok
+test_dt3_duplicate_after_completed_returns_record (test_duplicate_tap.TestDuplicateTap.test_dt3_duplicate_after_completed_returns_record) ... ok
+test_dt4_duplicate_approval_returns_same_decision (test_duplicate_tap.TestDuplicateTap.test_dt4_duplicate_approval_returns_same_decision) ... ok
+test_dt5_key_stable_for_same_approved_intent (test_duplicate_tap.TestDuplicateTap.test_dt5_key_stable_for_same_approved_intent) ... ok
+test_dt6_changed_intent_is_a_different_key (test_duplicate_tap.TestDuplicateTap.test_dt6_changed_intent_is_a_different_key) ... ok
+test_dt7_execute_without_approval_refused (test_duplicate_tap.TestDuplicateTap.test_dt7_execute_without_approval_refused) ... ok
+test_sr1_unsafe_retry_refused_attempt_count_unchanged (test_safe_retry.TestSafeRetry.test_sr1_unsafe_retry_refused_attempt_count_unchanged) ... ok
+test_sr2_verified_absent_retry_still_at_most_once (test_safe_retry.TestSafeRetry.test_sr2_verified_absent_retry_still_at_most_once) ... ok
+test_sr3_revision_frozen_at_bind_key_stable_across_retries (test_safe_retry.TestSafeRetry.test_sr3_revision_frozen_at_bind_key_stable_across_retries) ... ok
+test_sr4_retry_of_completed_returns_existing (test_safe_retry.TestSafeRetry.test_sr4_retry_of_completed_returns_existing) ... ok
+test_sr5_native_tool_retry_returns_existing_not_second_effect (test_safe_retry.TestSafeRetry.test_sr5_native_tool_retry_returns_existing_not_second_effect) ... ok
+test_sr6_cancel_then_retry_returns_cancelled (test_safe_retry.TestSafeRetry.test_sr6_cancel_then_retry_returns_cancelled) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.004s
+
+OK
