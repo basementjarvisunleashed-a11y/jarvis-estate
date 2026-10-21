@@ -100,16 +100,27 @@ details[open] summary{border-bottom:1px solid var(--border-subtle)}
 footer{border-top:1px solid var(--border);margin-top:60px;padding:30px 0;color:var(--text-faint);font-size:13.5px}
 .footer-inner{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 </style>
-</head><body>
+</head>
+<body>
 
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="#" data-view="home">J.A.R.V.I.S.<small>DOCTORAL RESEARCH</small></a>
-    <nav class="main-nav" id="main-nav" aria-label="Main navigation"></nav>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-btn active" data-view="home">Home</button>
+      <button class="nav-btn" data-view="papers">Papers</button>
+      <button class="nav-btn" data-view="doctoral">Doctoral Programme</button>
+      <button class="nav-btn" data-view="academy">Academy</button>
+      <button class="nav-btn" data-view="qa">Q&amp;A</button>
+      <button class="nav-btn" data-view="research">Research</button>
+      <button class="nav-btn" data-view="evidence">Evidence</button>
+      <button class="nav-btn" data-view="connect">Connect</button>
+    </nav>
   </div>
 </header>
 
 <main>
+<!-- ==================== HOME ==================== -->
 <section class="view active" id="view-home">
   <div class="hero">
     <div class="hero-kicker">OPEN-SOURCE RESEARCH PROGRAMME</div>
@@ -131,18 +142,142 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:30px 0;color:v
   <p>The system goes public; the principal's private life never does. That boundary is absolute.</p>
   <p>The doctoral programme (<a href="#" data-view="doctoral">eight phases</a>) commissions the proof: frozen contracts, a verified state machine, invariant verification, and a defensible evidence package — each phase gated, versioned, and inspectable on <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate">GitHub</a>.</p>
 </section>
-<!-- ==================== PAPERS (rendered from data) ==================== -->
-<section class="view" id="view-papers"></section>
-<!-- ==================== DOCTORAL (rendered from data) ==================== -->
-<section class="view" id="view-doctoral"></section>
-<!-- ==================== ACADEMY (rendered from data) ==================== -->
-<section class="view" id="view-academy"></section>
-<!-- ==================== QA (rendered from data) ==================== -->
-<section class="view" id="view-qa"></section>
-<!-- ==================== RESEARCH (rendered from data) ==================== -->
-<section class="view" id="view-research"></section>
-<!-- ==================== EVIDENCE (rendered from data) ==================== -->
-<section class="view" id="view-evidence"></section>
+
+<!-- ==================== PAPERS ==================== -->
+<section class="view" id="view-papers">
+  <h1>The papers</h1>
+  <p class="lede">Four papers, 164 pages. The trilogy states the doctrine; Paper IV commissions the proof. Open source from day one — MIT for code, CC-BY-4.0 for papers.</p>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Paper I — The Vision</h3>
+      <div class="card-meta">v1.2 · 14 pages · The operating white paper</div>
+      <p>The doctrine: one principal, a federation of narrow roles, the seven-stage chain of custody, memory, approval, and evidence. Open source as foundation.</p>
+      <div class="dl-row">
+        <a class="btn btn-outline" href="https://www.dropbox.com/scl/fi/5t6g9eghxwbpdl8yglh7r/J.A.R.V.I.S.-White-Paper-v1.2.pdf?rlkey=fjjbvk2ob8mqhxz1rp64n5ca2&dl=1">Download PDF</a>
+        <a class="btn btn-outline" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers">Source</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Paper II — The Back End</h3>
+      <div class="card-meta">v1.1 · 20 pages · The technical paper</div>
+      <p>The engineering: five invariants, the delegation boundary, the skill pipeline, failure visibility, the worker contract.</p>
+      <div class="dl-row">
+        <a class="btn btn-outline" href="https://www.dropbox.com/scl/fi/izgyzgc9p9bjpf4m40p52/J.A.R.V.I.S.-Technical-White-Paper-v1.1.pdf?rlkey=p2wk6uzarlyq5sbuzmc2ugkmu&dl=1">Download PDF</a>
+        <a class="btn btn-outline" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers">Source</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Paper III — The Front End</h3>
+      <div class="card-meta">v1.1 · 20 pages · The interface paper</div>
+      <p>The surface: how a principal meets the system — chat, voice, artifacts, and the approval boundary made tangible.</p>
+      <div class="dl-row">
+        <a class="btn btn-outline" href="https://www.dropbox.com/scl/fi/can3j6eust13ie1dngjub/J.A.R.V.I.S.-Front-End-White-Paper-v1.1.pdf?rlkey=rykcz1z2gbrdmohfznkofd6li&dl=1">Download PDF</a>
+        <a class="btn btn-outline" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers">Source</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Paper IV — From Doctrine to Proof</h3>
+      <div class="card-meta">v1.1 · 110 pages · The roadmap</div>
+      <p>The programme: six formalisms gaps, the invariant catalogue, the work-state machine, the threat model, the twelve-month path to doctoral evidence.</p>
+      <div class="dl-row">
+        <a class="btn btn-outline" href="https://www.dropbox.com/scl/fi/yj2l0s450hqu8n40kwhr0/J.A.R.V.I.S.-Roadmap-White-Paper-v1.1.pdf?rlkey=ivgpmgiac61j1qxiq60qnu2va&dl=1">Download PDF</a>
+        <a class="btn btn-outline" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers">Source</a>
+      </div>
+    </div>
+  </div>
+  <p>All versions, with full version history, in the <a href="https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq">Dropbox archive</a>.</p>
+</section>
+
+<!-- ==================== DOCTORAL ==================== -->
+<section class="view" id="view-doctoral">
+  <h1>The doctoral programme</h1>
+  <p class="lede"><strong>Public roadmap.</strong> Eight phases from frozen contracts to a defensible evidence package. Tracked on <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones">GitHub milestones</a>; every claim graded in the <a href="#" data-view="evidence">evidence ledger</a>.</p>
+  <div class="phase-list">
+    <div class="phase-row"><div class="phase-num">PHASE 0</div><div><h3>Freeze the contracts</h3><p>Canonical glossary v1.0.0 (69 terms), event vocabulary (19 events), TLA+ ratified as the proof language.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/1">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/43">Tracking issue #43</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-done">Closed</span></div></div>
+    <div class="phase-row"><div class="phase-num">PHASE 1</div><div><h3>State-machine proof</h3><p>TLC model check: 3,266,929 distinct states, zero invariant violations, six spec fixes.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/2">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/44">Tracking issue #44</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-done">Proven</span></div></div>
+    <div class="phase-row"><div class="phase-num">PHASE 2</div><div><h3>Invariant verification</h3><p>27 invariants, three layers. Full re-run 2026-10-21: Layer 1: 64/64. Layer 2: 10/10 (PT-4: 2,000 sequences, 53,003 refused). Layer 3: 10/10. Crosscheck: 12/12. Schema tests: 25/25. All nine open questions answered.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/3">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/10">Tracking issue #10</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-open">Open</span></div></div>
+    <div class="phase-row"><div class="phase-num">PHASE 3</div><div><h3>Consistency model</h3><p>The multi-device consistency contract.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/4">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/18">Tracking issue #18</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-planned">Planned</span></div></div>
+    <div class="phase-row"><div class="phase-num">PHASE 4</div><div><h3>Idempotency</h3><p>At-most-once semantics for consequential actions.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/5">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/19">Tracking issue #19</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-planned">Planned</span></div></div>
+    <div class="phase-row"><div class="phase-num">PHASE 5</div><div><h3>Security boundaries</h3><p>Formal threat model and capability matrix.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/6">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/20">Tracking issue #20</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-planned">Planned</span></div></div>
+    <div class="phase-row"><div class="phase-num">PHASE 6</div><div><h3>Router optimality</h3><p>Measured comparison of routing policies.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/7">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/21">Tracking issue #21</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-planned">Planned</span></div></div>
+    <div class="phase-row"><div class="phase-num">PHASE 7</div><div><h3>Doctoral evidence package</h3><p>The integrated, defensible thesis.</p><p class="phase-links"><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/8">Milestone</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/22">Tracking issue #22</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions">Discussion</a></p></div><div><span class="badge badge-planned">Planned</span></div></div>
+  </div>
+  <p>Proof artifacts: <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/formal-spec">formal-spec/</a> · Tests: <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/formal-spec/tests">tests/</a></p>
+</section>
+
+<!-- ==================== ACADEMY ==================== -->
+<section class="view" id="view-academy">
+  <h1>The Academy</h1>
+  <p class="lede">The papers, taught as a course. Tuesday, Wednesday, Thursday — 6:00–8:00 AM America/Toronto. Paper I, then the back end, then the front end.</p>
+  <h2>Session materials</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Session 3 — Memory</h3>
+      <div class="card-meta">2026-10-22 · Persistence and semantics · 48 slides</div>
+      <p>Deck: PDF and PowerPoint, from the Dropbox archive.</p>
+      <div class="dl-row">
+        <a class="btn btn-outline" href="https://www.dropbox.com/scl/fi/8e5ece7a34qgvdd9r8ldd/memory-slideshow.pdf?rlkey=8m6ldb6iauppedjbhj8d6lvkq&dl=1">PDF</a>
+        <a class="btn btn-outline" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy/decks">PPTX</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Session 2 — The Vision v1.2</h3>
+      <div class="card-meta">2026-10-21 · Expert depth · 48 slides</div>
+      <p>Deck: PDF and PowerPoint, from the Dropbox archive.</p>
+      <div class="dl-row">
+        <a class="btn btn-outline" href="https://www.dropbox.com/scl/fi/e9vlfk0j3tuplunnf8r5k/vision-white-paper-slideshow.pdf?rlkey=98qnke9iorzzxhy3zb89u7lw7&dl=1">PDF</a>
+        <a class="btn btn-outline" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy/decks">PPTX</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Session 1 — The Vision v1.1</h3>
+      <div class="card-meta">2026-10-14 · Expert depth · 42 slides</div>
+      <p>Taught before the documentation pipeline. Recorded in the lecture archive.</p>
+      <div class="dl-row">
+        <a class="btn btn-outline" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy/lecture-records">Lecture records</a>
+      </div>
+    </div>
+  </div>
+  <p>Full index, history, and versioned lecture records: <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy">academy/</a></p>
+</section>
+
+<!-- ==================== QA ==================== -->
+<section class="view" id="view-qa">
+  <h1>Questions &amp; Answers</h1>
+  <p class="lede">Checkpoint questions from the papers, with answers drafted strictly from the paper texts. Indexed and growing — nothing is ever removed.</p>
+  <h2>Paper I — The Vision (v1.2)</h2>
+  <div id="qa-paper1"></div>
+  <h2>Paper II — The Back End (v1.1)</h2>
+  <div id="qa-paper2"></div>
+  <h2>Session Q&amp;A</h2>
+  <div id="qa-sessions"></div>
+  <p style="margin-top:20px">Full bank: <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/qa">qa/</a></p>
+</section>
+
+<!-- ==================== RESEARCH ==================== -->
+<section class="view" id="view-research">
+  <h1>Research</h1>
+  <p class="lede">Published findings from the research desk — public data only, scrubbed before release. Newest first.</p>
+  <div class="card-grid" id="research-grid"></div>
+</section>
+
+<!-- ==================== EVIDENCE ==================== -->
+<section class="view" id="view-evidence">
+  <h1>Evidence</h1>
+  <p class="lede">Every claim graded: Proven, Verified, or Tracked. Nothing asserted without it.</p>
+  <table>
+    <tr><th>Claim</th><th>Status</th><th>Evidence</th></tr>
+    <tr><td>Four papers (I v1.2, II v1.1, III v1.1, IV v1.1)</td><td><span class="badge badge-done">Proven</span></td><td>PDFs in <code>doctrine/</code></td></tr>
+    <tr><td>Phase 0 — contracts frozen</td><td><span class="badge badge-done">Proven</span></td><td>Glossary v1.0.0 (69 terms, 25 conflicts resolved) · 19 events · TLA+ ratified · Contract governance &amp; versioning law. Completed 2026-10-19.</td></tr>
+    <tr><td>Phase 1 — 3,266,929 states, zero violations</td><td><span class="badge badge-done">Proven</span></td><td>TLC model check: 3,266,929 states, 0 violations · 6 spec fixes from counterexamples · <code>formal-spec/proofs/phase1-tlc-report.md</code>. Completed 2026-10-19.</td></tr>
+    <tr><td>Phase 2 — L1 39/39, L2 10/10, L3 10/10</td><td><span class="badge badge-open">Open</span></td><td><code>formal-spec/tests/</code>, milestones #11–#16</td></tr>
+    <tr><td>Identity clean — real name nowhere</td><td><span class="badge badge-done">Proven</span></td><td>Source greps, zero hits, every push</td></tr>
+    <tr><td>GitLab mirror</td><td><span class="badge badge-planned">Tracked</span></td><td>Awaiting credentials (issue #8)</td></tr>
+  </table>
+  <p>Full ledger: <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/EVIDENCE.md">EVIDENCE.md</a> · Audits: <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/audits">audits/</a></p>
+</section>
+
+<!-- ==================== CONNECT ==================== -->
 <section class="view" id="view-connect">
   <h1>Connect</h1>
   <p class="lede">The work is public. <strong>J.A.R.V.I.S.</strong> is the public identity.</p>
@@ -163,362 +298,8 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding:30px 0;color:v
   </div>
 </footer>
 
-
-<!--
-================================================================================
-HOW TO ADD A NEW SECTION (under 5 minutes — no JS logic changes):
-  1. NAV ENTRY — append {"id":"press","label":"Press"} to the nav-data array below.
-     Optional: add "track":"formal" or "track":"community" to mark the track.
-  2. DATA BLOCK — add <script type="application/json" id="press-data">…</script>
-     shaped like {"title":"…","lede_html":"…",
-       "items":[{"title":"…","meta":"…","desc":"…",
-                 "buttons":[{"label":"…","href":"…"}]}],"after_html":"…"}.
-     (A card-grid section like Papers/Academy renders automatically.)
-  3. VIEW CONTAINER — add <section class="view" id="view-press"></section>
-     inside <main>, then add one line to the RENDERER MAP in the script below:
-       press: "cards",
-     Reload — done. Zero dependencies, no build step, works in October 2027.
-================================================================================
--->
-<script type="application/json" id="nav-data">
-[
- {
-  "id": "home",
-  "label": "Home"
- },
- {
-  "id": "papers",
-  "label": "Papers"
- },
- {
-  "id": "doctoral",
-  "label": "Doctoral Programme",
-  "track": "formal"
- },
- {
-  "id": "academy",
-  "label": "Academy",
-  "track": "community"
- },
- {
-  "id": "qa",
-  "label": "Q&A"
- },
- {
-  "id": "research",
-  "label": "Research",
-  "track": "community"
- },
- {
-  "id": "evidence",
-  "label": "Evidence"
- },
- {
-  "id": "connect",
-  "label": "Connect"
- }
-]
-</script>
-<script type="application/json" id="views-data">
-{
- "papers": {
-  "title": "The papers",
-  "lede_html": "Four papers, 164 pages. The trilogy states the doctrine; Paper IV commissions the proof. Open source from day one — MIT for code, CC-BY-4.0 for papers.",
-  "after_html": "<p>All versions, with full version history, in the <a href=\"https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq\">Dropbox archive</a>.</p>"
- },
- "doctoral": {
-  "kicker": "FORMAL TRACK — WATCH THE PROOF",
-  "title": "The doctoral programme",
-  "lede_html": "<strong>Public roadmap.</strong> Eight phases from frozen contracts to a defensible evidence package. Tracked on <a href=\"https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones\">GitHub milestones</a>; every claim graded in the <a href=\"#\" data-view=\"evidence\">evidence ledger</a>.",
-  "after_html": "<p>Proof artifacts: <a href=\"https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/formal-spec\">formal-spec/</a> · Tests: <a href=\"https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/formal-spec/tests\">tests/</a></p>"
- },
- "academy": {
-  "kicker": "COMMUNITY TRACK — JOIN US",
-  "title": "The Academy",
-  "lede_html": "The papers, taught as a course. Tuesday, Wednesday, Thursday — 6:00–8:00 AM America/Toronto. Paper I, then the back end, then the front end.",
-  "section_title": "Session materials",
-  "after_html": "<p>Full index, history, and versioned lecture records: <a href=\"https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy\">academy/</a></p>"
- },
- "qa": {
-  "title": "Questions & Answers",
-  "lede_html": "Checkpoint questions from the papers, with answers drafted strictly from the paper texts. Indexed and growing — nothing is ever removed.",
-  "sections": [
-   {
-    "heading": "Paper I — The Vision (v1.2)",
-    "container": "qa-paper1"
-   },
-   {
-    "heading": "Paper II — The Back End (v1.1)",
-    "container": "qa-paper2"
-   },
-   {
-    "heading": "Session Q&A",
-    "container": "qa-sessions"
-   }
-  ],
-  "after_html": "<p style=\"margin-top:20px\">Full bank: <a href=\"https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/qa\">qa/</a></p>"
- },
- "research": {
-  "kicker": "COMMUNITY TRACK — JOIN US",
-  "title": "Research",
-  "lede_html": "Published findings from the research desk — public data only, scrubbed before release. Newest first."
- },
- "evidence": {
-  "title": "Evidence",
-  "lede_html": "Every claim graded: Proven, Verified, or Tracked. Nothing asserted without it.",
-  "after_html": "<p>Full ledger: <a href=\"https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/EVIDENCE.md\">EVIDENCE.md</a> · Audits: <a href=\"https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/audits\">audits/</a></p>"
- }
-}
-</script>
-<script type="application/json" id="papers-data">
-[
- {
-  "title": "Paper I — The Vision",
-  "meta": "v1.2 · 14 pages · The operating white paper",
-  "desc": "The doctrine: one principal, a federation of narrow roles, the seven-stage chain of custody, memory, approval, and evidence. Open source as foundation.",
-  "buttons": [
-   {
-    "label": "Download PDF",
-    "href": "https://www.dropbox.com/scl/fi/5t6g9eghxwbpdl8yglh7r/J.A.R.V.I.S.-White-Paper-v1.2.pdf?rlkey=fjjbvk2ob8mqhxz1rp64n5ca2&dl=1"
-   },
-   {
-    "label": "Source",
-    "href": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers"
-   }
-  ]
- },
- {
-  "title": "Paper II — The Back End",
-  "meta": "v1.1 · 20 pages · The technical paper",
-  "desc": "The engineering: five invariants, the delegation boundary, the skill pipeline, failure visibility, the worker contract.",
-  "buttons": [
-   {
-    "label": "Download PDF",
-    "href": "https://www.dropbox.com/scl/fi/izgyzgc9p9bjpf4m40p52/J.A.R.V.I.S.-Technical-White-Paper-v1.1.pdf?rlkey=p2wk6uzarlyq5sbuzmc2ugkmu&dl=1"
-   },
-   {
-    "label": "Source",
-    "href": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers"
-   }
-  ]
- },
- {
-  "title": "Paper III — The Front End",
-  "meta": "v1.1 · 20 pages · The interface paper",
-  "desc": "The surface: how a principal meets the system — chat, voice, artifacts, and the approval boundary made tangible.",
-  "buttons": [
-   {
-    "label": "Download PDF",
-    "href": "https://www.dropbox.com/scl/fi/can3j6eust13ie1dngjub/J.A.R.V.I.S.-Front-End-White-Paper-v1.1.pdf?rlkey=rykcz1z2gbrdmohfznkofd6li&dl=1"
-   },
-   {
-    "label": "Source",
-    "href": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers"
-   }
-  ]
- },
- {
-  "title": "Paper IV — From Doctrine to Proof",
-  "meta": "v1.1 · 110 pages · The roadmap",
-  "desc": "The programme: six formalisms gaps, the invariant catalogue, the work-state machine, the threat model, the twelve-month path to doctoral evidence.",
-  "buttons": [
-   {
-    "label": "Download PDF",
-    "href": "https://www.dropbox.com/scl/fi/yj2l0s450hqu8n40kwhr0/J.A.R.V.I.S.-Roadmap-White-Paper-v1.1.pdf?rlkey=ivgpmgiac61j1qxiq60qnu2va&dl=1"
-   },
-   {
-    "label": "Source",
-    "href": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/papers"
-   }
-  ]
- }
-]
-</script>
-<script type="application/json" id="phases-data">
-[
- {
-  "num": 0,
-  "title": "Freeze the contracts",
-  "desc": "Canonical glossary v1.0.0 (69 terms), event vocabulary (19 events), TLA+ ratified as the proof language.",
-  "status": "closed",
-  "badge": "Closed",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/1",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/43",
-  "issue_num": 43,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- },
- {
-  "num": 1,
-  "title": "State-machine proof",
-  "desc": "TLC model check: 3,266,929 distinct states, zero invariant violations, six spec fixes.",
-  "status": "proven",
-  "badge": "Proven",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/2",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/44",
-  "issue_num": 44,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- },
- {
-  "num": 2,
-  "title": "Invariant verification",
-  "desc": "27 invariants, three layers. Full re-run 2026-10-21: Layer 1: 64/64. Layer 2: 10/10 (PT-4: 2,000 sequences, 53,003 refused). Layer 3: 10/10. Crosscheck: 12/12. Schema tests: 25/25. All nine open questions answered.",
-  "status": "open",
-  "badge": "Open",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/3",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/10",
-  "issue_num": 10,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- },
- {
-  "num": 3,
-  "title": "Consistency model",
-  "desc": "The multi-device consistency contract.",
-  "status": "planned",
-  "badge": "Planned",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/4",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/18",
-  "issue_num": 18,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- },
- {
-  "num": 4,
-  "title": "Idempotency",
-  "desc": "At-most-once semantics for consequential actions.",
-  "status": "planned",
-  "badge": "Planned",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/5",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/19",
-  "issue_num": 19,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- },
- {
-  "num": 5,
-  "title": "Security boundaries",
-  "desc": "Formal threat model and capability matrix.",
-  "status": "planned",
-  "badge": "Planned",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/6",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/20",
-  "issue_num": 20,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- },
- {
-  "num": 6,
-  "title": "Router optimality",
-  "desc": "Measured comparison of routing policies.",
-  "status": "planned",
-  "badge": "Planned",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/7",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/21",
-  "issue_num": 21,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- },
- {
-  "num": 7,
-  "title": "Doctoral evidence package",
-  "desc": "The integrated, defensible thesis.",
-  "status": "planned",
-  "badge": "Planned",
-  "milestone_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones/8",
-  "issue_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/issues/22",
-  "issue_num": 22,
-  "discussion_url": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions"
- }
-]
-</script>
-<script type="application/json" id="academy-data">
-[
- {
-  "title": "Session 3 — Memory",
-  "meta": "2026-10-22 · Persistence and semantics · 48 slides",
-  "desc": "Deck: PDF and PowerPoint, from the Dropbox archive.",
-  "buttons": [
-   {
-    "label": "PDF",
-    "href": "https://www.dropbox.com/scl/fi/8e5ece7a34qgvdd9r8ldd/memory-slideshow.pdf?rlkey=8m6ldb6iauppedjbhj8d6lvkq&dl=1"
-   },
-   {
-    "label": "PPTX",
-    "href": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy/decks"
-   }
-  ]
- },
- {
-  "title": "Session 2 — The Vision v1.2",
-  "meta": "2026-10-21 · Expert depth · 48 slides",
-  "desc": "Deck: PDF and PowerPoint, from the Dropbox archive.",
-  "buttons": [
-   {
-    "label": "PDF",
-    "href": "https://www.dropbox.com/scl/fi/e9vlfk0j3tuplunnf8r5k/vision-white-paper-slideshow.pdf?rlkey=98qnke9iorzzxhy3zb89u7lw7&dl=1"
-   },
-   {
-    "label": "PPTX",
-    "href": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy/decks"
-   }
-  ]
- },
- {
-  "title": "Session 1 — The Vision v1.1",
-  "meta": "2026-10-14 · Expert depth · 42 slides",
-  "desc": "Taught before the documentation pipeline. Recorded in the lecture archive.",
-  "buttons": [
-   {
-    "label": "Lecture records",
-    "href": "https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/academy/lecture-records"
-   }
-  ]
- }
-]
-</script>
-<script type="application/json" id="evidence-data">
-[
- {
-  "claim": "Four papers (I v1.2, II v1.1, III v1.1, IV v1.1)",
-  "status": "proven",
-  "badge": "Proven",
-  "evidence_html": "PDFs in <code>doctrine/</code>"
- },
- {
-  "claim": "Phase 0 — contracts frozen",
-  "status": "proven",
-  "badge": "Proven",
-  "evidence_html": "Glossary v1.0.0 (69 terms, 25 conflicts resolved) · 19 events · TLA+ ratified · Contract governance &amp; versioning law. Completed 2026-10-19."
- },
- {
-  "claim": "Phase 1 — 3,266,929 states, zero violations",
-  "status": "proven",
-  "badge": "Proven",
-  "evidence_html": "TLC model check: 3,266,929 states, 0 violations · 6 spec fixes from counterexamples · <code>formal-spec/proofs/phase1-tlc-report.md</code>. Completed 2026-10-19."
- },
- {
-  "claim": "Phase 2 — L1 39/39, L2 10/10, L3 10/10",
-  "status": "open",
-  "badge": "Open",
-  "evidence_html": "<code>formal-spec/tests/</code>, milestones #11–#16"
- },
- {
-  "claim": "Identity clean — real name nowhere",
-  "status": "proven",
-  "badge": "Proven",
-  "evidence_html": "Source greps, zero hits, every push"
- },
- {
-  "claim": "GitLab mirror",
-  "status": "tracked",
-  "badge": "Tracked",
-  "evidence_html": "Awaiting credentials (issue #8)"
- }
-]
-</script>
-<script type="application/json" id="buildlog-data">[{"date": "2026-10-21", "time": "12:58 ET", "event": "Phase 2 push live on all three surfaces (81ec187 + ad0d7d1)"}, {"date": "2026-10-21", "time": "12:33 ET", "event": "Session 1 lecture record created; papers index on GitHub"}, {"date": "2026-10-21", "time": "12:14 ET", "event": "Website rebuilt \u2014 professional academic theme, tabbed navigation"}, {"date": "2026-10-21", "time": "12:09 ET", "event": "GitHub polish \u2014 milestones visible (2927113)"}, {"date": "2026-10-21", "time": "06:45 ET", "event": "Phase 2 history + full tests tree pushed (31a3627)"}, {"date": "2026-10-21", "title": "The GitHub Day \u2014 repository to PhD-doctoral level", "detail": "Full morning on GitHub itself: website rebuilt, all 8 milestones to PhD charters, 44 issues, board rebuilt, 10 discussion categories, v1.0.0 notes rewritten, J.A.R.V.I.S. contact hierarchy + footer law. Afternoon: Phase 2 rendering 19/19 pushed."}, {"date": "2026-10-21", "title": "Phase 2 total verification sweep \u2014 zero byte out of place", "detail": "Layer 1: 83/83. Layer 2: 10/10. Layer 3: 10/10. Crosscheck: 12/12. 5,322 files fingerprinted. All nine of HgX's answers verified implemented. Worked-example digest recomputed byte-for-byte."}]</script>
-<footer style="border-top:1px solid #e1e4e8;margin-top:3em;padding:2em 1em;text-align:center">
-  <p style="font-size:1.1em"><strong><a href="https://x.com/basementjarvisu">@basementjarvisu</a></strong> · <strong>basementjarvisunleashed@gmail.com</strong></p>
-  <p style="font-size:0.7em;color:#999"><a href="https://x.com/hgxengineering">@hgxengineering</a> · HgXengineering@gmail.com</p>
-</footer>
 <script>
-/* ============ DATA-DRIVEN VIEWS — content lives in the JSON blocks above.
-   To grow the site, append to the data. No HTML surgery needed. ============ */
+/* ============ DATA — append here to grow the site. No HTML surgery needed. ============ */
 var QA = {
   paper1: [
     {q:"Recite the fifth principle verbatim, and explain the distinction between open source as \u201cfoundation\u201d versus \u201crelease strategy.\u201d",
@@ -563,7 +344,7 @@ var RESEARCH = [
    href:"research/2026-10-21/bitcoin-vbyte-fee-stats.html"}
 ];
 
-/* ============ RENDER (view shells) — edit only to add a new template ============ */
+/* ============ RENDER — no edits needed below this line ============ */
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function renderQA(elId, items){
   var el = document.getElementById(elId);
@@ -578,124 +359,12 @@ function renderResearch(){
       "<h3><a href=\""+esc(r.href)+"\">"+esc(r.title)+"</a></h3><p>"+esc(r.summary)+"</p></div>";
   }).join("");
 }
-function getJSON(id){ return JSON.parse(document.getElementById(id).textContent); }
-function badgeClass(status){
-  var m = {closed:"badge-done", proven:"badge-done", open:"badge-open",
-           planned:"badge-planned", tracked:"badge-planned"};
-  return m[status] || "badge-planned";
-}
-function kickerHTML(v){ return v.kicker ? '<div class="hero-kicker">'+esc(v.kicker)+'</div>' : ''; }
-var VIEWS = getJSON("views-data");
-
-/* Generic card-grid section (Papers, Academy, and any future card section). */
-function renderCardsView(viewId){
-  var v = VIEWS[viewId];
-  var items = getJSON(viewId + "-data");
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>";
-  if(v.section_title) html += "<h2>" + esc(v.section_title) + "</h2>";
-  html += '<div class="card-grid">' + items.map(function(it){
-    return '<div class="card"><h3>' + esc(it.title) + '</h3>' +
-      '<div class="card-meta">' + esc(it.meta) + '</div>' +
-      "<p>" + esc(it.desc) + "</p>" +
-      '<div class="dl-row">' + it.buttons.map(function(b){
-        return '<a class="btn btn-outline" href="' + b.href + '">' + esc(b.label) + "</a>";
-      }).join("") + "</div></div>";
-  }).join("") + "</div>" + v.after_html;
-  document.getElementById("view-" + viewId).innerHTML = html;
-}
-
-/* Doctoral programme: the phase list. */
-function renderPhasesView(){
-  var v = VIEWS["doctoral"];
-  var phases = getJSON("phases-data");
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    '<div class="phase-list">' + phases.map(function(p){
-    return '<div class="phase-row"><div class="phase-num">PHASE ' + p.num + "</div><div><h3>" +
-      esc(p.title) + "</h3><p>" + esc(p.desc) + "</p>" +
-      '<p class="phase-links"><a href="' + p.milestone_url + '">Milestone</a> \u00b7 ' +
-      '<a href="' + p.issue_url + '">Tracking issue #' + p.issue_num + "</a> \u00b7 " +
-      '<a href="' + p.discussion_url + '">Discussion</a></p></div>' +
-      '<div><span class="badge ' + badgeClass(p.status) + '">' + esc(p.badge) + "</span></div></div>";
-  }).join("") + "</div>" + v.after_html;
-  document.getElementById("view-doctoral").innerHTML = html;
-}
-
-/* Evidence: the graded claims table. */
-function renderEvidenceView(){
-  var v = VIEWS["evidence"];
-  var claims = getJSON("evidence-data");
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    "<table><tr><th>Claim</th><th>Status</th><th>Evidence</th></tr>" +
-    claims.map(function(c){
-    return "<tr><td>" + esc(c.claim) + '</td><td><span class="badge ' +
-      badgeClass(c.status) + '">' + esc(c.badge) + "</span></td><td>" +
-      c.evidence_html + "</td></tr>";
-  }).join("") + "</table>" + v.after_html;
-  document.getElementById("view-evidence").innerHTML = html;
-}
-
-/* Q&A / Research shells (details render from the QA / RESEARCH data below). */
-function renderQAShell(){
-  var v = VIEWS["qa"];
-  var html = kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    v.sections.map(function(s){
-      return "<h2>" + esc(s.heading) + "</h2>" + '<div id="' + s.container + '"></div>';
-    }).join("") + v.after_html;
-  document.getElementById("view-qa").innerHTML = html;
-}
-function renderResearchShell(){
-  var v = VIEWS["research"];
-  document.getElementById("view-research").innerHTML =
-    kickerHTML(v) + "<h1>" + esc(v.title) + "</h1>" +
-    '<p class="lede">' + v.lede_html + "</p>" +
-    '<div class="card-grid" id="research-grid"></div>';
-}
-
-/* ---- RENDERER MAP: new section? add one line here (or reuse "cards") ---- */
-var SECTION_RENDERERS = {
-  papers: "cards",
-  academy: "cards",
-  doctoral: "phases",
-  evidence: "evidence",
-  qa: "qa-shell",
-  research: "research-shell"
-};
-function renderSection(viewId){
-  var kind = SECTION_RENDERERS[viewId];
-  if(kind === "cards") renderCardsView(viewId);
-  else if(kind === "phases") renderPhasesView();
-  else if(kind === "evidence") renderEvidenceView();
-  else if(kind === "qa-shell") renderQAShell();
-  else if(kind === "research-shell") renderResearchShell();
-}
-
-/* ---- navigation renders from nav-data ---- */
-var NAV_DATA = getJSON("nav-data");
-function trackTitle(t){
-  return t === "formal" ? "Formal track \u2014 watch the proof"
-       : t === "community" ? "Community track \u2014 join us" : "";
-}
-function renderNav(){
-  var nav = document.getElementById("main-nav");
-  nav.innerHTML = NAV_DATA.map(function(n, i){
-    var t = trackTitle(n.track);
-    return '<button class="nav-btn' + (i === 0 ? " active" : "") + '" data-view="' + n.id + '"' +
-      (t ? ' title="' + t + '"' : "") + ">" + esc(n.label) + "</button>";
-  }).join("");
-}
-
-/* ---- boot: shells first, then detail renders, then nav handler ---- */
-renderNav();
-NAV_DATA.forEach(function(n){ renderSection(n.id); });
 renderQA("qa-paper1", QA.paper1);
 renderQA("qa-paper2", QA.paper2);
 renderQA("qa-sessions", QA.sessions);
 renderResearch();
 
+/* ============ NAV ============ */
 document.querySelectorAll("[data-view]").forEach(function(el){
   el.addEventListener("click", function(e){
     e.preventDefault();
@@ -707,7 +376,11 @@ document.querySelectorAll("[data-view]").forEach(function(el){
     window.scrollTo(0,0);
   });
 });
-
 </script>
+<script type="application/json" id="buildlog-data">[{"date": "2026-10-21", "time": "12:58 ET", "event": "Phase 2 push live on all three surfaces (81ec187 + ad0d7d1)"}, {"date": "2026-10-21", "time": "12:33 ET", "event": "Session 1 lecture record created; papers index on GitHub"}, {"date": "2026-10-21", "time": "12:14 ET", "event": "Website rebuilt \u2014 professional academic theme, tabbed navigation"}, {"date": "2026-10-21", "time": "12:09 ET", "event": "GitHub polish \u2014 milestones visible (2927113)"}, {"date": "2026-10-21", "time": "06:45 ET", "event": "Phase 2 history + full tests tree pushed (31a3627)"}, {"date": "2026-10-21", "title": "The GitHub Day \u2014 repository to PhD-doctoral level", "detail": "Full morning on GitHub itself: website rebuilt, all 8 milestones to PhD charters, 44 issues, board rebuilt, 10 discussion categories, v1.0.0 notes rewritten, J.A.R.V.I.S. contact hierarchy + footer law. Afternoon: Phase 2 rendering 19/19 pushed."}]</script>
+<footer style="border-top:1px solid #e1e4e8;margin-top:3em;padding:2em 1em;text-align:center">
+  <p style="font-size:1.1em"><strong><a href="https://x.com/basementjarvisu">@basementjarvisu</a></strong> · <strong>basementjarvisunleashed@gmail.com</strong></p>
+  <p style="font-size:0.7em;color:#999"><a href="https://x.com/hgxengineering">@hgxengineering</a> · HgXengineering@gmail.com</p>
+</footer>
 </body>
 </html>
