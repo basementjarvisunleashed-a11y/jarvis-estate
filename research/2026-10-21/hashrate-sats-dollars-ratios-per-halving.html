@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hashrate, Satoshis, and Dollars &mdash; the Full Ratio Set per Halving &middot; J.A.R.V.I.S. Research</title>
+<style>
+:root{
+--bg:#07090c;--bg-raise:#0b0f14;--panel:#0d1219;--panel-2:#101722;--line:#1c2836;--line-soft:#141e2a;
+--ink:#e9f3f8;--ink-2:#b8c9d4;--muted:#8499a8;--cyan:#5ed8ff;--cyan-deep:#25a8d8;--cyan-soft:rgba(94,216,255,.12);
+--radius:14px;--font:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink-2);font-family:var(--font);font-size:16px;line-height:1.7;margin:0;padding:0}
+a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(94,216,255,.35)}
+a:hover{border-bottom-color:var(--cyan)}
+.wrap{max-width:76ch;margin:0 auto;padding:0 22px}
+.topbar{border-bottom:1px solid var(--line-soft);padding:14px 0;margin-bottom:34px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--ink)}
+.brand span{color:var(--cyan)}
+.back{font-size:14px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan);margin:0 0 10px}
+h1{color:var(--ink);font-size:30px;line-height:1.25;margin:0 0 12px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 6px}
+.meta strong{color:var(--ink-2);font-weight:600}
+.scrub{border-left:3px solid var(--cyan-deep);background:var(--cyan-soft);padding:10px 16px;border-radius:0 var(--radius) var(--radius) 0;font-size:14px;margin:18px 0 30px}
+h2{color:var(--ink);font-size:21px;margin:38px 0 12px;letter-spacing:-.01em}
+p{margin:0 0 14px}
+ul{margin:0 0 16px;padding-left:22px}
+li{margin-bottom:8px}
+hr{border:0;border-top:1px solid var(--line-soft);margin:30px 0}
+table{width:100%;border-collapse:collapse;margin:18px 0 24px;font-size:14.5px}
+th,td{text-align:left;padding:10px 12px;border:1px solid var(--line-soft);vertical-align:top}
+th{background:var(--panel-2);color:var(--ink);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+.foot{border-top:1px solid var(--line-soft);margin-top:44px;padding:20px 0 46px;color:var(--muted);font-size:13px}
+.foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+em.sources-note{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+<div class="brand">J.A.R.V.I.S. <span>RESEARCH</span></div>
+<a class="back" href="../../index.html#research">&larr; Research index</a>
+</div></div>
+<div class="wrap"><main><article>
+<p class="kicker">RESEARCH &middot; 2026-10-21</p>
+<h1>Hashrate, Satoshis, and Dollars &mdash; the Full Ratio Set per Halving</h1>
+<p class="meta"><strong>Date:</strong> 2026-10-21</p>
+<p class="meta"><strong>Question asked:</strong> dig deeper into the hashrate and mining research &mdash; work out the factors for each halving and the different ratios of hash to satoshis to US dollars for all halvings.</p>
+<p class="meta"><strong>Commissioned by:</strong> HgX &middot; <strong>Prepared by:</strong> Research Bot, the estate&rsquo;s research desk.</p>
+<p class="meta"><strong>Method:</strong> halving-day hashrate (H/s) and BTC price (USD, halving-day close) from the verified 2026-10-21 hashrate study; block subsidy per epoch in satoshis (50/25/12.5/6.25/3.125 BTC). Three pairwise ratios per halving, each also expressed as a percentage of today&rsquo;s value, plus the multiplicative factor change between consecutive halvings.</p>
+<div class="scrub"><strong>Scrub statement:</strong> this document contains only public on-chain statistics and published analytics. Nothing in it could compromise HgX &mdash; public identity only (HgX / @hgxengineering).</div>
+
+<h2>Headline</h2>
+<p>Three ratios, three stories. <strong>Hash-per-dollar</strong> peaked at the 2020 halving (115% of today) &mdash; reported yesterday. <strong>Sats-per-dollar</strong> falls every halving by construction (8.1M &rarr; 1,211). And <strong>hash-per-subsidy-satoshi</strong> &mdash; how much security backs each newly minted satoshi &mdash; has compounded relentlessly: <strong>5,000 H/s per sat in 2012 &rarr; 3.39 PH/s per sat today</strong>, a ~678-billion-fold increase, because every halving halves the subsidy while the hashrate keeps climbing.</p>
+
+<hr>
+<h2>The three ratios per halving</h2>
+<table>
+<tr><th>Halving</th><th>Hashrate</th><th>BTC price</th><th>Subsidy</th><th>Hash : USD (TH/s per $1)</th><th>Sats : USD (sats per $1)</th><th>Hash : sats (per subsidy-sat)</th></tr>
+<tr><td>2012-11-28</td><td>25 TH/s</td><td>$12.35</td><td>5.0B sats</td><td>2.0</td><td>8,097,166</td><td>5.0 kH/s</td></tr>
+<tr><td>2016-07-09</td><td>1.56 EH/s</td><td>$651</td><td>2.5B sats</td><td>2,396</td><td>153,610</td><td>624 GH/s</td></tr>
+<tr><td>2020-05-11</td><td>~129 EH/s</td><td>$8,740</td><td>1.25B sats</td><td>14,760</td><td>11,442</td><td>103.2 TH/s</td></tr>
+<tr><td>2024-04-20</td><td>~650 EH/s</td><td>$64,100</td><td>625M sats</td><td>10,140</td><td>1,560</td><td>1.04 PH/s</td></tr>
+<tr><td>2026-10-21 (today)</td><td>1,059 EH/s</td><td>$82,600</td><td>312.5M sats</td><td>12,821</td><td>1,211</td><td>3.39 PH/s</td></tr>
+</table>
+
+<h2>Each ratio as a percentage of today&rsquo;s value</h2>
+<table>
+<tr><th>Halving</th><th>Hash : USD</th><th>Sats : USD</th><th>Hash : sats</th></tr>
+<tr><td>2012</td><td>0.02%</td><td>668,826%</td><td>0.00000015%</td></tr>
+<tr><td>2016</td><td>18.7%</td><td>12,688%</td><td>0.018%</td></tr>
+<tr><td>2020</td><td>115.1%</td><td>945%</td><td>3.05%</td></tr>
+<tr><td>2024</td><td>79.1%</td><td>128.9%</td><td>30.7%</td></tr>
+<tr><td>Today</td><td>100%</td><td>100%</td><td>100%</td></tr>
+</table>
+
+<h2>The factorials &mdash; multiplicative change between consecutive halvings</h2>
+<table>
+<tr><th>Transition</th><th>Hash : USD</th><th>Sats : USD</th><th>Hash : sats</th></tr>
+<tr><td>2012 &rarr; 2016</td><td>1,184&times;</td><td>0.019&times;</td><td>124,800&times;</td></tr>
+<tr><td>2016 &rarr; 2020</td><td>6.2&times;</td><td>0.074&times;</td><td>165&times;</td></tr>
+<tr><td>2020 &rarr; 2024</td><td>0.69&times;</td><td>0.136&times;</td><td>10.1&times;</td></tr>
+<tr><td>2024 &rarr; today</td><td>1.26&times;</td><td>0.776&times;</td><td>3.3&times;</td></tr>
+</table>
+
+<h2>What the factors say</h2>
+<ul>
+<li><strong>Hash : USD</strong> is the only ratio that ever fell between halvings (0.69&times; from 2020&rarr;2024) &mdash; price outran security that epoch. It is rising again (1.26&times; since).</li>
+<li><strong>Sats : USD</strong> falls every halving, roughly tracking price &mdash; each halving you get ~7&ndash;50&times; fewer sats per dollar. It is the purest expression of Bitcoin&rsquo;s monetary tightening.</li>
+<li><strong>Hash : sats</strong> never falls and compounds hardest: each halving multiplies it by hashrate-growth &times; 2 (the subsidy cut). The 2012&rarr;2016 jump of 124,800&times; is the largest single-epoch move in the dataset. Even in the quiet 2024&rarr;today stretch it grew 3.3&times;.</li>
+</ul>
+
+<h2>Mining context</h2>
+<p>Miner revenue &asymp; $36.79/day per PH/s (Oct 2026). Fees remain under 1% of miner revenue &mdash; the subsidy still pays for security, and each subsidy satoshi today is backed by 3.39 PH/s of work, ~33&times; more than at the 2024 halving.</p>
+
+<h2>Reliability notes</h2>
+<ul>
+<li>Hashrate and price figures are the verified 2026-10-21 dataset (halving-day readings; 3rd-halving range 121&ndash;137 EH/s &mdash; mid value 129 EH/s used; today&rsquo;s 1,059 EH/s confirmed live on Maketo).</li>
+<li>Subsidy figures are protocol constants. Ratios are arithmetic from those inputs &mdash; no estimation beyond the input readings.</li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+<li>Hashrate &amp; price per halving: the verified 2026-10-21 halving dataset (CoinDesk/ChainBulletin, Bitinfocharts via Cointelegraph, cryptonomist.ch, Hashrate Index Q1-2024 via Nasdaq, Maketo live hashrate, Alpaca BTC/USD)</li>
+<li>Subsidy schedule: Bitcoin protocol (50 &rarr; 25 &rarr; 12.5 &rarr; 6.25 &rarr; 3.125 BTC)</li>
+<li>Miner revenue per PH/s: Maketo, Oct 2026</li>
+</ul>
+<p><em class="sources-note">Ratios computed 2026-10-21 from the verified inputs above.</em></p>
+</article></main></div>
+<div class="foot"><div class="wrap">
+<span>J.A.R.V.I.S. Research &mdash; public data only, scrubbed before release.</span>
+<span><a href="../../index.html#research">Research index</a> &middot; <a href="hashrate-sats-dollars-ratios-per-halving.md">Source markdown</a></span>
+</div></div>
+</body>
+</html>
