@@ -48,7 +48,7 @@ evidence forever. Nothing is asserted without it.
 | Dropbox              | Archive current; `/J.A.R.V.I.S./` public link live; build logs current |
 | Repo                 | `main` at 254e682 (2026-10-21); 26 snapshot pushes on record; identity clean |
 | Phase 2              | PROVEN — CLOSED 2026-10-21 ~16:52 ET on HgX's word. L1 83/83, L2 10/10, L3 10/10, crosscheck 12/12. 27 invariants traced. Seven drafts v1.0.0. OQ-1..OQ-9 answered. |
-| Phase 3              | OPEN — 2026-10-21 ~17:31 ET on HgX's word. Plan + Q1–Q4 answered. Layer 1 drafts v0.1 (six specs). Milestone #9, issue #50. |
+| Phase 3              | PROVEN — CLOSED 2026-10-21 ~18:03 ET on HgX's word. L2 42/42, L3 80/80 chaos. All five exit criteria met. Milestone #9, issue #50. |
 | GitLab mirror        | HELD on HgX's word — awaiting his username + token (issue #8) |
 
 ## FUTURE — tracked
@@ -59,6 +59,6 @@ evidence forever. Nothing is asserted without it.
 | F-002 | GitHub push (full chronicle)            | PROVEN — pushed 2026-10-19 ~20:40 ET         | done   |
 | F-003 | Dropbox `/J.A.R.V.I.S./` public link | https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq (anyone-with-link, "Allows viewing", minted 2026-10-19) | PROVEN |
 | F-004 | Weekly / monthly / quarterly audits     | —                                            | ACTIVE |
-| F-005 | Phase 3              | OPEN — 2026-10-21 ~17:31 ET on HgX's word. Plan + Q1–Q4 answered. Layer 1 drafts v0.1 (six specs). Milestone #9, issue #50. |
+| F-005 | Phase 3              | PROVEN — CLOSED 2026-10-21 ~18:03 ET on HgX's word. L2 42/42, L3 80/80 chaos. All five exit criteria met. Milestone #9, issue #50. |
 | GitLab mirror                           | HgX's username + token (secure handover)      | open   |
 | F-006 | Phase 2 gate decisions (CLOSED 2026-10-21) | OQ-1..OQ-9 answered; seven drafts v1.0.0; HgX's word 16:52 ET | CLOSED |
