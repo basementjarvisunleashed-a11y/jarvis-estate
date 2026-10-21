@@ -436,6 +436,18 @@
    .mat-det summary::-webkit-details-marker,.qa-det summary::-webkit-details-marker{display:none}
    .mat-det summary:hover,.qa-det summary:hover{border-color:var(--cyan)}
    .mat-det[open] summary,.qa-det[open] summary{border-color:var(--cyan);border-bottom-left-radius:0;border-bottom-right-radius:0}
+
+  /* ---------- distinct wings: Academy / Q&A / Research ---------- */
+  .wing{border:1px solid var(--line);border-radius:18px;padding:30px 32px;margin:40px 0;background:linear-gradient(180deg,rgba(255,255,255,.018),transparent)}
+  .wing-academy{border-top:3px solid var(--cyan)}
+  .wing-qa{border-top:3px solid #b48cff}
+  .wing-research{border-top:3px solid #f0b429}
+  .wing-qa .sec-label{background:#b48cff}
+  .wing-research .sec-label{background:#f0b429}
+  .qa-index{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+  .qa-index a{padding:6px 16px;border:1px solid var(--line);border-radius:999px;color:var(--cyan-ink);text-decoration:none;font-size:.85rem}
+  .qa-index a:hover{background:var(--cyan-soft)}
+  @media (max-width:640px){.wing{padding:22px 18px}}
 </style>
 </head>
 <body>
@@ -448,15 +460,16 @@
   </a>
   <nav class="nav-links" aria-label="Sections">
     <a href="#live" data-spy="live">Live</a>
-    <a href="#research" data-spy="research">Research</a>
+    <a href="#academy" data-spy="academy">Academy</a>
+    <a href="#qa" data-spy="qa">Q&amp;A</a>
     <a href="#build" data-spy="build">Build-out</a>
     <a href="#log" data-spy="log">Build Log</a>
     <a href="#evidence" data-spy="evidence">Evidence</a>
     <a href="#audits" data-spy="audits">Audits</a>
     <a href="#scores" data-spy="scores">Scores</a>
+    <a href="#research" data-spy="research">Research</a>
     <a href="#future" data-spy="future">Future</a>
     <a href="#connect" data-spy="connect">Connect</a>
-    <a href="#academy" data-spy="academy">Academy</a>
   </nav>
 </header>
 
@@ -3520,8 +3533,8 @@
     </div>
   </section>
 
-    <!-- ================= ACADEMY ================= -->
-  <section id="academy" aria-labelledby="academy-h">
+  <!-- ================= ACADEMY ================= -->
+  <section id="academy" class="wing wing-academy" aria-labelledby="academy-h">
     <div class="sec-head"><span class="sec-label">STUDY</span><h2 id="academy-h">The J.A.R.V.I.S. Academy</h2></div>
     <p class="sec-sub">The white papers, taught as a course. The Academy meets every Tuesday, Wednesday, and Thursday, 6:00&ndash;8:00 AM America/Toronto &mdash; two hours of teaching and questions each session: the J.A.R.V.I.S. system, the roadmap, and the papers in order &mdash; Paper I, then the back end (Paper II), then finally the front end (Paper III). Every lecture is documented &mdash; captioned in full, commented, summarized with an executive summary &mdash; and filed to the education dossier in the archive and the repository.</p>
     <nav class="academy-index" aria-label="Academy index">
@@ -3562,7 +3575,20 @@
       <p>Deck (48 slides): <a href="academy/decks/memory-slideshow.pdf">PDF</a> &middot; <a href="academy/decks/memory-slideshow.pptx">PPTX</a></p>
     </div></details>
 
-    <h3 id="academy-qa" class="academy-h3">Question &amp; Answer</h3>
+    
+    <p class="sec-sub">Questions and answers have their own home now &mdash; <a href="#qa">the Q&amp;A section</a>, indexed and growing with every session.</p>
+  </section>
+
+  <!-- ================= Q&A ================= -->
+  <section id="qa" class="wing wing-qa" aria-labelledby="qa-h">
+    <div class="sec-head"><span class="sec-label">Q&amp;A</span><h2 id="qa-h">Questions &amp; Answers</h2></div>
+    <p class="sec-sub">Every checkpoint question from the papers and the sessions, with answers &mdash; indexed below and growing as the Academy grows. New questions are appended at the end of their group, newest group last.</p>
+    <nav class="qa-index" aria-label="Q&A index">
+      <a href="#qa-paper1">Paper I</a>
+      <a href="#qa-paper2">Paper II</a>
+      <a href="#qa-sessions">Session Q&amp;A</a>
+    </nav>
+<h3 id="qa-paper1" class="academy-h3">Paper I &mdash; The Vision (v1.2)</h3>
     <h4 class="academy-h4">Paper I — The Vision (v1.2)</h4>
     <details class="qa-det"><summary>Recite the fifth principle verbatim, and explain the paper&#x27;s distinction between open source as &quot;foundation&quot; versus as &quot;release strategy.&quot;</summary><div class="det-body"><p><em>&quot;A fifth principle stands alongside the four above: Open source from day one. J.A.R.V.I.S. is built in the open as a matter of foundation, not as a release strategy. Every aim of the programme — doctrine, skills, contracts, reference implementation — is produced to be publishable, because a system that demands to be trusted must be inspectable. The boundary is absolute: the system goes public; the principal&#x27;s private life never does.&quot;</em> Foundation means the work is <em>produced to be publishable</em> from the first day — clarity, honest testing, no hidden assumptions — regardless of when anything is actually released. Release strategy would be a timing decision about shipping; the paper rejects that framing: <em>&quot;Open source is the main vision, not a release strategy.&quot;</em> Publishability is the standing requirement from day one; publication timing remains on HgX&#x27;s word.</p></div></details>
     <details class="qa-det"><summary>The paper draws an absolute boundary. State it exactly, then name three things that go public and three that never do, with the paper&#x27;s reason for the sanitising pass.</summary><div class="det-body"><p><em>&quot;The boundary is absolute: the system goes public; the principal&#x27;s private life never does.&quot;</em> Goes public: the doctrine and principles; skills as versioned reusable operating contracts; the reference implementation, its tests, and its history. Never goes public: the principal&#x27;s private life, family, and household; finances, credentials, and personal records; live estate data, messages, and private memory. The reason: <em>&quot;The sanitising pass is real work: only the system is publishable.&quot;</em></p></div></details>
@@ -3572,7 +3598,7 @@
     <details class="qa-det"><summary>Where does the paper say the public/private boundary is enforced in practice, and which two classes of memory fall on each side?</summary><div class="det-body"><p><em>&quot;Memory is where the boundary is enforced in practice.&quot;</em> On the publishable side: <em>&quot;Durable methods, role definitions, and principles belong to the system and are publishable.&quot;</em> On the side that never leaves the estate: <em>&quot;Personal memory — preferences tied to a private life, household detail, and lived history — stays in the estate and is never part of a public release.&quot;</em></p></div></details>
     <details class="qa-det"><summary>The paper calls evidence &quot;the bridge to open source.&quot; Explain the bridge — what is &quot;one discipline, applied twice&quot;?</summary><div class="det-body"><p><em>&quot;Evidence is also the bridge to open source: the same packet that lets HgX verify a run lets an external reviewer verify the system. Inspectability inside the estate and inspectability in public are one discipline, applied twice.&quot;</em> One evidence packet serves both audiences: the principal&#x27;s verification and the public&#x27;s inspection.</p></div></details>
     <details class="qa-det"><summary>State roadmap item 8 verbatim, and explain the two timing rules it contains.</summary><div class="det-body"><p><em>&quot;PUBLISH THE REFERENCE IMPLEMENTATION IN THE OPEN — 8. Complete the sanitising pass, publish doctrine, skills, contracts, and the reference implementation under an open licence, and maintain them in public. Publication timing remains on HgX&#x27;s word; publishability is the standing requirement from day one.&quot;</em> The two timing rules: (1) <em>when</em> to publish is HgX&#x27;s word alone; (2) <em>being publishable</em> is required from day one regardless.<br>---</p></div></details>
-    <h4 class="academy-h4">Paper II — The back end (technical)</h4>
+    <h3 id="qa-paper2" class="academy-h3">Paper II &mdash; The back end (technical)</h3>
     <details class="qa-det"><summary>Name the five engineering invariants and state the operational meaning of &quot;No proof, no done.&quot;</summary><div class="det-body"><p>The five invariants: <strong>No proof, no done</strong> — <em>&quot;Delegation output is reviewed against artifacts, sources, tests, approvals, and gaps before completion is reported.&quot;</em> <strong>Current facts stay live</strong> — <em>&quot;Memory carries durable context; changing state is re-read from its owning system.&quot;</em> <strong>Automate preparation first</strong> — <em>&quot;One-time task becomes a proven skill, then a tested routine. Consequential execution remains approval-gated.&quot;</em> <strong>Persistence is explicit</strong> — <em>&quot;/tmp and system paths are treated as disposable. Home-directory state survives restarts.&quot;</em> <strong>Failure is visible</strong> — <em>&quot;Stale sources, exhausted retries, unverified handoffs, and missing permissions surface as failures or escalation.&quot;</em></p></div></details>
     <details class="qa-det"><summary>Distinguish the durability boundary, the role boundary, the consequence boundary, and the delegation boundary — which one makes a subagent&#x27;s completion claim an input rather than a result?</summary><div class="det-body"><p>Durability: <em>&quot;~/ is the persistence root&quot;</em> — what survives restarts. Role: <em>&quot;Side chats isolate duties and memory procedurally. They are not a cryptographic boundary.&quot;</em> Consequence: <em>&quot;Sending, publishing, spending, deletion, permission changes, and other consequential effects stop for approval.&quot;</em> Delegation: <em>&quot;A subagent response is an input to verification, not a completion signal. The orchestrator remains accountable for acceptance.&quot;</em> — the <strong>delegation boundary</strong> is the one that makes a subagent&#x27;s &quot;done&quot; an input to verification.</p></div></details>
     <details class="qa-det"><summary>A subagent reports &quot;done&quot; but shows no evidence. Under the state machine, what state is the work actually in, and what is the required response?</summary><div class="det-body"><p>It is not in Verified — <em>&quot;Completion exists only after observed output passes the stated acceptance test&quot;</em> and <em>&quot;No optimistic completion: queued, running, active, or delegated are intermediate states.&quot;</em> The work sits in In progress awaiting verification. The required response is the delegation boundary plus the first invariant: treat the report as an input, and review the output against artifacts, sources, tests, approvals, and gaps before completion is reported. <em>&quot;No proof, no done.&quot;</em></p></div></details>
@@ -3586,37 +3612,13 @@
     <details class="qa-det"><summary>An approval is granted for one publish action. Does it cover a second publish to the same target tomorrow? Cite the non-goal.</summary><div class="det-body"><p>No. The approval non-goal: <em>&quot;Approval does not authorize adjacent actions or future repetitions.&quot;</em> One approval is one action — the paper&#x27;s standing example is that no agent publishes, sends, spends, or deletes without HgX&#x27;s explicit approval for that exact action.</p></div></details>
     <details class="qa-det"><summary>The same operation fails with the same error twice. What must the system do next — and what is it forbidden to do?</summary><div class="det-body"><p>The retry budget (router policy rule 2): <em>&quot;Same operation, same error, two retries consumed — Escalate or choose a fundamentally different approach.&quot;</em> What it is forbidden to do: repeat an unobserved consequential action — <em>&quot;The system&#x27;s strongest retry rule is to avoid repeating an unobserved consequential action.&quot;</em> Fail visible: the failure is reported with the observed condition, never papered over.</p></div></details>
     <details class="qa-det"><summary>In the test matrix, what is the expected observation for the &quot;Stale source&quot; test? How does the promotion gate distinguish a &quot;safe test&quot; from a &quot;routine&quot;?</summary><div class="det-body"><p>The matrix cell&#x27;s exact wording is in the paper (to be taken up in session); the paper&#x27;s supported position is the scheduling failure rule: <em>&quot;When a required source is stale or unavailable, report failure. Do not silently reuse old data&quot;</em> — consistent with the Failure-is-visible invariant. The promotion gate distinguishes them by stage: a <strong>safe test</strong> is the third stage (<em>&quot;The skill proves behavior on current data&quot;</em>); a <strong>routine</strong> is only the fourth (<em>&quot;Only a reviewed method receives a schedule&quot;</em>). The change-management rule: <em>&quot;Skipping a stage spends reliability before the estate has earned it. A routine is promoted evidence, not a convenient timer.&quot;</em><br>---</p></div></details>
-    <h4 class="academy-h4">Session Q&amp;A</h4>
+    <h3 id="qa-sessions" class="academy-h3">Session Q&amp;A</h3>
     <p class="sec-sub">Session questions from HgX are recorded here verbatim with the Academy&rsquo;s answers, dated and versioned like everything else. None yet.</p>
   </section>
 
 
-  <!-- ================= RESEARCH ================= -->
-  <section id="research" aria-labelledby="research-h">
-    <div class="sec-head"><span class="sec-label">RESEARCH</span><h2 id="research-h">Research</h2></div>
-    <p class="sec-sub">Published findings from the estate&rsquo;s research desk &mdash; public data only, scrubbed before release. Newest first; each entry links to the full report.</p>
-    <ol class="research-index" reversed>
-      <li class="research-entry">
-        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
-        <h3><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Hashrate, Satoshis, and Dollars &mdash; the Full Ratio Set per Halving</a></h3>
-        <p class="research-summary">The full ratio set per halving &mdash; hash:USD, sats:USD, hash:sats &mdash; with factor changes between halvings; hash-per-subsidy-satoshi compounded from 5 kH/s (2012) to 3.39 PH/s (today).</p>
-        <p class="research-links"><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.md">Source markdown</a></p>
-      </li>
-      <li class="research-entry">
-        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
-        <h3><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Hashrate per Halving, as a Percentage Ratio to Price</a></h3>
-        <p class="research-summary">Hashrate per halving as a percentage ratio to price &mdash; the hashrate-per-dollar ratio peaked at the 2020 halving (115% of today&rsquo;s); today sits at 100%, up from 79% at the 2024 halving.</p>
-        <p class="research-links"><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-per-halving-vs-price.md">Source markdown</a></p>
-      </li>
-      <li class="research-entry">
-        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
-        <h3><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics</a></h3>
-        <p class="research-summary">Six months of on-chain fee data: a floor-fee regime &mdash; median 1.0 sat/vB nearly throughout, largest intraday spike p90 4.08 sat/vB (Jun 9), fees under 1% of miner revenue for over a year.</p>
-        <p class="research-links"><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Read the full report</a> &middot; <a href="research/2026-10-21/bitcoin-vbyte-fee-stats.md">Source markdown</a></p>
-      </li>
-    </ol>
-    <p class="research-note">Layout: one dated folder per day under <span class="mono">research/</span> (<span class="mono">research/2026-10-21/&lt;slug&gt;.html</span>). Convention documented in <a href="research/README.md">research/README.md</a>.</p>
-  </section>
+
+
 
 
   <!-- ================= BUILD ================= -->
@@ -3792,6 +3794,34 @@
       </div>
     </div>
   </section>
+
+  <!-- ================= RESEARCH ================= -->
+  <section id="research" class="wing wing-research" aria-labelledby="research-h">
+    <div class="sec-head"><span class="sec-label">RESEARCH</span><h2 id="research-h">Research</h2></div>
+    <p class="sec-sub">Published findings from the estate&rsquo;s research desk &mdash; public data only, scrubbed before release. Newest first; each entry links to the full report.</p>
+    <ol class="research-index" reversed>
+      <li class="research-entry">
+        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
+        <h3><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Hashrate, Satoshis, and Dollars &mdash; the Full Ratio Set per Halving</a></h3>
+        <p class="research-summary">The full ratio set per halving &mdash; hash:USD, sats:USD, hash:sats &mdash; with factor changes between halvings; hash-per-subsidy-satoshi compounded from 5 kH/s (2012) to 3.39 PH/s (today).</p>
+        <p class="research-links"><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.md">Source markdown</a></p>
+      </li>
+      <li class="research-entry">
+        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
+        <h3><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Hashrate per Halving, as a Percentage Ratio to Price</a></h3>
+        <p class="research-summary">Hashrate per halving as a percentage ratio to price &mdash; the hashrate-per-dollar ratio peaked at the 2020 halving (115% of today&rsquo;s); today sits at 100%, up from 79% at the 2024 halving.</p>
+        <p class="research-links"><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-per-halving-vs-price.md">Source markdown</a></p>
+      </li>
+      <li class="research-entry">
+        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
+        <h3><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics</a></h3>
+        <p class="research-summary">Six months of on-chain fee data: a floor-fee regime &mdash; median 1.0 sat/vB nearly throughout, largest intraday spike p90 4.08 sat/vB (Jun 9), fees under 1% of miner revenue for over a year.</p>
+        <p class="research-links"><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Read the full report</a> &middot; <a href="research/2026-10-21/bitcoin-vbyte-fee-stats.md">Source markdown</a></p>
+      </li>
+    </ol>
+    <p class="research-note">Layout: one dated folder per day under <span class="mono">research/</span> (<span class="mono">research/2026-10-21/&lt;slug&gt;.html</span>). Convention documented in <a href="research/README.md">research/README.md</a>.</p>
+  </section>
+
 
   <!-- ================= FUTURE ================= -->
   <section id="future" aria-labelledby="future-h">

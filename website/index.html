@@ -44,8 +44,7 @@
     --font:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
     --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   }
-  @media (prefers-color-scheme: light){
-    :root{
+  :root[data-theme="light"]{
       color-scheme: light;
       --bg:#eef3f6;
       --bg-raise:#ffffff;
@@ -61,7 +60,6 @@
       --cyan-ink:#ffffff;
       --cyan-soft:rgba(13,127,171,.10);
       --glow:rgba(13,127,171,.35);
-    }
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -105,7 +103,7 @@
   }
   .nav-links a:hover{color:var(--ink);background:var(--cyan-soft)}
   .nav-links a.active{color:var(--cyan-ink);background:var(--cyan);border-color:var(--cyan)}
-  @media (prefers-color-scheme: light){ .nav-links a.active{color:#fff} }
+  :root[data-theme="light"] .nav-links a.active{color:#fff}
 
   main{max-width:1120px;margin:0 auto;padding:0 clamp(14px,4vw,32px)}
   section{scroll-margin-top:calc(var(--nav-h) + 18px);padding:clamp(34px,6vw,64px) 0 8px}
@@ -150,7 +148,7 @@
   .btn-solid:hover{box-shadow:0 0 26px -2px var(--glow)}
   .btn-ghost{background:transparent;color:var(--cyan)}
   .btn-ghost:hover{background:var(--cyan-soft)}
-  @media (prefers-color-scheme: light){ .btn-solid{color:#fff} }
+  :root[data-theme="light"] .btn-solid{color:#fff}
   .status-strip{display:flex;flex-wrap:wrap;gap:8px}
   .chip{
     font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--ink-2);
@@ -167,7 +165,7 @@
     font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.22em;color:var(--cyan-ink);
     background:var(--cyan);border-radius:6px;padding:4px 10px;
   }
-  @media (prefers-color-scheme: light){ .sec-label{color:#fff} }
+  :root[data-theme="light"] .sec-label{color:#fff}
   .sec-head h2{margin:0;font-size:clamp(24px,3.6vw,34px);font-weight:800;letter-spacing:.005em}
   .sec-sub{margin:2px 0 22px;color:var(--muted);max-width:62em}
 
@@ -187,7 +185,7 @@
     background:var(--cyan);color:var(--cyan-ink);border-radius:99px;padding:4px 11px;
     box-shadow:0 0 14px -4px var(--glow);
   }
-  @media (prefers-color-scheme: light){ .vchip{color:#fff} }
+  :root[data-theme="light"] .vchip{color:#fff}
   .paper h3{margin:0 0 6px;font-size:20px;font-weight:750;line-height:1.25}
   .paper .paper-sub{margin:0 0 10px;color:var(--ink-2);font-size:14.5px}
   .paper-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--muted);margin:0 0 16px}
@@ -198,7 +196,7 @@
     transition:background .15s,color .15s;
   }
   .read-btn:hover{background:var(--cyan);color:var(--cyan-ink)}
-  @media (prefers-color-scheme: light){ .read-btn:hover{color:#fff} }
+  :root[data-theme="light"] .read-btn:hover{color:#fff}
   .read-btn .chev{transition:transform .2s;font-size:12px}
   .read-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
   .paper-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
@@ -247,7 +245,7 @@
   }
   .st-done{background:var(--cyan);color:var(--cyan-ink)}
   .st-now{border:1px solid var(--cyan);color:var(--cyan)}
-  @media (prefers-color-scheme: light){ .st-done{color:#fff} }
+  :root[data-theme="light"] .st-done{color:#fff}
   .phase-rail{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
   .phase{
     border:1px solid var(--line-soft);border-radius:10px;padding:13px 14px;background:var(--panel);
@@ -285,7 +283,7 @@
   .ev-badge.b-proven{background:var(--cyan);color:var(--cyan-ink)}
   .ev-badge.b-verified{border:1px solid var(--cyan);color:var(--cyan)}
   .ev-badge.b-tracked{border:1px dashed var(--muted);color:var(--muted)}
-  @media (prefers-color-scheme: light){ .ev-badge.b-proven{color:#fff} }
+  :root[data-theme="light"] .ev-badge.b-proven{color:#fff}
   .ev-when{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
   .ev-def{margin:0 0 12px;color:var(--muted);font-size:13.5px}
   .ev-list{list-style:none;margin:0;padding:0}
@@ -438,6 +436,18 @@
    .mat-det summary::-webkit-details-marker,.qa-det summary::-webkit-details-marker{display:none}
    .mat-det summary:hover,.qa-det summary:hover{border-color:var(--cyan)}
    .mat-det[open] summary,.qa-det[open] summary{border-color:var(--cyan);border-bottom-left-radius:0;border-bottom-right-radius:0}
+
+  /* ---------- distinct wings: Academy / Q&A / Research ---------- */
+  .wing{border:1px solid var(--line);border-radius:18px;padding:30px 32px;margin:40px 0;background:linear-gradient(180deg,rgba(255,255,255,.018),transparent)}
+  .wing-academy{border-top:3px solid var(--cyan)}
+  .wing-qa{border-top:3px solid #b48cff}
+  .wing-research{border-top:3px solid #f0b429}
+  .wing-qa .sec-label{background:#b48cff}
+  .wing-research .sec-label{background:#f0b429}
+  .qa-index{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+  .qa-index a{padding:6px 16px;border:1px solid var(--line);border-radius:999px;color:var(--cyan-ink);text-decoration:none;font-size:.85rem}
+  .qa-index a:hover{background:var(--cyan-soft)}
+  @media (max-width:640px){.wing{padding:22px 18px}}
 </style>
 </head>
 <body>
@@ -450,15 +460,16 @@
   </a>
   <nav class="nav-links" aria-label="Sections">
     <a href="#live" data-spy="live">Live</a>
-    <a href="#research" data-spy="research">Research</a>
+    <a href="#academy" data-spy="academy">Academy</a>
+    <a href="#qa" data-spy="qa">Q&amp;A</a>
     <a href="#build" data-spy="build">Build-out</a>
     <a href="#log" data-spy="log">Build Log</a>
     <a href="#evidence" data-spy="evidence">Evidence</a>
     <a href="#audits" data-spy="audits">Audits</a>
     <a href="#scores" data-spy="scores">Scores</a>
+    <a href="#research" data-spy="research">Research</a>
     <a href="#future" data-spy="future">Future</a>
     <a href="#connect" data-spy="connect">Connect</a>
-    <a href="#academy" data-spy="academy">Academy</a>
   </nav>
 </header>
 
@@ -3522,8 +3533,8 @@
     </div>
   </section>
 
-    <!-- ================= ACADEMY ================= -->
-  <section id="academy" aria-labelledby="academy-h">
+  <!-- ================= ACADEMY ================= -->
+  <section id="academy" class="wing wing-academy" aria-labelledby="academy-h">
     <div class="sec-head"><span class="sec-label">STUDY</span><h2 id="academy-h">The J.A.R.V.I.S. Academy</h2></div>
     <p class="sec-sub">The white papers, taught as a course. The Academy meets every Tuesday, Wednesday, and Thursday, 6:00&ndash;8:00 AM America/Toronto &mdash; two hours of teaching and questions each session: the J.A.R.V.I.S. system, the roadmap, and the papers in order &mdash; Paper I, then the back end (Paper II), then finally the front end (Paper III). Every lecture is documented &mdash; captioned in full, commented, summarized with an executive summary &mdash; and filed to the education dossier in the archive and the repository.</p>
     <nav class="academy-index" aria-label="Academy index">
@@ -3564,7 +3575,20 @@
       <p>Deck (48 slides): <a href="academy/decks/memory-slideshow.pdf">PDF</a> &middot; <a href="academy/decks/memory-slideshow.pptx">PPTX</a></p>
     </div></details>
 
-    <h3 id="academy-qa" class="academy-h3">Question &amp; Answer</h3>
+    
+    <p class="sec-sub">Questions and answers have their own home now &mdash; <a href="#qa">the Q&amp;A section</a>, indexed and growing with every session.</p>
+  </section>
+
+  <!-- ================= Q&A ================= -->
+  <section id="qa" class="wing wing-qa" aria-labelledby="qa-h">
+    <div class="sec-head"><span class="sec-label">Q&amp;A</span><h2 id="qa-h">Questions &amp; Answers</h2></div>
+    <p class="sec-sub">Every checkpoint question from the papers and the sessions, with answers &mdash; indexed below and growing as the Academy grows. New questions are appended at the end of their group, newest group last.</p>
+    <nav class="qa-index" aria-label="Q&A index">
+      <a href="#qa-paper1">Paper I</a>
+      <a href="#qa-paper2">Paper II</a>
+      <a href="#qa-sessions">Session Q&amp;A</a>
+    </nav>
+<h3 id="qa-paper1" class="academy-h3">Paper I &mdash; The Vision (v1.2)</h3>
     <h4 class="academy-h4">Paper I — The Vision (v1.2)</h4>
     <details class="qa-det"><summary>Recite the fifth principle verbatim, and explain the paper&#x27;s distinction between open source as &quot;foundation&quot; versus as &quot;release strategy.&quot;</summary><div class="det-body"><p><em>&quot;A fifth principle stands alongside the four above: Open source from day one. J.A.R.V.I.S. is built in the open as a matter of foundation, not as a release strategy. Every aim of the programme — doctrine, skills, contracts, reference implementation — is produced to be publishable, because a system that demands to be trusted must be inspectable. The boundary is absolute: the system goes public; the principal&#x27;s private life never does.&quot;</em> Foundation means the work is <em>produced to be publishable</em> from the first day — clarity, honest testing, no hidden assumptions — regardless of when anything is actually released. Release strategy would be a timing decision about shipping; the paper rejects that framing: <em>&quot;Open source is the main vision, not a release strategy.&quot;</em> Publishability is the standing requirement from day one; publication timing remains on HgX&#x27;s word.</p></div></details>
     <details class="qa-det"><summary>The paper draws an absolute boundary. State it exactly, then name three things that go public and three that never do, with the paper&#x27;s reason for the sanitising pass.</summary><div class="det-body"><p><em>&quot;The boundary is absolute: the system goes public; the principal&#x27;s private life never does.&quot;</em> Goes public: the doctrine and principles; skills as versioned reusable operating contracts; the reference implementation, its tests, and its history. Never goes public: the principal&#x27;s private life, family, and household; finances, credentials, and personal records; live estate data, messages, and private memory. The reason: <em>&quot;The sanitising pass is real work: only the system is publishable.&quot;</em></p></div></details>
@@ -3574,7 +3598,7 @@
     <details class="qa-det"><summary>Where does the paper say the public/private boundary is enforced in practice, and which two classes of memory fall on each side?</summary><div class="det-body"><p><em>&quot;Memory is where the boundary is enforced in practice.&quot;</em> On the publishable side: <em>&quot;Durable methods, role definitions, and principles belong to the system and are publishable.&quot;</em> On the side that never leaves the estate: <em>&quot;Personal memory — preferences tied to a private life, household detail, and lived history — stays in the estate and is never part of a public release.&quot;</em></p></div></details>
     <details class="qa-det"><summary>The paper calls evidence &quot;the bridge to open source.&quot; Explain the bridge — what is &quot;one discipline, applied twice&quot;?</summary><div class="det-body"><p><em>&quot;Evidence is also the bridge to open source: the same packet that lets HgX verify a run lets an external reviewer verify the system. Inspectability inside the estate and inspectability in public are one discipline, applied twice.&quot;</em> One evidence packet serves both audiences: the principal&#x27;s verification and the public&#x27;s inspection.</p></div></details>
     <details class="qa-det"><summary>State roadmap item 8 verbatim, and explain the two timing rules it contains.</summary><div class="det-body"><p><em>&quot;PUBLISH THE REFERENCE IMPLEMENTATION IN THE OPEN — 8. Complete the sanitising pass, publish doctrine, skills, contracts, and the reference implementation under an open licence, and maintain them in public. Publication timing remains on HgX&#x27;s word; publishability is the standing requirement from day one.&quot;</em> The two timing rules: (1) <em>when</em> to publish is HgX&#x27;s word alone; (2) <em>being publishable</em> is required from day one regardless.<br>---</p></div></details>
-    <h4 class="academy-h4">Paper II — The back end (technical)</h4>
+    <h3 id="qa-paper2" class="academy-h3">Paper II &mdash; The back end (technical)</h3>
     <details class="qa-det"><summary>Name the five engineering invariants and state the operational meaning of &quot;No proof, no done.&quot;</summary><div class="det-body"><p>The five invariants: <strong>No proof, no done</strong> — <em>&quot;Delegation output is reviewed against artifacts, sources, tests, approvals, and gaps before completion is reported.&quot;</em> <strong>Current facts stay live</strong> — <em>&quot;Memory carries durable context; changing state is re-read from its owning system.&quot;</em> <strong>Automate preparation first</strong> — <em>&quot;One-time task becomes a proven skill, then a tested routine. Consequential execution remains approval-gated.&quot;</em> <strong>Persistence is explicit</strong> — <em>&quot;/tmp and system paths are treated as disposable. Home-directory state survives restarts.&quot;</em> <strong>Failure is visible</strong> — <em>&quot;Stale sources, exhausted retries, unverified handoffs, and missing permissions surface as failures or escalation.&quot;</em></p></div></details>
     <details class="qa-det"><summary>Distinguish the durability boundary, the role boundary, the consequence boundary, and the delegation boundary — which one makes a subagent&#x27;s completion claim an input rather than a result?</summary><div class="det-body"><p>Durability: <em>&quot;~/ is the persistence root&quot;</em> — what survives restarts. Role: <em>&quot;Side chats isolate duties and memory procedurally. They are not a cryptographic boundary.&quot;</em> Consequence: <em>&quot;Sending, publishing, spending, deletion, permission changes, and other consequential effects stop for approval.&quot;</em> Delegation: <em>&quot;A subagent response is an input to verification, not a completion signal. The orchestrator remains accountable for acceptance.&quot;</em> — the <strong>delegation boundary</strong> is the one that makes a subagent&#x27;s &quot;done&quot; an input to verification.</p></div></details>
     <details class="qa-det"><summary>A subagent reports &quot;done&quot; but shows no evidence. Under the state machine, what state is the work actually in, and what is the required response?</summary><div class="det-body"><p>It is not in Verified — <em>&quot;Completion exists only after observed output passes the stated acceptance test&quot;</em> and <em>&quot;No optimistic completion: queued, running, active, or delegated are intermediate states.&quot;</em> The work sits in In progress awaiting verification. The required response is the delegation boundary plus the first invariant: treat the report as an input, and review the output against artifacts, sources, tests, approvals, and gaps before completion is reported. <em>&quot;No proof, no done.&quot;</em></p></div></details>
@@ -3588,37 +3612,13 @@
     <details class="qa-det"><summary>An approval is granted for one publish action. Does it cover a second publish to the same target tomorrow? Cite the non-goal.</summary><div class="det-body"><p>No. The approval non-goal: <em>&quot;Approval does not authorize adjacent actions or future repetitions.&quot;</em> One approval is one action — the paper&#x27;s standing example is that no agent publishes, sends, spends, or deletes without HgX&#x27;s explicit approval for that exact action.</p></div></details>
     <details class="qa-det"><summary>The same operation fails with the same error twice. What must the system do next — and what is it forbidden to do?</summary><div class="det-body"><p>The retry budget (router policy rule 2): <em>&quot;Same operation, same error, two retries consumed — Escalate or choose a fundamentally different approach.&quot;</em> What it is forbidden to do: repeat an unobserved consequential action — <em>&quot;The system&#x27;s strongest retry rule is to avoid repeating an unobserved consequential action.&quot;</em> Fail visible: the failure is reported with the observed condition, never papered over.</p></div></details>
     <details class="qa-det"><summary>In the test matrix, what is the expected observation for the &quot;Stale source&quot; test? How does the promotion gate distinguish a &quot;safe test&quot; from a &quot;routine&quot;?</summary><div class="det-body"><p>The matrix cell&#x27;s exact wording is in the paper (to be taken up in session); the paper&#x27;s supported position is the scheduling failure rule: <em>&quot;When a required source is stale or unavailable, report failure. Do not silently reuse old data&quot;</em> — consistent with the Failure-is-visible invariant. The promotion gate distinguishes them by stage: a <strong>safe test</strong> is the third stage (<em>&quot;The skill proves behavior on current data&quot;</em>); a <strong>routine</strong> is only the fourth (<em>&quot;Only a reviewed method receives a schedule&quot;</em>). The change-management rule: <em>&quot;Skipping a stage spends reliability before the estate has earned it. A routine is promoted evidence, not a convenient timer.&quot;</em><br>---</p></div></details>
-    <h4 class="academy-h4">Session Q&amp;A</h4>
+    <h3 id="qa-sessions" class="academy-h3">Session Q&amp;A</h3>
     <p class="sec-sub">Session questions from HgX are recorded here verbatim with the Academy&rsquo;s answers, dated and versioned like everything else. None yet.</p>
   </section>
 
 
-  <!-- ================= RESEARCH ================= -->
-  <section id="research" aria-labelledby="research-h">
-    <div class="sec-head"><span class="sec-label">RESEARCH</span><h2 id="research-h">Research</h2></div>
-    <p class="sec-sub">Published findings from the estate&rsquo;s research desk &mdash; public data only, scrubbed before release. Newest first; each entry links to the full report.</p>
-    <ol class="research-index" reversed>
-      <li class="research-entry">
-        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
-        <h3><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Hashrate, Satoshis, and Dollars &mdash; the Full Ratio Set per Halving</a></h3>
-        <p class="research-summary">The full ratio set per halving &mdash; hash:USD, sats:USD, hash:sats &mdash; with factor changes between halvings; hash-per-subsidy-satoshi compounded from 5 kH/s (2012) to 3.39 PH/s (today).</p>
-        <p class="research-links"><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.md">Source markdown</a></p>
-      </li>
-      <li class="research-entry">
-        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
-        <h3><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Hashrate per Halving, as a Percentage Ratio to Price</a></h3>
-        <p class="research-summary">Hashrate per halving as a percentage ratio to price &mdash; the hashrate-per-dollar ratio peaked at the 2020 halving (115% of today&rsquo;s); today sits at 100%, up from 79% at the 2024 halving.</p>
-        <p class="research-links"><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-per-halving-vs-price.md">Source markdown</a></p>
-      </li>
-      <li class="research-entry">
-        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
-        <h3><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics</a></h3>
-        <p class="research-summary">Six months of on-chain fee data: a floor-fee regime &mdash; median 1.0 sat/vB nearly throughout, largest intraday spike p90 4.08 sat/vB (Jun 9), fees under 1% of miner revenue for over a year.</p>
-        <p class="research-links"><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Read the full report</a> &middot; <a href="research/2026-10-21/bitcoin-vbyte-fee-stats.md">Source markdown</a></p>
-      </li>
-    </ol>
-    <p class="research-note">Layout: one dated folder per day under <span class="mono">research/</span> (<span class="mono">research/2026-10-21/&lt;slug&gt;.html</span>). Convention documented in <a href="research/README.md">research/README.md</a>.</p>
-  </section>
+
+
 
 
   <!-- ================= BUILD ================= -->
@@ -3648,7 +3648,7 @@
     <div class="sec-head"><span class="sec-label">BUILD LOG</span><h2 id="log-h">The estate&rsquo;s chronicle</h2></div>
     <p class="sec-sub">Every release, decision, and landing — dated, timestamped (America/Toronto), and commented. The formal log system began on 19 October 2026; entries from earlier that day were reconstructed from the day&rsquo;s record and are marked <em>approx.</em> New entries are appended as the build proceeds.</p>
     <ol class="log-list" id="log-list" reversed>
-<li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">08:50 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Third research item of the day &mdash; &lsquo;Hashrate, Satoshis, and Dollars: the Full Ratio Set per Halving&rsquo; (2026-10-21): hash:USD, sats:USD and hash:sats per halving, each as % of today, plus factorial changes between halvings; hash-per-subsidy-satoshi compounded 5 kH/s (2012) &rarr; 3.39 PH/s (today). All three tables and full sources intact on the entry page; index prepended. Scrubbed &mdash; public on-chain statistics only.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">07:05 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Second research item of the day &mdash; &lsquo;Hashrate per Halving, as a Percentage Ratio to Price&rsquo; (2026-10-21): the hashrate-per-dollar ratio peaked at the 2020 halving (115% of today&rsquo;s); today sits at 100%, up from 79% at the 2024 halving. Full report on its entry page (research/2026-10-21/hashrate-per-halving-vs-price.html), canonical markdown beside it, index prepended. Scrubbed &mdash; public on-chain statistics only.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">06:50 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Research section rebuilt as a future-friendly dated index on HgX&rsquo;s order &mdash; reverse-chronological entries (date, title, one-line summary, link), full reports on dedicated entry pages (research/2026-10-21/&lt;slug&gt;.html), canonical markdown beside each page, layout convention in research/README.md. Seeded with the 2026-10-21 vByte fee report. Ready to receive daily research without redesign.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">06:50 ET <span class="log-approx">approx.</span></span><span class="log-tag">Doctoral</span></div><p class="log-text">Full estate push on HgX&rsquo;s order &mdash; Phase 2 sweep evidence complete in the repository (Layer 1 re-run 39/39, Layer 2 properties 10/10, Layer 3 chaos 10/10, crosscheck 12/12, evidence logs, backtrace manifest, staging records); two ratified v1.1 corrections (TLC report: six fixes, not five; contracts README: 3 open questions, not 6 unresolved); seven new v0.1 draft files promoted to canonical placement (state-machine.md, approval-digest.md, five contract schemas) with open questions OQ-1..OQ-6 flagged, not fudged. GitHub + Dropbox + website.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">01:55 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Research published &mdash; &lsquo;Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics&rsquo; (2026-04-21 &rarr; 2026-10-21), commissioned by HgX and prepared by Research Bot: a floor-fee regime, median 1.0 sat/vB nearly throughout, largest intraday spike p90 4.08 sat/vB (Jun 9). Live in the hub&rsquo;s new Research section, filed in the repository (research/) and the Dropbox archive; scrubbed &mdash; public on-chain statistics only.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">23:45 ET <span class="log-approx">approx.</span></span><span class="log-tag">Academy</span></div><p class="log-text">The J.A.R.V.I.S. Academy takes its place on the hub &mdash; the Academy meets every Tuesday, Wednesday, and Thursday, 6:00&ndash;8:00 AM America/Toronto; the papers taught in order (Paper I, the back end, the front end), every lecture documented &mdash; captioned, summarized, executive summary &mdash; and filed to the education dossier. The session log carries Session 1 (2026-10-14) and grows weekly; lecture records land in the repository each week.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">06:38 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">GitHub milestones corrected — the closed Phase 0 and Phase 1 milestones read 0% because a milestone counts its issues and none were filed. The deliverables are now filed as closed issues (four under Phase 0, three under Phase 1); both milestones read 100% complete.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">06:11 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">Website GitHub links fixed — the Connect section&rsquo;s GitHub card now links to the live repository (it previously read &lsquo;Opens with the first push&rsquo; and linked nowhere), a Wiki card was added beside it, and the Build-out section now records Phase 1 as proven rather than under way.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">22:59 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">GitHub project board stood up — J.A.R.V.I.S. Build-out with Table, Board, and Roadmap views, thirteen items in their true states, eight phase milestones (Phases 0 and 1 closed), and eight labels. The repo About now carries the description, the website link, and topics.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">22:14 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">Full GitHub wiki published — eleven pages: Home, the Papers, Architecture, Glossary, Doctoral Programme, Versioning, Build Log, Skills, Watchtower, Contributing, FAQ.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">21:30 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">GitHub repository live — jarvis-estate pushed under the release identity: all four papers, the formal spec, the proofs, the TLC run logs, the skills, the watchtower, the versioning law, and the changelog. The repository is public; the principal&rsquo;s private life is not in it.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">17:58 ET</span><span class="log-tag">Release</span></div><p class="log-text">Dropbox /J.A.R.V.I.S./ folder link live — the full versioned archive (13 folders, 50 entries) is now viewable by anyone with the link; the folder link moves from Tracked to Proven in the evidence ledger, and the hub&rsquo;s Dropbox button points at it.</p></li>
+<li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">08:50 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Third research item of the day &mdash; &lsquo;Hashrate, Satoshis, and Dollars: the Full Ratio Set per Halving&rsquo; (2026-10-21): hash:USD, sats:USD and hash:sats per halving, each as % of today, plus factorial changes between halvings; hash-per-subsidy-satoshi compounded 5 kH/s (2012) &rarr; 3.39 PH/s (today). All three tables and full sources intact on the entry page; index prepended. Scrubbed &mdash; public on-chain statistics only.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">07:05 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Second research item of the day &mdash; &lsquo;Hashrate per Halving, as a Percentage Ratio to Price&rsquo; (2026-10-21): the hashrate-per-dollar ratio peaked at the 2020 halving (115% of today&rsquo;s); today sits at 100%, up from 79% at the 2024 halving. Full report on its entry page (research/2026-10-21/hashrate-per-halving-vs-price.html), canonical markdown beside it, index prepended. Scrubbed &mdash; public on-chain statistics only.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">06:50 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Research section rebuilt as a future-friendly dated index on HgX&rsquo;s order &mdash; reverse-chronological entries (date, title, one-line summary, link), full reports on dedicated entry pages (research/2026-10-21/&lt;slug&gt;.html), canonical markdown beside each page, layout convention in research/README.md. Seeded with the 2026-10-21 vByte fee report. Ready to receive daily research without redesign.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">06:50 ET <span class="log-approx">approx.</span></span><span class="log-tag">Doctoral</span></div><p class="log-text">Full estate push on HgX&rsquo;s order &mdash; Phase 2 sweep evidence complete in the repository (Layer 1 re-run 39/39, Layer 2 properties 10/10, Layer 3 chaos 10/10, crosscheck 12/12, evidence logs, backtrace manifest, staging records); two ratified v1.1 corrections (TLC report: six fixes, not five; contracts README: 3 open questions, not 6 unresolved); seven new v0.1 draft files promoted to canonical placement (state-machine.md, approval-digest.md, five contract schemas) with open questions OQ-1..OQ-6 flagged, not fudged. GitHub + Dropbox + website.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-21">2026-10-21</time><span class="log-time">01:55 ET <span class="log-approx">approx.</span></span><span class="log-tag">Research</span></div><p class="log-text">Research published &mdash; &lsquo;Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics&rsquo; (2026-04-21 &rarr; 2026-10-21), commissioned by HgX and prepared by Research Bot: a floor-fee regime, median 1.0 sat/vB nearly throughout, largest intraday spike p90 4.08 sat/vB (Jun 9). Live in the hub&rsquo;s new Research section, filed in the repository (research/) and the Dropbox archive; scrubbed &mdash; public on-chain statistics only.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">23:45 ET <span class="log-approx">approx.</span></span><span class="log-tag">Academy</span></div><p class="log-text">The J.A.R.V.I.S. Academy takes its place on the hub &mdash; the Academy meets every Tuesday, Wednesday, and Thursday, 6:00&ndash;8:00 AM America/Toronto; the papers taught in order (Paper I, the back end, the front end), every lecture documented &mdash; captioned, summarized, executive summary &mdash; and filed to the education dossier. The session log carries Session 1 (2026-10-14) and grows weekly; lecture records land in the repository each week.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">18:20 ET <span class="log-approx">approx.</span></span><span class="log-tag">Doctoral</span></div><p class="log-text">Phase 2 opened — Invariant Verification, on HgX's order. The opening package is filed in the repository (formal-spec/tests/): the phase plan (three layers, gates, and the proof-of-work standard), the catalogue of the 27 invariants with their doctrine sources, and the traceability matrix. Layer 1 — static contract tests over the ratified contracts and the TLA+ specification — is built and verified: 39 tests, 39 passing. Layers 2 and 3 run on the roadmap's calendar (Months 2–4). Filed in the Dropbox archive; it travels to the GitLab mirror when that push happens.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">18:04 ET</span><span class="log-tag">Audit</span></div><p class="log-text">Internal audit filed — the pause ordered at 23:43 ET on 2026-10-19 was a deliberate test of the estate's pause→go mechanism, disclosed by HgX at the full lift. One word stopped every Jarvis build-out line cold: a running proof process killed mid-run, four release schedules disabled, nothing deleted, all state preserved. The only work under the hold was two scoped exceptions, each on HgX's direct order, and external material moved nothing. Resumption followed his words piecewise — publishing house, then the doctoral programme — and at 18:04 ET he confirmed the full lift: everything is a go. Score: 96/100, PASS. Filed in the repository and the Dropbox archive.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">17:59 ET <span class="log-approx">approx.</span></span><span class="log-tag">Audit</span></div><p class="log-text">Outside audit filed — an external model (Qwen), run outside the estate on programme material, asserted estate work it could not have performed: files written here, ledger downgrades committed and locked, a Roadmap 2.0 PDF generated, Phase 1 downgraded to conditional. Each claim was checked against the primary records and found false or superseded, and its offer to simulate the model check was rejected — a simulated proof is not evidence. The audit is filed in the repository and the Dropbox archive; the estate record is unchanged.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">06:38 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">GitHub milestones corrected — the closed Phase 0 and Phase 1 milestones read 0% because a milestone counts its issues and none were filed. The deliverables are now filed as closed issues (four under Phase 0, three under Phase 1); both milestones read 100% complete.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-20">2026-10-20</time><span class="log-time">06:11 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">Website GitHub links fixed — the Connect section&rsquo;s GitHub card now links to the live repository (it previously read &lsquo;Opens with the first push&rsquo; and linked nowhere), a Wiki card was added beside it, and the Build-out section now records Phase 1 as proven rather than under way.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">22:59 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">GitHub project board stood up — J.A.R.V.I.S. Build-out with Table, Board, and Roadmap views, thirteen items in their true states, eight phase milestones (Phases 0 and 1 closed), and eight labels. The repo About now carries the description, the website link, and topics.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">22:14 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">Full GitHub wiki published — eleven pages: Home, the Papers, Architecture, Glossary, Doctoral Programme, Versioning, Build Log, Skills, Watchtower, Contributing, FAQ.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">21:30 ET <span class="log-approx">approx.</span></span><span class="log-tag">Release</span></div><p class="log-text">GitHub repository live — jarvis-estate pushed under the release identity: all four papers, the formal spec, the proofs, the TLC run logs, the skills, the watchtower, the versioning law, and the changelog. The repository is public; the principal&rsquo;s private life is not in it.</p></li> <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">17:58 ET</span><span class="log-tag">Release</span></div><p class="log-text">Dropbox /J.A.R.V.I.S./ folder link live — the full versioned archive (13 folders, 50 entries) is now viewable by anyone with the link; the folder link moves from Tracked to Proven in the evidence ledger, and the hub&rsquo;s Dropbox button points at it.</p></li>
 <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">17:40 ET</span><span class="log-tag">Release</span></div><p class="log-text">Evidence, Audits, and Scores sections added to the hub — the evidence ledger (Proven / Verified / Tracked), the public audit record with the 2026-W43 baseline, and stability scoring under rubric v1.0 now live on the website alongside the papers and the log.</p></li>
 <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">16:28 ET</span><span class="log-tag">Release</span></div><p class="log-text">Dropbox versioning doctrine and build-log system commissioned — immutable versioned folders for every paper, a dedicated roadmap folder tree, dated log PDFs, and a real-time log on this website. Nothing is overwritten again.</p></li>
 <li class="log-entry"><div class="log-meta"><time datetime="2026-10-19">2026-10-19</time><span class="log-time">16:26 ET</span><span class="log-tag">Release</span></div><p class="log-text">Website hardening and redesign commissioned — hardened build, button navigation, Live / Build / Future sections, and the full Connect row.</p></li>
@@ -3795,6 +3795,34 @@
     </div>
   </section>
 
+  <!-- ================= RESEARCH ================= -->
+  <section id="research" class="wing wing-research" aria-labelledby="research-h">
+    <div class="sec-head"><span class="sec-label">RESEARCH</span><h2 id="research-h">Research</h2></div>
+    <p class="sec-sub">Published findings from the estate&rsquo;s research desk &mdash; public data only, scrubbed before release. Newest first; each entry links to the full report.</p>
+    <ol class="research-index" reversed>
+      <li class="research-entry">
+        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
+        <h3><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Hashrate, Satoshis, and Dollars &mdash; the Full Ratio Set per Halving</a></h3>
+        <p class="research-summary">The full ratio set per halving &mdash; hash:USD, sats:USD, hash:sats &mdash; with factor changes between halvings; hash-per-subsidy-satoshi compounded from 5 kH/s (2012) to 3.39 PH/s (today).</p>
+        <p class="research-links"><a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-sats-dollars-ratios-per-halving.md">Source markdown</a></p>
+      </li>
+      <li class="research-entry">
+        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
+        <h3><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Hashrate per Halving, as a Percentage Ratio to Price</a></h3>
+        <p class="research-summary">Hashrate per halving as a percentage ratio to price &mdash; the hashrate-per-dollar ratio peaked at the 2020 halving (115% of today&rsquo;s); today sits at 100%, up from 79% at the 2024 halving.</p>
+        <p class="research-links"><a href="research/2026-10-21/hashrate-per-halving-vs-price.html">Read the full report</a> &middot; <a href="research/2026-10-21/hashrate-per-halving-vs-price.md">Source markdown</a></p>
+      </li>
+      <li class="research-entry">
+        <div class="research-meta"><time datetime="2026-10-21">2026-10-21</time><span class="research-tag">Bitcoin</span></div>
+        <h3><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics</a></h3>
+        <p class="research-summary">Six months of on-chain fee data: a floor-fee regime &mdash; median 1.0 sat/vB nearly throughout, largest intraday spike p90 4.08 sat/vB (Jun 9), fees under 1% of miner revenue for over a year.</p>
+        <p class="research-links"><a href="research/2026-10-21/bitcoin-vbyte-fee-stats.html">Read the full report</a> &middot; <a href="research/2026-10-21/bitcoin-vbyte-fee-stats.md">Source markdown</a></p>
+      </li>
+    </ol>
+    <p class="research-note">Layout: one dated folder per day under <span class="mono">research/</span> (<span class="mono">research/2026-10-21/&lt;slug&gt;.html</span>). Convention documented in <a href="research/README.md">research/README.md</a>.</p>
+  </section>
+
+
   <!-- ================= FUTURE ================= -->
   <section id="future" aria-labelledby="future-h">
     <div class="sec-head"><span class="sec-label">FUTURE</span><h2 id="future-h">Next — the road ahead</h2></div>
@@ -3914,6 +3942,27 @@
     "approx": true,
     "tag": "Academy",
     "text": "The J.A.R.V.I.S. Academy takes its place on the hub \u2014 the Academy meets every Tuesday, Wednesday, and Thursday, 6:00\u20138:00 AM America/Toronto; the papers taught in order (Paper I, the back end, the front end), every lecture documented \u2014 captioned, summarized, executive summary \u2014 and filed to the education dossier. The session log carries Session 1 (2026-10-14) and grows weekly; lecture records land in the repository each week."
+  },
+  {
+    "date": "2026-10-20",
+    "time": "18:20",
+    "approx": true,
+    "tag": "Doctoral",
+    "text": "Phase 2 opened — Invariant Verification, on HgX's order. The opening package is filed in the repository (formal-spec/tests/): the phase plan (three layers, gates, and the proof-of-work standard), the catalogue of the 27 invariants with their doctrine sources, and the traceability matrix. Layer 1 — static contract tests over the ratified contracts and the TLA+ specification — is built and verified: 39 tests, 39 passing. Layers 2 and 3 run on the roadmap's calendar (Months 2–4). Filed in the Dropbox archive; it travels to the GitLab mirror when that push happens."
+  },
+  {
+    "date": "2026-10-20",
+    "time": "18:04",
+    "approx": false,
+    "tag": "Audit",
+    "text": "Internal audit filed — the pause ordered at 23:43 ET on 2026-10-19 was a deliberate test of the estate's pause→go mechanism, disclosed by HgX at the full lift. One word stopped every Jarvis build-out line cold: a running proof process killed mid-run, four release schedules disabled, nothing deleted, all state preserved. The only work under the hold was two scoped exceptions, each on HgX's direct order, and external material moved nothing. Resumption followed his words piecewise — publishing house, then the doctoral programme — and at 18:04 ET he confirmed the full lift: everything is a go. Score: 96/100, PASS. Filed in the repository and the Dropbox archive."
+  },
+  {
+    "date": "2026-10-20",
+    "time": "17:59",
+    "approx": true,
+    "tag": "Audit",
+    "text": "Outside audit filed — an external model (Qwen), run outside the estate on programme material, asserted estate work it could not have performed: files written here, ledger downgrades committed and locked, a Roadmap 2.0 PDF generated, Phase 1 downgraded to conditional. Each claim was checked against the primary records and found false or superseded, and its offer to simulate the model check was rejected — a simulated proof is not evidence. The audit is filed in the repository and the Dropbox archive; the estate record is unchanged."
   },
   {
     "date": "2026-10-20",
