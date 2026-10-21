@@ -216,6 +216,14 @@ The full chronicle — logs, comments, versioning — is followable right here:
 - **Wiki:** the [wiki](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/wiki)
   — the papers, architecture, glossary, doctoral programme, versioning,
   build log, skills, watchtower, contributing, FAQ.
+- **Discussions:** [10 categories](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/discussions)
+  — one per doctoral phase plus Q&A; evidence discussions posted as phases complete.
+- **Releases:** [v1.0.0](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/releases/tag/v1.0.0)
+  — the first public release, with doctoral-grade notes.
+- **Academy:** [decks](academy/decks/) and [lecture records](academy/lecture-records/)
+  — the J.A.R.V.I.S. white-paper academy, every session documented.
+- **Research:** [research/](research/) — indexed, sourced entries by date.
+- **Q&A bank:** [qa/](qa/) — the growing checkpoint question bank.
 
 HgX's standing rule: the growth and maturity of J.A.R.V.I.S. stay on record —
 every version kept, every release logged.
