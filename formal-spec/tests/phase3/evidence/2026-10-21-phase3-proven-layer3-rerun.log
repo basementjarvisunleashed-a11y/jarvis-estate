@@ -1,0 +1,10 @@
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.088s
+
+OK
+---
+evidence: ../evidence/2026-10-21-phase3-layer3.log
+rejections: ../evidence/2026-10-21-phase3-layer3-rejections.log (137 refused requests logged)
+verdicts: ../evidence/2026-10-21-phase3-layer3-verdicts.log (80 adversarial cases)
+RESULT: ALL GREEN

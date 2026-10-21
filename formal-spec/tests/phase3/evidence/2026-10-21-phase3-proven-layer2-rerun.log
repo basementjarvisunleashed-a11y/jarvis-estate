@@ -1,0 +1,9 @@
+
+----------------------------------------------------------------------
+Ran 42 tests in 0.051s
+
+OK
+---
+evidence: ../evidence/2026-10-21-phase3-layer2.log
+rejections: ../evidence/2026-10-21-phase3-layer2-rejections.log (33 refused requests logged)
+RESULT: ALL GREEN
