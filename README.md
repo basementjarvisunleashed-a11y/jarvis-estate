@@ -10,7 +10,7 @@ evidence, and human authority at every consequential boundary.**
 [![Status: Live](https://img.shields.io/badge/Status-Live-brightgreen)](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/)
 [![Phase 1: Proven](https://img.shields.io/badge/Phase%201-Proven-blue)](formal-spec/proofs/phase1-tlc-report.md)
 [![Audits: Public](https://img.shields.io/badge/Audits-Public-orange)](audits/)
-[![Phase 2: Proven](https://img.shields.io/badge/Phase%202-Proven-blue)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3) [![Phase 3: Proven](https://img.shields.io/badge/Phase%203-Proven-blue)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/9)
+[![Phase 2: Proven](https://img.shields.io/badge/Phase%202-Proven-blue)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3) [![Phase 3: Proven](https://img.shields.io/badge/Phase%203-Proven-blue)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/9) [![Phase 4: Open](https://img.shields.io/badge/Phase%204-Open-yellow)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones)
 
 **[Website](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/) ·
 [Wiki](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/wiki) ·
