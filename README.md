@@ -10,9 +10,11 @@ evidence, and human authority at every consequential boundary.**
 [![Status: Live](https://img.shields.io/badge/Status-Live-brightgreen)](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/)
 [![Phase 1: Proven](https://img.shields.io/badge/Phase%201-Proven-blue)](formal-spec/proofs/phase1-tlc-report.md)
 [![Audits: Public](https://img.shields.io/badge/Audits-Public-orange)](audits/)
+[![Phase 2: Open](https://img.shields.io/badge/Phase%202-Open-yellow)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3)
 
 **[Website](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/) ·
 [Wiki](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/wiki) ·
+[Milestones](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestones) ·
 [Project board](https://github.com/users/basementjarvisunleashed-a11y/projects/1) ·
 [Papers archive (Dropbox)](https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq) ·
 [Evidence ledger](EVIDENCE.md) ·
@@ -152,14 +154,14 @@ Paper IV (above); working files in [`formal-spec/`](formal-spec/).
 
 | Phase | Scope | Status |
 |---|---|---|
-| 0 | Freeze the contracts | **Closed** — TLA+ ratified; glossary ratified; contracts v1.0.0 normative |
-| 1 | State-machine proof | **Proven** — TLC model check: 3,266,929 states, zero invariant violations |
-| 2 | Invariant verification | In progress — opened 2026-10-20 (27 invariants, three test layers) |
-| 3 | Consistency model | Planned |
-| 4 | Idempotency | Planned |
-| 5 | Security boundaries | Planned |
-| 6 | Router optimality | Planned |
-| 7 | Doctoral evidence package | Planned |
+| [0](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/1) | Freeze the contracts | **Closed** — TLA+ ratified; glossary ratified; contracts v1.0.0 normative |
+| [1](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/2) | State-machine proof | **Proven** — TLC model check: 3,266,929 states, zero invariant violations |
+| [2](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3) | Invariant verification | **Open** — Layer 1 39/39, Layer 2 10/10, Layer 3 10/10, crosscheck 12/12 ([evidence](formal-spec/tests/)) |
+| [3](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/4) | Consistency model | Planned |
+| [4](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/5) | Idempotency | Planned |
+| [5](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/6) | Security boundaries | Planned |
+| [6](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/7) | Router optimality | Planned |
+| [7](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/8) | Doctoral evidence package | Planned |
 
 Versions follow the law in [VERSIONING.md](VERSIONING.md): v0.x.x is a
 draft, v1.0.0 is ratified, versions only move forward, and every proof names
