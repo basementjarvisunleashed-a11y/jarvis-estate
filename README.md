@@ -21,9 +21,14 @@ evidence, and human authority at every consequential boundary.**
 
 ## Right now — the estate is live and moving
 
-> **2026-10-20:** Phase 2 of the doctoral programme — invariant verification —
-> is **open**. Layer 1 is verified: 39 of 39 contract tests passing against
-> the ratified contracts and the TLA+ specification. The pause→go mechanism
+> **2026-10-21:** Phase 2 of the doctoral programme — invariant verification —
+> is **open** and evidencing: Layer 1 contract suite **39/39**, Layer 2 property
+> suite **10/10** (53,079 rejections logged), Layer 3 chaos suite **10/10**,
+> cross-artifact audit **12/12**, roadmap test **37/58**, Phase 0+1 backtrace
+> **18/18 artifacts, 12/12 claims**. Full reports in
+> [`formal-spec/tests/`](formal-spec/tests/); the
+> [Phase 2 milestone](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3)
+> carries six closed deliverable issues with #10 tracking. The pause→go mechanism
 > passed its live test at 96/100. Public audits run every week, and the
 > evidence ledger is current. This is not a demo and it is not vapourware —
 > every claim on this page is graded in the [evidence ledger](EVIDENCE.md).
