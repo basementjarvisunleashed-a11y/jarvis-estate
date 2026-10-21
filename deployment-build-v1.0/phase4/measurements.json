@@ -1,0 +1,30 @@
+{
+  "budgets": {
+    "proof_size_snark_bytes": 2048,
+    "proof_size_stark_bytes": 204800,
+    "proving_time_s": 30,
+    "verify_time_ms": 100
+  },
+  "freshness_window_s": 300,
+  "reference": "REFERENCE-NOT-PRODUCTION-CRYPTOGRAPHY",
+  "statements": {
+    "S1": {
+      "iterations": 200,
+      "proof_bytes": 687,
+      "prove_ms": 0.026133934999847952,
+      "verify_ms": 0.018870195000317835
+    },
+    "S2": {
+      "iterations": 200,
+      "proof_bytes": 656,
+      "prove_ms": 0.04126602499979981,
+      "verify_ms": 0.01917615500019565
+    },
+    "S3": {
+      "iterations": 200,
+      "proof_bytes": 675,
+      "prove_ms": 0.03087649500002954,
+      "verify_ms": 0.018728730000248106
+    }
+  }
+}

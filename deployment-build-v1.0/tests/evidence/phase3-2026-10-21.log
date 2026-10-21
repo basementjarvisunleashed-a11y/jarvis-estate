@@ -1,0 +1,39 @@
+Phase 3 evidence — complete handshake (paper Section 5)
+date: 2026-10-21
+keys: TEST ONLY (ceremony marker CEREMONY-TEST present)
+
+Section 5.5 worked trace reproduction: PASS
+  intent (canonical): {"content":"Running 10 min late","effect":"send_message","target":{"count":4,"kind":"people"}}
+  D (computed, not hardcoded): d0f1d96735a3edc175b4a53a00b8085eccfcb58606407a256215632501074f78
+  09:38:00 step 1 | actor=orchestrator/control verifier=intent-log lease/data | sealed INTENT entry
+  09:38:02 step 2 | actor=device pulls/governance verifier=device seal check | approval card card-1
+  09:38:07 step 3 | actor=principal+device/governance verifier=orchestrator/control | signed (approve, D, expiry)
+  09:38:08 step 4 | actor=orchestrator/control verifier=trust-root/governance | capability token tok-1
+  09:38:09 step 5 | actor=execution-edge/data verifier=edge token verify | verified authorization
+  09:38:11 step 6 | actor=execution-edge/data verifier=intent-log seal/data | sealed EVIDENCE entry
+  09:38:11 outcome: 'Sent to 4 people · 09:38' -> phone packet: 'Sent to 4 people · 09:38'
+  final state: EVIDENCED
+
+counts (measured):
+  steps executed: 6
+  state transitions: 4 (PROPOSED -> PRESENTED -> DECIDED -> AUTHORIZED -> EVIDENCED)
+  cross-plane pulls (gateway audit): 10
+  sealed envelopes created (trace): 16
+  seal verifications passed (trace): 18
+  intent log entries: 2 {EVIDENCE x1, INTENT x1}
+  log chain verifies end-to-end: True
+  nonces minted: 1, burned: 1
+  denials/incidents: 0
+
+auditor re-verification (ceremony keys):
+  seal verifies: intent lease (master)        True
+  seal verifies: card (surface:watch)         True
+  seal verifies: decision (surface:watch)     True
+  seal verifies: token (surface:edge)         True
+  seal verifies: evidence entry (master)      True
+  seal verifies: phone packet (surface:phone) True
+  auditor envelopes created: 2, verifications passed: 8
+  all artifact seals verify: True
+
+failure behaviours deployed (Section 5.4): mutation mid-presentation invalidates card; expired card disables controls + re-presentation; offline tap records nothing; edge digest mismatch refused + denial sealed; token replay refused + incident logged.
+unittest phase3.test_phase3: Ran 19 tests in 0.024s OK

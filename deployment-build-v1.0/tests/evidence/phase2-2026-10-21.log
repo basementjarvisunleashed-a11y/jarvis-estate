@@ -1,0 +1,51 @@
+PHASE 2 EVIDENCE LOG — orchestral layers
+build: ~/workspace/jarvis-deploy/phase2
+date: 2026-10-21
+keys: TEST ONLY (common/keys.py ceremony; CEREMONY-TEST marker present)
+
+CONTRACT ENFORCEMENT AT THE PULL
+Every refusal below: sealed denial (governance inner seal verified
+with the ceremony master key; transport outer seal verified) AND
+logged as DENIAL in the intent log (chain verified end-to-end).
+refusals by surface:
+  phone: 2 — engine_internals, other_roles_private_state
+  watch: 2 — evidence_bodies, configuration
+  tablet: 2 — credentials, sealed_private_memory
+  tv: 2 — contents, approvals
+  headset: 1 — outside_private_session
+refusals total: 9
+allowances, sealed responses (both seals verified):
+  phone: 4 — briefs, decisions, blocks, packets
+  watch: 2 — approvals_5s, critical_alerts
+  tablet: 1 — full_evidence_packets
+  tv: 1 — state
+  headset: 1 — role_artifact_evidence_relationships
+allowances total: 9
+
+FAIL-CLOSED
+unknown category refused: 1; unenrolled device refused: 1 (counter total: 2)
+direct data-plane bypass (no pull-server authorization) refused: 1
+
+ENROLLMENT CEREMONY (control plane)
+happy path: 1 — phone-initiated; pairing codes matched; exact contract terms accepted;
+  first pull = Watchtower status (state=operational); enrollment sealed in the log (DECISION)
+refusal paths (each: sealed denial, seal verified, DENIAL logged, device left unenrolled):
+  self: 1
+  wrong_initiator: 1
+  mismatch: 1
+  wrong_terms: 1
+
+ATTENTION BUDGET (monitored quantity; unspent budget is the success metric)
+unit verdicts asserted: 13 — watch 5 allowed then 6th queued (spent stays 5);
+  phone 3 allowed then 4th queued; tv/headset system-initiated refused;
+  tablet system-initiated refused (principal-initiated only); principal-initiated uncounted;
+  remaining() exact; report() exact; attention_success unspent=5 of 8 (ratio 0.625);
+  day rollover resets spend
+integration at the pull: 5 system-initiated watch pulls allowed, 1 queued (spent unchanged at 5, remaining 0);
+  tv system-initiated pull refused with sealed denial: 1
+
+KEYS: ceremony master key held only by the governance KeyService; no control/data component
+or surface client holds ceremony key bytes: 1 assertion set passed
+PLANES: 7 direct cross-plane calls raised PlaneViolation; 1 sanctioned gateway pull
+succeeded
+INTENT LOG: 18 entries (2 DECISION, 16 DENIAL); chain verifies: True

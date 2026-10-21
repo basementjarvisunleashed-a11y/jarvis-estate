@@ -1,0 +1,98 @@
+J.A.R.V.I.S. deployment — Phase 4 (Zero-knowledge proofs) evidence
+Date: 2026-10-21
+Build: REFERENCE implementation — NOT PRODUCTION CRYPTOGRAPHY
+  (see phase4/proofs.py header for the honesty notice)
+
+Statements (exactly three, standardized):
+  S1: This value exceeds threshold T in sealed baseline B
+      (variance-gate alerts without exposing the baseline)
+  S2: An approval exists for intent digest D
+      (actuation without re-showing the approval)
+  S3: This payload satisfies policy P
+      (execution without exposing the payload)
+
+Protocol shape: commit -> challenge -> respond -> verify,
+Fiat-Shamir (challenge = SHA-256 of transcript), non-interactive.
+Freshness window: 300s; proofs bind ts + proof_nonce.
+
+TESTS: Ran 35 tests — PASS (OK)
+  Breakdown: round-trip S1/S2/S3 (4 incl. wire-privacy),
+  false-statement refusal (7 incl. seal-key + tampered approval),
+  tampered proof (5), superseded circuit (4), freshness (4),
+  replay (2), registry (7), budget measurements (1),
+  reference-tag presence folded into round-trip.
+
+MEASURED vs §4.4 BUDGETS (200 iterations per statement):
+  stmt | proving ms (budget 30000) | verify ms (budget 100) | proof bytes (budget 204800 STARK / 2048 SNARK)
+  S1   |      0.027                |      0.019             | 687
+  S2   |      0.041                |      0.020             | 656
+  S3   |      0.038                |      0.019             | 675
+
+  All budgets met with large margins. Proof sizes (~0.66 KB)
+  also fall under the 2 KB SNARK budget numerically, but the
+  reference is NOT a SNARK/STARK — no such claim is made.
+
+HONEST LIMITS:
+  1. Zero-knowledge property NOT established for the reference:
+     the blinded opening is reversible by the verifier.
+  2. The statement predicate is evaluated by the (honest) prover
+     and attested in the transcript; a dishonest prover could
+     attest falsely. The wire shape cannot detect that — hence
+     the prover refuses false statements (ProveError, fail-closed).
+  3. Production requires audited STARK/SNARK circuits per §4.3
+     (STARKs preferred: no trusted setup).
+  4. A proof proves the statement, not the data's truth (§4.5).
+     Proofs compose with seals (S2 verifies the approval seal
+     before attesting); they do not replace them.
+
+FILES:
+  phase4/proofs.py      REFERENCE prover/verifier, policy table
+  phase4/registry.py    versioned statement registry
+  phase4/test_phase4.py unittest suite (35 tests)
+  phase4/run.sh         this runner
+  phase4/measurements.json raw numbers
+
+FULL TEST OUTPUT:
+test_measurements_within_budgets (__main__.TestBudgets.test_measurements_within_budgets) ... ok
+test_prover_refuses_false_s1 (__main__.TestFalseStatement.test_prover_refuses_false_s1) ... ok
+test_prover_refuses_false_s2 (__main__.TestFalseStatement.test_prover_refuses_false_s2) ... ok
+test_prover_refuses_false_s3 (__main__.TestFalseStatement.test_prover_refuses_false_s3) ... ok
+test_prover_refuses_s2_without_seal_key (__main__.TestFalseStatement.test_prover_refuses_s2_without_seal_key) ... ok
+test_prover_refuses_tampered_approval_seal (__main__.TestFalseStatement.test_prover_refuses_tampered_approval_seal) ... ok
+test_wrong_public_params_fail_verify (__main__.TestFalseStatement.test_wrong_public_params_fail_verify) ... ok
+test_wrong_witness_digest_fails_verify (__main__.TestFalseStatement.test_wrong_witness_digest_fails_verify) ... ok
+test_boundary_300s_accepted (__main__.TestFreshness.test_boundary_300s_accepted) ... ok
+test_fresh_proof_accepted (__main__.TestFreshness.test_fresh_proof_accepted) ... ok
+test_future_ts_outside_window_rejected (__main__.TestFreshness.test_future_ts_outside_window_rejected) ... ok
+test_stale_301s_rejected (__main__.TestFreshness.test_stale_301s_rejected) ... ok
+test_duplicate_register_rejected (__main__.TestRegistry.test_duplicate_register_rejected) ... ok
+test_exactly_three_statements_registered (__main__.TestRegistry.test_exactly_three_statements_registered) ... ok
+test_register_and_lookup (__main__.TestRegistry.test_register_and_lookup) ... ok
+test_supersede_moves_version (__main__.TestRegistry.test_supersede_moves_version) ... ok
+test_supersede_non_increasing_rejected (__main__.TestRegistry.test_supersede_non_increasing_rejected) ... ok
+test_supersede_unknown_rejected (__main__.TestRegistry.test_supersede_unknown_rejected) ... ok
+test_unknown_statement_not_current (__main__.TestRegistry.test_unknown_statement_not_current) ... ok
+test_distinct_proofs_both_accepted (__main__.TestReplay.test_distinct_proofs_both_accepted) ... ok
+test_same_nonce_twice_rejected (__main__.TestReplay.test_same_nonce_twice_rejected) ... ok
+test_reference_tag_present (__main__.TestRoundTrip.test_reference_tag_present) ... ok
+test_s1_roundtrip (__main__.TestRoundTrip.test_s1_roundtrip) ... ok
+test_s2_roundtrip (__main__.TestRoundTrip.test_s2_roundtrip) ... ok
+test_s3_roundtrip (__main__.TestRoundTrip.test_s3_roundtrip) ... ok
+test_verifier_learns_only_one_bit (__main__.TestRoundTrip.test_verifier_learns_only_one_bit) ... ok
+test_new_version_verifies (__main__.TestSupersededCircuit.test_new_version_verifies) ... ok
+test_old_version_rejected_after_supersede (__main__.TestSupersededCircuit.test_old_version_rejected_after_supersede) ... ok
+test_prover_refuses_superseded_version (__main__.TestSupersededCircuit.test_prover_refuses_superseded_version) ... ok
+test_unknown_statement_rejected (__main__.TestSupersededCircuit.test_unknown_statement_rejected) ... ok
+test_cleared_attestation_fails (__main__.TestTamperedProof.test_cleared_attestation_fails) ... ok
+test_garbage_proof_fails_closed (__main__.TestTamperedProof.test_garbage_proof_fails_closed) ... ok
+test_mutated_challenge_fails (__main__.TestTamperedProof.test_mutated_challenge_fails) ... ok
+test_mutated_commitment_fails (__main__.TestTamperedProof.test_mutated_commitment_fails) ... ok
+test_mutated_response_fails (__main__.TestTamperedProof.test_mutated_response_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.092s
+
+OK
+MEASURE S1 prove_ms=0.027 verify_ms=0.019 proof_bytes=687
+MEASURE S2 prove_ms=0.041 verify_ms=0.020 proof_bytes=656
+MEASURE S3 prove_ms=0.038 verify_ms=0.019 proof_bytes=675

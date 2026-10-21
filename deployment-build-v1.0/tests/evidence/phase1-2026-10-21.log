@@ -1,0 +1,53 @@
+J.A.R.V.I.S. deployment — Phase 1 (Pull protocol) evidence
+date: 2026-10-21
+work root: ~/workspace/jarvis-deploy/phase1/
+command: ./phase1/run.sh  (python3 phase1/test_phase1.py, from ~/workspace/jarvis-deploy)
+stdlib only. No network, no git, no publishing.
+
+RESULT: Ran 27 tests in 0.03s — OK
+  passed: 27, failed: 0, errors: 0, skipped: 0
+
+per-class counts (each "ok"):
+  TestPullRules            5/5   (one test per pull-discipline rule, rules 1-5)
+  TestSignedRequests       2/2   (good sig accepted; bad sig -> sealed denial)
+  TestLongPoll             3/3   (data arrives; deadline -> sealed timeout;
+                                  server initiates nothing)
+  TestDenialAudit          3/3   (denials in log verify; denial content;
+                                  denial envelope shape)
+  TestPlaneEnforcement     3/3   (direct cross-plane call raises PlaneViolation;
+                                  gateway bypass raises; all cross-plane
+                                  traffic via gateway)
+  TestChaosPartition       2/2
+  TestChaosReplay          3/3
+  TestChaosSkew            3/3
+  TestOrchestratorLoop     3/3   (phase order; five phases' jobs; loop never pushes)
+
+chaos cases exercised (each asserts all five pull-discipline rules hold):
+  - partition: gateway drops pulls -> client retries 3x per rule 5, then
+    PartitionError; server journal empty, audit unchanged, server never
+    chases; healed partition serves the next pull normally.
+  - replay: resent identical request -> identical sealed response bytes,
+    duplicate flag set, exactly 1 data read and 1 EVIDENCE log entry
+    (idempotent single effect); same req_id with different bytes ->
+    sealed "req-id-reuse" denial.
+  - clock skew: FakeClock +/-301s vs server -> "stale-request" sealed denial
+    (seal verifies, DENIAL logged, chain verifies); +/-300s and 0 -> accepted.
+
+key custody: Phase-0 TEST ceremony (CEREMONY-TEST marker asserted present in
+every test); ceremony keys held only by the governance-plane component.
+No production keys. No key bytes cross a plane boundary (seal/verify ops
+take key names; key material never leaves governance).
+
+spec decisions recorded (flagged, not invented — see final report):
+  D1 response/denial sealed with the requesting surface's enrollment key
+     (the only key a surface holds), sealed inside governance.
+  D2 gateway transport envelope on server-initiated pulls uses a PUBLIC
+     framing constant (TRANSPORT_KEY) — carries no authority; authority
+     lives in the inner governance-sealed envelopes.
+  D3 proof verification by a surface (which holds no master key) runs inside
+     governance via the "verify" op, keyed by name.
+  D4 denial returned as the sealed envelope itself (content carries
+     req_id/reason/ts; seal top-level), not a flattened copy.
+  D5 replay cache keyed on req_id + exact request bytes.
+  D6 "server initiates nothing" verified by audit traceability: every
+     gateway record carries its originator's req_id.

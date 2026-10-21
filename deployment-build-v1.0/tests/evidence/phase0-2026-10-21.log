@@ -1,0 +1,4 @@
+Ran 18 tests in 0.027s
+OK
+count: 18 run, 18 passed, 0 failed
+covers: key ceremony TEST markers + load refusal (4), seal round-trip/tamper/fail-closed/canonical/digest (8), intent-log chain/prev/tamper/checkpoint/rollback/reload (6)
