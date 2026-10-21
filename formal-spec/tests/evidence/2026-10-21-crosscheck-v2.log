@@ -1,0 +1,14 @@
+[PASS] catalogue-count: 27 rows, 27 unique IDs
+[PASS] matrix-count: 27 rows, 27 unique IDs
+[PASS] catalogue-matrix-id-parity: ID sets equal
+[PASS] catalogue-statements-verbatim: 27 statements parsed from ROADMAP.md §5; all 27 match the catalogue verbatim
+[PASS] events-count: events.md defines 19 events
+[PASS] tla-events-parity: .tla references T1..T21 (21 numbers); 17 events bound to T-numbers (T6 jointly to artifact_produced and evidence_packet_created); T-less events: ['brief_received', 'execution_started']
+[PASS] states-count: 12 states, 3 terminal (cancelled, completed, failed)
+[PASS] transitions-count: 21 transitions in events.md table and in .tla references
+[PASS] cfg-names-defined: cfg declares ['SafetyInvs', 'PO11_TerminalAbsorbing']; all defined in state-machine.tla
+[PASS] safetyinvs-conjuncts-defined: SafetyInvs has 9 conjuncts; all defined
+[PASS] phase1-report-figures: report: 3,266,929 distinct states, 205,173,020 generated, zero violations: True, fixes: 6
+[PASS] tests-md-phase1-citations: every Phase 1 figure cited in tests/*.md matches the report
+
+Crosscheck: 12/12 checks passed

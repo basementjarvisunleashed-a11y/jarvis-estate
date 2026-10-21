@@ -22,9 +22,9 @@ invariant today.*
 | INV-A6 | Idempotency (Phase 4); Paper III duplicate-tap semantics | `spec/state-machine.tla`: `DuplicateTap` stutter; T9 note (second grant returns the recorded decision). Full idempotency semantics owned by Phase 4 (`spec/idempotency.md`, planned) | CT-A6 · PT-3 · CH-4 |
 | INV-A7 | No blanket permission (Phase 0 spec); Paper IV §8.1 | `spec/state-machine.tla`: approval binds a single intent record via `DigestOf`; a grant for intent X cannot satisfy the guard for intent Y | CT-A7 · PT-1 |
 | INV-E1 | Proof bundle (Paper I: evidence); Paper IV §8.1 | `spec/state-machine.tla`: `can_enter_completed` evidence conjunct; `contracts/events.md` §4–§6 (packet fields, Paper IV §6.6) | CT-E1 · PT-4 |
-| INV-E2 | Revision binding (Phase 0 spec); Paper IV §5.6 | `contracts/evidence-packet.schema.json` + `contracts/artifact-manifest.schema.json` — v0.1 drafts (2026-10-21, promoted on HgX's word; ratification pending). Revision binding enforced at schema level | SCH-EP-01/03 · CH-5 (completion-writer level) |
+| INV-E2 | Revision binding (Phase 0 spec); Paper IV §5.6 | `contracts/evidence-packet.schema.json` v0.1 draft (2026-10-21; reworked to C.1 sketch names on HgX's Q5 word) — `artifact_revision` (string per sketch; Q2 integer tension recorded) + `contracts/artifact-manifest.schema.json`. Binding enforced at guard level (coerced-string compare) | SCH-EP-01/05 · CH-5 (completion-writer level) |
 | INV-E3 | Gaps visible (Paper I: honesty); Paper IV §8.1 | Partial — packet side schema-backed: `contracts/evidence-packet.schema.json` v0.1 draft requires `gaps` and marks stale observations (CH-7 rule). "Missing evidence renders as missing" on a surface still awaits a rendering artifact | SCH-EP-02 · CH-7 (packet-marking rule); rendering pending |
-| INV-E4 | Required gaps field (Paper IV §6.6) | `contracts/evidence-packet.schema.json` v0.1 draft (2026-10-21) — `gaps` required; omission is a schema violation | SCH-EP-02 · CH-10 (completion-writer level) |
+| INV-E4 | Required gaps field (Paper IV §6.6) | `contracts/evidence-packet.schema.json` v0.1 draft (2026-10-21; reworked to C.1 sketch names on HgX's Q5 word) — `gaps` sketch-optional, omission refused at guard level | SCH-EP-04 · CH-10 (completion-writer level) |
 | INV-E5 | Live-source freshness (Paper I); Paper IV §8.1 | `spec/state-machine.tla`: `BlockageCleared` freshness guard; `OperatorResumed` / `ObservationRestored` set `source_freshness' = "fresh"`; PO-10 guard construction | CT-E5 (structural) · PT-5 · CH-7 |
 | INV-S1 | Forced unknown (Paper IV §7.3); Paper IV §8.1 | `spec/state-machine.tla`: `ObservationLost` (T20) / `ObservationRestored` (T21) — single keyed exit from `unknown`; PO4_UnknownNotOperational | CT-S1 · PT-5 · CH-7 |
 | INV-S2 | Pause ≠ failure (Paper III); Paper IV §5.6 | `contracts/watchtower.schema.json` v0.1 draft (2026-10-21): closed state enum, paused never renders as down; renderer rule still at contract level (CH-1). Machine-level substrate PO5_PausedNotFailed proven in Phase 1 | SCH-WT-01/02 · CH-1 (renderer rule, contract level) |
@@ -55,10 +55,12 @@ invariant today.*
 ## Update — 2026-10-21 (day work)
 
 Layer 1 gate remainder closed: the five v0.1 schema drafts are covered by
-`tests/layer1/test_schema_examples.py` (23/23 passing). INV-E2, INV-E4,
+`tests/layer1/test_schema_examples.py` (25/25 passing as of the 2026-10-21
+C.1-sketch rework of the evidence-packet schema on HgX's Q5 word). INV-E2, INV-E4,
 INV-S2 moved to schema-backed; INV-E3, INV-S3 partially; INV-S5 and
 INV-R2/R3/R4 remain uncovered. The Layer 1 contract suite grew from 39 to
-62 passing tests (39 + 23). All five schemas remain v0.1 drafts —
+62 passing tests (39 + 23), then to 64 (39 + 25) after the evidence-packet
+C.1-sketch rework. All five schemas remain v0.1 drafts —
 normative only on HgX's ratification. Crosscheck run 2026-10-21: 11/12
 (the one failure is the documented honest limitation, unchanged from
 2026-10-20).

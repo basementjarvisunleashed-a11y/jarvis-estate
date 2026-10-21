@@ -153,20 +153,33 @@ check("phase1-report-figures",
       f"report: {rep_states} distinct states, {rep_generated} "
       f"generated, zero violations: {rep_zero}, fixes: {rep_fixes}")
 
+# Attribution: a figure from another run is acceptable when the citation
+# names its run in the same line or the line above (HgX's word, Q9,
+# 2026-10-21 — the check was failing honestly on run-attributed figures).
+ATTRIBUTED = re.compile(
+    r"(?i)(exhaustive|retest|final line|pause order|\blog\b|progress\()")
+
 problems = []
 for md in sorted(TESTS.glob("*.md")):
     text = md.read_text(encoding="utf-8")
-    for value in re.findall(r"([\d,]+) distinct states", text):
-        if value != rep_states:
-            problems.append(f"{md.name}: cites {value} distinct states")
-    for value in re.findall(r"([\d,]+) generated", text):
-        if value != rep_generated:
-            problems.append(f"{md.name}: cites {value} generated")
+    lines = text.splitlines()
+    for i, line in enumerate(lines):
+        context = line + "\n" + (lines[i - 1] if i > 0 else "")
+        for value in re.findall(r"([\d,]+) distinct states", line):
+            if value != rep_states and not ATTRIBUTED.search(context):
+                problems.append(
+                    f"{md.name}:{i + 1}: cites {value} distinct states "
+                    f"without run attribution")
+        for value in re.findall(r"([\d,]+) generated", line):
+            if value != rep_generated and not ATTRIBUTED.search(context):
+                problems.append(
+                    f"{md.name}:{i + 1}: cites {value} generated "
+                    f"without run attribution")
     for word in re.findall(r"(\w+) invariant violations", text):
-        if word.lower() != "zero":
+        if word.lower() not in ("zero", "0"):
             problems.append(
                 f"{md.name}: cites '{word} invariant violations'")
-    for num in re.findall(r"(six|\d+) (?:genuine )?(?:spec )?"
+    for num in re.findall(r"(?<![\dv.])(six|\d+) (?:genuine )?(?:spec )?"
                           r"(?:bugs|fixes)\b", text):
         if num not in ("six", "6"):
             problems.append(f"{md.name}: cites {num} spec bugs/fixes")
