@@ -145,3 +145,6 @@ Phases 0 and 1.
 - **Third-party runbook written:** `tests/RUNBOOK.md` (Paper IV §8.4 gate).
 - **Router deferral recorded:** `tests/PHASE-2-ROUTER-DEFERRAL.md`
   (INV-R2/R3/R4 uncovered by design; Phase 6 owns the proof).
+
+## 2026-10-21 ~16:52 ET — PHASE 2 CLOSED (HgX's word)
+Exit criteria (ROADMAP.md §5) verified met: 27 invariants catalogued + traced; suites automated (L1 83/83, L2 10/10, L3 10/10, crosscheck 12/12); mutated/expired approvals cannot pass; optimistic completion fails tests; citable as empirical validation. Dispositioned: R2/R3/R4 → Phase 6 by design; CH-5/CH-6 contract-level (recorded limitation); nine questions answered; seven drafts v1.0.0; events.md v1.1; integer type coherence. Deployment build (132/132) contributes implementation evidence; mapping approved by HgX 2026-10-21 ~16:41 ET. Phase 3 NOT opened — awaits his word.
