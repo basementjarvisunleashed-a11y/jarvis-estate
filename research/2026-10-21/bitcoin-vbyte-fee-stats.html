@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics &middot; J.A.R.V.I.S. Research</title>
+<style>
+:root{
+--bg:#07090c;--bg-raise:#0b0f14;--panel:#0d1219;--panel-2:#101722;--line:#1c2836;--line-soft:#141e2a;
+--ink:#e9f3f8;--ink-2:#b8c9d4;--muted:#8499a8;--cyan:#5ed8ff;--cyan-deep:#25a8d8;--cyan-soft:rgba(94,216,255,.12);
+--radius:14px;--font:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink-2);font-family:var(--font);font-size:16px;line-height:1.7;margin:0;padding:0}
+a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(94,216,255,.35)}
+a:hover{border-bottom-color:var(--cyan)}
+.wrap{max-width:76ch;margin:0 auto;padding:0 22px}
+.topbar{border-bottom:1px solid var(--line-soft);padding:14px 0;margin-bottom:34px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--ink)}
+.brand span{color:var(--cyan)}
+.back{font-size:14px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan);margin:0 0 10px}
+h1{color:var(--ink);font-size:30px;line-height:1.25;margin:0 0 12px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 6px}
+.meta strong{color:var(--ink-2);font-weight:600}
+.scrub{border-left:3px solid var(--cyan-deep);background:var(--cyan-soft);padding:10px 16px;border-radius:0 var(--radius) var(--radius) 0;font-size:14px;margin:18px 0 30px}
+h2{color:var(--ink);font-size:21px;margin:38px 0 12px;letter-spacing:-.01em}
+p{margin:0 0 14px}
+ul{margin:0 0 16px;padding-left:22px}
+li{margin-bottom:8px}
+hr{border:0;border-top:1px solid var(--line-soft);margin:30px 0}
+table{width:100%;border-collapse:collapse;margin:18px 0 24px;font-size:14.5px}
+th,td{text-align:left;padding:10px 12px;border:1px solid var(--line-soft);vertical-align:top}
+th{background:var(--panel-2);color:var(--ink);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+td:first-child{white-space:nowrap}
+.foot{border-top:1px solid var(--line-soft);margin-top:44px;padding:20px 0 46px;color:var(--muted);font-size:13px}
+.foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+em.sources-note{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+<div class="brand">J.A.R.V.I.S. <span>RESEARCH</span></div>
+<a class="back" href="../../index.html#research">&larr; Research index</a>
+</div></div>
+<div class="wrap"><main><article>
+<p class="kicker">RESEARCH &middot; 2026-10-21</p>
+<h1>Bitcoin Fee Rates per vByte &mdash; Six-Month Statistics</h1>
+<p class="meta"><strong>Coverage:</strong> 2026-04-21 &rarr; 2026-10-21 (six months, America/Toronto).</p>
+<p class="meta"><strong>Commissioned by:</strong> HgX &middot; <strong>Prepared by:</strong> Research Bot, the estate&rsquo;s research desk.</p>
+<p class="meta"><strong>Unit:</strong> satoshis per virtual byte (sat/vB) &mdash; the fee rate every Bitcoin transaction pays per unit of block space.</p>
+<div class="scrub"><strong>Scrub statement:</strong> this document contains only public on-chain statistics and published analytics. Nothing in it could compromise HgX &mdash; public identity only (HgX / @hgxengineering).</div>
+
+<h2>Headline</h2>
+<p>The entire six-month window was a <strong>floor-fee regime</strong>. Median fee rates sat at <strong>1.0 sat/vB</strong> for the overwhelming majority of the period, in every month. No ordinals/runes congestion wave occurred. The largest intraday percentile spike of the window was <strong>4.08 sat/vB</strong> (p90, June 9). Across a 1,105-block sample (June 9 &rarr; September 9), 90.4% of block medians were &le; 2 sat/vB and <strong>none exceeded 7 sat/vB</strong>.</p>
+
+<hr>
+<h2>Month-by-month fee rates (sat/vB)</h2>
+<table>
+<tr><th>Month</th><th>Median (p50)</th><th>Avg fee rate</th><th>Band (p10&ndash;p90)</th><th>Notes</th></tr>
+<tr><td>Apr 21&ndash;30</td><td>1.0 flat</td><td>~1.0&ndash;1.1</td><td>p10/p25/p50 = 1.0; p90 briefly &gt; 5 in congestion windows</td><td>Weekly avg medians 1.07 (Apr 2&ndash;9), 1.02 (Apr 13&ndash;19)</td></tr>
+<tr><td>May</td><td>1.0 every week</td><td>~1.0</td><td>p10/p25 pinned 1.0; p90 intraday peaks 2.13&ndash;2.99 (May 26&ndash;28)</td><td>Sharpest May intraday: May 28, ~14:00&ndash;16:00 UTC</td></tr>
+<tr><td>Jun</td><td>1.0; weekly avg median 1.53 (Jun 11&ndash;18)</td><td>~1.0&ndash;1.5</td><td>p90 card 1.1; intraday p90 peak <strong>4.08</strong> (Jun 9, 17:00 UTC)</td><td>Window&rsquo;s largest intraday spike; cleared within hours</td></tr>
+<tr><td>Jul</td><td>avg median <strong>1.31</strong></td><td>avg <strong>1.3</strong></td><td>p10 1.00 / p90 1.82; peak median 2.08</td><td>Mempool peaked 8.11 MB (~5&ndash;6 blocks backlog); cleared within hours</td></tr>
+<tr><td>Aug</td><td>1.0 every week</td><td>~1.0</td><td>p90 &asymp; 1.0&ndash;1.01</td><td>&ldquo;No meaningful fee spikes&rdquo;; sub-1.0 sat/vB txs clearing routinely</td></tr>
+<tr><td>Sep</td><td>1.0, all tiers, all month</td><td>~1.0</td><td>p90 intraday peak 3.15 (Sep 22); fast/30-min/economy = 2/1/1 sat/vB (Sep 29)</td><td>Fees unmoved through 6.7% price day (~$87k, Sep 21) and Bitget hack sell-off week</td></tr>
+<tr><td>Oct 1&ndash;21</td><td>~1.0&ndash;1.03</td><td>~1.0</td><td>next-block 2 / 30-min 1 / 1-hour 1 / economy 1 / min relay 1 (Oct 21)</td><td>Floor regime intact</td></tr>
+</table>
+
+<h2>Extremes in the window</h2>
+<ul>
+<li><strong>Lowest:</strong> 1.0 sat/vB median &mdash; the practical floor, observed nearly every day. Sub-1.0 sat/vB transactions began clearing routinely (Aug 2026); mempool.space minimum relay is now <strong>0.1 sat/vB</strong> (node policy).</li>
+<li><strong>Highest:</strong> p90 <strong>4.08 sat/vB</strong> (June 9, 2026 ~17:00 UTC); highest <em>median</em> peak <strong>2.08 sat/vB</strong> (July). No block median exceeded 7 sat/vB in the Jun 9&ndash;Sep 9 sample.</li>
+</ul>
+
+<h2>Notable fee events (all modest)</h2>
+<table>
+<tr><th>Date</th><th>Event</th><th>Peak</th></tr>
+<tr><td>2026-04-17, 19:00&ndash;20:00 UTC</td><td>Brief median bump, April&rsquo;s weekly high</td><td>p50 1.63 sat/vB</td></tr>
+<tr><td>2026-05-28, ~14:00&ndash;16:00 UTC</td><td>Sharpest intraday of the May window; US trading-hours exchange batching suspected</td><td>p90 2.99, p50 1.19</td></tr>
+<tr><td>2026-06-09, 17:00 UTC</td><td>Window&rsquo;s largest intraday spike; cleared within hours</td><td>p90 4.08 sat/vB</td></tr>
+<tr><td>July 2026</td><td>Mempool peaked 8.11 MB; cleared within hours</td><td>median peak 2.08</td></tr>
+<tr><td>2026-09-21</td><td><strong>Non-event:</strong> +6.7% BTC day (~$87k), record ETF week &mdash; fees stayed at 1 sat/vB</td><td>&mdash;</td></tr>
+<tr><td>2026-09-24</td><td>Bitget hack sell-off week &mdash; absorbed without fee movement</td><td>&mdash;</td></tr>
+</table>
+<p>No inscription/ordinals/runes congestion wave occurred in the window.</p>
+
+<h2>Fee share of miner revenue (context)</h2>
+<table>
+<tr><th>Period</th><th>Fees per block</th><th>Fee share of revenue</th></tr>
+<tr><td>Apr 2&ndash;9 (wk sample)</td><td>0.0160 BTC</td><td>&mdash;</td></tr>
+<tr><td>Jul 23&ndash;30 (wk sample)</td><td>0.0203 BTC</td><td>0.64%</td></tr>
+<tr><td>Sep 21 (144-block sample)</td><td>0.0169 BTC</td><td>&mdash;</td></tr>
+<tr><td>Oct 14 (estimate)</td><td>~0.018 BTC</td><td>0.64% (trailing 30d to Oct 16)</td></tr>
+</table>
+<p>Fees have been <strong>under 1% of miner revenue for over a year</strong> &mdash; the fee market is effectively dormant as a revenue source.</p>
+
+<h2>Structural context</h2>
+<ul>
+<li><strong>Relay floor lowered:</strong> Bitcoin Core 29.1 cut the default minimum relay fee from 1 to <strong>0.1 sat/vB</strong>; adoption rolled out through the window. The 1 sat/vB &ldquo;floor&rdquo; in reports is now convention &mdash; sub-1 sat/vB transactions clear where node policy allows.</li>
+<li><strong>SegWit:</strong> &gt;80&ndash;85% of transactions in 2026; blocks stay 93&ndash;99% full while fees stay flat.</li>
+<li><strong>Taproot:</strong> ~4.8% adoption / ~7.0% utilization (Sept 9, 2026) &mdash; slow, steady.</li>
+<li><strong>Governance overhang:</strong> BIP-110 (limiting non-financial data on-chain) and an eCash fork proposal framed the August 2026 fee politics.</li>
+</ul>
+
+<h2>Reliability notes</h2>
+<ul>
+<li>btc.network reports are AI-assisted analytics &mdash; measured but secondary; cryptoscanin cross-checks mempool.space APIs. Weekly-sample monthly cells are labeled as such.</li>
+<li>Excluded as unreliable: Kryptoca articles (internally inconsistent figures; claimed a November 2026 halving &mdash; the next halving is ~2028). A Cointelegraph &ldquo;$52 fee spike&rdquo; piece was excluded as stale (June 2024, not 2026).</li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+<li>btc.network weekly fee reports and the July 2026 network-state report &mdash; <a href="https://btc.network/blog?tag=mining">btc.network/blog?tag=mining</a></li>
+<li>cryptoscanin fee and on-chain weekly updates &mdash; <a href="https://www.cryptoscanin.com">cryptoscanin.com</a></li>
+<li>thebitcoinbeacon (Sept 21 difficulty/fees) &mdash; <a href="https://thebitcoinbeacon.com">thebitcoinbeacon.com</a></li>
+<li>ycharts / Blockchain.com (total fees per day) &mdash; <a href="https://ycharts.com/indicators/bitcoin_total_transaction_fees_per_day">ycharts.com</a></li>
+<li>Cointelegraph (Core 29.1 relay-fee cut) &mdash; <a href="https://cointelegraph.com/news/bitcoin-core-default-minimum-relay-fees-decreases-90-as-update-rolls-out">cointelegraph.com</a></li>
+<li>cointribune (BIP-110 / eCash fork politics) &mdash; <a href="https://www.cointribune.com">cointribune.com</a></li>
+</ul>
+<p><em class="sources-note">Figures verified against primary pages on 2026-10-21 before publication. Estimates are labeled; everything else is measured historical data.</em></p>
+</article></main></div>
+<div class="foot"><div class="wrap">
+<span>J.A.R.V.I.S. Research &mdash; public data only, scrubbed before release.</span>
+<span><a href="../../index.html#research">Research index</a> &middot; <a href="bitcoin-vbyte-fee-stats.md">Source markdown</a></span>
+</div></div>
+</body>
+</html>
