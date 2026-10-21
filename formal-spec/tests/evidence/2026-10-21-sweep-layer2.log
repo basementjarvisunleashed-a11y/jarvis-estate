@@ -1,0 +1,17 @@
+test_mutations_between_record_and_grant_refused (test_layer2_properties.TestPT1MutationFuzz.test_mutations_between_record_and_grant_refused) ... ok
+test_mutations_between_tap_and_record_refused (test_layer2_properties.TestPT1MutationFuzz.test_mutations_between_tap_and_record_refused) ... ok
+test_unmutated_control_still_executes (test_layer2_properties.TestPT1MutationFuzz.test_unmutated_control_still_executes) ... ok
+test_boundary_exactly_at_expiry_refused (test_layer2_properties.TestPT2ExpirySweep.test_boundary_exactly_at_expiry_refused) ... ok
+test_expiry_sweep (test_layer2_properties.TestPT2ExpirySweep.test_expiry_sweep) ... ok
+test_duplicate_decision_storm (test_layer2_properties.TestPT3DuplicateStorm.test_duplicate_decision_storm) ... ok
+test_random_event_sequences (test_layer2_properties.TestPT4RandomSequences.test_random_event_sequences) ... ok
+test_stale_readings_never_render_operational (test_layer2_properties.TestPT5StaleSourceInjection.test_stale_readings_never_render_operational) ... ok
+test_stale_source_cannot_satisfy_guard (test_layer2_properties.TestPT5StaleSourceInjection.test_stale_source_cannot_satisfy_guard) ... ok
+test_unavailable_observation_renders_unknown (test_layer2_properties.TestPT5StaleSourceInjection.test_unavailable_observation_renders_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.350s
+
+OK
+
+PT-4 totals: 2000 sequences, 55983 attempted steps, 168 executions, 22 completions (all invariant assertions held)
