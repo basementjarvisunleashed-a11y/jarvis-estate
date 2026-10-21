@@ -1,7 +1,7 @@
 # Approval Intent Digest — spec/approval-digest.md
 
 **DRAFT 0.1 — built 2026-10-21 on HgX's order; awaiting ratification.**
-*Normative anchor: glossary U-1 (RESOLVED 2026-10-19, HgX): "SHA-256 over the canonical JSON serialisation of the approval intent." Owner: Phase 0 spec. Version: 0.1-draft.*
+*Normative anchor: glossary U-1 (RESOLVED 2026-10-19, HgX): "SHA-256 over the canonical JSON serialisation of the approval intent." Owner: Phase 0 spec. Version: 1.0.0 — RATIFIED by HgX 2026-10-21 (open question Q7).*
 
 ## 1. What the digest is
 
@@ -72,3 +72,7 @@ Assumed as lemma (a), Paper IV §7.6. The TLA+ concretization is injective over 
 *Sources: contracts/glossary.md §1 (Intent, Intent digest, Approval decision, Tap), §3 U-1; spec/state-machine.tla (`OperatorTapsApprove`, `DuplicateTap`, `ServerRecordsApproval`, `can_enter_executing`, `MutateIntent`); Paper IV §5.6, §6.6, §7.6.*
 
 > Promotion note (2026-10-21, on HgX's order "push all of it"): promoted to canonical placement as v0.1 draft. Formal ratification to v1.0.0 remains HgX's call. Open questions OQ-1..OQ-6 recorded in tests/staging/prescribed-files/BUILD-NOTES.md.
+
+## Version history
+
+- **v1.0.0 (2026-10-21, on HgX's order — open question Q7):** ratified. Content unchanged from the v0.1 draft; normative. Worked example digest a5ba4f85…f63179 verified byte-for-byte in the 2026-10-21 sweep.

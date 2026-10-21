@@ -1,7 +1,7 @@
 # Canonical Work-State Machine — spec/state-machine.md
 
 **DRAFT 0.1 — built 2026-10-21 on HgX's order; awaiting ratification.**
-*Normative anchor: `spec/state-machine.tla` (TLA+, Phase 1 proved). Where this document and the TLA+ disagree, the TLA+ governs. Version: 0.1-draft.*
+*Normative anchor: `spec/state-machine.tla` (TLA+, Phase 1 proved). Where this document and the TLA+ disagree, the TLA+ governs. Version: 1.0.0 — RATIFIED by HgX 2026-10-21 (open question Q7).*
 
 ## 1. Purpose
 
@@ -96,3 +96,7 @@ F1: →`completed` except via `verifying` · F2: `awaiting_approval→executing`
 - Proof: `proofs/phase1-tlc-report.md` v1.1 (3,266,929 states, zero violations, six counterexample fixes).
 
 > Promotion note (2026-10-21, on HgX's order "push all of it"): promoted to canonical placement as v0.1 draft. Formal ratification to v1.0.0 remains HgX's call. Open questions OQ-1..OQ-6 recorded in tests/staging/prescribed-files/BUILD-NOTES.md.
+
+## Version history
+
+- **v1.0.0 (2026-10-21, on HgX's order — open question Q7):** ratified. Content unchanged from the v0.1 draft; normative.
