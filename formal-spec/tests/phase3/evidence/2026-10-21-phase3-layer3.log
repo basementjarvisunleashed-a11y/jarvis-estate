@@ -1,0 +1,67 @@
+test_ar1_two_valid_same_digest (test_adversarial_race.TestAdversarialRace.test_ar1_two_valid_same_digest)
+Both devices' valid approvals, identical timestamps: every ... ok
+test_ar2_valid_vs_invalid_digest (test_adversarial_race.TestAdversarialRace.test_ar2_valid_vs_invalid_digest)
+One device's card is stale on digest: the valid decision records ... ok
+test_ar3_both_invalid_nothing_recorded (test_adversarial_race.TestAdversarialRace.test_ar3_both_invalid_nothing_recorded)
+Neither racer passes the checks: nothing is recorded, both lapse, ... ok
+test_ar4_three_way_with_duplicate (test_adversarial_race.TestAdversarialRace.test_ar4_three_way_with_duplicate)
+A duplicate inside the race (iPhone taps twice): all six orders ... ok
+test_ar5_race_at_request_bound (test_adversarial_race.TestAdversarialRace.test_ar5_race_at_request_bound)
+One racer's timestamp sits exactly on the 300 s request bound ... ok
+test_ar6_stale_request_vs_valid (test_adversarial_race.TestAdversarialRace.test_ar6_stale_request_vs_valid)
+A racer 301 s out cannot win by arriving first: the stale request ... ok
+test_mx1_partition_skew_race (test_mixed_chaos.TestMixedChaos.test_mx1_partition_skew_race)
+Partition drops the Watch's attempt; the iPhone's in-bound ... ok
+test_mx2_delayed_skewed_duplicate_race (test_mixed_chaos.TestMixedChaos.test_mx2_delayed_skewed_duplicate_race)
+Three racers — a skewed Watch, a delayed iPhone, and a Watch ... ok
+test_mx3_both_dropped_both_resend_fresh (test_mixed_chaos.TestMixedChaos.test_mx3_both_dropped_both_resend_fresh)
+Both racers dropped by the partition, both re-send fresh after ... ok
+test_mx4_skew_partition_offline_tap (test_mixed_chaos.TestMixedChaos.test_mx4_skew_partition_offline_tap)
+The Watch taps offline (gesture only) while a wildly skewed ... ok
+test_mx5_full_interleaving_fuzz (test_mixed_chaos.TestMixedChaos.test_mx5_full_interleaving_fuzz)
+The full fuzz: two valid racers, one duplicate, one bad-digest ... ok
+test_pt1_dropped_decide_retried_once (test_partition.TestPartition.test_pt1_dropped_decide_retried_once)
+The Watch's decision is dropped by the partition: the ... ok
+test_pt2_late_arrival_after_rival_records (test_partition.TestPartition.test_pt2_late_arrival_after_rival_records)
+The Watch's decision is delayed by the partition and surfaces ... ok
+test_pt3_both_dropped_both_resend (test_partition.TestPartition.test_pt3_both_dropped_both_resend)
+Both devices' decisions are dropped mid-ceremony; after the heal ... ok
+test_pt4_stale_cache_unknown_during_partition (test_partition.TestPartition.test_pt4_stale_cache_unknown_during_partition)
+CR-3 under partition: the Watch's cached status ages past its ... ok
+test_pt5_recorded_decision_survives_partition (test_partition.TestPartition.test_pt5_recorded_decision_survives_partition)
+CR-1: a decision recorded before the partition stays ... ok
+test_pt6_flapping_partition (test_partition.TestPartition.test_pt6_flapping_partition)
+The link flaps mid-race: dropped attempt, rival records, dropped ... ok
+test_rp1_replay_recorded_decision (test_replay.TestReplay.test_rp1_replay_recorded_decision)
+Byte-identical replays of a recorded approval are refused ... ok
+test_rp2_replay_under_partition (test_replay.TestReplay.test_rp2_replay_under_partition)
+Replays sent while partitioned are dropped by the network; the ... ok
+test_rp3_replay_of_refusal (test_replay.TestReplay.test_rp3_replay_of_refusal)
+A refused request replayed three times is refused three times — ... ok
+test_rp4_duplicated_pulls_idempotent (test_replay.TestReplay.test_rp4_duplicated_pulls_idempotent)
+The same pull twice: identical state, identical revision, no ... ok
+test_rp5_expired_intent_replay (test_replay.TestReplay.test_rp5_expired_intent_replay)
+An intent past expiry, replayed: intent-invalid both times, ... ok
+test_rp6_burned_across_reconnect (test_replay.TestReplay.test_rp6_burned_across_reconnect)
+Sequence (d) meets the burned slot: the Watch taps offline ... ok
+test_sk1_request_bound_exact (test_skew.TestClockSkew.test_sk1_request_bound_exact)
+|now - ts| = 300 s is accepted; 301 s is refused — both ... ok
+test_sk2_event_bound_exact (test_skew.TestClockSkew.test_sk2_event_bound_exact)
+Event age 60 s is accepted; 61 s is refused stale-event — the ... ok
+test_sk3_skew_cannot_mint_decision (test_skew.TestClockSkew.test_sk3_skew_cannot_mint_decision)
+A client 400 s out in either direction cannot get a decision ... ok
+test_sk4a_skew_does_not_bypass_revision (test_skew.TestClockSkew.test_sk4a_skew_does_not_bypass_revision)
+In-bound skew (+250 s) with a stale revision: refused for the ... ok
+test_sk4b_skew_does_not_bypass_digest (test_skew.TestClockSkew.test_sk4b_skew_does_not_bypass_digest)
+In-bound skew (-250 s) with a wrong digest: digest-lapse, no ... ok
+test_sk5_race_under_skew (test_skew.TestClockSkew.test_sk5_race_under_skew)
+Both racers skewed to opposite in-bound edges (+250 / -250): ... ok
+test_sk6_skewed_pull_renders_unknown (test_skew.TestClockSkew.test_sk6_skewed_pull_renders_unknown)
+A pull whose request clock is 400 s out is refused; the surface ... ok
+test_sk7_future_event_grants_nothing (test_skew.TestClockSkew.test_sk7_future_event_grants_nothing)
+A future-dated observed_at passes the event check but buys no ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.010s
+
+OK

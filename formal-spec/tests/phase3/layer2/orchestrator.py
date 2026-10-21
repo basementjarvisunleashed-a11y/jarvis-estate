@@ -4,7 +4,11 @@ Implements the v0.1 drafts in ~/workspace/jarvis-formal-spec/tests/phase3/:
 - revision-protocol.md: six-field revision token, monotonicity R1-R5,
   the five-step rejection order (session -> freshness -> intent liveness
   -> revision currency -> digest binding), fail-closed, every refusal a
-  logged event.
+  logged event. For decide requests the digest binding is evaluated
+  BEFORE revision currency (5-before-4): sequence-diagrams.md (b)
+  requires a digest mismatch to lapse the ceremony even when the
+  revision is also stale — "the stricter of the two failures governs"
+  (Layer 3 chaos finding, 2026-10-21).
 - conflict-resolution.md: CR-1..CR-8 deterministic resolutions.
 - consistency-model.md: the orchestrator as single authoritative writer
   (NT-1); event-sourced work state; the tap is a gesture, the record is
@@ -176,6 +180,21 @@ class Orchestrator:
                         "intent-invalid", req,
                         "live source moved (CR-4): expected %r, live is %r"
                         % (lp["expected"], live))
+        # 5-before-4 for decisions (Layer 3 chaos finding, 2026-10-21):
+        # sequence-diagrams.md (b) requires that a digest mismatch lapses
+        # the ceremony even when the revision is also stale — "the
+        # stricter of the two failures governs". A stale-revision refusal
+        # must not mask a digest mismatch: the attested lapse is the audit
+        # trail for approving something that is not the current intent.
+        if req.get("kind") == "decide" and iid is not None:
+            it2 = self.intents.get(iid)
+            if it2 is not None and req.get("digest_seen") != it2["digest"]:
+                self.lapses.append({"intent_id": iid, "at": self.now,
+                                    "seen": req.get("digest_seen"),
+                                    "digest": it2["digest"]})
+                self.sealed_log.append(("lapsed", iid, self.now))
+                return self._refuse("digest-lapse", req,
+                                    "D_seen != D: ceremony lapsed, no execution, attested lapse")
         # 4. revision currency — accepted iff held == current (R2)
         wid = req.get("work_id")
         if wid is not None:

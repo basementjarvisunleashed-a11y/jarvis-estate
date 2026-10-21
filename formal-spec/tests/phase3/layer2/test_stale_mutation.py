@@ -59,15 +59,18 @@ class TestStaleMutationOrder(unittest.TestCase):
         r = self.orch.submit(base_req(intent_id="nope", revision=99))
         self.assertEqual(r["reason"], "intent-invalid")
 
-    def test_sm4_order_currency_before_digest(self):
-        """Failing currency + digest reports 'stale-revision' — the
-        digest is never even compared (decide path)."""
+    def test_sm4_order_digest_before_currency_for_decide(self):
+        """Failing currency + digest on a decide reports 'digest-lapse' —
+        the digest binding is evaluated before revision currency for
+        decisions (5-before-4): sequence-diagrams.md (b), 'the stricter
+        of the two failures governs'. The lapse is attested."""
         r = self.orch.submit({"kind": "decide", "intent_id": "intent-1",
                               "work_id": "work-1", "revision": 99,
                               "digest_seen": "wrong",
                               "device_session_id": "iphone-s1",
                               "timestamp": NOW})
-        self.assertEqual(r["reason"], "stale-revision")
+        self.assertEqual(r["reason"], "digest-lapse")
+        self.assertEqual(len(self.orch.lapses), 1)
 
     def test_sm5_each_step_individually(self):
         """Every step, failed alone, yields its own reason."""
