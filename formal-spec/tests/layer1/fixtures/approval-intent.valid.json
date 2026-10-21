@@ -1,0 +1,14 @@
+{
+  "intent_id": "intent-20261021-001",
+  "work_id": "work-7f3a",
+  "action": "publish_post",
+  "target": "x/@hgxengineering",
+  "effect": "post_text",
+  "scope": "single_post",
+  "revision": 3,
+  "expiry": 1793030400,
+  "risk_class": "standard",
+  "requested_at": "2026-10-21T10:00:00Z",
+  "approval_state": "requested",
+  "intent_digest": "9a1fb9a336cfeeb136bcb50dd00f93f7d9d1a304d01e7fdbe2ac73f4a7c6c92e"
+}

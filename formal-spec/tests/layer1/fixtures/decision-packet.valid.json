@@ -1,0 +1,10 @@
+{
+  "intent_id": "intent-20261021-001",
+  "intent_digest": "9a1fb9a336cfeeb136bcb50dd00f93f7d9d1a304d01e7fdbe2ac73f4a7c6c92e",
+  "decision": "granted",
+  "device_session_id": "session-9c2b",
+  "timestamp": "2026-10-21T10:30:00Z",
+  "auth_method": "passkey",
+  "server_recorded_at": "2026-10-21T10:30:01Z",
+  "claimed_outcome": "completed"
+}

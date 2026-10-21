@@ -44,6 +44,19 @@ or simply:
 - **Fail-closed validation** — unknown event names, unknown states, and
   illegal transitions (including `failed → completed`) are rejected.
 
+## Schema example tests (new 2026-10-21)
+
+`test_schema_examples.py` + `schema_validator.py` + `fixtures/` — tests the
+five v0.1 contract schemas (`contracts/approval-intent.schema.json`,
+`decision-packet.schema.json`, `evidence-packet.schema.json`,
+`artifact-manifest.schema.json`, `watchtower.schema.json`) with one valid
+worked example and at least two failing cases each. Every failing case
+asserts the rejection (fail closed): mutated digest, missing required
+field, unknown enum value, expired approval, missing `gaps` (INV-E4),
+revision mismatch (INV-E2), stale reading at full confidence,
+degraded-without-note (INV-S3). Run: `python3 -m unittest test_schema_examples -v`
+— 23/23 passing (evidence `tests/evidence/2026-10-21-schema-tests.log`).
+
 ## Files
 
 | File | Role |

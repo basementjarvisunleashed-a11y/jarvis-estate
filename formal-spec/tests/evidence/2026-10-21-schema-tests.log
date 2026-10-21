@@ -1,0 +1,28 @@
+test_sch_ai_01_valid_example_passes (test_schema_examples.TestApprovalIntentSchema.test_sch_ai_01_valid_example_passes) ... ok
+test_sch_ai_02_mutated_digest_rejected (test_schema_examples.TestApprovalIntentSchema.test_sch_ai_02_mutated_digest_rejected) ... ok
+test_sch_ai_03_missing_required_field_rejected (test_schema_examples.TestApprovalIntentSchema.test_sch_ai_03_missing_required_field_rejected) ... ok
+test_sch_ai_04_unknown_enum_value_rejected (test_schema_examples.TestApprovalIntentSchema.test_sch_ai_04_unknown_enum_value_rejected) ... ok
+test_sch_ai_05_expiry_string_rejected (test_schema_examples.TestApprovalIntentSchema.test_sch_ai_05_expiry_string_rejected) ... ok
+test_sch_ai_06_revision_string_rejected (test_schema_examples.TestApprovalIntentSchema.test_sch_ai_06_revision_string_rejected) ... ok
+test_sch_am_01_valid_manifest_passes (test_schema_examples.TestArtifactManifestSchema.test_sch_am_01_valid_manifest_passes) ... ok
+test_sch_am_02_malformed_digest_rejected (test_schema_examples.TestArtifactManifestSchema.test_sch_am_02_malformed_digest_rejected) ... ok
+test_sch_am_03_missing_provenance_rejected (test_schema_examples.TestArtifactManifestSchema.test_sch_am_03_missing_provenance_rejected) ... ok
+test_sch_dp_01_valid_decision_honoured (test_schema_examples.TestDecisionPacketSchema.test_sch_dp_01_valid_decision_honoured) ... ok
+test_sch_dp_02_digest_mismatch_rejected (test_schema_examples.TestDecisionPacketSchema.test_sch_dp_02_digest_mismatch_rejected) ... ok
+test_sch_dp_03_expired_approval_rejected (test_schema_examples.TestDecisionPacketSchema.test_sch_dp_03_expired_approval_rejected) ... ok
+test_sch_dp_04_missing_required_field_rejected (test_schema_examples.TestDecisionPacketSchema.test_sch_dp_04_missing_required_field_rejected) ... ok
+test_sch_ep_01_valid_packet_authorises (test_schema_examples.TestEvidencePacketSchema.test_sch_ep_01_valid_packet_authorises) ... ok
+test_sch_ep_02_missing_gaps_rejected (test_schema_examples.TestEvidencePacketSchema.test_sch_ep_02_missing_gaps_rejected) ... ok
+test_sch_ep_03_revision_mismatch_rejected (test_schema_examples.TestEvidencePacketSchema.test_sch_ep_03_revision_mismatch_rejected) ... ok
+test_sch_ep_04_failed_test_result_rejected (test_schema_examples.TestEvidencePacketSchema.test_sch_ep_04_failed_test_result_rejected) ... ok
+test_sch_wt_01_valid_report_passes (test_schema_examples.TestWatchtowerSchema.test_sch_wt_01_valid_report_passes) ... ok
+test_sch_wt_02_paused_renders_paused (test_schema_examples.TestWatchtowerSchema.test_sch_wt_02_paused_renders_paused) ... ok
+test_sch_wt_03_unknown_enum_value_rejected (test_schema_examples.TestWatchtowerSchema.test_sch_wt_03_unknown_enum_value_rejected) ... ok
+test_sch_wt_04_stale_at_full_confidence_rejected (test_schema_examples.TestWatchtowerSchema.test_sch_wt_04_stale_at_full_confidence_rejected) ... ok
+test_sch_wt_05_stale_downgraded_confidence_accepted (test_schema_examples.TestWatchtowerSchema.test_sch_wt_05_stale_downgraded_confidence_accepted) ... ok
+test_sch_wt_06_degraded_without_note_rejected (test_schema_examples.TestWatchtowerSchema.test_sch_wt_06_degraded_without_note_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.006s
+
+OK

@@ -32,6 +32,21 @@ layer's gate has passed and been recorded.
 - Gate: every invariant assigned to Layer 1 in the catalogue is covered
   by an automated test whose output is on record.
 
+### Layer 1 gate remainder — CLOSED 2026-10-21
+- The five v0.1 schema drafts (built 2026-10-20/21, promoted to
+  `contracts/` on HgX's word 2026-10-21) are now covered:
+  `tests/layer1/test_schema_examples.py` (stdlib-only schema
+  validator + worked examples + failing cases), 23/23 passing,
+  evidence `tests/evidence/2026-10-21-schema-tests.log`.
+- Closed gaps: INV-E2 (revision binding, SCH-EP-01/03), INV-E4
+  (required `gaps`, SCH-EP-02), INV-S2 substrate (Watchtower closed
+  enum, SCH-WT-01/02), approval-intent/decision-packet guard coverage
+  (SCH-AI-*, SCH-DP-*).
+- D-D closed: all seven prescribed files built 2026-10-21 as v0.1
+  drafts and promoted to `spec/` + `contracts/` (`spec/state-machine.md`,
+  `spec/approval-digest.md`, five schemas); open questions OQ-1..OQ-6
+  recorded in `tests/staging/prescribed-files/BUILD-NOTES.md`.
+
 ### Layer 2 — Property-based tests (opens on Layer 1 gate)
 - Random event sequences asserting the invariants: approval mutations,
   expiry times, duplicates, network loss, sub-agent claims, stale
@@ -71,6 +86,30 @@ automated; mutated or expired approval cannot pass; optimistic
 completion fails tests; the suite is citable as empirical validation.
 Phase 2 closes on HgX's word, on evidence — the same discipline as
 Phases 0 and 1.
+
+## Session log — 2026-10-21 (day work, on HgX's order ~11:42 ET)
+
+- Fresh re-runs: Layer 1 39/39 OK; Layer 2 10/10 OK (PT-4: 2,000
+  sequences, 56,261 steps, 162 executions, 23 completions — exact
+  reproduction of the 2026-10-20 volumes); Layer 3 10/10 OK;
+  crosscheck 11/12 (the single failure is the documented honest
+  limitation on run-attributed state figures in the backtrace manifest —
+  see the 2026-10-20 run report §5; the check-improvement proposal
+  still needs HgX's word); new schema suite 23/23 OK.
+- Evidence: `tests/evidence/2026-10-21-layer1-rerun.log`,
+  `2026-10-21-layer2-run.log`, `2026-10-21-layer3-run.log`,
+  `2026-10-21-crosscheck.log`, `2026-10-21-schema-tests.log`.
+- **Phase 2 remains OPEN.** Remaining items, stated exactly:
+  (a) INV-R2/R3/R4 uncovered — the usage router is estate runtime;
+  mechanised only in Phase 6 (`spec/router-policy.md` planned);
+  (b) CH-5/CH-6 run at contract level only — full form needs the
+  Paper III client/router artifacts (no artifact in this repository);
+  (c) INV-E3/S3/S5 rendering side pending — packet side of E3 now
+  schema-backed (v0.1 draft), S3 schema-level only, S5 uncovered
+  (Paper III shared surfaces); (d) open questions OQ-1..OQ-6 from the
+  seven-file build still need HgX's word (revision/expiry types gate
+  the Phase 3 revision protocol); (e) CI/scheduled-run wiring and
+  third-party runnability per Paper IV §8.4.
 
 ## Publication
 

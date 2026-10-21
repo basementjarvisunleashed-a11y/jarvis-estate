@@ -1,0 +1,29 @@
+{
+  "report_id": "watch-20261021-001",
+  "observed_at": "2026-10-21T11:05:00Z",
+  "services": [
+    {
+      "service_id": "release-nightly-publish",
+      "name": "Release nightly publish",
+      "state": "operational",
+      "freshness": {
+        "observed_at": "2026-10-21T11:00:00Z",
+        "fresh_until": "2026-10-21T12:00:00Z"
+      },
+      "confidence": 0.98,
+      "evidence_ref": "cron.runs 2026-10-21"
+    },
+    {
+      "service_id": "course-bot",
+      "name": "Course Bot",
+      "state": "paused",
+      "note": "reserved for semester examination; silent by order",
+      "freshness": {
+        "observed_at": "2026-10-21T11:00:00Z",
+        "fresh_until": "2026-10-21T12:00:00Z"
+      },
+      "confidence": 1.0,
+      "evidence_ref": "memory 2026-10-20"
+    }
+  ]
+}

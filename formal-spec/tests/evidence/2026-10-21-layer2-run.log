@@ -1,0 +1,7 @@
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.415s
+
+OK
+
+PT-4 totals: 2000 sequences, 56261 attempted steps, 162 executions, 23 completions (all invariant assertions held)
