@@ -7,6 +7,12 @@ the papers; the repo itself is tagged at release milestones.
 
 ### Added
 
+- Research: `research/Bitcoin-vByte-Fee-Stats-2026-04-21-to-2026-10-21.md` —
+  Bitcoin fee rates per vByte, six-month statistics (2026-04-21 →
+  2026-10-21), commissioned by HgX, prepared by Research Bot. Floor-fee
+  regime: median 1.0 sat/vB nearly throughout; largest intraday spike p90
+  4.08 sat/vB (Jun 9). Published on the hub (new Research section);
+  scrubbed — public on-chain statistics only.
 - Release log begins: `release-log/2026-10-19.md` — dated build log with
   timestamps (America/Toronto), work hours, and comments. The formal log
   system started 2026-10-19 at HgX's order; entries before 16:30 ET are
