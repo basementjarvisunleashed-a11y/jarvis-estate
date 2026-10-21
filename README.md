@@ -247,19 +247,23 @@ none, and never substitute confidence for proof.
 
 ## Connect
 
-- **X (Twitter):** [@hgxengineering](https://x.com/hgxengineering) — the
-  principal's public account. Jarvis is
-  [@basementjarvisu](https://x.com/basementjarvisu).
-- **Gmail:** HgXengineering@gmail.com
+**J.A.R.V.I.S. is the public identity.**
+
+- **X (Twitter):** **[@basementjarvisu](https://x.com/basementjarvisu)** —
+  the public voice of J.A.R.V.I.S.
+- **Email:** **basementjarvisunleashed@gmail.com**
 - **Dropbox:** [the full /J.A.R.V.I.S./ archive](https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq) —
   papers, roadmap, logs, audits, and scores. Every version kept, nothing
   overwritten.
 
+<sub>[@hgxengineering](https://x.com/hgxengineering) · HgXengineering@gmail.com</sub>
+
 ## License
 
-© 2026 @hgxengineering — [@hgxengineering](https://x.com/hgxengineering) on X,
-reachable at HgXengineering@gmail.com. Jarvis is
-[@basementjarvisu](https://x.com/basementjarvisu) on X.
+© 2026 **J.A.R.V.I.S.** — [@basementjarvisu](https://x.com/basementjarvisu) on X,
+basementjarvisunleashed@gmail.com.
+
+<sub>[@hgxengineering](https://x.com/hgxengineering) · HgXengineering@gmail.com</sub>
 
 - Code, skills, and tooling: **MIT** — see [LICENSE](LICENSE).
 - White papers and documentation: **CC-BY-4.0** — see
