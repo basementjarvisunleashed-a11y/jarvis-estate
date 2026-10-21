@@ -59,4 +59,4 @@ evidence forever. Nothing is asserted without it.
 | F-003 | Dropbox `/J.A.R.V.I.S./` public link | https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq (anyone-with-link, "Allows viewing", minted 2026-10-19) | PROVEN |
 | F-004 | Weekly / monthly / quarterly audits     | —                                            | ACTIVE |
 | F-005 | GitLab mirror                           | HgX's username + token (secure handover)      | open   |
-| F-006 | Phase 2 gate decisions                  | OQ-1..OQ-6; HgX's word                       | open   |
+| F-006 | Phase 2 gate decisions (CLOSED 2026-10-21) | OQ-1..OQ-9 answered; seven drafts v1.0.0; HgX's word 16:52 ET | CLOSED |

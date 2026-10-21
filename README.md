@@ -10,7 +10,7 @@ evidence, and human authority at every consequential boundary.**
 [![Status: Live](https://img.shields.io/badge/Status-Live-brightgreen)](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/)
 [![Phase 1: Proven](https://img.shields.io/badge/Phase%201-Proven-blue)](formal-spec/proofs/phase1-tlc-report.md)
 [![Audits: Public](https://img.shields.io/badge/Audits-Public-orange)](audits/)
-[![Phase 2: Open](https://img.shields.io/badge/Phase%202-Open-yellow)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3)
+[![Phase 2: Closed](https://img.shields.io/badge/Phase%202-Closed-green)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3)
 
 **[Website](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/) ·
 [Wiki](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/wiki) ·
@@ -24,13 +24,12 @@ evidence, and human authority at every consequential boundary.**
 ## Right now — the estate is live and moving
 
 > **2026-10-21:** Phase 2 of the doctoral programme — invariant verification —
-> is **open** and evidencing: Layer 1 contract suite **39/39**, Layer 2 property
-> suite **10/10** (53,079 rejections logged), Layer 3 chaos suite **10/10**,
-> cross-artifact audit **12/12**, roadmap test **37/58**, Phase 0+1 backtrace
-> **18/18 artifacts, 12/12 claims**. Full reports in
+> is **CLOSED** (HgX's word ~16:52 ET): Layer 1 **83/83**, Layer 2 **10/10**,
+> Layer 3 **10/10**, crosscheck **12/12**. 27 invariants catalogued and traced.
+> Seven drafts ratified v1.0.0. All nine open questions answered. Full reports in
 > [`formal-spec/tests/`](formal-spec/tests/); the
 > [Phase 2 milestone](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3)
-> carries six closed deliverable issues with #10 tracking. The pause→go mechanism
+> closed at 100% with 14 issues. Phase 3 awaits his word. The pause→go mechanism
 > passed its live test at 96/100. Public audits run every week, and the
 > evidence ledger is current. This is not a demo and it is not vapourware —
 > every claim on this page is graded in the [evidence ledger](EVIDENCE.md).
