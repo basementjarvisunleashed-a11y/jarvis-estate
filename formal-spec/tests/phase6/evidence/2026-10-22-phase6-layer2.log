@@ -1,0 +1,7 @@
+Phase 6 Layer 2 replay — 2026-10-22
+corpus: 13 total (1 real, 12 synthetic)
+[unconstrained] n=13 agree=7 differ=6 labeled_agreed=6 accepted_rate=0.6667 guardrail_violations=1 rec={"defer": 0, "deny": 0, "escalate": 0, "proceed": 13, "use-cache": 0}
+[cache-only] n=13 agree=8 differ=5 labeled_agreed=7 accepted_rate=0.7143 guardrail_violations=1 rec={"defer": 0, "deny": 0, "escalate": 0, "proceed": 12, "use-cache": 1}
+[local] n=13 agree=12 differ=1 labeled_agreed=11 accepted_rate=0.6364 guardrail_violations=0 rec={"defer": 1, "deny": 3, "escalate": 2, "proceed": 6, "use-cache": 1}
+[check INV-R5] pass — failing backend -> escalate via local-fallback-after:ConnectionError
+[check Q2-jev-refusal] pass — refused: Jev backend not approved: HgX's explicit word and his key ar

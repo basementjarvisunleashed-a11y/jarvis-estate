@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Phase 6 — Cost · Attention · Acceptance Dashboard (v0.1-draft, 2026-10-22)</title>
+<style>
+body{font-family:Georgia,serif;max-width:960px;margin:2em auto;padding:0 1em;color:#1a1a1a;background:#fdfdfb}
+h1{font-size:1.5em}h2{font-size:1.15em;margin-top:2em}
+table{border-collapse:collapse;width:100%;margin:1em 0}
+th,td{border:1px solid #999;padding:.45em .7em;text-align:left}
+th{background:#f0ede6}.num{text-align:right}
+.gate{display:inline-block;background:#fff3cd;border:1px solid #d4a017;border-radius:4px;padding:.15em .6em;margin:.2em .4em .2em 0;font-size:.9em}
+.warn{background:#fdecea;border:1px solid #b3261e;border-radius:6px;padding:1em;margin:1.5em 0}
+.note{color:#555;font-size:.92em}
+footer{margin-top:3em;color:#777;font-size:.85em}
+</style>
+</head>
+<body>
+<h1>Router Optimality — Cost · Attention · Acceptance Dashboard</h1>
+<p class="note">Phase 6, Layer 4 · v0.1-draft · 2026-10-22 · UNWEIGHTED metrics only.
+Source: <code>tests/phase6/evidence/2026-10-22-phase6-layer2-metrics.json</code></p>
+
+<div class="warn"><strong>Read this first.</strong> The corpus is <strong>1 real router decision</strong>
+plus 12 labeled synthetic fixtures (harness verification). The tables below demonstrate the
+replay <em>method</em>; they are <strong>not a verdict</strong> on which policy is optimal.
+No optimality claim is made anywhere on this page.</div>
+
+<h2>Corpus</h2>
+<table><tr><th>Source</th><th class="num">n</th></tr>
+<tr><td>Real router log (2026-10-07 self-test)</td><td class="num">1</td></tr>
+<tr><td>Synthetic fixtures (marked <code>synthetic:true</code>)</td><td class="num">12</td></tr>
+<tr><td><strong>Total</strong></td><td class="num"><strong>13</strong></td></tr></table>
+
+<h2>Recommendation distribution (13 entries)</h2>
+<table><tr><th>Policy</th><th class="num">proceed</th><th class="num">use-cache</th>
+<th class="num">defer</th><th class="num">escalate</th><th class="num">deny</th></tr>
+<tr><td>unconstrained (RP-8a)</td><td class="num">13</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>cache-only (RP-8b)</td><td class="num">12</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>local heuristic (RP-8c)</td><td class="num">6</td><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">3</td></tr></table>
+
+<h2>Cost · attention · acceptance (agreed + labeled entries only)</h2>
+<table><tr><th>Policy</th><th class="num">n</th><th class="num">accepted rate</th>
+<th class="num">repair min</th><th class="num">interruptions</th><th class="num">cost units</th><th class="num">mean latency s</th></tr>
+<tr><td>unconstrained</td><td class="num">6</td><td class="num">0.667</td><td class="num">35</td><td class="num">4</td><td class="num">12</td><td class="num">807.0</td></tr>
+<tr><td>cache-only</td><td class="num">7</td><td class="num">0.714</td><td class="num">35</td><td class="num">4</td><td class="num">12</td><td class="num">692.0</td></tr>
+<tr><td>local heuristic</td><td class="num">11</td><td class="num">0.636</td><td class="num">25</td><td class="num">6</td><td class="num">321.1</td></tr></table>
+<p class="note">Denominators differ per policy (agreed-only rule) — the rows are not a ranking.
+Guardrail check: irreversible → escalate — local 0 violations; unconstrained and cache-only
+1 each <em>by design</em> (baselines have no gating). INV-R5 fallback: pass. Jev refusal: pass.
+All seven local rules fired.</p>
+
+<h2>Gates — what is NOT open</h2>
+<p><span class="gate">WEIGHTS UNSIGNED</span> No weighted comparison until he signs the weight table (Q4).<br>
+<span class="gate">STAGE 3 NOT APPROVED</span> No live trials — only the eligibility framework, awaiting his line-by-line ratification (Q3).<br>
+<span class="gate">JEV NOT APPROVED</span> The backend interface refuses without his word and his key; nothing sent, nothing spent (Q2).</p>
+
+<h2>What opens each gate</h2>
+<table><tr><th>Gate</th><th>Opens when</th><th>Then</th></tr>
+<tr><td>Weighted comparison</td><td>He signs <code>weight-table.md</code></td><td>Harness gains <code>--weighted</code> mode; report gains a weighted table</td></tr>
+<tr><td>Stage 1 volume</td><td>Outcome labels accumulate on real decisions</td><td>Stage 4 (Bayesian, small samples) becomes meaningful</td></tr>
+<tr><td>Jev evaluation</td><td>His explicit approval + his key via Secure Vault</td><td>A fourth policy column appears in replay</td></tr>
+<tr><td>Stage 3 trials</td><td>His word, per task class, on the ratified boundary</td><td>Live-trial evidence enters under the eligibility protocol</td></tr></table>
+
+<footer>J.A.R.V.I.S. doctoral programme — Phase 6 (Router Optimality). Method over verdict.</footer>
+</body>
+</html>

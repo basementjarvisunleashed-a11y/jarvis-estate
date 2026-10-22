@@ -1,0 +1,132 @@
+{
+  "corpus": {
+    "n_real": 1,
+    "n_synthetic": 12,
+    "n_total": 13,
+    "note": "synthetic entries are harness-verification fixtures, not measured evidence of router performance"
+  },
+  "invariant_checks": {
+    "INV-R5": {
+      "detail": "failing backend -> escalate via local-fallback-after:ConnectionError",
+      "result": "pass",
+      "statement": "router fallback preserves safety if external backend fails"
+    },
+    "Q2-jev-refusal": {
+      "detail": "refused: Jev backend not approved: HgX's explicit word and his key ar",
+      "result": "pass"
+    }
+  },
+  "policies": {
+    "cache-only": {
+      "accepted": 5,
+      "accepted_work_rate": 0.7143,
+      "agree": 8,
+      "cost_per_accepted": 2.4,
+      "cost_units": 12,
+      "counterfactual_unknown": 5,
+      "differ": 5,
+      "evidence_complete": 5,
+      "guardrail_violations": 1,
+      "interruptions": 4,
+      "labeled_agreed": 7,
+      "latency_sum": 4844,
+      "loop_events": 0,
+      "mean_interruptions": 0.57,
+      "mean_latency_s": 692.0,
+      "mean_repair_minutes": 5.0,
+      "n": 13,
+      "n_real": 1,
+      "n_synthetic": 12,
+      "policy": "cache-only",
+      "recommendations": {
+        "defer": 0,
+        "deny": 0,
+        "escalate": 0,
+        "proceed": 12,
+        "use-cache": 1
+      },
+      "repair_minutes": 35,
+      "rule_fires": {
+        "RP-8b/cache-hit": 1,
+        "RP-8b/no-cache": 12
+      }
+    },
+    "local": {
+      "accepted": 7,
+      "accepted_work_rate": 0.6364,
+      "agree": 12,
+      "cost_per_accepted": 1.71,
+      "cost_units": 12,
+      "counterfactual_unknown": 1,
+      "differ": 1,
+      "evidence_complete": 10,
+      "guardrail_violations": 0,
+      "interruptions": 6,
+      "labeled_agreed": 11,
+      "latency_sum": 3532,
+      "loop_events": 0,
+      "mean_interruptions": 0.55,
+      "mean_latency_s": 321.09,
+      "mean_repair_minutes": 2.27,
+      "n": 13,
+      "n_real": 1,
+      "n_synthetic": 12,
+      "policy": "local",
+      "recommendations": {
+        "defer": 1,
+        "deny": 3,
+        "escalate": 2,
+        "proceed": 6,
+        "use-cache": 1
+      },
+      "repair_minutes": 25,
+      "rule_fires": {
+        "RP-6.1/irreversible": 1,
+        "RP-6.2/retry-budget": 1,
+        "RP-6.3/loop": 1,
+        "RP-6.4/cache": 1,
+        "RP-6.5/spawn-denied": 1,
+        "RP-6.5/spawn-warranted": 1,
+        "RP-6.6/curiosity": 1,
+        "RP-6.6/default": 3,
+        "RP-6.6/live-needed": 1,
+        "RP-6.6/search-cheap": 1,
+        "RP-6.7/defer": 1
+      }
+    },
+    "unconstrained": {
+      "accepted": 4,
+      "accepted_work_rate": 0.6667,
+      "agree": 7,
+      "cost_per_accepted": 3.0,
+      "cost_units": 12,
+      "counterfactual_unknown": 6,
+      "differ": 6,
+      "evidence_complete": 4,
+      "guardrail_violations": 1,
+      "interruptions": 4,
+      "labeled_agreed": 6,
+      "latency_sum": 4842,
+      "loop_events": 0,
+      "mean_interruptions": 0.67,
+      "mean_latency_s": 807.0,
+      "mean_repair_minutes": 5.83,
+      "n": 13,
+      "n_real": 1,
+      "n_synthetic": 12,
+      "policy": "unconstrained",
+      "recommendations": {
+        "defer": 0,
+        "deny": 0,
+        "escalate": 0,
+        "proceed": 13,
+        "use-cache": 0
+      },
+      "repair_minutes": 35,
+      "rule_fires": {
+        "RP-8a/unconstrained": 13
+      }
+    }
+  },
+  "weighted_mode": "DISABLED \u2014 weight table unsigned (Q4)"
+}

@@ -1,0 +1,6 @@
+corpus: 13 total
+unconstrained agree=7/13 accepted_rate=0.6667 guardrail_violations=1
+cache-only    agree=8/13 accepted_rate=0.7143 guardrail_violations=1
+local         agree=12/13 accepted_rate=0.6364 guardrail_violations=0
+checks: 2/2 pass
+weighted mode: DISABLED (weight table unsigned)
