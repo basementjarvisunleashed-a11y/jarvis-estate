@@ -121,7 +121,6 @@ none, and never substitute confidence for proof.
 | Phase 4 — Idempotency guarantees | Closed — L2 20/20, L3 15/15, 35 claims audited |
 | Phase 5 — Security boundary formalism | **Closed** — L2 93/93, L3 34/34, 0 findings, 146/146 claims |
 | Phase 6 — Router optimality | **Open** — HgX's word 2026-10-22 |
-| Phase 5 — Security boundary formalism | **Open** — HgX's word 2026-10-22 ~07:51 ET |
 
 Full evidence in [EVIDENCE.md](EVIDENCE.md). Daily release logs in [release-log/](release-log/).
 
