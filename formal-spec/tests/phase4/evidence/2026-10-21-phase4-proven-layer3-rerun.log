@@ -1,0 +1,20 @@
+test_ad1_racing_duplicate_executes_all_interleavings (test_adversarial_duplicates.TestAdversarialDuplicates.test_ad1_racing_duplicate_executes_all_interleavings) ... ok
+test_ad2_duplicate_approvals_race (test_adversarial_duplicates.TestAdversarialDuplicates.test_ad2_duplicate_approvals_race) ... ok
+test_ad3_replayed_execution_request_thrice (test_adversarial_duplicates.TestAdversarialDuplicates.test_ad3_replayed_execution_request_thrice) ... ok
+test_ad4_three_way_race_execute_execute_retry (test_adversarial_duplicates.TestAdversarialDuplicates.test_ad4_three_way_race_execute_execute_retry) ... ok
+test_ad5_race_execute_vs_cancel (test_adversarial_duplicates.TestAdversarialDuplicates.test_ad5_race_execute_vs_cancel) ... ok
+test_ax1_opaque_tools_all_become_visible_unknown (test_ambiguous_chaos.TestAmbiguousChaos.test_ax1_opaque_tools_all_become_visible_unknown) ... ok
+test_ax2_mixed_outcomes_each_resolved_per_its_kind (test_ambiguous_chaos.TestAmbiguousChaos.test_ax2_mixed_outcomes_each_resolved_per_its_kind) ... ok
+test_ax3_unknown_then_verify_present_under_flap (test_ambiguous_chaos.TestAmbiguousChaos.test_ax3_unknown_then_verify_present_under_flap) ... ok
+test_ax4_failed_executions_retry_safely_never_duplicate (test_ambiguous_chaos.TestAmbiguousChaos.test_ax4_failed_executions_retry_safely_never_duplicate) ... ok
+test_ax5_many_keys_chaos_sweep (test_ambiguous_chaos.TestAmbiguousChaos.test_ax5_many_keys_chaos_sweep) ... ok
+test_nl1_severed_mid_execution_never_silently_completes (test_netloss.TestNetworkLoss.test_nl1_severed_mid_execution_never_silently_completes) ... ok
+test_nl2_reconnect_verify_absent_retry_completes_once (test_netloss.TestNetworkLoss.test_nl2_reconnect_verify_absent_retry_completes_once) ... ok
+test_nl3_reconnect_verify_present_no_refire (test_netloss.TestNetworkLoss.test_nl3_reconnect_verify_present_no_refire) ... ok
+test_nl4_flapping_link_duplicate_taps_still_one_record (test_netloss.TestNetworkLoss.test_nl4_flapping_link_duplicate_taps_still_one_record) ... ok
+test_nl5_severed_before_first_fire_no_phantom_effect (test_netloss.TestNetworkLoss.test_nl5_severed_before_first_fire_no_phantom_effect) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.007s
+
+OK
