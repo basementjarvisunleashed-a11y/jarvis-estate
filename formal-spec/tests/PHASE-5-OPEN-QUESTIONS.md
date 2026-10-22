@@ -30,7 +30,7 @@ P4-OP-5 carryover — both deferred to this phase on the record.
   session lifecycle doesn't belong here, it belongs nowhere, and the
   spoofing control would rest on an unspecified foundation. The
   specification is the control's precondition.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) specify the full lifecycle here — enrollment, revocation, re-enrollment after device replacement, expiry — as part of the spoofing controls. Answered 2026-10-22 ~07:54 ET.
 
 ---
 
@@ -60,7 +60,7 @@ P4-OP-5 carryover — both deferred to this phase on the record.
   Phase 4 classification already gives the control vocabulary —
   the catalogue just has to use it. (c) would leave the at-most-once
   proof resting on an unnamed assumption.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) model it as a named threat (Tampering: false outcome reporting) with read-after-write verification where supported, strongest-approval or manual execution where not. Answered 2026-10-22 ~07:55 ET.
 
 ---
 
@@ -88,7 +88,7 @@ P4-OP-5 carryover — both deferred to this phase on the record.
   compensated L0. L1 is implementation depth — it deserves its own
   order, its own evidence, and his explicit word, not a side effect
   of a formalism phase.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) stay at L0 for this phase — document the procedural isolation, name the compensations, write the upgrade roadmap with honest sequencing. Answered 2026-10-22 ~07:56 ET.
 
 ---
 
@@ -114,7 +114,7 @@ P4-OP-5 carryover — both deferred to this phase on the record.
   written in, and the eight fields are the roadmap's own. Specifying
   the format commits nothing about when tokens get issued — it
   gives the formalism its nouns while the verbs wait for his word.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) specify the capability format now — the eight fields as the matrix's normative vocabulary, with issuance, storage, and rotation mechanics explicitly deferred. Answered 2026-10-22 ~07:57 ET.
 
 ---
 
@@ -146,7 +146,7 @@ P4-OP-5 carryover — both deferred to this phase on the record.
   control is the conversion; an appendix is where conversions go
   to be forgotten. The overclaiming the exit criterion forbids is
   exactly what the catalogue prevents.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) each honest limitation becomes a named threat with a compensating control. Answered 2026-10-22 ~07:58 ET.
 
 ---
 
@@ -179,7 +179,7 @@ P4-OP-5 carryover — both deferred to this phase on the record.
   custodian preserves the secrecy while letting the model reason
   about the boundary. Describe, never redesign — and where
   description would weaken a control, the control wins.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) formalize them as named trust boundaries — described exactly as ordered, never redesigned; where description would weaken a control, the control wins (the boundary is named, never the custodian). Answered 2026-10-22 ~07:59 ET.
 
 ---
 
@@ -194,3 +194,6 @@ P4-OP-5 carryover — both deferred to this phase on the record.
   the Phase 4 P4-OP-5 carryover).
 - The work layers open on his word after the walkthrough — this
   package is the opening, not the work.
+
+## Walkthrough complete
+- 2026-10-22 ~07:59 ET: all six questions answered in the one-by-one walkthrough — Q1 full device_session_id lifecycle specified here, Q2 tool-plane truthfulness as a named Tampering threat, Q3 stay at L0 with documented compensations, Q4 capability format specified now with issuance deferred, Q5 honest limitations as named threats with compensating controls, Q6 custody doctrines formalized as named boundaries (boundary named, never the custodian). Phase 5 work layers open on his word.
