@@ -19,6 +19,12 @@ evidence forever. Nothing is asserted without it.
 | E-004 | Identity clean — principal's real name nowhere                            | source greps, 0 hits                                  | 2026-10-19             |
 | E-005 | Release Bot office opened; build-log system live                         | charter, `release-log/2026-10-19.md`                  | 2026-10-19 16:25–16:30 |
 | E-006 | Forge scaffolding committed (INDEX, CONTRIBUTING, GitHub/GitLab templates)| commit 37dda1f                                        | 2026-10-19 17:33       |
+| E-007 | Phase 0 closed — contracts frozen | formal-spec/contracts/ | 2026-10-19 |
+| E-008 | Phase 1 closed — state-machine proof (TLC) | formal-spec/proofs/phase1-tlc-report.md | 2026-10-20 |
+| E-009 | Phase 2 closed — L1 83/83, L2 10/10, L3 10/10, crosscheck 12/12 | formal-spec/tests/ | 2026-10-21 16:52 ET |
+| E-010 | Phase 3 closed — L2 42/42, L3 80/80 chaos | formal-spec/tests/phase3/ | 2026-10-21 18:07 ET |
+| E-011 | Phase 4 closed — L2 20/20, L3 15/15, 35 claims | formal-spec/tests/phase4/ | 2026-10-21 22:31 ET |
+| E-012 | Phase 5 closed — L2 93/93, L3 34/34, 0 findings, 146/146 claims | formal-spec/tests/phase5/ | 2026-10-22 12:44 ET |
 
 ## PRESENT — verified (checked 2026-10-19 ~17:35 ET)
 
