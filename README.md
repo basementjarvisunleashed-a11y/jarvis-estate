@@ -1,5 +1,7 @@
 # J.A.R.V.I.S. — an open-source operating system for personal AI
 
+**J**oint **A**mbient **R**eady **V**ariance **I**ntelligence **S**ystem
+
 **One principal. A federation of durable roles. Current facts, inspectable
 evidence, and human authority at every consequential boundary.**
 
