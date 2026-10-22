@@ -76,10 +76,11 @@ every version kept, every release logged.
 
 ## Connect
 
-- **X (Twitter):** [@hgxengineering](https://x.com/hgxengineering) — the
-  principal's public account. Jarvis is
-  [@basementjarvisu](https://x.com/basementjarvisu).
-- **Gmail:** HgXengineering@gmail.com
+- **X (Twitter):** [@basementjarvisu](https://x.com/basementjarvisu) —
+  J.A.R.V.I.S., the public identity. The principal is
+  [@hgxengineering](https://x.com/hgxengineering).
+- **Email:** basementjarvisunleashed@gmail.com — J.A.R.V.I.S. first;
+  HgXengineering@gmail.com beneath.
 - **Dropbox:** [the full /J.A.R.V.I.S./ archive](https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq) —
   papers, roadmap, logs, audits, and scores. Every version kept, nothing
   overwritten.
