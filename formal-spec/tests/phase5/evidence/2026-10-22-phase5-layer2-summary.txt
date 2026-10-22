@@ -1,0 +1,8 @@
+phase5-layer2: 93 passed, 0 failed, 66 refusals logged
+  SP test_spoofing.py: 21 passed, 0 failed
+  TM test_tampering.py: 21 passed, 0 failed
+  RP test_repudiation.py: 5 passed, 0 failed
+  DC test_disclosure.py: 7 passed, 0 failed
+  DF test_dos_fatigue.py: 15 passed, 0 failed
+  HL test_honest_limits.py: 10 passed, 0 failed
+  EL test_elevation.py: 14 passed, 0 failed

@@ -1,0 +1,73 @@
+test_af01_barrage_of_valid_requests_hits_budget (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af01_barrage_of_valid_requests_hits_budget)
+AF-01 | T-24 | C-18 | AT-4 flood leaf. ... ok
+test_af02_barrage_of_invalid_requests (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af02_barrage_of_invalid_requests)
+AF-02 | T-24 | C-19 | AT-4 lookalike leaf. ... ok
+test_af03_mixed_barrage_orderings_invariant (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af03_mixed_barrage_orderings_invariant)
+AF-03 | T-24 | C-18/C-19 | systematic permutation ... ok
+test_af04_bulk_approve_always_refused (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af04_bulk_approve_always_refused)
+AF-04 | T-24 | C-18 | AT-4 bulk-pressure leaf. ... ok
+test_af05_fatigued_rapid_sequence_binds_every_digest (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af05_fatigued_rapid_sequence_binds_every_digest)
+AF-05 | T-24 | C-4/C-5 | fatigued-principal leaf. ... ok
+test_af06_high_risk_disguised_as_routine (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af06_high_risk_disguised_as_routine)
+AF-06 | T-24 | C-19 | AT-4 desensitize-with-lookalikes leaf. ... ok
+test_af07_routine_requests_stay_silent_under_barrage (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af07_routine_requests_stay_silent_under_barrage)
+AF-07 | T-14 | C-17 | AT-4 routine-flood leaf. ... ok
+test_af08_budget_log_exportable_for_human_review (test_approval_fatigue.TestApprovalFatigueAdversarial.test_af08_budget_log_exportable_for_human_review)
+AF-08 | T-27 | C-20 | honest mark. ... ok
+test_pi01_tool_output_carrying_instruction (test_prompt_injection.TestPromptInjectionAdversarial.test_pi01_tool_output_carrying_instruction)
+PI-01 | T-22 | C-12 | AT-3 inject-via-tool-output leaf. ... ok
+test_pi02_fetched_page_text_with_instructions (test_prompt_injection.TestPromptInjectionAdversarial.test_pi02_fetched_page_text_with_instructions)
+PI-02 | T-22 | C-11 | AT-3 inject-via-web-content leaf. ... ok
+test_pi03_subagent_report_embedding_instructions (test_prompt_injection.TestPromptInjectionAdversarial.test_pi03_subagent_report_embedding_instructions)
+PI-03 | T-22 | C-13 | AT-3 inject-via-subagent leaf. ... ok
+test_pi04_injection_split_across_fields (test_prompt_injection.TestPromptInjectionAdversarial.test_pi04_injection_split_across_fields)
+PI-04 | T-22 | C-11 | adversarial variant: split fields. ... ok
+test_pi05_injection_in_approval_card_display (test_prompt_injection.TestPromptInjectionAdversarial.test_pi05_injection_in_approval_card_display)
+PI-05 | T-22 | C-6/C-11 | adversarial variant: card tail. ... ok
+test_pi06_helpful_subagent_summary_carries_instruction (test_prompt_injection.TestPromptInjectionAdversarial.test_pi06_helpful_subagent_summary_carries_instruction)
+PI-06 | T-22 | C-13 | adversarial variant: helpful summary. ... ok
+test_pi07_paraphrase_evasion_meets_approval_backstop (test_prompt_injection.TestPromptInjectionAdversarial.test_pi07_paraphrase_evasion_meets_approval_backstop)
+PI-07 | T-22 | C-4 (backstop) | honest boundary. ... ok
+test_pi08_credential_in_external_content_quarantined (test_prompt_injection.TestPromptInjectionAdversarial.test_pi08_credential_in_external_content_quarantined)
+PI-08 | T-13 | C-16 | AT-3 credentials-in-context leaf. ... ok
+test_pi09_conservative_false_positive_documented (test_prompt_injection.TestPromptInjectionAdversarial.test_pi09_conservative_false_positive_documented)
+PI-09 | T-22 | C-11 | honesty mark. ... ok
+test_pi10_benign_content_passes_as_data (test_prompt_injection.TestPromptInjectionAdversarial.test_pi10_benign_content_passes_as_data)
+PI-10 | T-22 | C-11 | control case. ... ok
+test_ss01_raced_state_midflight_refused (test_stale_state.TestStaleStateAdversarial.test_ss01_raced_state_midflight_refused)
+SS-01 | T-23 | C-26 | AT-2 race leaf. ... ok
+test_ss02_observation_failure_renders_unknown (test_stale_state.TestStaleStateAdversarial.test_ss02_observation_failure_renders_unknown)
+SS-02 | T-23 | C-26 | observation-failure leaf. ... ok
+test_ss03_superseded_revision_presented_as_current (test_stale_state.TestStaleStateAdversarial.test_ss03_superseded_revision_presented_as_current)
+SS-03 | T-23 | C-4 | AT-2 mutate-after-approval leaf. ... ok
+test_ss04_freshness_boundary_exact (test_stale_state.TestStaleStateAdversarial.test_ss04_freshness_boundary_exact)
+SS-04 | T-23 | C-26 | boundary case. ... ok
+test_ss05_approval_expiry_boundary_exact (test_stale_state.TestStaleStateAdversarial.test_ss05_approval_expiry_boundary_exact)
+SS-05 | T-4 | C-8 | AT-2 expire-then-execute leaf. ... ok
+test_ss06_operation_orderings_enumerated (test_stale_state.TestStaleStateAdversarial.test_ss06_operation_orderings_enumerated)
+SS-06 | T-23 | C-9 | systematic permutation enumeration. ... ok
+test_ss07_session_revoked_between_grant_and_execution (test_stale_state.TestStaleStateAdversarial.test_ss07_session_revoked_between_grant_and_execution)
+SS-07 | T-23 | C-9/C-2 | stale-authority leaf. ... ok
+test_ss08_fresh_path_executes (test_stale_state.TestStaleStateAdversarial.test_ss08_fresh_path_executes)
+SS-08 | T-23 | C-26 | control case. ... ok
+test_sd01_completion_without_evidence_refused (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd01_completion_without_evidence_refused)
+SD-01 | T-25 | C-30 | fake-completion leaf. ... ok
+test_sd02_fabricated_evidence_refs_cross_checked (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd02_fabricated_evidence_refs_cross_checked)
+SD-02 | T-25 | C-10 | fabricated-evidence leaf. ... ok
+test_sd03_verified_result_contradicting_log_loses (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd03_verified_result_contradicting_log_loses)
+SD-03 | T-25 | C-22 | sealed-log leaf. ... ok
+test_sd04_outcome_with_no_sealed_record_refused (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd04_outcome_with_no_sealed_record_refused)
+SD-04 | T-25 | C-30/C-22 | no-record leaf. ... ok
+test_sd05_subagent_memory_write_refused (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd05_subagent_memory_write_refused)
+SD-05 | T-25 | C-23 | memory-poisoning leaf. ... ok
+test_sd06_report_carrying_instructions_refused (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd06_report_carrying_instructions_refused)
+SD-06 | T-22/T-25 | C-13 | AT-3 inject-via-subagent leaf. ... ok
+test_sd07_verification_orderings_enumerated (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd07_verification_orderings_enumerated)
+SD-07 | T-25 | C-30 | systematic permutation enumeration. ... ok
+test_sd08_truthful_report_with_evidence_completes (test_subagent_deception.TestSubagentDeceptionAdversarial.test_sd08_truthful_report_with_evidence_completes)
+SD-08 | T-25 | C-30 | control case. ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.016s
+
+OK
