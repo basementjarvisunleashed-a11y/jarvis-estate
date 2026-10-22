@@ -28,7 +28,7 @@ readiness — one by one, answers recorded as given.
   — it deserves its own order, per task class, not a quiet inclusion in an
   evaluation phase. The evidence base for stages 1–2 also tells him which
   task classes, if any, are worth trialing live.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) stages 1–2 now — shadow logging with outcome labels plus offline replay; stage 3 only later, on his word, per task class. Answered 2026-10-22 ~12:47 ET.
 
 ---
 
@@ -54,7 +54,7 @@ readiness — one by one, answers recorded as given.
   — the approval is his, and it has a price tag. Build the harness
   Jev-ready so a single word from him starts the trial; don't spend his
   money on a decision he hasn't made.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) evaluate Jev only on his explicit approval — the harness built Jev-ready, the trial waits for his word and his key. Answered 2026-10-22 ~12:48 ET.
 
 ---
 
@@ -80,7 +80,7 @@ readiness — one by one, answers recorded as given.
 - **Recommendation:** (a). The boundary should be written down first —
   proposed against the doctrines he ordered, ratified by him line by line.
   A boundary that lives only in somebody's head is not a boundary.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) propose the boundary in L1 — eligible/ineligible task classes drafted against the custody doctrines; he ratifies line by line. Answered 2026-10-22 ~12:49 ET.
 
 ---
 
@@ -106,7 +106,7 @@ readiness — one by one, answers recorded as given.
   are faster to correct than a blank sheet, and a blank sheet at
   walkthrough speed gets vague answers. But no comparison runs until he
   has signed the weights.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) propose defaults in L1 — the policy spec carries a weight table; he ratifies or overrides each before any comparison runs. Answered 2026-10-22 ~12:51 ET.
 
 ---
 
@@ -132,4 +132,7 @@ readiness — one by one, answers recorded as given.
 - **Recommendation:** (a). The labels deserve a written custody line —
   proposed in the schema, ratified by him. (b) is likely where the line
   lands, but let him see the proposal and say so, rather than assuming it.
-- **HgX's answer:** _(blank — walkthrough pending)_
+- **HgX's answer:** (a) propose placement in L1 — the log schema names the location, the readers, and the egress rules; he ratifies. Answered 2026-10-22 ~12:52 ET.
+
+## Walkthrough complete
+- 2026-10-22 ~12:52 ET: all five questions answered in the one-by-one walkthrough — Q1 stages 1–2 now, stage 3 later on his word per task class; Q2 Jev evaluated only on his explicit approval; Q3 eligibility boundary proposed in L1 against the custody doctrines, he ratifies line by line; Q4 weight-table defaults proposed in L1, he signs before any comparison runs; Q5 outcome-labeled log placement proposed in L1, he ratifies. Phase 6 work layers open on his word.
