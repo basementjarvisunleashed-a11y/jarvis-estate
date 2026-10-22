@@ -1,6 +1,6 @@
 # Canonical Event Vocabulary — J.A.R.V.I.S. Phase 0
 
-*Version 1.0.0 — RATIFIED by HgX 2026-10-19 (decision D2). Normative.*
+*Version 1.1 — RATIFIED by HgX 2026-10-21 (amendment: event 6 packet fields). Normative.*
 *Proof language: TLA+ (decision D1, 2026-10-19).*
 
 ## 1. Naming convention
@@ -56,7 +56,7 @@ The history is append-only — "it is never rewritten — corrections are new ev
 | 3 | `brief_declined` ★ | The brief is out of scope or unauthorised. | Reason recorded (Paper IV §6.2 T2 guard). | T2: `received → cancelled` | IV §6.4 |
 | 4 | `plan_created` | A bounded plan exists with identified approval stops. | Bounded plan with approval stops (Paper IV §6.2 T3 guard; Paper II: decompose into real jobs). | T3: `accepted → in_progress` | II (Plan), IV §6.4, Roadmap §0.3 |
 | 5 | `artifact_produced` | Inspectable output exists, digest-bound to the work-item revision. Fluent text not observed against its acceptance test is not an artifact (Paper IV §5.6). | Artifact manifest: `artifact_id`, `work_id`, `revision`, `digest`, `media_type`, `location`, `provenance` (Paper IV §6.6). | T6 (joint with `evidence_packet_created`): `in_progress → verifying` | I (Artifact stage), II (Execute output), III (Work), IV §6.4, Roadmap §0.3 |
-| 6 | `evidence_packet_created` | The proof bundle exists and is complete against the brief's acceptance tests. | Packet fields: `packet_id`, `work_id`, `revision`, `artifact_refs`, `source_observations` (each with `observed_at`, `fresh_until`), `test_results`, `approval_refs`, `gaps` (required field), `created_at`, packet checksum (Paper IV §6.6). | T6 (joint with `artifact_produced`) | I (Evidence stage), II (Verify), III (Evidence), IV §6.4, Roadmap §0.3 |
+| 6 | `evidence_packet_created` | The proof bundle exists and is complete against the brief's acceptance tests. | Packet fields: `packet_id`, `work_id`, `artifact_revision` (string), `created_at` (date-time string), `approval_ref` (optional string), `checks` (array of {`name`, `result`: pass or fail, `observed_at`, `detail`}), `gaps` (array of string, optional); required: `packet_id`, `work_id`, `artifact_revision`, `created_at`, `checks` (Paper IV App. C.1 sketch, adopted per HgX's 2026-10-21 decision Q5). | T6 (joint with `artifact_produced`) | I (Evidence stage), II (Verify), III (Evidence), IV §6.4, Roadmap §0.3 |
 | 7 | `execution_started` | The approved consequential action began. Entered only through the approval gate; recorded against the idempotency key. | Idempotency key `hash(work_id, intent_id, intent_digest, action, target, scope, revision, operation_class)` (Paper IV §5.6); execution record fields: key, status, approval ref, attempt count, safe-to-retry flag (Roadmap §7). | Within `executing` (entry) | IV §6.4, Roadmap §0.3 |
 | 8 | `execution_observed` | The result of the action is observed — success, failure, or ambiguous. "Dispatch without observation is not an exit" (Paper IV §6.2 T13). | Observed result (success / failure / ambiguous) (Paper IV §6.4; Roadmap §7 execution record: observed result). | T13: `executing → verifying` | IV §6.4, Roadmap §0.3 |
 | 9 | `acceptance_passed` | The stated acceptance test passed against observed output. | Evidence exists; test result recorded in the evidence packet (Paper IV §6.2 T15 guard; INV-C1). | T15: `verifying → completed` | IV §6.4, Roadmap §0.3 |
@@ -221,3 +221,8 @@ naming collisions (§10) and 5 UNRESOLVED gaps (§11).
 ---
 *Sources: Paper I v1.2, Paper II v1.1, Paper III v1.1, Paper IV v1.1 (esp. §5.4–§6.4, §9–§10, §14),
 ROADMAP.md (§0.3, §0.4, §6–§7), phase-0-decision-sheet.md (D1, D2, D5, D6).*
+
+## Version history
+
+- **v1.1 (2026-10-21, on HgX's order — open question Q5/OQ-5):** event 6 `evidence_packet_created` packet fields changed from the Paper IV §6.6 names to the Appendix C.1 sketch names (`packet_id`, `work_id`, `artifact_revision`, `approval_ref`, `checks`, `gaps`, `created_at`), matching the ratified-by-decision `contracts/evidence-packet.schema.json` v0.1 draft. The contradiction between schema and vocabulary is closed. Open: `artifact_revision` is a string in the sketch while revisions are integers per his Q2 decision (type coherence); INV-E2's backing is name+revision-string (no digests in the sketch).
+- **v1.1a (2026-10-21, on HgX's order — type coherence):** `artifact_revision` changed from string to **integer** (minimum 0), overruling the C.1 sketch's string typing to match his Q2 decision. Recorded as a divergence from Paper IV App. C.1. Schema, guard, and fixtures now compare integers; INV-E2 is integer-exact.
