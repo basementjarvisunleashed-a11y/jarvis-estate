@@ -1,6 +1,6 @@
 # Canonical Work-State Machine — spec/state-machine.md
 
-**DRAFT 0.1 — built 2026-10-21 on HgX's order; awaiting ratification.**
+**v1.0.1 — 2026-10-21: cosmetic cleanup; stale DRAFT 0.1 line removed. Content unchanged from ratified v1.0.0.**
 *Normative anchor: `spec/state-machine.tla` (TLA+, Phase 1 proved). Where this document and the TLA+ disagree, the TLA+ governs. Version: 1.0.0 — RATIFIED by HgX 2026-10-21 (open question Q7).*
 
 ## 1. Purpose

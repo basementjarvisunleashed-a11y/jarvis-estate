@@ -155,9 +155,9 @@ Paper IV (above); working files in [`formal-spec/`](formal-spec/).
 |---|---|---|
 | [0](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/1) | Freeze the contracts | **Closed** — TLA+ ratified; glossary ratified; contracts v1.0.0 normative |
 | [1](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/2) | State-machine proof | **Proven** — TLC model check: 3,266,929 states, zero invariant violations |
-| [2](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3) | Invariant verification | **Open** — Layer 1 39/39, Layer 2 10/10, Layer 3 10/10, crosscheck 12/12 ([evidence](formal-spec/tests/)) |
-| [3](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/4) | Consistency model | Planned |
-| [4](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/5) | Idempotency | Planned |
+| [2](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/3) | Invariant verification | **Closed** — Layer 1 83/83, Layer 2 10/10, Layer 3 10/10, crosscheck 12/12 ([evidence](formal-spec/tests/)) |
+| [3](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/9) | Consistency model | **Closed** — L2 42/42, L3 80/80 chaos ([evidence](formal-spec/tests/phase3/)) |
+| [4](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/10) | Idempotency | **Closed** — L2 20/20, L3 15/15 ([evidence](formal-spec/tests/phase4/)) |
 | [5](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/6) | Security boundaries | Planned |
 | [6](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/7) | Router optimality | Planned |
 | [7](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/milestone/8) | Doctoral evidence package | Planned |

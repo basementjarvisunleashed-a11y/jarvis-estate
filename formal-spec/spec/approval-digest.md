@@ -1,6 +1,6 @@
 # Approval Intent Digest — spec/approval-digest.md
 
-**DRAFT 0.1 — built 2026-10-21 on HgX's order; awaiting ratification.**
+**v1.0.1 — 2026-10-21: cosmetic cleanup; stale DRAFT 0.1 line removed. Content unchanged from ratified v1.0.0.**
 *Normative anchor: glossary U-1 (RESOLVED 2026-10-19, HgX): "SHA-256 over the canonical JSON serialisation of the approval intent." Owner: Phase 0 spec. Version: 1.0.0 — RATIFIED by HgX 2026-10-21 (open question Q7).*
 
 ## 1. What the digest is

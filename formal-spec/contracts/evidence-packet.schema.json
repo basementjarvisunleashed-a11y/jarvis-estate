@@ -1,5 +1,5 @@
 {
-  "$comment": "Field names per HgX's 2026-10-21 decision (Q5/OQ-5): Appendix C.1 sketch names. NOTE: this diverges from ratified contracts/events.md event 6 (section 6.6 names); a contract amendment needs HgX's word. Evidence packet - the structured proof bundle; the unit of verification ('no proof, no done', INV-C1). DRAFT 0.1 - built 2026-10-21 on HgX's order; reworked 2026-10-21 to the C.1 sketch on his word; awaiting ratification. Normative on ratification only. RATIFIED v1.0.0 by HgX 2026-10-21 (open question Q7): normative. Content unchanged from the v0.1 drafts; the seven drafts now stand as the ratified contract set.",
+  "$comment": "Field names per HgX's 2026-10-21 decision (Q5/OQ-5): Appendix C.1 sketch names. NOTE: this diverges from ratified contracts/events.md event 6 (section 6.6 names); a contract amendment needs HgX's word. Evidence packet - the structured proof bundle; the unit of verification ('no proof, no done', INV-C1). RATIFIED v1.0.0 by HgX 2026-10-21 (open question Q7): normative. Content unchanged from the v0.1 drafts; the seven drafts now stand as the ratified contract set.",
   "$id": "https://jarvis-estate/contracts/evidence-packet.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
@@ -75,5 +75,5 @@
   ],
   "title": "EvidencePacket",
   "type": "object",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

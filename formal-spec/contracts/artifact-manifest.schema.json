@@ -1,5 +1,5 @@
 {
-  "$comment": "Owning contract: contracts/artifact-manifest.schema.json per ROADMAP.md §0.4, Paper IV §6.6. Artifact manifest — digest-bound manifest of inspectable output (glossary: Artifact). Binds INV-E2 (packet revision matches artifact revision) to bytes. DRAFT 0.1 — built 2026-10-21 on HgX's order; awaiting ratification. Normative on ratification only. RATIFIED v1.0.0 by HgX 2026-10-21 (open question Q7): normative. Content unchanged from the v0.1 drafts; the seven drafts now stand as the ratified contract set.",
+  "$comment": "Owning contract: contracts/artifact-manifest.schema.json per ROADMAP.md §0.4, Paper IV §6.6. Artifact manifest — digest-bound manifest of inspectable output (glossary: Artifact). Binds INV-E2 (packet revision matches artifact revision) to bytes. RATIFIED v1.0.0 by HgX 2026-10-21 (open question Q7): normative. Content unchanged from the v0.1 drafts; the seven drafts now stand as the ratified contract set.",
   "$id": "https://jarvis-estate/contracts/artifact-manifest.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
@@ -46,5 +46,5 @@
   ],
   "title": "ArtifactManifest",
   "type": "object",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
