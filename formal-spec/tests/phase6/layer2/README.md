@@ -21,11 +21,27 @@ experiment protocol (`../experiment-protocol.md` EP-3…EP-5).
 
 ## What it does NOT do
 
-- No weighted comparison — disabled until he signs the weight table (Q4).
 - No Jev calls — the interface exists, the approval does not.
 - No synthetic entry is presented as measured evidence. The fixtures
   verify the machinery (all seven rules fire; the guardrail check trips
   on the unconstrained baseline by design).
+
+## Weighted mode (gate OPEN — weights signed 2026-10-22)
+
+```sh
+./run.sh --weighted --corpus real   # weighted EVIDENCE run (102 real entries, 0 synthetic)
+./run.sh --weighted --corpus all    # weighted sanity check (real + synthetic; NOT evidence)
+```
+
+`--weighted` computes WT-9 per policy with the signed weights parsed
+from `../weight-table.md` (never hardcoded; the run fails loudly if any
+weight is unsigned). Per DL-4, entries with unknown outcome labels are
+excluded from outcome metrics; unknown numeric labels contribute 0 and
+are counted. `accepted_work` counts `outcome == "accepted"` only; loops
+are detected in state (`action_repeat_count >= 3`).
+
+Weighted evidence: `../evidence/2026-10-22-phase6-layer2-weighted.log`,
+`../evidence/2026-10-22-phase6-layer2-weighted-metrics.json`.
 
 ## Run
 

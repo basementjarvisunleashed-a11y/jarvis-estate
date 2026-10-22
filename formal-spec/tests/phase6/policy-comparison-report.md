@@ -3,8 +3,13 @@
 **Status:** v0.1-draft. Written 2026-10-22 under Phase 6 (Router Optimality),
 on HgX's word ("Run the work layers", 2026-10-22 ~12:53 ET).
 **Sources:** `layer2/` replay harness (evidence
-`evidence/2026-10-22-phase6-layer2-metrics.json`); ROADMAP.md §9;
-`experiment-protocol.md`; `weight-table.md`; `router-policy-spec.md`.
+`evidence/2026-10-22-phase6-layer2-metrics.json`; weighted evidence
+`evidence/2026-10-22-phase6-layer2-weighted-metrics.json` and
+`evidence/2026-10-22-phase6-layer2-weighted.log`); ROADMAP.md §9;
+`experiment-protocol.md`; `weight-table.md` (ALL SIGNED 2026-10-22);
+`router-policy-spec.md`; real corpus
+`~/workspace/usage-router/logs/router-backfill-2026-10-22.jsonl` (101
+entries) + `router-2026-10-07.jsonl` (1 entry).
 
 ## 1. Method (what was actually done)
 
@@ -15,6 +20,18 @@ weighted comparison until he signs the weight table). Outcome metrics
 cover only entries where the policy AGREED with the logged `action_taken`
 (measured outcomes); disagreements are `counterfactual_unknown` — no
 claim is made about what would have happened.
+
+**Weighted run (2026-10-22 ~13:15 ET):** the weights are now SIGNED —
+all six, 2026-10-22 ~13:09–13:14 ET, every default kept as proposed
+(`weight-table.md`, "ALL SIX WEIGHTS SIGNED"; the weighted gate is
+OPEN). The harness gained `--weighted` mode (WT-9, weights parsed from
+the signed document, never hardcoded) and ran it against the REAL
+corpus: 102 real entries (101 backfilled `router-backfill-2026-10-22.jsonl`
++ 1 original `router-2026-10-07.jsonl`), 0 synthetic. Evidence:
+`evidence/2026-10-22-phase6-layer2-weighted-metrics.json`,
+`evidence/2026-10-22-phase6-layer2-weighted.log`. The 12 synthetic
+fixtures were run separately as a sanity check only — clearly labeled,
+never merged into the evidence numbers.
 
 ## 2. The corpus — read this before the tables
 
@@ -78,6 +95,45 @@ Local rule coverage (all seven rules fired):
 RP-6.1 ×1, RP-6.2 ×1, RP-6.3 ×1, RP-6.4 ×1, RP-6.5 ×2 (warranted + denied),
 RP-6.6 ×4 (search-cheap, live-needed, curiosity, default ×3), RP-6.7 ×1.
 
+## 3b. Weighted comparison (WT-9) — 102 real entries
+
+Weights (signed, parsed from `weight-table.md`):
+`score = 1.0·accepted_work − 5.0·human_repair_minutes −
+10.0·attention_interruptions − 1.0·cost_units − 8.0·loops −
+0.1·latency_over_budget_seconds`.
+
+Corpus for this table: **102 real entries, 0 synthetic** (101 backfilled
+2026-10-22 + the original 2026-10-07 self-test). Contributing entries per
+policy = agreed with the logged `action_taken` AND outcome label known
+(DL-4). Excluded: `action_taken` "unknown" (25 entries — can never agree),
+agreed-but-outcome-unknown (2 per policy), policy disagreements
+(counterfactual-unknown).
+
+| Policy | contributing | accepted_work | repair min | interruptions | cost units | loops | latency OB | **WT-9 score** | guardrail violations |
+|---|---|---|---|---|---|---|---|---|---|
+| unconstrained (RP-8a) | 74 | 72 | 0 (74 unk) | 0 (74 unk) | 0 (74 unk) | 0 | 0 (74 unk) | **72.0** | 38 |
+| cache-only (RP-8b) | 74 | 72 | 0 (74 unk) | 0 (74 unk) | 0 (74 unk) | 0 | 0 (74 unk) | **72.0** | 38 |
+| local heuristic (RP-8c) | 45 | 45 | 0 (45 unk) | 0 (45 unk) | 0 (45 unk) | 0 | 0 (45 unk) | **45.0** | 0 |
+
+Notes on the terms: `accepted_work` counts `outcome == "accepted"` only —
+the 2 "repaired" and 1 "rejected" outcomes contribute 0 (stated, not
+smoothed). All four numeric labels (`repair_time_minutes`,
+`attention_interruptions`, `cost_units`, `latency_seconds`) are unknown
+in every backfilled entry — they contribute 0 and are counted as unknown
+(the harness never invents them). No state carries `action_repeat_count
+>= 3`, so 0 loop events were detected; no state carries a latency budget,
+so latency-over-budget is 0-by-unknown. **The weighted scores rest on
+`accepted_work` alone — four of six terms have no data.**
+
+Why local scores lower: of the 38 irreversible entries, local recommended
+`escalate` on all of them (the guardrail firing, correctly). 29 of those
+were logged with terminal action `proceed` — HgX's own approval was the
+gate in every case — so they count as disagreements (counterfactual-unknown),
+not contributions. The baselines "agree" with those 29 precisely because
+they have no gate — and carry 38 guardrail violations each for it. Local
+agreed with 47, all 45 contributing outcomes accepted (rate 1.0), 0
+violations.
+
 ## 4. What the numbers do and do not say
 
 - **They say:** the replay machinery works end to end — corpus loading,
@@ -88,13 +144,26 @@ RP-6.6 ×4 (search-cheap, live-needed, curiosity, default ×3), RP-6.7 ×1.
   hand-built fixtures and 1 real entry; the agreed subsets differ per
   policy; the comparison is unweighted. Any "winner" read off these
   tables would be numerology, and this report refuses it.
+- **The weighted table (§3b) does not say** that the no-gate baselines
+  are "better" because they score 72.0 against local's 45.0. The score
+  rewards agreement with logged terminal actions — and 29 of the
+  baselines' agreements are irreversible actions the guardrail exists to
+  gate (each one a guardrail violation; local has 0). Read with the
+  violations column, the table says the opposite of what a naive ranking
+  would claim: the local policy is the only one that never violates the
+  consequential-action guardrail, and every outcome it agreed with was
+  accepted. The weighted scores become a real comparison only when live
+  labeled volume accumulates — repair minutes, interruptions, cost, and
+  latency measured, not unknown.
 
 ## 5. What changes when the gates open
 
-- **Weights signed (Q4):** the harness gains `--weighted` mode (WT-9);
+- **Weights signed (Q4):** ~~the harness gains `--weighted` mode (WT-9);
   this report gains a weighted table beside the unweighted one. The
   unweighted tables stay — weights are a value judgement over
-  measurement, not a substitute.
+  measurement, not a substitute.~~ **DONE 2026-10-22 ~13:14 ET** — all
+  six weights signed, every default kept; `--weighted` mode built and
+  run (§3b); the unweighted tables remain above.
 - **Stage 1 volume:** as outcome labels accumulate on real decisions,
   the labeled+agreed denominators grow and stage 4 (Bayesian estimation
   for small samples) becomes meaningful. Today it is a method on paper.
@@ -114,6 +183,12 @@ ground truth.
 L-3. Replay cannot observe counterfactuals — the agreed-only rule is
 the honest boundary, and it shrinks every denominator.
 L-4. The learned policy (RP-8f) and hybrid (RP-8e) are not evaluated.
+L-5. The weighted scores (§3b) rest on `accepted_work` alone — four of
+six WT-9 terms are zero-by-unknown across all 102 backfilled entries,
+and 0 loop events were detectable. The backfill is Stage 2
+reconstruction (the router was in shadow, never consulted), not live
+Stage 1 data. The scores are a method demonstration with real entries,
+not an optimality verdict.
 
 ## Cross-references
 

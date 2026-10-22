@@ -1,0 +1,216 @@
+{
+  "corpus": {
+    "n_real": 102,
+    "n_synthetic": 0,
+    "n_total": 102,
+    "note": "real router logs only \u2014 no synthetic entries",
+    "selection": "real"
+  },
+  "invariant_checks": {
+    "INV-R5": {
+      "detail": "failing backend -> escalate via local-fallback-after:ConnectionError",
+      "result": "pass",
+      "statement": "router fallback preserves safety if external backend fails"
+    },
+    "Q2-jev-refusal": {
+      "detail": "refused: Jev backend not approved: HgX's explicit word and his key ar",
+      "result": "pass"
+    }
+  },
+  "mode": "weighted",
+  "policies": {
+    "cache-only": {
+      "accepted": 72,
+      "accepted_work_rate": 0.973,
+      "action_unknown": 25,
+      "agree": 76,
+      "cost_per_accepted": 0.0,
+      "cost_units": 0,
+      "cost_units_unknown": 74,
+      "counterfactual_unknown": 26,
+      "differ": 26,
+      "evidence_complete": 24,
+      "excluded_outcome_unknown": 2,
+      "guardrail_violations": 38,
+      "interruptions": 0,
+      "interruptions_unknown": 74,
+      "labeled_agreed": 74,
+      "latency_sum": 0,
+      "latency_unknown": 74,
+      "loop_events": 0,
+      "mean_interruptions": 0.0,
+      "mean_latency_s": 0.0,
+      "mean_repair_minutes": 0.0,
+      "n": 102,
+      "n_real": 102,
+      "n_synthetic": 0,
+      "policy": "cache-only",
+      "recommendations": {
+        "defer": 0,
+        "deny": 0,
+        "escalate": 0,
+        "proceed": 102,
+        "use-cache": 0
+      },
+      "repair_minutes": 0,
+      "repair_minutes_unknown": 74,
+      "rule_fires": {
+        "RP-8b/no-cache": 102
+      },
+      "weighted": {
+        "contributing": 74,
+        "excluded_action_unknown": 25,
+        "excluded_outcome_unknown": 2,
+        "score": 72.0,
+        "terms": {
+          "accepted_work": 72,
+          "attention_interruptions": 0,
+          "cost_units": 0,
+          "human_repair_minutes": 0,
+          "latency_over_budget_seconds": 0,
+          "loops": 0
+        },
+        "terms_unknown": {
+          "attention_interruptions": 74,
+          "cost_units": 74,
+          "human_repair_minutes": 74,
+          "latency_over_budget_seconds": 74
+        }
+      }
+    },
+    "local": {
+      "accepted": 45,
+      "accepted_work_rate": 1.0,
+      "action_unknown": 25,
+      "agree": 47,
+      "cost_per_accepted": 0.0,
+      "cost_units": 0,
+      "cost_units_unknown": 45,
+      "counterfactual_unknown": 55,
+      "differ": 55,
+      "evidence_complete": 14,
+      "excluded_outcome_unknown": 2,
+      "guardrail_violations": 0,
+      "interruptions": 0,
+      "interruptions_unknown": 45,
+      "labeled_agreed": 45,
+      "latency_sum": 0,
+      "latency_unknown": 45,
+      "loop_events": 0,
+      "mean_interruptions": 0.0,
+      "mean_latency_s": 0.0,
+      "mean_repair_minutes": 0.0,
+      "n": 102,
+      "n_real": 102,
+      "n_synthetic": 0,
+      "policy": "local",
+      "recommendations": {
+        "defer": 0,
+        "deny": 0,
+        "escalate": 38,
+        "proceed": 64,
+        "use-cache": 0
+      },
+      "repair_minutes": 0,
+      "repair_minutes_unknown": 45,
+      "rule_fires": {
+        "RP-6.1/irreversible": 38,
+        "RP-6.5/spawn-warranted": 59,
+        "RP-6.6/default": 1,
+        "RP-6.6/live-needed": 4
+      },
+      "weighted": {
+        "contributing": 45,
+        "excluded_action_unknown": 25,
+        "excluded_outcome_unknown": 2,
+        "score": 45.0,
+        "terms": {
+          "accepted_work": 45,
+          "attention_interruptions": 0,
+          "cost_units": 0,
+          "human_repair_minutes": 0,
+          "latency_over_budget_seconds": 0,
+          "loops": 0
+        },
+        "terms_unknown": {
+          "attention_interruptions": 45,
+          "cost_units": 45,
+          "human_repair_minutes": 45,
+          "latency_over_budget_seconds": 45
+        }
+      }
+    },
+    "unconstrained": {
+      "accepted": 72,
+      "accepted_work_rate": 0.973,
+      "action_unknown": 25,
+      "agree": 76,
+      "cost_per_accepted": 0.0,
+      "cost_units": 0,
+      "cost_units_unknown": 74,
+      "counterfactual_unknown": 26,
+      "differ": 26,
+      "evidence_complete": 24,
+      "excluded_outcome_unknown": 2,
+      "guardrail_violations": 38,
+      "interruptions": 0,
+      "interruptions_unknown": 74,
+      "labeled_agreed": 74,
+      "latency_sum": 0,
+      "latency_unknown": 74,
+      "loop_events": 0,
+      "mean_interruptions": 0.0,
+      "mean_latency_s": 0.0,
+      "mean_repair_minutes": 0.0,
+      "n": 102,
+      "n_real": 102,
+      "n_synthetic": 0,
+      "policy": "unconstrained",
+      "recommendations": {
+        "defer": 0,
+        "deny": 0,
+        "escalate": 0,
+        "proceed": 102,
+        "use-cache": 0
+      },
+      "repair_minutes": 0,
+      "repair_minutes_unknown": 74,
+      "rule_fires": {
+        "RP-8a/unconstrained": 102
+      },
+      "weighted": {
+        "contributing": 74,
+        "excluded_action_unknown": 25,
+        "excluded_outcome_unknown": 2,
+        "score": 72.0,
+        "terms": {
+          "accepted_work": 72,
+          "attention_interruptions": 0,
+          "cost_units": 0,
+          "human_repair_minutes": 0,
+          "latency_over_budget_seconds": 0,
+          "loops": 0
+        },
+        "terms_unknown": {
+          "attention_interruptions": 74,
+          "cost_units": 74,
+          "human_repair_minutes": 74,
+          "latency_over_budget_seconds": 74
+        }
+      }
+    }
+  },
+  "weights": {
+    "formula": "score = 1.0*accepted_work - 5.0*human_repair_minutes - 10.0*attention_interruptions - 1.0*cost_units - 8.0*loops - 0.1*latency_over_budget_seconds",
+    "honesty": "unknown numeric labels contribute 0 and are counted; accepted_work counts outcome=='accepted' only; loops detected in state (action_repeat_count>=3); latency-over-budget needs stated budget (absent->0, unknown)",
+    "source": "weight-table.md (ALL SIGNED 2026-10-22 ~13:09\u201313:14 ET)",
+    "values": {
+      "accepted_work": 1.0,
+      "attention_interruptions": -10.0,
+      "cost_units": -1.0,
+      "human_repair_minutes": -5.0,
+      "latency_over_budget_seconds": -0.1,
+      "loops": -8.0
+    }
+  }
+}

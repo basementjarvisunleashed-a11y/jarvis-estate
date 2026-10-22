@@ -5,9 +5,7 @@ on HgX's word ("Run the work layers", 2026-10-22 ~12:53 ET).
 **Sources:** ROADMAP.md §9 (objective function, quoted);
 `tests/PHASE-6-OPEN-QUESTIONS.md` Q4 (2026-10-22 ~12:51 ET: propose
 defaults in L1, he signs before any comparison runs).
-**Signature status:** every weight below is **PROPOSED — FOR HIS
-SIGNATURE**. No weighted comparison runs until he signs. The L2 harness
-and L4 report compute unweighted metrics only.
+**Signature status:** **ALL SIX WEIGHTS SIGNED 2026-10-22 ~13:09–13:14 ET** (WT-3 +1.0, WT-4 −5.0, WT-5 −10.0, WT-6 −1.0, WT-7 −8.0, WT-8 −0.1 — every default kept as proposed). The weighted gate is OPEN: the L2 harness gained `--weighted` mode and the L4 report the weighted comparison table on 2026-10-22 ~13:15 ET (evidence `tests/phase6/evidence/2026-10-22-phase6-layer2-weighted-metrics.json`).
 
 ## Version history
 
@@ -31,12 +29,12 @@ and the default price for each.
 
 | # | Term | Unit | Proposed default weight (per unit) | Rationale for the default |
 |---|---|---|---|---|
-| WT-3 | `accepted_work` | per accepted artifact | +1.0 (numeraire) | the thing being maximized; everything else is priced against it |
-| WT-4 | `human_repair_cost` | per minute of his repair time | −5.0 | repair is his time spent fixing — priced at 5× an artifact's value per minute, because a minute of repair is a minute not spent on the work |
-| WT-5 | `attention_cost` | per interruption | −10.0 | **attention priced above compute** — one interruption costs ten artifacts' worth; the router's whole purpose is to not waste the thing it measures |
-| WT-6 | `financial_cost` | per cost unit | −1.0 | one-to-one with the artifact numeraire; API spend is real but cheap relative to his time |
-| WT-7 | `loop_penalty` | per detected loop event | −8.0 | loops burn attention and compute together; priced near attention |
-| WT-8 | `latency_penalty` | per second beyond the task's stated budget | −0.1 | latency is felt, not priced — a tenth of an artifact per second over budget |
+| WT-3 | `accepted_work` | per accepted artifact | **+1.0 — SIGNED 2026-10-22 ~13:09 ET** | the thing being maximized; everything else is priced against it |
+| WT-4 | `human_repair_cost` | per minute of his repair time | **−5.0 — SIGNED 2026-10-22 ~13:11 ET** | repair is his time spent fixing — priced at 5× an artifact's value per minute, because a minute of repair is a minute not spent on the work |
+| WT-5 | `attention_cost` | per interruption | **−10.0 — SIGNED 2026-10-22 ~13:12 ET** | **attention priced above compute** — one interruption costs ten artifacts' worth; the router's whole purpose is to not waste the thing it measures |
+| WT-6 | `financial_cost` | per cost unit | **−1.0 — SIGNED 2026-10-22 ~13:13 ET** | one-to-one with the artifact numeraire; API spend is real but cheap relative to his time |
+| WT-7 | `loop_penalty` | per detected loop event | **−8.0 — SIGNED 2026-10-22 ~13:13 ET** | loops burn attention and compute together; priced near attention |
+| WT-8 | `latency_penalty` | per second beyond the task's stated budget | **−0.1 — SIGNED 2026-10-22 ~13:14 ET** | latency is felt, not priced — a tenth of an artifact per second over budget |
 
 **WT-9.** The proposed weighted objective:
 

@@ -17,8 +17,11 @@ footer{margin-top:3em;color:#777;font-size:.85em}
 </head>
 <body>
 <h1>Router Optimality — Cost · Attention · Acceptance Dashboard</h1>
-<p class="note">Phase 6, Layer 4 · v0.1-draft · 2026-10-22 · UNWEIGHTED metrics only.
-Source: <code>tests/phase6/evidence/2026-10-22-phase6-layer2-metrics.json</code></p>
+<p class="note">Phase 6, Layer 4 · v0.1-draft · 2026-10-22 · Sections 1–3: UNWEIGHTED metrics
+on the 13-entry layers-build corpus. Section 4: WEIGHTED metrics (WT-9, weights signed
+2026-10-22) on the 102-real-entry corpus. Source:
+<code>tests/phase6/evidence/2026-10-22-phase6-layer2-metrics.json</code> and
+<code>tests/phase6/evidence/2026-10-22-phase6-layer2-weighted-metrics.json</code></p>
 
 <div class="warn"><strong>Read this first.</strong> The corpus is <strong>1 real router decision</strong>
 plus 12 labeled synthetic fixtures (harness verification). The tables below demonstrate the
@@ -49,14 +52,49 @@ Guardrail check: irreversible → escalate — local 0 violations; unconstrained
 1 each <em>by design</em> (baselines have no gating). INV-R5 fallback: pass. Jev refusal: pass.
 All seven local rules fired.</p>
 
+<h2>Weighted comparison — WT-9 (weights signed 2026-10-22, 102 real entries)</h2>
+<div class="warn"><strong>Read this first.</strong> Weights: <code>1.0·accepted − 5.0·repair_min −
+10.0·interruptions − 1.0·cost − 8.0·loops − 0.1·latency_over_budget</code>, all six signed
+2026-10-22, every default kept. Corpus: <strong>102 real entries, 0 synthetic</strong>
+(101 backfilled 2026-10-22 + the 2026-10-07 self-test). Contributing entries = agreed with the
+logged action <em>and</em> outcome label known (DL-4). <strong>Four of six weight terms are
+zero-by-unknown</strong> — repair minutes, interruptions, cost units, and latency are unknown
+in every backfilled entry; 0 loop events were detectable. The scores below rest on
+<strong>accepted work alone</strong>. They are a method demonstration on real entries,
+<strong>not an optimality verdict</strong>.</div>
+<table><tr><th>Policy</th><th class="num">contributing</th><th class="num">accepted</th>
+<th class="num">repair&nbsp;min</th><th class="num">interrupt.</th><th class="num">cost</th>
+<th class="num">loops</th><th class="num">latency&nbsp;OB</th><th class="num">WT-9 score</th>
+<th class="num">guardrail viol.</th></tr>
+<tr><td>unconstrained (RP-8a)</td><td class="num">74</td><td class="num">72</td>
+<td class="num">0 (74 unk)</td><td class="num">0 (74 unk)</td><td class="num">0 (74 unk)</td>
+<td class="num">0</td><td class="num">0 (74 unk)</td><td class="num"><strong>72.0</strong></td>
+<td class="num">38</td></tr>
+<tr><td>cache-only (RP-8b)</td><td class="num">74</td><td class="num">72</td>
+<td class="num">0 (74 unk)</td><td class="num">0 (74 unk)</td><td class="num">0 (74 unk)</td>
+<td class="num">0</td><td class="num">0 (74 unk)</td><td class="num"><strong>72.0</strong></td>
+<td class="num">38</td></tr>
+<tr><td>local heuristic (RP-8c)</td><td class="num">45</td><td class="num">45</td>
+<td class="num">0 (45 unk)</td><td class="num">0 (45 unk)</td><td class="num">0 (45 unk)</td>
+<td class="num">0</td><td class="num">0 (45 unk)</td><td class="num"><strong>45.0</strong></td>
+<td class="num">0</td></tr></table>
+<p class="note">Do <strong>not</strong> read 72.0 &gt; 45.0 as "the baselines win." The score rewards
+agreement with logged terminal actions — and 29 of the baselines' agreements are irreversible
+actions the guardrail exists to gate (each a guardrail violation; local: 0). Local agreed with
+47 entries and every contributing outcome was accepted. Exclusions per policy: 25 entries with
+<code>action_taken</code> "unknown" (can never agree) + 2 agreed-but-outcome-unknown (DL-4);
+the rest are counterfactual-unknown disagreements. The 2 "repaired" and 1 "rejected" outcomes
+contribute 0 to accepted work (stated). Backfill = Stage 2 reconstruction (router in shadow,
+never consulted), not live Stage 1 data.</p>
+
 <h2>Gates — what is NOT open</h2>
-<p><span class="gate">WEIGHTS UNSIGNED</span> No weighted comparison until he signs the weight table (Q4).<br>
+<p><span class="gate">WEIGHTS SIGNED 2026-10-22</span> All six weights signed, every default kept — the weighted table above is live.<br>
 <span class="gate">STAGE 3 NOT APPROVED</span> No live trials — only the eligibility framework, awaiting his line-by-line ratification (Q3).<br>
 <span class="gate">JEV NOT APPROVED</span> The backend interface refuses without his word and his key; nothing sent, nothing spent (Q2).</p>
 
 <h2>What opens each gate</h2>
 <table><tr><th>Gate</th><th>Opens when</th><th>Then</th></tr>
-<tr><td>Weighted comparison</td><td>He signs <code>weight-table.md</code></td><td>Harness gains <code>--weighted</code> mode; report gains a weighted table</td></tr>
+<tr><td>Weighted comparison</td><td><strong>Done</strong> — signed 2026-10-22 ~13:09–13:14 ET</td><td><code>--weighted</code> mode live; weighted table above; unweighted tables retained</td></tr>
 <tr><td>Stage 1 volume</td><td>Outcome labels accumulate on real decisions</td><td>Stage 4 (Bayesian, small samples) becomes meaningful</td></tr>
 <tr><td>Jev evaluation</td><td>His explicit approval + his key via Secure Vault</td><td>A fourth policy column appears in replay</td></tr>
 <tr><td>Stage 3 trials</td><td>His word, per task class, on the ratified boundary</td><td>Live-trial evidence enters under the eligibility protocol</td></tr></table>

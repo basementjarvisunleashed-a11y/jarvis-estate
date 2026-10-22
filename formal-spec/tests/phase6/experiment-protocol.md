@@ -54,7 +54,7 @@ eligibility boundary, **proposed, for his line-by-line ratification**
 **EP-6a — Proposed eligible (low-risk, read-only, no external
 visibility):** single `browser.search` discovery lookups; file reads;
 memory/context lookups; cache-preferred fetches of already-known
-artifacts.
+artifacts. **RATIFIED 2026-10-22 ~13:16 ET.**
 
 **EP-6b — Absolutely excluded (proposed):** anything consequential —
 send, spend, publish, delete; anything touching a custody doctrine —
@@ -62,7 +62,7 @@ money (Money Bot), calendar/email/tasks (Tickler Bot), health (Dr Bot,
 sealed), food (Food Bot), research (Research Bot, sealed lab), live
 location (the eye in the sky, never named); anything with external
 visibility (posts, messages, published pages); anything requiring his
-approval (the trial must never consume the approval it is measuring).
+approval (the trial must never consume the approval it is measuring). **RATIFIED 2026-10-22 ~13:17 ET.**
 
 **EP-6c.** Even after ratification, stage 3 requires a separate explicit
 order naming the task class. This protocol never self-authorizes a

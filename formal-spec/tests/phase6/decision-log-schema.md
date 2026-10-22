@@ -65,7 +65,7 @@ decision metrics. The harness does not invent labels.
 **DL-5a — Location (proposed):** the outcome labels ride on the same
 JSONL lines as the decisions, in the existing directory
 `~/workspace/usage-router/logs/`. One file, one record — no sidecar to
-drift out of sync.
+drift out of sync. **RATIFIED 2026-10-22 ~13:18 ET.**
 
 **DL-5b — Readers (proposed):** Jarvis (the working room) only. No other
 bot, chat, worker, or external system reads these logs — the labels are
