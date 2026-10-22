@@ -139,3 +139,6 @@ word.
 
 ## Walkthrough complete
 - 2026-10-21 ~18:31 ET: all five questions answered in the one-by-one walkthrough — Q1 orchestrator signs after recompute (worker authorship in provenance), Q2 revision frozen at approval time, Q3 key excludes device_session_id, Q4 execution_unknown surfaced on next pull + escalated notification, Q5 fresh ceremony for consequential compensation. Phase 4 work layers open on his word.
+
+## Phase 4 CLOSED
+- **2026-10-21 ~22:31 ET, on HgX's word** ("Close Phase 4"): Phase 4 — Idempotency Guarantees — is CLOSED. The path: walkthrough complete ~18:31 ET (five answers), work layers built ~18:33–18:37 ET under his blanket approval (L1 five v0.1 drafts, L2 20/20, L3 15/15), PROVEN ~22:30 ET (full verification sweep: fresh re-runs 20/20 + 15/15, refusal ledgers byte-identical, all 35 claims audited, no ratified-file touch, integrity manifest of 28 files, all five exit criteria met — report `tests/PHASE-4-PROVEN-REPORT-2026-10-21.md`), then closed on his explicit word. Open points carried forward: P4-OP-1 (external-system inventory), P4-OP-2 (verified-safe mechanics), P4-OP-4 (notification channel mechanics) await his word; P4-OP-3 (session lifecycle) and P4-OP-5 (tool-plane truthfulness) → Phase 5.
