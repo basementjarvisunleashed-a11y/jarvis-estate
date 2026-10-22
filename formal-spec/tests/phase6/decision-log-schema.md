@@ -70,13 +70,13 @@ drift out of sync. **RATIFIED 2026-10-22 ~13:18 ET.**
 **DL-5b — Readers (proposed):** Jarvis (the working room) only. No other
 bot, chat, worker, or external system reads these logs — the labels are
 a diary of his attention, and the custody doctrines say who may hold
-what.
+what. **RATIFIED 2026-10-22 ~13:19 ET.**
 
 **DL-5c — Egress (proposed):** nothing leaves the estate. The single
 exception: the compact decision state of RP-5 — and only that, no names,
 no message contents, no PII — may be sent to the Jev backend, and only
 with his explicit Jev approval (Q2). Outcome labels never leave the
-estate under any policy in this phase.
+estate under any policy in this phase. **RATIFIED 2026-10-22 ~13:20 ET.**
 
 **DL-5d.** Until he ratifies, DL-5a…DL-5c are proposals, and the logs
 stay exactly as they are today (skill-doc behavior, Jarvis-only by
