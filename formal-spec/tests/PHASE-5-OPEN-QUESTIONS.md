@@ -197,3 +197,8 @@ P4-OP-5 carryover — both deferred to this phase on the record.
 
 ## Walkthrough complete
 - 2026-10-22 ~07:59 ET: all six questions answered in the one-by-one walkthrough — Q1 full device_session_id lifecycle specified here, Q2 tool-plane truthfulness as a named Tampering threat, Q3 stay at L0 with documented compensations, Q4 capability format specified now with issuance deferred, Q5 honest limitations as named threats with compensating controls, Q6 custody doctrines formalized as named boundaries (boundary named, never the custodian). Phase 5 work layers open on his word.
+
+## Phase closure
+- **CLOSED 2026-10-22 ~12:44 ET on HgX's word** ("Close phase five and open up phase six").
+- PROVEN 2026-10-22 ~12:43 ET: report `tests/PHASE-5-PROVEN-REPORT-2026-10-22.md` — L2 93/93, L3 34/34, 146/146 claims audited, 33-file integrity manifest, all five exit criteria met.
+- Open points carried: P5-OP-0…P5-OP-8 await HgX's word (flagged, not blocking).

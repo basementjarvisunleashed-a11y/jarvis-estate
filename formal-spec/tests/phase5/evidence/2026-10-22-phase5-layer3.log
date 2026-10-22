@@ -68,6 +68,6 @@ test_sd08_truthful_report_with_evidence_completes (test_subagent_deception.TestS
 SD-08 | T-25 | C-30 | control case. ... ok
 
 ----------------------------------------------------------------------
-Ran 34 tests in 0.016s
+Ran 34 tests in 0.013s
 
 OK

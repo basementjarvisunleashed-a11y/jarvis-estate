@@ -85,7 +85,7 @@ requires more.
   per-scope directories cover the custody boundaries (TB-11…TB-15)
   first, or the tool/subagent planes (TB-3/TB-4) first, is a build
   decision for that order. Recorded here so the question is not
-  lost. **Needs HgX's word** at that time, not now.
+  lost. **RESOLVED 2026-10-22 ~13:33 ET: custody boundaries (TB-11…TB-15) first, then the tool/subagent planes.**
 
 ## 7. Cross-references
 

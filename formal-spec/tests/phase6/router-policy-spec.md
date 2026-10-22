@@ -106,7 +106,7 @@ deferred.
 **RP-8b — Cache-only.** The cache-preference baseline. Rule RP-6.4 applied
 whenever a fresh cached artifact or note answers the goal (`use-cache`);
 every other decision answers `proceed` directly. This is a *definitional
-choice of this spec* (see P6-OP-4): cache-only isolates the value of
+choice of this spec* (see P6-OP-4) **RESOLVED 2026-10-22 ~13:34 ET: keep the definition.**: cache-only isolates the value of
 caching from the value of gating.
 
 **RP-8c — Local heuristic.** The seven rules of RP-6 applied in order,
@@ -116,12 +116,11 @@ first match wins. This is the live router as it runs today (shadow mode,
 **RP-8d — TypeSafe Jev backend.** The harness exposes the backend as a
 pluggable interface: the compact decision state of RP-5 is the only
 payload, and the backend's answer replaces the local recommendation.
-**Not evaluated in this phase.** Q2's answer (2026-10-22 ~12:48 ET):
-evaluate Jev only on HgX's explicit approval — the harness is built
-Jev-ready, the trial waits for his word and his key. No API spend, no
-data egress, no endpoint called, until then. (Skill doc: he creates the
-key himself via the Secure Vault flow; any backend failure falls back to
-local immediately, logged.)
+**APPROVED 2026-10-22 ~13:36 ET (P6-OP-7):** HgX approved the Jev trial.
+The trial runs when his key is stored via the Secure Vault flow (he creates
+the TypeSafe AI API key himself at the provider's official site). Until then:
+no API spend, no data egress, no endpoint called. (Skill doc: any backend
+failure falls back to local immediately, logged.)
 
 **RP-8e — Hybrid.** Defined as a policy shape for a later trial: local
 policy first; on `defer` or `escalate` outcomes, consult the backend

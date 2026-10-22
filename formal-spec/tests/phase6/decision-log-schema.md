@@ -51,10 +51,11 @@ latency_seconds, attention_interruptions, evidence_complete).
 | `evidence_complete` | boolean | the evidence packet was complete |
 
 **DL-3.** Labeling method (honest statement): outcome labels are assigned
-after the fact — by Jarvis's post-hoc judgment on the record, or by HgX
-directly. There is no automatic labeler. The labels are a claim about
-what happened, written into the log; the comparison report treats them
-as measured-with-method, not as ground truth. (Open point P6-OP-1.)
+after the fact — by HgX directly. There is no automatic labeler. **RESOLVED
+2026-10-22 ~13:34 ET (P6-OP-1): HgX labels outcomes directly — his labels are
+ground truth, not post-hoc claims.** The 2026-10-22 backfill corpus keeps its
+post-hoc labels marked as such (backfilled: true); they remain measured-with-method
+until he labels them directly.
 
 **DL-4.** An unlabeled decision (the common case today) carries no
 outcome labels and is **excluded from outcome metrics**, counted only in

@@ -115,7 +115,7 @@ approval-fatigue
   digest-bound intent; the exact card schema and its digest-binding
   mechanics are estate implementation, out of spec scope here.
   **Needs HgX's word** only if he wants the card contract specified
-  in this phase.
+  in this phase. **RESOLVED 2026-10-22 ~13:30 ET: specify the card contract in this phase — card schema and digest-binding mechanics become spec.**
 
 ## 8. Cross-references
 

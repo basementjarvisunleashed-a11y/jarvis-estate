@@ -251,3 +251,8 @@ Genuinely open — not claimed, not implied:
   without approval; the research pipeline stays sealed; the website
   stays as-is (logs only) per his 2026-10-21 hands-off order; the
   doctrines are described, never redesigned.
+
+## Closure
+- **CLOSED 2026-10-22 ~12:44 ET on HgX's word.**
+- PROVEN 2026-10-22 ~12:43 ET: report `tests/PHASE-5-PROVEN-REPORT-2026-10-22.md` — fresh re-runs L2 93/93 + L3 34/34 green, ledgers byte-identical, 146/146 numbered claims audited, all six walkthrough answers verified baked in, no ratified-file touch, 33-file integrity manifest, all five exit criteria met.
+- Phase state at closure: Phase 2 CLOSED (2026-10-21 ~16:52 ET), Phase 3 CLOSED (2026-10-21 ~18:07 ET), Phase 4 CLOSED (2026-10-21 ~22:31 ET), Phase 5 CLOSED (2026-10-22 ~12:44 ET). Phase 6 opened 2026-10-22 ~12:44 ET on HgX's word.

@@ -138,12 +138,12 @@ Each cell: permitted actions, with the eight fields summarized.
   HgX's custody orders name Money Bot and Tickler Bot; it uses
   "health service" and "research lab" for TB-13/TB-15. **Needs
   HgX's word** on whether the operational bot names should appear
-  verbatim in the formal model.
+  verbatim in the formal model. **RESOLVED 2026-10-22 ~13:28 ET: use the operational bot names verbatim — except where his secrecy order applies (the live-location custodian is never named; Q6 reservation stands).**
 - **P5-OP-4 — Approval-to-session binding.** Whether `grant.approval`
   binds to the presenting `device_session_id` (so a stolen approval
   hint cannot be tapped from another session) is unspecified here.
   Recommendation: yes, as a `condition` field entry. **Needs HgX's
-  word** before it becomes CM law.
+  word** before it becomes CM law. **RESOLVED 2026-10-22 ~13:29 ET: yes — `grant.approval` binds to the presenting `device_session_id` as a `condition`-field entry.**
 
 ## 7. Cross-references
 

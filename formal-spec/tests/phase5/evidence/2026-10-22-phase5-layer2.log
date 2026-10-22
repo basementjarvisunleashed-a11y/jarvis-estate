@@ -93,6 +93,6 @@ test_credential_in_context_refused (test_tampering.TestVaultBoundary.test_creden
 test_private_key_in_context_refused (test_tampering.TestVaultBoundary.test_private_key_in_context_refused) ... ok
 
 ----------------------------------------------------------------------
-Ran 93 tests in 0.024s
+Ran 93 tests in 0.007s
 
 OK

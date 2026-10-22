@@ -106,12 +106,12 @@ subjects on each side, the assets in play, and the crossing rules.
   other named role-bots (News, Food, Tax, Family, Fantasy) have no
   custody and are not mapped. Whether each role-bot's authority
   should be a matrix row is deferred to HgX. **Needs HgX's word** if
-  the matrix is to enumerate them.
+  the matrix is to enumerate them. **RESOLVED 2026-10-22 ~13:26 ET: enumerate every role-bot — each role-bot's authority becomes a matrix row (custody or none).**
 - **P5-OP-2 — TB-2 edge re-validation.** The edge validates intent
   digest + session + expiry and the orchestrator re-validates before
   consequence; whether a third validation belongs at the tool plane
   (TB-3) is implementation depth. **Needs HgX's word** only if he
-  wants the belt-and-braces depth specified here.
+  wants the belt-and-braces depth specified here. **RESOLVED 2026-10-22 ~13:27 ET: specify the third validation at the tool plane (TB-3).**
 
 ## 7. Cross-references
 

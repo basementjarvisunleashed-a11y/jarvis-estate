@@ -108,7 +108,7 @@ Classification scale, applied uniformly:
   roadmap's 12 assets." This register uses fifteen entries and maps
   the roadmap's ten lines without omission; it does not claim twelve
   is the roadmap's number. **Needs HgX's word** on whether the
-  twelve-count was a shorthand or a different grouping to adopt.
+  twelve-count was a shorthand or a different grouping to adopt. **RESOLVED 2026-10-22 ~13:25 ET: keep fifteen as written — the twelve-count was shorthand.**
 
 ## 7. Cross-references
 

@@ -165,11 +165,11 @@ session log is append-only (C-22).
 ## 10. Open points
 
 - **P5-OP-6 — Session expiry duration.** The model requires an
-  expiry; its length is HgX's decision. **Needs HgX's word.**
+  expiry; its length is HgX's decision. **RESOLVED 2026-10-22 ~13:31 ET: 24 hours.**
 - **P5-OP-7 — Second-device enrollment.** §4's SL-8 allows a device
   already holding a valid session to initiate enrollment for a
   second device; whether that delegation should require a fresh
-  operator gesture each time is unspecified. **Needs HgX's word.**
+  operator gesture each time is unspecified. **RESOLVED 2026-10-22 ~13:32 ET: a fresh operator gesture is required every time.**
 
 ## 11. Cross-references
 
