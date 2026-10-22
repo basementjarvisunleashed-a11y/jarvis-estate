@@ -108,6 +108,21 @@ The scarcest resource is not compute. It is the operator's attention. A mature
 system protects it: speak when there is signal, stay silent when there is
 none, and never substitute confidence for proof.
 
+## Current Status
+
+**Doctoral programme — Phases 0–4 closed, Phase 5 open.**
+
+| Phase | Status |
+|---|---|
+| Phase 0 — Freeze contracts | Closed |
+| Phase 1 — State-machine proof | Closed |
+| Phase 2 — Invariant verification | Closed — L1 83/83, L2 10/10, L3 10/10, crosscheck 12/12 |
+| Phase 3 — Consistency model | Closed — L2 42/42, L3 80/80 chaos |
+| Phase 4 — Idempotency guarantees | Closed — L2 20/20, L3 15/15, 35 claims audited |
+| Phase 5 — Security boundaries | Open — awaits the principal's word |
+
+Full evidence in [EVIDENCE.md](EVIDENCE.md). Daily release logs in [release-log/](release-log/).
+
 ## License
 
 © 2026 @hgxengineering — [@hgxengineering](https://x.com/hgxengineering) on X,
