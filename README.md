@@ -110,7 +110,7 @@ none, and never substitute confidence for proof.
 
 ## Current Status
 
-**Doctoral programme — Phases 0–4 closed, Phase 5 open.**
+**Doctoral programme — Phases 0–5 closed, Phase 6 open.**
 
 | Phase | Status |
 |---|---|
@@ -119,6 +119,8 @@ none, and never substitute confidence for proof.
 | Phase 2 — Invariant verification | Closed — L1 83/83, L2 10/10, L3 10/10, crosscheck 12/12 |
 | Phase 3 — Consistency model | Closed — L2 42/42, L3 80/80 chaos |
 | Phase 4 — Idempotency guarantees | Closed — L2 20/20, L3 15/15, 35 claims audited |
+| Phase 5 — Security boundary formalism | **Closed** — L2 93/93, L3 34/34, 0 findings, 146/146 claims |
+| Phase 6 — Router optimality | **Open** — HgX's word 2026-10-22 |
 | Phase 5 — Security boundary formalism | **Open** — HgX's word 2026-10-22 ~07:51 ET |
 
 Full evidence in [EVIDENCE.md](EVIDENCE.md). Daily release logs in [release-log/](release-log/).
