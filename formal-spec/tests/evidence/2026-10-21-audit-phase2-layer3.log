@@ -1,0 +1,16 @@
+test_ch01_device_offline_during_approval (test_layer3_chaos.TestChaosScenarios.test_ch01_device_offline_during_approval) ... ok
+test_ch02_approval_expiry_mid_review (test_layer3_chaos.TestChaosScenarios.test_ch02_approval_expiry_mid_review) ... ok
+test_ch03_intent_change_after_card_render (test_layer3_chaos.TestChaosScenarios.test_ch03_intent_change_after_card_render) ... ok
+test_ch04_duplicate_tap (test_layer3_chaos.TestChaosScenarios.test_ch04_duplicate_tap) ... ok
+test_ch05_backend_change_before_client_refresh (test_layer3_chaos.TestChaosScenarios.test_ch05_backend_change_before_client_refresh) ... ok
+test_ch06_router_backend_down (test_layer3_chaos.TestChaosScenarios.test_ch06_router_backend_down) ... ok
+test_ch07_stale_live_source (test_layer3_chaos.TestChaosScenarios.test_ch07_stale_live_source) ... ok
+test_ch08_subagent_completion_without_evidence (test_layer3_chaos.TestChaosScenarios.test_ch08_subagent_completion_without_evidence) ... ok
+test_ch09_digest_mismatch (test_layer3_chaos.TestChaosScenarios.test_ch09_digest_mismatch) ... ok
+test_ch10_missing_tests_in_evidence_packet (test_layer3_chaos.TestChaosScenarios.test_ch10_missing_tests_in_evidence_packet) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+OK
+EXIT:0

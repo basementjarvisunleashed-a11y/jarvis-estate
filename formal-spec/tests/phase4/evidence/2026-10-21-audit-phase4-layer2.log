@@ -1,0 +1,10 @@
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.007s
+
+OK
+---
+evidence: ../evidence/2026-10-22-phase4-layer2.log
+rejections: ../evidence/2026-10-22-phase4-layer2-rejections.log (4 refused requests logged)
+RESULT: ALL GREEN
+EXIT:0
