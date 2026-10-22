@@ -72,8 +72,8 @@ test_sm2_order_freshness_before_liveness (test_stale_mutation.TestStaleMutationO
 Failing freshness + liveness reports 'stale-request'. ... ok
 test_sm3_order_liveness_before_currency (test_stale_mutation.TestStaleMutationOrder.test_sm3_order_liveness_before_currency)
 Failing liveness + currency reports 'intent-invalid'. ... ok
-test_sm4_order_currency_before_digest (test_stale_mutation.TestStaleMutationOrder.test_sm4_order_currency_before_digest)
-Failing currency + digest reports 'stale-revision' — the ... ok
+test_sm4_order_digest_before_currency_for_decide (test_stale_mutation.TestStaleMutationOrder.test_sm4_order_digest_before_currency_for_decide)
+Failing currency + digest on a decide reports 'digest-lapse' — ... ok
 test_sm5_each_step_individually (test_stale_mutation.TestStaleMutationOrder.test_sm5_each_step_individually)
 Every step, failed alone, yields its own reason. ... ok
 test_sm6_refused_mutation_changes_nothing (test_stale_mutation.TestStaleMutationOrder.test_sm6_refused_mutation_changes_nothing)
@@ -84,6 +84,6 @@ test_sm8_expired_intent_refused_at_boundary (test_stale_mutation.TestStaleMutati
 Expiry is integer epoch seconds (Phase 2 Q1); now == expiry is ... ok
 
 ----------------------------------------------------------------------
-Ran 42 tests in 0.005s
+Ran 42 tests in 0.051s
 
 OK

@@ -17,7 +17,11 @@ or:   ./run.sh
 
 The suite writes its rejection ledger — every illegal action the
 generators attempted and the machine refused, by guard — to
-tests/evidence/2026-10-20-layer2-rejections.log at teardown.
+tests/evidence/<YYYY-MM-DD>-layer2-rejections.log at teardown
+(the filename is date-derived so a re-run never overwrites a prior
+run's evidence; fixed 2026-10-21 after a hardcoded 2026-10-20 name
+overwrote the previous day's local copy — the 2026-10-20 data
+survives in the committed repository and the 2026-10-20 run report).
 """
 
 import random
@@ -29,7 +33,7 @@ import work_item_sim as sim
 from work_item_sim import WorkItem, base_intent, render_state
 
 EVIDENCE = Path(__file__).resolve().parents[1] / "evidence"
-REJECTION_LOG = EVIDENCE / "2026-10-20-layer2-rejections.log"
+REJECTION_LOG = EVIDENCE / f"{datetime.now():%Y-%m-%d}-layer2-rejections.log"
 
 # Fixed seed sets (recorded; do not change without noting it in the log).
 PT1_SEEDS = (20261020, 20261021, 20261022)
@@ -39,6 +43,8 @@ PT4_SEEDS = (20261025, 20261026, 20261027, 20261028, 20261029)
 PT5_SEED = 20261030
 
 MUTATIONS = {
+    "intent_id": "intent-999",
+    "work_id": "work-999",
     "action": "delete_post",
     "target": "x/@someone_else",
     "effect": "delete",

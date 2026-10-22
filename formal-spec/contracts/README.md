@@ -15,7 +15,7 @@ ratifies the final glossary).
 |---|---|---|
 | `spec/state-machine.md` | The canonical work-state machine: the twelve states (`received`, `accepted`, `in_progress`, `awaiting_approval`, `executing`, `verifying`, `completed`, `blocked`, `failed`, `paused`, `unknown`, `cancelled`), the transition table T1–T21 with guards, and the forbidden transitions F1–F9. Per Paper IV §6.1–§6.3. **Implemented as `spec/state-machine.tla` (TLA+, ratified proof language).** | Phase 0 coordinator; HgX ratifies |
 | `contracts/events.md` | The canonical event vocabulary: 19 events (this directory), naming convention (snake_case), envelope, structural rules, conflicts and resolutions. Per Paper IV §6.4 and Roadmap §0.3. | Phase 0 coordinator; HgX ratifies |
-| `contracts/glossary.md` | The canonical glossary: 69 normative term definitions, 25 vocabulary conflicts with resolutions, 3 open questions (U-2, U-3, U-4); 3 resolved at ratification (U-1, U-5, U-6). The single vocabulary the model checker, test suite, and doctoral committee refer to. | Phase 0 coordinator; **HgX ratifies (v1.0.0 gate)** |
+| `contracts/glossary.md` | The canonical glossary: 69 normative term definitions, 25 vocabulary conflicts with resolutions, 6 terms flagged unresolved. The single vocabulary the model checker, test suite, and doctoral committee refer to. | Phase 0 coordinator; **HgX ratifies (v1.0.0 gate)** |
 | `spec/approval-digest.md` | The approval-intent digest rule: exact field construction, hash, and canonicalisation, stated precisely enough that two independent implementations produce the same digest for the same intent (Paper IV §14, Month 1 deliverable). | Phase 0 coordinator; HgX ratifies |
 | `contracts/watchtower.schema.json` | Service-state rendering contract: `service_id`, closed `state` enum (`operational`, `paused`, `degraded`, `unknown` — paused explicitly distinct from failed), `last_observed_at`, `fresh_until`, `confidence`, `evidence_ref`. Paper III (Contracts/I); Paper IV §6.6. | Phase 0 coordinator; HgX ratifies |
 | `contracts/evidence-packet.schema.json` | Proof-bundle schema: `packet_id`, `work_id`, `revision`, `artifact_refs`, `source_observations`, `test_results`, `approval_refs`, required `gaps` (omission is a schema violation — INV-E4), `created_at`, packet checksum. Paper IV §6.6. | Phase 0 coordinator; HgX ratifies |
@@ -108,7 +108,3 @@ word. Nothing is pushed, shared, or published by this freeze — the contracts a
 ---
 *Authority: Paper IV v1.1 §§5.4–§6.7, §14 (Month 1); ROADMAP.md §0.4; phase-0-decision-sheet.md
 (D1, D2, D5–D7). Decision D2 (2026-10-19): coordinator resolves vocabulary conflicts; HgX ratifies.*
-
-## Version history
-
-- **v1.1 (2026-10-20, on HgX's order):** corrected the glossary row's unresolved-term count ("6" → "3 open: U-2, U-3, U-4; 3 resolved at ratification: U-1, U-5, U-6"), matching `contracts/glossary.md` §3's 2026-10-19 ratification record. No normative change.

@@ -23,7 +23,7 @@
 36:0	unknown-session	mutate	nope	session not enrolled or revoked
 37:0	stale-request	mutate	nope	|now-ts|=10000 > 300 (request bound)
 38:0	intent-invalid	mutate	nope	intent unknown
-39:0	stale-revision	decide	intent-1	held=99 current=0 (R2: no older, no newer, no missing)
+39:0	digest-lapse	decide	intent-1	D_seen != D: ceremony lapsed, no execution, attested lapse
 40:0	unknown-session	mutate	intent-1	session not enrolled or revoked
 40:1	stale-request	mutate	intent-1	|now-ts|=10000 > 300 (request bound)
 40:2	intent-invalid	mutate	nope	intent unknown

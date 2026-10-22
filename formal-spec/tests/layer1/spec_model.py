@@ -209,14 +209,20 @@ def build_legal_table():
 # Guard reference implementation (mirrors spec/state-machine.tla)
 # ---------------------------------------------------------------------------
 
-#: The six fields an approval binds (Paper IV section 5.6; INV-A2).
-INTENT_FIELDS = ("action", "target", "effect", "scope", "revision", "expiry")
+#: The eight fields an approval binds (Paper IV section 6.6; INV-A2).
+#: HgX's decision Q3 (2026-10-21): the digest binds intent_id and work_id
+#: in addition to the six TLA+ concretization fields — paper text over the
+#: narrower machine variant. A six-field and an eight-field digest differ
+#: entirely; this binding is not reversible without re-hashing history.
+INTENT_FIELDS = ("intent_id", "work_id", "action", "target", "effect",
+                 "scope", "revision", "expiry")
 
 
 def intent_digest(intent):
-    """SHA-256 over the canonical JSON serialisation of the six bound
-    fields — the ratified digest rule (decision U-1, 2026-10-19). Any
-    change to any bound field changes the digest (INV-A2, INV-A3)."""
+    """SHA-256 over the canonical JSON serialisation of the eight bound
+    fields — the ratified digest rule (decision U-1, 2026-10-19) as
+    configured by HgX's Q3 decision (2026-10-21). Any change to any bound
+    field changes the digest (INV-A2, INV-A3)."""
     canonical = {k: intent[k] for k in INTENT_FIELDS}
     blob = json.dumps(canonical, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()

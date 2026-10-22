@@ -53,6 +53,8 @@ def reset_ledger():
 
 def base_intent(**overrides):
     intent = {
+        "intent_id": "intent-001",
+        "work_id": "work-001",
         "action": "publish_post",
         "target": "x/@hgxengineering",
         "effect": "post_text",

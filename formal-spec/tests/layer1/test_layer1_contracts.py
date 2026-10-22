@@ -30,6 +30,8 @@ EXPECTED_EVENTS = [
 
 def base_intent(**overrides):
     intent = {
+        "intent_id": "intent-001",
+        "work_id": "work-001",
         "action": "publish_post",
         "target": "x/@hgxengineering",
         "effect": "post_text",
@@ -219,10 +221,13 @@ class TestApprovalGuards(unittest.TestCase):
         self.assertFalse(sm.server_record_approval(s))
 
     def test_each_bound_field_mutation_changes_digest(self):
-        # CT-A2: the digest binds all six fields; mutating any one of them
-        # changes the digest (INV-A2, INV-A3).
+        # CT-A2: the digest binds all eight fields; mutating any one of them
+        # changes the digest (INV-A2, INV-A3). Eight-field binding per HgX's
+        # Q3 decision (2026-10-21) — intent_id and work_id included.
         base = sm.intent_digest(base_intent())
         mutations = {
+            "intent_id": "intent-999",
+            "work_id": "work-999",
             "action": "delete_post",
             "target": "x/@other",
             "effect": "delete",

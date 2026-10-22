@@ -113,3 +113,4 @@ stamps it can compute with; it gets denials until its clock is sane.
 - **v0.1-draft — 2026-10-21.** First draft: stamp fields, age-honesty
   rules F1–F4, staleness table, cadence-class p99 expectations. Not
   ratified.
+- **2026-10-21 ~17:49 ET (OP-1 RESOLVED on HgX's word):** keep both — 60 s state/event bound (Phase 0 U-5/D7 ratified), 300 s request-freshness bound (substrate reference).

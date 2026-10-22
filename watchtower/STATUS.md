@@ -1,24 +1,23 @@
 # Watchtower Status
 
-Generated: `2026-10-20T00:15:17+00:00` (UTC)
+Generated: `2026-10-22T04:16:28+00:00` (UTC)
 
-**Summary:** 6 operational, 8 paused, 1 unknown
+**Summary:** 4 degraded, 9 operational, 1 paused
 
 | Service | State | Cadence | Note |
 |---|---|---|---|
-| inbox-triage-scan | 🟢 operational | every 30m | enabled; cadence interval@30m |
-| inbox-morning-briefing | 🟢 operational | daily 08:15 | enabled; cadence daily@08:15 |
-| dr-bot-daily-briefing | ⏸️ paused | daily 07:11 | disabled; side chat archived 2026-10-19; last ran Sun 2026-10-18 07:11:53 EDT |
-| dr-bot-anomaly-watch | ⏸️ paused | daily 21:11 | disabled; side chat archived 2026-10-19; last ran Sun 2026-10-18 21:19:29 EDT |
-| dr-bot-weekly-report | ⏸️ paused | weekly Mon 08:11 | disabled; side chat archived 2026-10-19; last ran Mon 2026-10-05 08:13:28 EDT |
-| gameday-nfl-pregame | ⏸️ paused | daily 08:00 | disabled; side chat archived 2026-10-19; last ran Sun 2026-10-18 08:11:23 EDT |
-| gameday-teams-today | ⏸️ paused | daily 09:00 | disabled; side chat archived 2026-10-19; last ran Sun 2026-10-18 09:11:48 EDT |
-| gameday-finals | ⏸️ paused | daily 23:00 | disabled; side chat archived 2026-10-19; last ran Sun 2026-10-18 23:11:52 EDT |
-| gameday-nfl-weekly | ⏸️ paused | weekly Tue 08:00 | disabled; side chat archived 2026-10-19; last ran Tue 2026-10-13 19:57:38 EDT |
-| fz1073-investigation-watch | 🟢 operational | daily 08:11 | enabled; cadence daily@08:11 |
-| neptunesbag-poll-watch | ⏸️ paused | daily 17:11 | disabled; poll closed 2026-10-11; operator-paused as spent |
-| heartbeat | 🟢 operational | every 30m | enabled; cadence interval@30m; mode heartbeat |
-| white-paper-web-edition | ⚪ unknown | continuous | HTTP 403 (bot protection) — could not verify from here |
+| inbox-triage-scan | 🟢 operational | every 30m | enabled interval@30m — runs every 30 minutes |
+| inbox-morning-briefing | 🟢 operational | daily 08:15 | enabled daily@08:00:00 — runs daily at 08:00 ET |
+| dr-bot-daily-briefing | 🟢 operational | daily 07:11 | enabled daily@12:11:00 — runs daily |
+| dr-bot-anomaly-watch | 🟢 operational | daily 21:11 | enabled daily@21:11:00 — scheduled, awaiting evening run |
+| dr-bot-weekly-report | 🟢 operational | weekly Mon 08:11 | enabled weekly Mon 12:11 — runs Mondays |
+| gameday-nfl-pregame | 🔴 degraded | daily 08:00 | cron job MISSING from scheduler — absent from live schedules, cron.d definition files, and _archive; no removal ordered on record |
+| gameday-teams-today | 🔴 degraded | daily 09:00 | cron job MISSING from scheduler — absent from live schedules, cron.d definition files, and _archive; no removal ordered on record |
+| gameday-finals | 🔴 degraded | daily 23:00 | cron job MISSING from scheduler — absent from live schedules, cron.d definition files, and _archive; no removal ordered on record |
+| gameday-nfl-weekly | 🔴 degraded | weekly Tue 08:00 | cron job MISSING from scheduler — absent from live schedules, cron.d definition files, and _archive; no removal ordered on record |
+| fz1073-investigation-watch | 🟢 operational | daily 08:11 | enabled daily@08:11:00 — runs daily |
+| neptunesbag-poll-watch | ⏸️ paused | daily 17:11 | disabled by operator — poll closed 2026-10-11, jobs stay disabled |
+| heartbeat | 🟢 operational | every 30m | enabled interval@30m, mode=heartbeat — scheduler heartbeat alive |
 | estate-skills | 🟢 operational | continuous | present on disk |
 | estate-memory | 🟢 operational | continuous | present on disk |
 

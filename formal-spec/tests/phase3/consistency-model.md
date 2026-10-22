@@ -145,3 +145,4 @@ change control. The substrate is evidence, not law.
 - **v0.1-draft — 2026-10-21.** First draft: hybrid table instantiated for
   iPhone + Watch scope; NT-1..NT-5 operationalization; Q1–Q4 answers
   baked in. Not ratified.
+- **2026-10-21 ~17:49 ET (OP-1 RESOLVED on HgX's word):** keep both — 60 s state/event bound (Phase 0 U-5/D7 ratified), 300 s request-freshness bound (substrate reference).

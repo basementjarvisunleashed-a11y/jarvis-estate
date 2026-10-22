@@ -84,20 +84,25 @@ def decide(packet, intent, now):
 
 def check_evidence_packet(packet, manifests):
     """Completion-side packet guard: raise SchemaError if the packet must
-    not authorise completion — schema violation, revision mismatch (INV-E2),
-    missing gaps (INV-E4), or a failed acceptance test."""
+    not authorise completion — schema violation, artifact_revision mismatch
+    (INV-E2), missing gaps (INV-E4), or a failed acceptance check.
+
+    Q5/OQ-5 (2026-10-21): field names follow the Appendix C.1 sketch.
+    Type coherence (2026-10-21, HgX's word): artifact_revision is INTEGER,
+    overruling the sketch's string typing — INV-E2 compares integers.
+    The sketch carries no artifact digests, so the digest cross-check of
+    the earlier draft is gone (recorded in tests/evidence/2026-10-21-ep-rework.md).
+    """
     assert_schema("evidence", packet)
-    by_id = {m["artifact_id"]: m for m in manifests}
-    for ref in packet["artifact_refs"]:
-        if ref["revision"] != packet["revision"]:
-            sv._fail("evidence", "packet revision %r != artifact revision %r "
-                     "(INV-E2)" % (packet["revision"], ref["revision"]))
-        m = by_id.get(ref["artifact_id"])
-        if m is not None and m["digest"] != ref["digest"]:
-            sv._fail("evidence", "artifact digest mismatch for %r"
-                     % ref["artifact_id"])
-    if any(r["result"] != "pass" for r in packet["test_results"]):
-        sv._fail("evidence", "a failed test result is present — "
+    rev = packet["artifact_revision"]
+    if not any(m["revision"] == rev for m in manifests):
+        sv._fail("evidence", "artifact_revision %r matches no manifest "
+                 "revision (INV-E2)" % rev)
+    if "gaps" not in packet:
+        sv._fail("evidence", "gaps field missing — INV-E4 requires "
+                 "visible gaps")
+    if any(c["result"] != "pass" for c in packet["checks"]):
+        sv._fail("evidence", "a failed check is present — "
                  "completion not authorised")
     return True
 
@@ -194,7 +199,8 @@ class TestDecisionPacketSchema(unittest.TestCase):
 
 
 class TestEvidencePacketSchema(unittest.TestCase):
-    """SCH-EP: evidence-packet.schema.json (v0.1-draft) + packet guard."""
+    """SCH-EP: evidence-packet.schema.json (v0.1-draft, C.1 sketch names per
+    HgX's 2026-10-21 Q5 decision) + packet guard."""
 
     def manifests(self):
         return [load_fixture("artifact-manifest")]
@@ -203,21 +209,34 @@ class TestEvidencePacketSchema(unittest.TestCase):
         self.assertTrue(check_evidence_packet(
             load_fixture("evidence-packet"), self.manifests()))
 
-    def test_sch_ep_02_missing_gaps_rejected(self):
-        # INV-E4: omission of the required gaps field is a schema violation.
+    def test_sch_ep_02_missing_required_checks_rejected(self):
+        # Sketch required list: packet_id, work_id, artifact_revision,
+        # created_at, checks.
+        bad = load_fixture("evidence-packet")
+        del bad["checks"]
+        rejected(check_evidence_packet, bad, self.manifests())
+
+    def test_sch_ep_03_unknown_check_result_enum_rejected(self):
+        bad = load_fixture("evidence-packet")
+        bad["checks"][0]["result"] = "skipped"
+        rejected(check_evidence_packet, bad, self.manifests())
+
+    def test_sch_ep_04_missing_gaps_rejected(self):
+        # INV-E4: the sketch lists gaps as optional; the guard enforces it.
         bad = load_fixture("evidence-packet")
         del bad["gaps"]
         rejected(check_evidence_packet, bad, self.manifests())
 
-    def test_sch_ep_03_revision_mismatch_rejected(self):
-        # INV-E2: packet revision must match the artifact revision.
+    def test_sch_ep_05_artifact_revision_mismatch_rejected(self):
+        # INV-E2: packet artifact_revision must match the artifact revision
+        # (compared on the coerced string — see the guard docstring).
         bad = load_fixture("evidence-packet")
-        bad["artifact_refs"][0]["revision"] = 2
+        bad["artifact_revision"] = "2"
         rejected(check_evidence_packet, bad, self.manifests())
 
-    def test_sch_ep_04_failed_test_result_rejected(self):
+    def test_sch_ep_06_failed_check_rejected(self):
         bad = load_fixture("evidence-packet")
-        bad["test_results"][0]["result"] = "fail"
+        bad["checks"][0]["result"] = "fail"
         rejected(check_evidence_packet, bad, self.manifests())
 
 
