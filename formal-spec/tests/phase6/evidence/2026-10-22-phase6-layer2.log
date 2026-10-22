@@ -1,7 +1,11 @@
-Phase 6 Layer 2 replay (unweighted) — 2026-10-22
-corpus: all — 114 total (102 real, 12 synthetic)
-[unconstrained] n=114 agree=82 differ=32 action_unknown=25 labeled_agreed=80 excluded_outcome_unknown=2 accepted_rate=0.95 guardrail_violations=39 rec={"defer": 0, "deny": 0, "escalate": 0, "proceed": 114, "use-cache": 0}
-[cache-only] n=114 agree=83 differ=31 action_unknown=25 labeled_agreed=81 excluded_outcome_unknown=2 accepted_rate=0.9506 guardrail_violations=39 rec={"defer": 0, "deny": 0, "escalate": 0, "proceed": 113, "use-cache": 1}
-[local] n=114 agree=58 differ=56 action_unknown=25 labeled_agreed=56 excluded_outcome_unknown=2 accepted_rate=0.9286 guardrail_violations=0 rec={"defer": 1, "deny": 3, "escalate": 40, "proceed": 69, "use-cache": 1}
+Phase 6 Layer 2 replay (weighted) — 2026-10-22
+corpus: real — 102 total (102 real, 0 synthetic)
+weights: {"accepted_work": 1.0, "attention_interruptions": -10.0, "cost_units": -1.0, "human_repair_minutes": -5.0, "latency_over_budget_seconds": -0.1, "loops": -8.0}
+[unconstrained] n=102 agree=76 differ=26 action_unknown=25 labeled_agreed=74 excluded_outcome_unknown=2 accepted_rate=0.973 guardrail_violations=38 rec={"defer": 0, "deny": 0, "escalate": 0, "proceed": 102, "use-cache": 0}
+  weighted: contributing=74 score=72.0 terms={"accepted_work": 72, "attention_interruptions": 0, "cost_units": 0, "human_repair_minutes": 0, "latency_over_budget_seconds": 0, "loops": 0} terms_unknown={"attention_interruptions": 74, "cost_units": 74, "human_repair_minutes": 74, "latency_over_budget_seconds": 74}
+[cache-only] n=102 agree=76 differ=26 action_unknown=25 labeled_agreed=74 excluded_outcome_unknown=2 accepted_rate=0.973 guardrail_violations=38 rec={"defer": 0, "deny": 0, "escalate": 0, "proceed": 102, "use-cache": 0}
+  weighted: contributing=74 score=72.0 terms={"accepted_work": 72, "attention_interruptions": 0, "cost_units": 0, "human_repair_minutes": 0, "latency_over_budget_seconds": 0, "loops": 0} terms_unknown={"attention_interruptions": 74, "cost_units": 74, "human_repair_minutes": 74, "latency_over_budget_seconds": 74}
+[local] n=102 agree=47 differ=55 action_unknown=25 labeled_agreed=45 excluded_outcome_unknown=2 accepted_rate=1.0 guardrail_violations=0 rec={"defer": 0, "deny": 0, "escalate": 38, "proceed": 64, "use-cache": 0}
+  weighted: contributing=45 score=45.0 terms={"accepted_work": 45, "attention_interruptions": 0, "cost_units": 0, "human_repair_minutes": 0, "latency_over_budget_seconds": 0, "loops": 0} terms_unknown={"attention_interruptions": 45, "cost_units": 45, "human_repair_minutes": 45, "latency_over_budget_seconds": 45}
 [check INV-R5] pass — failing backend -> escalate via local-fallback-after:ConnectionError
 [check Q2-jev-refusal] pass — refused: Jev backend not approved: HgX's explicit word and his key ar
