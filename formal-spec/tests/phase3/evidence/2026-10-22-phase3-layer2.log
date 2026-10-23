@@ -84,6 +84,6 @@ test_sm8_expired_intent_refused_at_boundary (test_stale_mutation.TestStaleMutati
 Expiry is integer epoch seconds (Phase 2 Q1); now == expiry is ... ok
 
 ----------------------------------------------------------------------
-Ran 42 tests in 0.009s
+Ran 42 tests in 0.016s
 
 OK

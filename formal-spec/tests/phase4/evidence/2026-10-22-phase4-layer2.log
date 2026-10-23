@@ -20,6 +20,6 @@ test_sr5_native_tool_retry_returns_existing_not_second_effect (test_safe_retry.T
 test_sr6_cancel_then_retry_returns_cancelled (test_safe_retry.TestSafeRetry.test_sr6_cancel_then_retry_returns_cancelled) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 0.007s
+Ran 20 tests in 0.040s
 
 OK

@@ -4,7 +4,7 @@
 # counted by the guard that refused it. A guard with a count here
 # has demonstrably rejected something; a guard absent from this
 # list was never exercised by refusal in this run.
-# Written: 2026-10-22T02:33:30.644442+00:00
+# Written: 2026-10-22T17:49:40.046872+00:00
 # Seeds: PT-1 (20261020, 20261021, 20261022), PT-2 20261023, PT-3 20261024, PT-4 (20261025, 20261026, 20261027, 20261028, 20261029), PT-5 20261030
 
 TOTAL REFUSED: 53003

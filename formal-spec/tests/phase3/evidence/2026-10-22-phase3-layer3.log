@@ -62,6 +62,6 @@ test_sk7_future_event_grants_nothing (test_skew.TestClockSkew.test_sk7_future_ev
 A future-dated observed_at passes the event check but buys no ... ok
 
 ----------------------------------------------------------------------
-Ran 31 tests in 0.045s
+Ran 31 tests in 0.023s
 
 OK

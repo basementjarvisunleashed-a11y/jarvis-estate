@@ -15,6 +15,6 @@ test_nl4_flapping_link_duplicate_taps_still_one_record (test_netloss.TestNetwork
 test_nl5_severed_before_first_fire_no_phantom_effect (test_netloss.TestNetworkLoss.test_nl5_severed_before_first_fire_no_phantom_effect) ... ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 0.004s
+Ran 15 tests in 0.029s
 
 OK
