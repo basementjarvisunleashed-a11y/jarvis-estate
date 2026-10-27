@@ -2,3 +2,20 @@ __pycache__/
 *.pyc
 .DS_Store
 status.json
+
+# Local Jarvis: voice profiles, audio, models, secrets, backups.
+# __pycache__/ is already ignored above; repeated so this list stays complete.
+profiles.json
+*.npy
+*.wav
+*.mp3
+*.onnx
+*.onnx.json
+*.gguf
+pretrained_models/
+.env*
+*.bak*
+__pycache__/
+local-jarvis/verdicts.log
+local-jarvis/actions.log
+local-jarvis/out/
