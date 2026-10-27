@@ -19,6 +19,27 @@ the papers; the repo itself is tagged at release milestones.
   folder tree (`roadmap/formal-spec/phase-N/`), dated logs (markdown + PDF) in
   `logs/`. Root-level latest copies untouched; their share links keep working.
 
+## [2026-10-27] — Local Jarvis laptop stack
+
+### Added
+
+- `local-jarvis/`: basement laptop stack. Orchestrator on port 8080
+  (Ollama `qwen3:8b` via `/api/chat`, think off, regex fast path for VLC
+  media commands, VLC HTTP remote on `127.0.0.1:8090`, read-only
+  `rea_analyze`). Voice loop `jarvis_voice.py`: mic → Whisper `small.en`
+  → speaker voice gate → `POST /jarvis` → Piper TTS. The voice loop does
+  not auto-start.
+- Voice gate threshold **0.45**, marked **UNCALIBRATED**, pending
+  calibration for quiet voice, across the room, and unknown voice.
+  Unenrolled voices are ignored.
+- Passwords in the tree are the placeholder `CHANGE_ME` and must be set
+  locally. Windows paths use `C:\Users\<user>`.
+- Secret scanning with gitleaks on push and pull request, and a CI job
+  that runs `python -m py_compile` on `local-jarvis/*.py`.
+- `.gitignore` extended for voice profiles (`profiles.json`, `*.npy`),
+  audio (`*.wav`, `*.mp3`), models (`*.onnx`, `*.onnx.json`, `*.gguf`,
+  `pretrained_models/`), `.env*`, and `*.bak*`. `__pycache__` stays ignored.
+
 ## [2026-10-19] — Phase 1: TLC proof of the state machine
 
 - 3,266,929 distinct states explored; zero invariant violations after six

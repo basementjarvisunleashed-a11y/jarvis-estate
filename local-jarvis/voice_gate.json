@@ -1,0 +1,5 @@
+{
+ "threshold": 0.45,
+ "status": "UNCALIBRATED, pending measurements: quiet voice, across the room, unknown voice",
+ "note": "0.611 was a single verify score, not a threshold. Anything below threshold (any non-enrolled voice) is ignored."
+}

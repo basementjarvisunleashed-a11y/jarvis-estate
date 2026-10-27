@@ -1,0 +1,14 @@
+title = "J.A.R.V.I.S. estate secret scan"
+
+[extend]
+useDefault = true
+
+# Published Dropbox share links are already in the public record (README,
+# papers, the site, EVIDENCE.md). generic-api-key captures the query as
+# `rlkey=<value>` and nothing around it, so the allowlist is that prefix
+# only. A key that is not an rlkey still fails the scan.
+# CHANGE_ME is already ignored by generic-api-key (all-letter placeholder).
+[allowlist]
+description = "Public Dropbox share-link rlkey query values"
+regexTarget = "match"
+regexes = ['''rlkey=[A-Za-z0-9_-]+''']
