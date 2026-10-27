@@ -4,7 +4,7 @@ Does NOT auto-start. Usage (venv python):
   jarvis_voice.py test WAV [--bypass-gate]   offline: one file through the pipeline, reply to out\\reply.wav
 No delete capability by design."""
 import warnings; warnings.filterwarnings("ignore")
-import sys, os, json, time, subprocess, urllib.request, wave
+import sys, os, re, json, time, subprocess, urllib.request, wave
 sys.path.insert(0, r"C:\Jarvis")
 import jarvis as J   # reuse dev(), transcribe(), MIC/SPK, VOICE (same Whisper, same devices)
 ORCH = "http://127.0.0.1:8080/jarvis"
@@ -57,13 +57,41 @@ def record(seconds, path):
     a = sd.rec(int(seconds * sr), samplerate=sr, channels=2, device=J.dev(J.MIC, "input")); sd.wait()
     sf.write(path, a.mean(axis=1), sr); return path
 
+# --- VG-2c 2026-10-27: replay mitigation -------------------------------------------
+# A recording of HgX could pass the speaker gate. For commands that look like they
+# change something (file_move, git_commit, VLC control, verdict approve/deny), Jarvis
+# asks "Say confirm" and only proceeds on a SECOND, fresh clip that (1) passes the
+# gate and (2) Whisper hears as "confirm", within CONFIRM_WINDOW_S. A replayed
+# single command clip cannot answer the prompt. Read-only questions skip this.
+MUTATING_RE = re.compile(r"\b(move|rename|commit|play|pause|resume|stop|next|skip|previous|"
+                         r"volume|louder|quieter|softer|mute|approve|deny|verdict)\b", re.IGNORECASE)
+CONFIRM_WINDOW_S = 15
+
+def confirm(gate, speak, secs=4):
+    """Return True only for a gated, spoken 'confirm' within the window."""
+    if not speak:
+        return False  # offline test mode cannot answer the prompt -> refuse
+    t0 = time.time()
+    play(tts("Say confirm to go ahead.", os.path.join(OUT, "confirm_prompt.wav")))
+    wav = record(secs, os.path.join(OUT, "confirm.wav"))
+    ok, _ = gate.check(wav)
+    if not ok or time.time() - t0 > CONFIRM_WINDOW_S:
+        return False
+    return "confirm" in J.transcribe(wav).lower()
+
 def handle(wav, gate, out_wav, speak, bypass=False):
     t = {}; s = time.time()
-    text = J.transcribe(wav); t["whisper_s"] = time.time() - s; s = time.time()
+    # VG-4 2026-10-27: gate FIRST; other people's speech is never transcribed.
     ok, score = gate.check(wav); t["gate_s"] = time.time() - s
-    res = {"text": text, "principal": ok, "score": score}
-    if not text.strip() or (not ok and not bypass):
+    res = {"text": "", "principal": ok, "score": score}
+    if not ok and not bypass:
         res["action"] = "ignored"; res["t"] = t; return res
+    s = time.time(); text = J.transcribe(wav); t["whisper_s"] = time.time() - s
+    res["text"] = text
+    if not text.strip():
+        res["action"] = "ignored"; res["t"] = t; return res
+    if MUTATING_RE.search(text) and not confirm(gate, speak):  # VG-2c
+        res["action"] = "unconfirmed"; res["t"] = t; return res
     s = time.time(); reply = orchestrate(text); t["orchestrator_s"] = time.time() - s
     s = time.time(); tts(reply, out_wav); t["piper_s"] = time.time() - s
     if speak: s = time.time(); play(out_wav); t["play_s"] = time.time() - s

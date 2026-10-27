@@ -24,9 +24,12 @@ import sys
 SAMPLE_RATE = 16000
 TAKES = 5
 DURATION = 3.0
-PROFILE_FILE = "profiles.json"
+# VG-1 2026-10-27: all voice-profile data lives in C:\Jarvis\voiceprint (not Downloads).
+VOICEPRINT = r"C:\Jarvis\voiceprint"
+os.makedirs(VOICEPRINT, exist_ok=True)
+PROFILE_FILE = os.path.join(VOICEPRINT, "profiles.json")
 MODEL = "speechbrain/spkrec-ecapa-voxceleb"
-MODEL_DIR = "pretrained_models/spkrec-ecapa-voxceleb"
+MODEL_DIR = os.path.join(VOICEPRINT, "pretrained_models", "spkrec-ecapa-voxceleb")
 
 
 def record_take(n, total=1):
@@ -47,7 +50,7 @@ def record_take(n, total=1):
     )
     sd.wait()
     wav = audio.reshape(-1)
-    fname = f"take{n}.wav"
+    fname = os.path.join(VOICEPRINT, f"take{n}.wav")  # VG-1
     sf.write(fname, wav, SAMPLE_RATE)
     print(f"Got it. Saved {fname}.")
     return wav
