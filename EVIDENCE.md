@@ -26,13 +26,14 @@ evidence forever. Nothing is asserted without it.
 | E-011 | Phase 4 closed — L2 20/20, L3 15/15, 35 claims | formal-spec/tests/phase4/ | 2026-10-21 22:31 ET |
 | E-012 | Phase 5 closed — L2 93/93, L3 34/34, 0 findings, 146/146 claims | formal-spec/tests/phase5/ | 2026-10-22 12:44 ET |
 
-## PRESENT — verified (checked 2026-10-19 ~17:35 ET)
+## PRESENT — verified (checked 2026-10-26 ~09:30 ET)
 
 | Surface              | State                                                              |
 |----------------------|--------------------------------------------------------------------|
-| Website (j-a-r-v-i-s-hub) | Built + verified; **no public URL** — share refused 8×, platform-wide |
-| Dropbox              | Archive current; log PDF re-rendered 17:33 ET                       |
-| Repo                 | Committed through 37dda1f; staged locally; **not pushed**           |
+| Website (j-a-r-v-i-s-hub) | Built; no build running; **not shared** (`shared: false`, no public URL) — artifact share FULL STOP and website hands-off order stand |
+| Public site (GitHub Pages) | **Live** — https://basementjarvisunleashed-a11y.github.io/jarvis-estate/ — fetched in the 2026-W44 audit; nightly live check 2026-10-26 08:39 ET |
+| Dropbox              | Archive present; logs current through build-log-2026-10-26 |
+| Repo                 | Local `master` at dd19167 (Academy Session 3, 2026-10-22), **not pushed**; `origin/main` at 37d4244 (2026-10-26) |
 
 ## FUTURE — tracked
 
@@ -42,3 +43,4 @@ evidence forever. Nothing is asserted without it.
 | F-002 | GitHub push (full chronicle)            | basementjarvisunleashed account + HgX's word | open   |
 | F-003 | Dropbox `/J.A.R.V.I.S./` public link | https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq (anyone-with-link, "Allows viewing", minted 2026-10-19) | PROVEN |
 | F-004 | Weekly / monthly / quarterly audits     | —                                            | ACTIVE |
+| F-005 | Reconcile local ledger with published ledger (E-007–E-012, Phases 0–5) | publishing-house reconciliation | open |

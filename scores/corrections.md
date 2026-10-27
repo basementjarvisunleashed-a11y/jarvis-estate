@@ -10,3 +10,4 @@ exactness not guaranteed, honesty marked where uncertain.
 | 2026-10-16 | "make sure it looks like the old me" (meme likeness)                       | meme forge   | canonical likeness rule, no-text-on-image               |
 | 2026-10-18 | "u don't even update me" → checkpoints pushed unprompted, moved to main chat | fantasy    | five Sunday checkpoints, unprompted                     |
 | 2026-10-18 | Premature "Raiders +5.0 is gone" walked back at finals                     | betting desk | never grade from a live line; verify the final marker   |
+| 2026-10-21 | Academy Session 2 lecture record corrected — session taught elsewhere, not recorded (v2, v3) | academy | gap documented in the lecture record per the documentation law |
