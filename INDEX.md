@@ -1,57 +1,59 @@
 # J.A.R.V.I.S. Estate — Repository Index
 
-Public, sanitized release. Identity: **@hgxengineering** (no real names anywhere).
+Public record, current as of **2026-10-27**. The operator is **HgX**. No real names.
 
-## Doctrine — the white papers (`doctrine/`)
+**Local Jarvis is live.** The downloadable Windows build is [`local-jarvis/`](local-jarvis/README.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
 
-| #   | Paper              | File                                        | Version | Pages | Landed     |
-|-----|--------------------|---------------------------------------------|---------|-------|------------|
-| I   | Vision / Doctrine  | `jarvis-white-paper-v1.2.pdf`               | v1.2    | 14    | 2026-10-19 |
-| II  | Technical          | `jarvis-technical-white-paper-v1.1.pdf`     | v1.1    | 20    | 2026-10-19 |
-| III | Front-End          | `jarvis-frontend-white-paper-v1.1.pdf`      | v1.1    | 20    | 2026-10-19 |
-| IV  | Roadmap (to Proof) | `jarvis-roadmap-white-paper-v1.1.pdf`      | v1.1    | 110   | 2026-10-19 |
+## Runtime
 
-Open source from day one is the foundation of all four (Paper I, 5th principle).
+| Path | What it is |
+|---|---|
+| [`local-jarvis/`](local-jarvis/README.md) | Windows 10/11 laptop stack. `install.ps1`, voice loop, orchestrator on port 8080. Placeholders only. Not auto-started. |
+| [`watchtower/`](watchtower/README.md) | Honest uptime monitor. Live states are in `STATUS.md`. |
+| [`skills/`](skills/) | Eight roles: `betting-engine`, `bitcoin-x-memes`, `gameday-bot`, `overlord-bot`, `tax-bot`, `team-deployment`, `tickler-bot`, `usage-router`. |
 
-## Formal specification (`formal-spec/`) — the doctoral validation programme
+## Doctrine
 
-- `contracts/` — normative contracts: `glossary.md` (v1.0.0, ratified),
-  `events.md` (v1.0.0), `README.md` (governance).
-- `spec/` — `state-machine.tla` (TLA+ work-state machine, the proof language),
-  `state-machine.cfg` (TLC model-checker config).
-- `proofs/` — `phase1-tlc-report.md` (Phase 1 model-checking evidence).
+The white papers are indexed in [`papers/`](papers/README.md). There is no `doctrine/` directory in this repository. Paper IV's source is [`formal-spec/whitepaper/`](formal-spec/whitepaper/jarvis-roadmap-white-paper.md). The full in-browser reader is the archived hub [`website/index.html`](website/index.html).
 
-Versioning law: `VERSIONING.md` — v0.x.x = draft, v1.0.0 = ratified, versions only move forward.
+| # | Paper | Version | Pages | Landed |
+|---|---|---|---|---|
+| I | Vision | v1.2 | 14 | 2026-10-19 |
+| II | Technical | v1.1 | 20 | 2026-10-19 |
+| III | Front end | v1.1 | 20 | 2026-10-19 |
+| IV | Roadmap to proof | v1.1 | 110 | 2026-10-19 |
 
-## Release log (`release-log/`)
+Dropbox share URLs are listed in `papers/README.md`. Checked 2026-10-27, those shares respond with a Dropbox login page. They were not replaced.
 
-Dated build logs — `YYYY-MM-DD.md`: every release with date, timestamps
-(America/Toronto), hours worked, and comments. The estate's chronicle, kept from
-2026-10-19 to the final build-out.
+## Formal specification (`formal-spec/`)
 
-## Skills (`skills/`) — one role per skill, duties never cross
+- `contracts/` — glossary and event vocabulary (v1.0.0), governance in `README.md`.
+- `spec/` — `state-machine.tla` and the TLC config.
+- `proofs/` — Phase 1 model-checking evidence.
+- `tests/` — phase results. Phases 0–5 are closed. Phase 6 is open.
 
-`betting-engine`, `bitcoin-x-memes`, `gameday-bot`, `overlord-bot`, `tax-bot`,
-`team-deployment`, `tickler-bot`, `usage-router`.
+Versioning law: [`VERSIONING.md`](VERSIONING.md). v0.x.x is a draft. v1.0.0 is ratified. Versions only move forward.
 
-## Watchtower (`watchtower/`)
+## Chronicle
 
-The estate monitor: `watchtower.py` (portable, stdlib-only), `services.yaml`
-manifest (see `services.example.yaml`), live `STATUS.md`. Silent unless something
-changed or needs attention.
+- [`release-log/`](release-log/) — dated logs from 2026-10-19 onward, America/Toronto.
+- [`CHANGELOG.md`](CHANGELOG.md) — notable changes.
+- [`EVIDENCE.md`](EVIDENCE.md) — claims and their evidence.
+- [`academy/`](academy/README.md) — the course: index, history, decks, lecture records.
+- [`research/`](research/README.md) — research notes by day.
+- [`audits/`](audits/TEMPLATE.md) and [`scores/`](scores/README.md) — audits and the stability score.
 
 ## Root files
 
-- `README.md` — what this is, and "Following the build-out" (how to track progress).
-- `SYSTEM_PROMPT.md` — the operating identity and rules.
-- `VERSIONING.md` — the versioning law.
-- `CHANGELOG.md` — what changed, per release.
-- `INDEX.md` — this file.
-- `CONTRIBUTING.md` — how to contribute.
-- `LICENSE` — MIT (code). `LICENSE-CC-BY-4.0` — CC-BY-4.0 (papers and docs).
+- [`README.md`](README.md) — overview, install, architecture.
+- [`SYSTEM_PROMPT.md`](SYSTEM_PROMPT.md) — operating identity and public-identity rules.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md), [`SECURITY.md`](SECURITY.md), [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+- [`LICENSE`](LICENSE) — MIT for code. [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0) — papers and docs.
 
-## Forge scaffolding
+## Forge
 
-- `.github/` — issue templates and pull-request template (GitHub).
-- `.gitlab/` — issue templates (GitLab).
-- `.gitignore` — runtime and local artifacts never committed.
+- [`.github/`](.github/pull_request_template.md) — issue templates, pull-request template, Validate, gitleaks, Local Jarvis `py_compile`, and link check.
+- [`.gitlab/`](.gitlab/issue_templates/bug.md) — GitLab issue templates.
+- [`.gitignore`](.gitignore) — voice profiles, audio, models, and secrets stay untracked.
+
+`website/index.html` is the archived white-paper hub. Do not publish that file as the homepage. The live page is the root `index.html`.

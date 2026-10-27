@@ -11,7 +11,7 @@ labels: bug
 
 ## Where
 
-<!-- paper/skill/phase and version, e.g. doctrine Paper II v1.1, skill usage-router -->
+<!-- paper/skill/phase and version, e.g. papers Paper II v1.1, local-jarvis, skill usage-router -->
 
 ## Evidence
 

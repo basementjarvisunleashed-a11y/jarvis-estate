@@ -15,4 +15,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile local-jarvis Python
-        run: python -m py_compile local-jarvis/*.py
+        run: |
+          python -m py_compile \
+            local-jarvis/enroll.py \
+            local-jarvis/jarvis.py \
+            local-jarvis/jarvis_voice.py \
+            local-jarvis/orchestrator.py \
+            local-jarvis/voice_gate.py
+          python -m py_compile local-jarvis/*.py

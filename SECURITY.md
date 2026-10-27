@@ -13,11 +13,15 @@ By doctrine:
   one.
 - **Human authority at every consequential boundary.** The system this repo
   documents sends, spends, publishes, and deletes nothing without the
-  principal's explicit approval. Reports that describe bypassing that
+  operator's explicit approval. Reports that describe bypassing that
   boundary are treated as security issues.
-- **Formal security work is on the roadmap.** Phase 5 of the doctoral
-  programme (security boundaries) builds on the STRIDE threat model in
-  Paper IV. Findings from this repository's readers are welcome input.
+- **Formal security work.** Phase 5 (security boundaries) is closed.
+  Phase 6 (router optimality) is open. Findings from readers are welcome.
+- **Local Jarvis**, live in [`local-jarvis/`](local-jarvis/README.md) since
+  2026-10-27, ships placeholders only (`CHANGE_ME`, `<user>`). Voice
+  profiles, recordings, and weights stay on the machine. The voice path,
+  VLC, and Ollama bind to localhost. The orchestrator listens on port 8080
+  only after it is started. The voice loop is not auto-started.
 
 ## Supported versions
 
@@ -27,7 +31,7 @@ superseded versions, which are kept for the record.
 
 ## Reporting a vulnerability
 
-Email **HgXengineering@gmail.com** with the subject line
+Email **HgXengineering@gmail.com** (HgX, the operator) with the subject line
 `SECURITY: jarvis-estate`. Please include:
 
 - what you found and where (file, path, or URL),

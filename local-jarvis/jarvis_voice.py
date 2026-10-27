@@ -1,6 +1,6 @@
 """Local Jarvis voice loop: Maono mic -> Whisper -> voice gate -> 8080 orchestrator -> Piper (Alan).
 Does NOT auto-start. Usage (venv python):
-  jarvis_voice.py loop [seconds]             live loop (only when HgX says so)
+  jarvis_voice.py loop [seconds]             live loop (only when the operator says so)
   jarvis_voice.py test WAV [--bypass-gate]   offline: one file through the pipeline, reply to out\\reply.wav
 No delete capability by design."""
 import warnings; warnings.filterwarnings("ignore")

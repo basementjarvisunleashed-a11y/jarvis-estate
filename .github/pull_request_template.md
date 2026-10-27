@@ -15,3 +15,4 @@
 - [ ] No real names or private data added
 - [ ] `CHANGELOG.md` updated
 - [ ] Docs updated where behavior changed
+- [ ] New links resolve, or a broken external link is explained in the description

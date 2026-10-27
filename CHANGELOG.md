@@ -3,6 +3,35 @@
 All notable changes to the J.A.R.V.I.S. open-source release. Versions follow
 the papers; the repo itself is tagged at release milestones.
 
+## [2026-10-27] — public site and living docs
+
+### Changed
+
+- Root `index.html` is a static dark homepage: Local Jarvis, architecture,
+  download, docs, research (`#research`), and the build chronicle. No
+  third-party scripts. GitHub Pages still publishes `/` on `main`.
+- Living docs (README, INDEX, CONTRIBUTING, SECURITY, papers, Academy,
+  evidence) state the current fact: Local Jarvis is live on 2026-10-27
+  in `local-jarvis/`.
+- `website/index.html` stays as the archived white-paper hub, marked
+  deprecated for publishing. Its relative Academy links now resolve from
+  `website/` to the repository root.
+- Link check runs in CI. Broken files and HTTP 404/410 fail the job.
+  Timeouts and flaky external status codes do not.
+- `index.html` gained a `#research` anchor so the research entry pages
+  resolve.
+
+### Notes
+
+- Dropbox shares were checked on 2026-10-27 and ask for a login. URLs were
+  not replaced.
+- The 2026-10-19 Muse share returns "Shared link unavailable". The URL
+  remains in the changelog below as history. The live site is GitHub Pages.
+- Licenses were already present (MIT, CC-BY-4.0). None was added.
+- `deployment-build-v1.0/` and `watchtower/STATUS.md` were not modified.
+- Historical note on the unreleased section below: `doctrine/` was never a
+  directory. Papers are indexed in `papers/`.
+
 ## [Unreleased]
 
 ### Added
@@ -18,6 +47,25 @@ the papers; the repo itself is tagged at release milestones.
   version in `papers/<paper>/<version>/` with VERSIONS.md, the roadmap's own
   folder tree (`roadmap/formal-spec/phase-N/`), dated logs (markdown + PDF) in
   `logs/`. Root-level latest copies untouched; their share links keep working.
+
+## [2026-10-27] — downloadable build
+
+### Added
+
+- Local Jarvis is downloadable and installable from
+  [`local-jarvis/`](local-jarvis/README.md): a Windows 10/11 install guide
+  (NVIDIA GPU, tested on an RTX 2060 6GB), idempotent `install.ps1`, and
+  `.env.example` with placeholders only.
+- `enroll.py` (5 takes, `--verify`), `jarvis.py` (`qwen2.5:3b`), and the
+  two requirements files. `requirements-voice.txt` targets
+  `C:\Jarvis\venv`. `requirements-orchestrator.txt` targets system
+  Python 3.13 for the voice gate and enrollment.
+- Optional logon tasks in `local-jarvis/tasks/`. The voice loop is
+  deliberately not auto-started. `install.ps1` registers tasks only with
+  `-RegisterTasks`, and only after the `<user>`, SID, and path
+  placeholders are edited. It does not remove files or store secrets.
+- `.gitignore` also covers `take*.wav`, `out/`, and `voices/*.onnx`.
+  `.env.example` stays tracked; a real `.env` does not.
 
 ## [2026-10-27] — Local Jarvis laptop stack
 
@@ -74,7 +122,9 @@ the papers; the repo itself is tagged at release milestones.
   - Paper IV — doctoral roadmap, *From Doctrine to Proof* (v1.1, 110 pages):
     open source through every phase, new publication boundary, new risk R9
     (open-source publication hazards).
-- Public hub site hosting all four papers:
+- Public hub site hosting all four papers (historical URL; on 2026-10-27
+  the share returned "Shared link unavailable". The live site is GitHub
+  Pages):
   https://muse.ai/s/j-a-r-v-i-s-white-paper-wxs6bxaxyuhxafxi
 - `SYSTEM_PROMPT.md` — the release's identity rules: public references only
   as @hgxengineering; the principal's real name never in public material.

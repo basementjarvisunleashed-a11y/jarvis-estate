@@ -1,0 +1,36 @@
+name: Links
+
+# File links and HTTP 404/410 fail the job. Timeouts and flaky external
+# status codes (403, 405, 408, 429, 5xx) are printed and do not fail it.
+# Loopback URLs in the install docs are not fetched.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install lychee
+        run: |
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/download/lychee-v0.18.1/lychee-x86_64-unknown-linux-gnu.tar.gz \
+            -o /tmp/lychee.tgz
+          tar -xzf /tmp/lychee.tgz -C /tmp lychee
+          /tmp/lychee --version
+      - name: Check Markdown and HTML links
+        run: |
+          set +e
+          /tmp/lychee \
+            --no-progress \
+            --max-retries 2 \
+            --max-concurrency 8 \
+            --timeout 20 \
+            --exclude-loopback \
+            --include-fragments \
+            --format json \
+            --output /tmp/lychee.json \
+            '**/*.md' '**/*.html'
+          python3 scripts/link-check-gate.py /tmp/lychee.json

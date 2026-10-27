@@ -12,7 +12,7 @@ The Academy is where the white papers are taught as a course. The Academy Bot ho
 |---|---|---|---|---|
 | 1 | 2026-10-14 | The Vision (white paper v1.1) — expert depth, 42 slides | — | — |
 | 2 | 2026-10-21 | The Vision (white paper v1.2) — expert depth, 48 slides | [PDF](decks/vision-white-paper-slideshow.pdf) · [PPTX](decks/vision-white-paper-slideshow.pptx) | [v1](lecture-records/lecture-record-2026-10-21.md) · [v2](lecture-records/lecture-record-2026-10-21-v2.md) · [v3](lecture-records/lecture-record-2026-10-21-v3.md) |
-| 3 | 2026-10-22 | Memory — persistence and semantics | — | — |
+| 3 | 2026-10-22 | Memory — persistence and semantics. Deck published. The 06:00–08:00 window recorded no exchanges; whether the session ran is unrecorded. | [PDF](decks/memory-slideshow.pdf) · [PPTX](decks/memory-slideshow.pptx) | [record](lecture-records/lecture-record-2026-10-22.md) |
 
 ## Materials
 
@@ -24,4 +24,4 @@ The Academy is where the white papers are taught as a course. The Academy Bot ho
 ## On the other surfaces
 
 - **Dropbox:** `/J.A.R.V.I.S./education/` — the education dossier: `decks/`, `records/`, `status/` subfolders under the same versioning law.
-- **Website:** the hub's Academy section carries the cadence, the session log, the deck links, the Academy index, history, materials, and Q&A.
+- **Website:** the live homepage links the Academy from its docs section. The archived hub (`website/index.html`) still carries the full Academy section. Local Jarvis, the downloadable build, has been live in `local-jarvis/` since 2026-10-27 and is not a course session.

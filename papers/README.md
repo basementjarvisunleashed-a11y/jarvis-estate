@@ -1,7 +1,16 @@
 # Papers
 
 The J.A.R.V.I.S. white-paper series. The trilogy states the doctrine; Paper IV
-commissions the proof.
+commissions the proof. The downloadable runtime is separate: Local Jarvis
+has been live since 2026-10-27 in [`local-jarvis/`](../local-jarvis/README.md).
+
+**Dropbox status, checked 2026-10-27.** Every share link in this file
+responds with a Dropbox login page, including the file links that already
+use `dl=1` and the folder link. They are not public downloads until HgX
+remints them. The URLs are unchanged on purpose. Read Paper IV in
+[`formal-spec/whitepaper/jarvis-roadmap-white-paper.md`](../formal-spec/whitepaper/jarvis-roadmap-white-paper.md).
+Papers I–III are in the archived hub
+[`website/index.html`](../website/index.html).
 
 **Versioning law:** nothing is ever deleted or overwritten. New versions are
 added alongside the old; this index records the full history. The growth of
