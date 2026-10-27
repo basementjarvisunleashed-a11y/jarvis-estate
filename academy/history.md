@@ -34,6 +34,14 @@ The lecture record is versioned three times in one morning, per his law: v1 (the
 
 Later that morning, HgX commissions the next deck: a two-hour presentation on **memory** — memory persistence and memory semantics — for Session 3.
 
-## 2026-10-22 — Session 3 (upcoming)
+## 2026-10-22 — Session 3
 
 Memory — persistence and semantics. Thursday, 6:00–8:00 AM America/Toronto.
+
+The 48-slide deck was published before the slot
+(`academy/decks/memory-slideshow.pdf`, `academy/decks/memory-slideshow.pptx`).
+The scheduled window recorded no exchanges. Whether the session ran as
+self-study, ran elsewhere, or did not run is unrecorded and awaits HgX's
+word. The lecture record is
+`lecture-records/lecture-record-2026-10-22.md`. This heading used to say
+"upcoming"; that word was wrong once the date had passed.

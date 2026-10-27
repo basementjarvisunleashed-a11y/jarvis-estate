@@ -11,7 +11,7 @@ labels: enhancement
 
 ## Scope
 
-<!-- doctrine / skill / formal-spec / watchtower / website -->
+<!-- papers / local-jarvis / skill / formal-spec / watchtower / website -->
 
 ## Versioning impact
 

@@ -3,6 +3,11 @@
 *Doctoral-level remediation roadmap for J.A.R.V.I.S. — recorded 2026-10-08.
 Declared by HgX as the focus of his life. Source: HgX's own directive.*
 
+> **Status on 2026-10-27.** Phases 0–5 are closed in this repository. Phase 6
+> (router optimality) is open. Local Jarvis, the downloadable Windows build,
+> is in [`local-jarvis/`](../local-jarvis/README.md). The text below is the
+> roadmap as recorded on 2026-10-08. It is not rewritten.
+
 Below is a doctoral-level remediation roadmap. Its purpose is to move J.A.R.V.I.S. from **strong architectural specification** to **formally defensible engineering and research contribution**.
 
 The roadmap is organized around the six gaps:

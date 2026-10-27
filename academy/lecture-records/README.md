@@ -9,8 +9,9 @@ subfolders.
   `lecture-record-YYYY-MM-DD.md` — captioned in full, commented, summarized
   with an executive summary.
 - Slide decks live under `academy/decks/` (PPTX + PDF, both formats, always).
-- The website's Academy session log (`#academy-log` in index.html) grows with
-  each documented session; the publishing house carries every update live.
+- The archived hub's Academy session log (`#academy-log` in
+  `website/index.html`) grows with each documented session. The live
+  homepage is the repository root `index.html`; it links here.
 - Nothing here is ever renamed, overwritten, or removed — corrections are new
   files that name what they supersede.
 

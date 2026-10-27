@@ -16,8 +16,8 @@ who you are, who the principal is in public, and the doctrine you never break.
 
 These rules are absolute in all public material, prompts, logs, and metadata:
 
-- The principal is referred to ONLY as **@hgxengineering**. Never any other
-  name, in any public context.
+- The principal is **HgX**, the operator. The public handle on X is
+  **@hgxengineering**. Never a legal name, in any public context.
 - The principal's real name, family details, addresses, finances, credentials,
   and personal data NEVER appear in public material. Ever.
 - Public contact: **@hgxengineering** on X — **HgXengineering@gmail.com**.
@@ -41,6 +41,12 @@ These rules are absolute in all public material, prompts, logs, and metadata:
 - **Evidence is the unit of trust** — no proof, no done.
 - **Memory** answers "how do we work"; **live systems** answer "what is true
   now."
+
+## Runtime
+
+Local Jarvis has been live since 2026-10-27. The downloadable Windows build
+is `local-jarvis/` (`install.ps1`, voice loop, orchestrator on port 8080).
+It does not start itself. Placeholders only. Voice data never enters git.
 
 ## Licensing
 

@@ -1,151 +1,126 @@
-# J.A.R.V.I.S. — an open-source operating system for personal AI
+# J.A.R.V.I.S.
 
-**J**oint **A**mbient **R**eady **V**ariance **I**ntelligence **S**ystem
+**Joint Ambient Ready Variance Intelligence System**
 
-**One principal. A federation of durable roles. Current facts, inspectable
-evidence, and human authority at every consequential boundary.**
+One operator. Durable roles. Current facts, inspectable evidence, and human authority at every consequential boundary.
 
-This repository is the complete, sanitized J.A.R.V.I.S. estate: the doctrine,
-the skills, and the Watchtower that proves it's running. Everything here runs
-today on a real operator's estate — this isn't a framework demo, it's the
-actual system with the personal details removed.
+[![Validate](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/actions/workflows/validate.yml/badge.svg)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/github/license/basementjarvisunleashed-a11y/jarvis-estate)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/basementjarvisunleashed-a11y/jarvis-estate)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/commits/main)
+
+**Local Jarvis is live.** On 2026-10-27 the downloadable Windows build landed in [`local-jarvis/`](local-jarvis/README.md). The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
+
+## Contents
+
+- [Overview](#overview)
+- [Get Local Jarvis](#get-local-jarvis)
+- [Architecture](#architecture)
+- [Repository structure](#repository-structure)
+- [Security](#security)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Overview
+
+J.A.R.V.I.S. is an operating system for a personal AI estate. Named roles own durable jobs. Changing facts are re-read from the system that owns them. A fluent "done" is not proof: consequential work ends in an artifact the operator can inspect. Nothing is sent, spent, published, or deleted without explicit approval.
+
+The estate loop is:
+
+**Role → live source → tool → artifact → evidence → approval → routine**
+
+This repository is the public record: doctrine, skills, the formal programme, Watchtower, and the laptop build. Personal details stay off the public tree. The operator is **HgX**.
+
+Doctoral programme, as of 2026-10-27: Phases 0–5 are closed. Phase 6 (router optimality) is open. Evidence is in [`EVIDENCE.md`](EVIDENCE.md).
 
 ## Get Local Jarvis
 
-The Windows laptop build is in [`local-jarvis/`](local-jarvis/README.md).
-It installs on Windows 10/11 with an NVIDIA GPU (tested on an RTX 2060
-6GB): mic, Whisper, a speaker gate, an orchestrator on port 8080, Ollama,
-and Piper. [`install.ps1`](local-jarvis/install.ps1) checks prerequisites,
-creates `C:\Jarvis\venv`, and installs both requirements files. It does
-not register scheduled tasks unless you pass `-RegisterTasks`. The voice
-loop is deliberately not auto-started.
+The Windows laptop build is [`local-jarvis/`](local-jarvis/README.md). It does not start on its own. The voice loop is not a login item. The orchestrator listens on port 8080 only after you start it.
 
-## From proof of concept to production
+Tested on Windows 10/11 with an NVIDIA GPU (reference card: RTX 2060 6GB). CPU Whisper works without the GPU.
 
-**The concept.** Most people use an AI assistant like a better chat window:
-one question, one answer, no memory, no accountability. The bet behind
-J.A.R.V.I.S. was that a personal AI should work more like a well-run estate —
-named roles that own durable jobs, facts re-read from live systems instead of
-trusted from memory, and every consequential run ending in evidence the
-operator can inspect.
+1. Install Python 3.13, [Ollama](https://ollama.com/download), and the two models named in the guide (`qwen3:8b` for the orchestrator, `qwen2.5:3b` for `jarvis.py`).
+2. From `local-jarvis/`:
 
-**The production system.** That bet became an operating loop:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\install.ps1
+   ```
 
+3. Set passwords and the Windows account on the machine. The tree ships placeholders only (`CHANGE_ME`, `<user>`). Do not commit the real values.
+4. Start the orchestrator with `py -3.13 C:\Jarvis\orchestrator.py` and open `http://localhost:8080`.
+5. Enroll the speaker before trusting the voice gate. The threshold starts at **0.45** and is **uncalibrated**.
+
+`install.ps1` is idempotent. It does not register scheduled tasks unless you pass `-RegisterTasks`, and it refuses that flag while placeholders are still in the task XML. Full steps, Piper voice files, VLC, and troubleshooting are in [`local-jarvis/README.md`](local-jarvis/README.md).
+
+## Architecture
+
+A spoken turn is audio in and audio out. Plain VLC commands match a regex and skip the model.
+
+```mermaid
+flowchart LR
+    mic[Mic] --> whisper[Whisper small.en]
+    whisper --> gate[Voice gate]
+    gate --> orch["Orchestrator :8080"]
+    orch --> ollama["Ollama qwen3:8b"]
+    ollama --> tools["Tools / VLC / REA"]
+    tools --> piper[Piper TTS]
 ```
-ROLE → LIVE SOURCE → TOOL → ARTIFACT → EVIDENCE → APPROVAL → ROUTINE
+
+The estate around that laptop stack still follows the same custody chain:
+
+```mermaid
+flowchart LR
+    role[Role] --> source[Live source]
+    source --> tool[Tool]
+    tool --> artifact[Artifact]
+    artifact --> evidence[Evidence]
+    evidence --> approval[Approval]
+    approval --> routine[Routine]
 ```
 
-- **Roles, not a monolith.** Each bot owns one job: calendar and tasks, media
-  creation, health, sports, tax, administration. Duties never cross; context
-  compounds inside each role instead of blurring across them.
-- **Live sources of truth.** Changing facts (scores, prices, schedules,
-  account states) are re-read from the system that owns them, every run.
-  Memory holds identity, preferences, and continuity — never current numbers.
-- **Evidence over status updates.** A fluent "done" is not proof. Every
-  consequential run returns an artifact plus sources, changes, tests,
-  approvals, and visible gaps.
-- **Approval at the last safe moment.** The system prepares everything
-  reversible, then stops before anything consequential: nothing is sent,
-  spent, published, or deleted without the operator's explicit approval.
-- **Skills before routines.** A proven run becomes a reusable skill; only
-  skills that survive review become scheduled routines. Automation removes
-  repeated preparation before it removes human control.
+`jarvis.py` is a separate helper on `qwen2.5:3b`. The voice loop does not use that model. VLC's HTTP remote and Ollama stay on localhost. Details and the file map are in [`local-jarvis/README.md`](local-jarvis/README.md).
 
-**The runtime proof.** [`watchtower/STATUS.md`](watchtower/STATUS.md) is
-regenerated by the estate's own hourly sweep — real timestamps, real service
-states. A service the operator deliberately paused reads as *paused*, not
-down: pausing is a decision, not an outage. The full doctrine is in
-[`papers/`](papers/), including the technical white paper written for
-senior engineers.
-
-## Repository map
+## Repository structure
 
 | Path | What it is |
 |---|---|
-| [`local-jarvis/`](local-jarvis/README.md) | Downloadable Windows build: voice loop, orchestrator, install guide, and `install.ps1`. |
-| `skills/` | The eight estate skills — reproducible playbooks: calendar office, meme forge, betting desk, sports desk, estate administrator, tax office, team deployment, usage router. |
-| `watchtower/` | Honest uptime monitoring: stdlib-only Python, a service manifest, and the live `STATUS.md`. |
-| `papers/` | The white-paper trilogy plus the roadmap — vision (v1.2), technical (v1.1), front-end (v1.1), and the doctoral validation programme (v1.1). Every released version is kept; nothing is ever replaced. |
-| `release-log/` | Dated build logs (markdown): date, timestamps (America/Toronto), work hours, and comments — the full chronicle from 2026-10-19 to the final build-out. |
-| `formal-spec/` | The doctoral workstream: frozen contracts (canonical glossary, event vocabulary), the TLA+ work-state machine, and per-phase outputs as they land. |
+| [`local-jarvis/`](local-jarvis/README.md) | Downloadable Windows build: voice loop, orchestrator, `install.ps1`. Live 2026-10-27. |
+| [`skills/`](skills/) | Eight role playbooks. Duties do not cross. |
+| [`watchtower/`](watchtower/README.md) | Stdlib monitor and [`STATUS.md`](watchtower/STATUS.md). Paused is a decision, not an outage. |
+| [`papers/`](papers/README.md) | White-paper index. Current versions and the Dropbox URLs. |
+| [`formal-spec/`](formal-spec/ROADMAP.md) | Contracts, the TLA+ state machine, and the phase record. |
+| [`academy/`](academy/README.md) | Course index, history, decks, and lecture records. |
+| [`release-log/`](release-log/) | Dated build logs, America/Toronto. |
+| [`research/`](research/README.md) | Published research notes, one folder per day. |
+| [`audits/`](audits/TEMPLATE.md) | Audit template and weekly audits. |
+| [`scores/`](scores/README.md) | Stability rubric and history. |
+| [`website/index.html`](website/index.html) | Archived white-paper hub. The live homepage is the root `index.html`. |
+| [`INDEX.md`](INDEX.md) | Short map of the same tree. |
 
-## Following the build-out
+Eight skills: `tickler-bot`, `bitcoin-x-memes`, `betting-engine`, `gameday-bot`, `overlord-bot`, `tax-bot`, `team-deployment`, `usage-router`. Each `SKILL.md` has the same anatomy: purpose, workflow, output contract, operating rules.
 
-The full chronicle — logs, comments, versioning — is followable right here:
+## Security
 
-- **Papers, versioned:** [`papers/`](papers/) indexes every released paper version
-  (Paper I v1.2, Paper II v1.1, Paper III v1.1, Paper IV v1.1 as of 2026-10-19),
-  with Dropbox downloads. New versions land alongside the old — nothing is ever replaced.
-- **Release log:** `release-log/` — one dated markdown file per build day, with
-  timestamps (America/Toronto), work hours, and comments, from 2026-10-19
-  through the final build-out.
-- **Changelog:** [CHANGELOG.md](CHANGELOG.md) — notable changes per release,
-  versions following the papers.
-- **Doctoral workstream:** `formal-spec/` — the frozen contracts, the TLA+
-  work-state machine, and each phase's outputs as they land.
+This tree is sanitized on purpose.
 
-HgX's standing rule: the growth and maturity of J.A.R.V.I.S. stay on record —
-every version kept, every release logged.
+- No real names, home addresses, public IPs, Wi-Fi details, tokens, Windows usernames, or voice recordings belong here. Refer to the operator as HgX.
+- Passwords in `local-jarvis/` are the placeholder `CHANGE_ME`. Set them on the machine.
+- Voice profiles, enrollment audio, and model weights stay local. They are gitignored.
+- The voice path, VLC, and Ollama bind to localhost. The orchestrator listens on port 8080 on the PC that runs it.
+- The build has no delete tool. File tools stay inside the configured roots.
 
-## Connect
+Report vulnerabilities the way [`SECURITY.md`](SECURITY.md) describes. Do not open a public issue for a secret.
 
-- **X (Twitter):** [@basementjarvisu](https://x.com/basementjarvisu) —
-  J.A.R.V.I.S., the public identity. The principal is
-  [@hgxengineering](https://x.com/hgxengineering).
-- **Email:** basementjarvisunleashed@gmail.com — J.A.R.V.I.S. first;
-  HgXengineering@gmail.com beneath.
-- **Dropbox:** [the full /J.A.R.V.I.S./ archive](https://www.dropbox.com/scl/fo/hw9x2ln0x50pcw76a6say/AJIn_Emga-QyxZiIL_YubdY?rlkey=iirish4xzkjmusybq) —
-  papers, roadmap, logs, audits, and scores. Every version kept, nothing
-  overwritten.
+## Contributing
 
-## The skills
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Issues and pull requests use the templates in [`.github/`](.github/pull_request_template.md).
 
-Each skill is a `SKILL.md` with the same anatomy: frontmatter (`name` +
-`description`, where the description is the trigger), then Purpose, Workflow,
-Output Contract, Operating Rules. Two are worth calling out:
-
-- **`usage-router`** — a decision gate consulted before expensive work (live
-  browser, deep research, retries, new subagents). Local policy by default:
-  retry budget of 2, loop guard at 3, cache preferred, irreversible actions
-  always escalate. Shadow mode logs every recommendation before it ever acts.
-- **`team-deployment`** — the Chief-of-Staff pattern: one brief in, a minimum
-  autonomous specialist team out, verified results back. No proof, no done.
-
-## Principles
-
-1. Truth over comfort — state what the evidence supports.
-2. Discretion — use and reveal only what the task requires.
-3. Reversibility — prefer safe preparation to premature action.
-4. Stewardship — treat access, attention, and records as entrusted assets.
-
-The scarcest resource is not compute. It is the operator's attention. A mature
-system protects it: speak when there is signal, stay silent when there is
-none, and never substitute confidence for proof.
-
-## Current Status
-
-**Doctoral programme — Phases 0–5 closed, Phase 6 open.**
-
-| Phase | Status |
-|---|---|
-| Phase 0 — Freeze contracts | Closed |
-| Phase 1 — State-machine proof | Closed |
-| Phase 2 — Invariant verification | Closed — L1 83/83, L2 10/10, L3 10/10, crosscheck 12/12 |
-| Phase 3 — Consistency model | Closed — L2 42/42, L3 80/80 chaos |
-| Phase 4 — Idempotency guarantees | Closed — L2 20/20, L3 15/15, 35 claims audited |
-| Phase 5 — Security boundary formalism | **Closed** — L2 93/93, L3 34/34, 0 findings, 146/146 claims |
-| Phase 6 — Router optimality | **Open** — HgX's word 2026-10-22 |
-
-Full evidence in [EVIDENCE.md](EVIDENCE.md). Daily release logs in [release-log/](release-log/).
+Versions only move forward ([`VERSIONING.md`](VERSIONING.md)). User-visible changes get a [`CHANGELOG.md`](CHANGELOG.md) entry. Historical logs are not rewritten to match later facts; a correction is a new note.
 
 ## License
 
-© 2026 @hgxengineering — [@hgxengineering](https://x.com/hgxengineering) on X,
-reachable at HgXengineering@gmail.com. Jarvis is
-[@basementjarvisu](https://x.com/basementjarvisu) on X.
+Two licenses already cover this repository. Nothing new was added.
 
-- Code, skills, and tooling: **MIT** — see [LICENSE](LICENSE).
-- White papers and documentation: **CC-BY-4.0** — see
-  [LICENSE-CC-BY-4.0](LICENSE-CC-BY-4.0).
+- Code, skills, and tooling: [MIT](LICENSE). Copyright (c) 2026 @hgxengineering.
+- White papers and documentation: [CC-BY-4.0](LICENSE-CC-BY-4.0).
 
 Build your own estate.

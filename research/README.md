@@ -30,9 +30,10 @@ research/
 3. Release office builds `research/<date>/<slug>.html` from the entry-page
    template (copy the previous day's page; swap title, date, body; keep the
    header/footer chrome and the back link).
-4. Release office prepends one entry to the hub's Research index
-   (`index.html` + `website/index.html`, section `#research`): date, title,
-   one-line summary, link to `research/<date>/<slug>.html`.
+4. Release office prepends one entry to the live homepage's Research
+   index (root `index.html`, section `#research`): date, title, one-line
+   summary, link to `research/<date>/<slug>.html`. `website/index.html` is
+   the archived hub and is not the Pages homepage.
 5. Commit, push, verify live. The index is reverse-chronological —
    newest entry first — so it extends cleanly every day.
 
