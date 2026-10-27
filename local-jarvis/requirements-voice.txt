@@ -1,0 +1,8 @@
+# Local Jarvis voice venv (C:\Jarvis\venv, Python 3.13): jarvis.py, jarvis_voice.py
+faster-whisper==1.2.1
+ctranslate2==4.8.4
+piper-tts==1.8.0
+onnxruntime==1.31.1
+sounddevice==0.5.6
+soundfile==0.14.0
+numpy==2.5.4

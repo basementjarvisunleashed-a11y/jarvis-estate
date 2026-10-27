@@ -19,6 +19,25 @@ the papers; the repo itself is tagged at release milestones.
   folder tree (`roadmap/formal-spec/phase-N/`), dated logs (markdown + PDF) in
   `logs/`. Root-level latest copies untouched; their share links keep working.
 
+## [2026-10-27] — downloadable build
+
+### Added
+
+- Local Jarvis is downloadable and installable from
+  [`local-jarvis/`](local-jarvis/README.md): a Windows 10/11 install guide
+  (NVIDIA GPU, tested on an RTX 2060 6GB), idempotent `install.ps1`, and
+  `.env.example` with placeholders only.
+- `enroll.py` (5 takes, `--verify`), `jarvis.py` (`qwen2.5:3b`), and the
+  two requirements files. `requirements-voice.txt` targets
+  `C:\Jarvis\venv`. `requirements-orchestrator.txt` targets system
+  Python 3.13 for the voice gate and enrollment.
+- Optional logon tasks in `local-jarvis/tasks/`. The voice loop is
+  deliberately not auto-started. `install.ps1` registers tasks only with
+  `-RegisterTasks`, and only after the `<user>`, SID, and path
+  placeholders are edited. It does not remove files or store secrets.
+- `.gitignore` also covers `take*.wav`, `out/`, and `voices/*.onnx`.
+  `.env.example` stays tracked; a real `.env` does not.
+
 ## [2026-10-27] — Local Jarvis laptop stack
 
 ### Added

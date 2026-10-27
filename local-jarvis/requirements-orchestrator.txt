@@ -1,0 +1,9 @@
+# System Python 3.13: orchestrator.py (stdlib only) + voice_gate.py / enroll.py (speaker gate)
+speechbrain==1.1.2
+torch==2.14.1
+torchaudio==2.11.0
+numpy==2.5.4
+soundfile==0.14.0
+sounddevice==0.5.6
+# Optional: Meshtastic MQTT bridge in orchestrator.py (not installed on the reference laptop)
+# paho-mqtt

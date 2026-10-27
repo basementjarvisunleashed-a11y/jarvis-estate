@@ -13,7 +13,11 @@ profiles.json
 *.onnx.json
 *.gguf
 pretrained_models/
+take*.wav
+out/
+voices/*.onnx
 .env*
+!.env.example
 *.bak*
 __pycache__/
 local-jarvis/verdicts.log

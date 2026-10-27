@@ -2,7 +2,7 @@
 """
 J.A.R.V.I.S. Bracelet Proof-of-Concept Orchestrator
 ----------------------------------------------------
-Weekend proof-of-concept build kit, credited to 3.0 + the R&D lab (HgX's word, 2026-10-23).
+Weekend proof-of-concept build kit, credited to 3.0 + the R&D lab (the operator's word, 2026-10-23).
 Bench R&D -- the Q1 audit embargo stands for the commercial bracelet.
 
 ONE BRAIN, TWO SURFACES:
@@ -58,6 +58,7 @@ XAI_MODEL = "grok-4"
 # real region + the watch's node id from the first uplink message.
 MQTT_BROKER = "mqtt.meshtastic.org"
 MQTT_PORT = 1883
+OPERATOR_NAME = os.environ.get("JARVIS_OPERATOR_NAME", "sir")  # how Jarvis addresses you
 MQTT_USER = "meshdev"          # public-broker username (Meshtastic docs)
 MQTT_PASS = "CHANGE_ME"       # placeholder — set the broker password locally
 MQTT_CHANNEL = "mqtt"          # must match the secondary channel name on the node, EXACTLY
@@ -779,8 +780,8 @@ JARVIS_DISPATCH = {
 }
 
 JARVIS_SYSTEM = (
-    "You are Jarvis, the valet-mind on HgX's wrist, running on his own laptop. "
-    "Manner: formal, precise, calm, dry wit. Address him as HgX. Every reply is "
+    f"You are Jarvis, the valet-mind on {OPERATOR_NAME}'s wrist, running on their own laptop. "
+    f"Manner: formal, precise, calm, dry wit. Address the operator as {OPERATOR_NAME}. Every reply is "
     "SPOKEN on a watch: 40 words max, no markdown, no lists, no code blocks.\n"
     "You have tools: VLC playback control, and file tools limited to his Desktop, "
     "Documents and Downloads folders (and their subfolders) -- NOTHING outside them.\n"
@@ -869,7 +870,7 @@ def jarvis_ask(text):
         if all(((tc.get("function") or {}).get("name") in _SIMPLE_VLC) for tc in calls):
             return " ".join(x["content"] for x in messages[-len(calls):]), actions
     return ("I ran the tools but did not reach a final answer -- "
-            "try a simpler request, HgX.", actions)
+            f"try a simpler request, {OPERATOR_NAME}.", actions)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -949,7 +950,7 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("need {\"text\": \"<utterance>\"}")
             except Exception as e:
                 self._send_json({"ok": False, "error": str(e),
-                                 "reply": "I didn't catch that -- say it again, HgX."}, 400)
+                                 "reply": f"I didn't catch that -- say it again, {OPERATOR_NAME}."}, 400)
                 return
             print("JARVIS: %s" % text[:80])
             try:

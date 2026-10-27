@@ -10,6 +10,16 @@ the skills, and the Watchtower that proves it's running. Everything here runs
 today on a real operator's estate — this isn't a framework demo, it's the
 actual system with the personal details removed.
 
+## Get Local Jarvis
+
+The Windows laptop build is in [`local-jarvis/`](local-jarvis/README.md).
+It installs on Windows 10/11 with an NVIDIA GPU (tested on an RTX 2060
+6GB): mic, Whisper, a speaker gate, an orchestrator on port 8080, Ollama,
+and Piper. [`install.ps1`](local-jarvis/install.ps1) checks prerequisites,
+creates `C:\Jarvis\venv`, and installs both requirements files. It does
+not register scheduled tasks unless you pass `-RegisterTasks`. The voice
+loop is deliberately not auto-started.
+
 ## From proof of concept to production
 
 **The concept.** Most people use an AI assistant like a better chat window:
@@ -52,6 +62,7 @@ senior engineers.
 
 | Path | What it is |
 |---|---|
+| [`local-jarvis/`](local-jarvis/README.md) | Downloadable Windows build: voice loop, orchestrator, install guide, and `install.ps1`. |
 | `skills/` | The eight estate skills — reproducible playbooks: calendar office, meme forge, betting desk, sports desk, estate administrator, tax office, team deployment, usage router. |
 | `watchtower/` | Honest uptime monitoring: stdlib-only Python, a service manifest, and the live `STATUS.md`. |
 | `papers/` | The white-paper trilogy plus the roadmap — vision (v1.2), technical (v1.1), front-end (v1.1), and the doctoral validation programme (v1.1). Every released version is kept; nothing is ever replaced. |
