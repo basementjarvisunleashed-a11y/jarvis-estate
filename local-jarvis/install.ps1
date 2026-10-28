@@ -165,10 +165,10 @@ if (-not $ollama) {
 $vlc = "C:\Program Files\VideoLAN\VLC\vlc.exe"
 if (Test-Path -LiteralPath $vlc) {
     Write-Host "VLC: found"
-    $notes.Add("In VLC, enable the Web interface and set the Lua HTTP password in Preferences. Start it with C:\Jarvis\vlc_remote.cmd so the remote is 127.0.0.1:8090. Put that same password in VLC_HTTP_PASSWORD.") | Out-Null
+    $notes.Add("In VLC, enable the Web interface and set the Lua HTTP password in Preferences. Start it with C:\Jarvis\vlc_remote.cmd so the remote is localhost:8090. Put that same password in VLC_HTTP_PASSWORD.") | Out-Null
 } else {
     Write-Host "VLC: not found at $vlc"
-    $notes.Add("Install VLC from https://www.videolan.org/ . Enable the Web interface, set the Lua HTTP password in Preferences, and start C:\Jarvis\vlc_remote.cmd (127.0.0.1:8090).") | Out-Null
+    $notes.Add("Install VLC from https://www.videolan.org/ . Enable the Web interface, set the Lua HTTP password in Preferences, and start C:\Jarvis\vlc_remote.cmd (localhost:8090).") | Out-Null
 }
 
 $voice = "C:\Jarvis\voices\en_GB-alan-medium.onnx"

@@ -31,7 +31,7 @@ superseded versions, which are kept for the record.
 
 ## Reporting a vulnerability
 
-Email **HgXengineering@gmail.com** (HgX, the operator) with the subject line
+Email **HgX's engineering inbox** (HgX, the operator) with the subject line
 `SECURITY: jarvis-estate`. Please include:
 
 - what you found and where (file, path, or URL),

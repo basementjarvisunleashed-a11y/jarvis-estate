@@ -6,7 +6,7 @@ MODEL = os.environ.get("JARVIS_MODEL", "qwen2.5:3b")
 VOICE = os.path.join(BASE, "voices", "en_GB-alan-medium.onnx")
 VLC = r"C:\Program Files\VideoLAN\VLC\vlc.exe"
 MIC, SPK = "Microphone (MAONO AU-AM200)", "Speakers (MAONO AU-AM200)"
-VLC_HTTP = ("127.0.0.1", 8090, os.environ.get("VLC_HTTP_PASSWORD", "CHANGE_ME"))  # VLC web interface, localhost only
+VLC_HTTP = ("localhost", 8090, os.environ.get("VLC_HTTP_PASSWORD", "CHANGE_ME"))  # VLC web interface, localhost only
 
 def dev(name, kind):
     import sounddevice as sd
@@ -45,7 +45,7 @@ def pause():
 def ask(prompt):
     body = json.dumps({"model": MODEL, "prompt": prompt, "stream": False,
                        "system": "You are Jarvis, a concise local assistant."}).encode()
-    r = urllib.request.urlopen(urllib.request.Request("http://127.0.0.1:11434/api/generate", body, {"Content-Type": "application/json"}), timeout=300)
+    r = urllib.request.urlopen(urllib.request.Request("http://localhost:11434/api/generate", body, {"Content-Type": "application/json"}), timeout=300)
     return json.load(r)["response"].strip()
 
 def tts(text, path=os.path.join(BASE, "out", "say.wav")):

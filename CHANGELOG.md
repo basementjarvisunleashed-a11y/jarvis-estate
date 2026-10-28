@@ -32,6 +32,11 @@ The 1.2.0 sections of `docs/logs/2026-10-27.md` are not rewritten.
 
 - No startup-file paths, backup paths, account names, addresses, or ssh
   configuration were added.
+- Mailbox addresses that remained in the 2026-10-19 notes, and the same
+  addresses elsewhere in the tree, now read as HgX's engineering inbox
+  and the estate's inbox. The addresses themselves are not published.
+  Loopback numeric addresses in the laptop notes and the Local Jarvis
+  sources now read as localhost.
 - The 1.2.0 entry below stays as it was written.
 
 ## [1.2.0] — 2026-10-28 — operations log for 2026-10-27
@@ -175,7 +180,7 @@ versions are unchanged.
 
 - `local-jarvis/`: basement laptop stack. Orchestrator on port 8080
   (Ollama `qwen3:8b` via `/api/chat`, think off, regex fast path for VLC
-  media commands, VLC HTTP remote on `127.0.0.1:8090`, read-only
+  media commands, VLC HTTP remote on `localhost:8090`, read-only
   `rea_analyze`). Voice loop `jarvis_voice.py`: mic → Whisper `small.en`
   → speaker voice gate → `POST /jarvis` → Piper TTS. The voice loop does
   not auto-start.
@@ -235,6 +240,6 @@ versions are unchanged.
 
 ### Notes
 
-- Release identity: @hgxengineering (X), contact HgXengineering@gmail.com;
+- Release identity: @hgxengineering (X), contact HgX's engineering inbox;
   Jarvis is @basementjarvisu on X; accounts under
-  basementjarvisunleashed@gmail.com.
+  the estate's inbox.

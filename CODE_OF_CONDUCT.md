@@ -20,7 +20,7 @@ holds itself to:
 ## Enforcement
 
 Conduct is moderated by HgX, the operator. Reports go to
-**HgXengineering@gmail.com**. Consequences scale with the conduct: a private
+**HgX's engineering inbox**. Consequences scale with the conduct: a private
 note, a public correction, removal of content, or exclusion from the
 project's spaces. Decisions are final and are not debated in the threads
 they concern.

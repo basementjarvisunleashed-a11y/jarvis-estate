@@ -57,12 +57,12 @@ reference run used an RTX 2060 6GB. CPU Whisper works without the GPU.
    ```
 
    `qwen3:8b` is the orchestrator. `qwen2.5:3b` is `jarvis.py`.
-3. **VLC**, with the HTTP remote on `127.0.0.1:8090`.
+3. **VLC**, with the HTTP remote on `localhost:8090`.
    Install VLC, then in Preferences (Show settings: All):
    - Interface → Main interfaces → check **Web**
    - Interface → Main interfaces → Lua → **Lua HTTP** → set a password
 
-   `vlc_remote.cmd` starts VLC bound to `127.0.0.1:8090`. It does not
+   `vlc_remote.cmd` starts VLC bound to `localhost:8090`. It does not
    contain the password. The password lives in VLC's preferences and in
    `VLC_HTTP_PASSWORD`, and the two must match.
 4. **Piper voice** `en_GB-alan-medium` in `C:\Jarvis\voices`. Download both
@@ -119,7 +119,7 @@ afterwards). Do not commit the real values.
 | `XAI_API_KEY` | Optional. When set, demo briefs are drafted by Grok. When unset, the orchestrator serves a canned DEMO card. |
 
 Also read by the orchestrator, with safe defaults: `OLLAMA_URL`
-(`http://127.0.0.1:11434`), `OLLAMA_MODEL` (`qwen3:8b`), `VLC_HTTP_PORT`
+(`http://localhost:11434`), `OLLAMA_MODEL` (`qwen3:8b`), `VLC_HTTP_PORT`
 (`8090`), `JARVIS_ROOTS` (Desktop, Documents, and Downloads under your
 home directory), `JARVIS_LAN_IP` (printed for a watch on the same
 network; unset prints a placeholder).
@@ -257,8 +257,8 @@ inside Desktop, Documents, and Downloads (or `JARVIS_ROOTS`). `..` is
 refused.
 
 The voice path, VLC, and Ollama are bound to localhost. VLC's HTTP
-remote is `127.0.0.1:8090`. Ollama is `127.0.0.1:11434`. The voice loop
-posts only to `http://127.0.0.1:8080/jarvis`. The orchestrator listens
+remote is `localhost:8090`. Ollama is `localhost:11434`. The voice loop
+posts only to `http://localhost:8080/jarvis`. The orchestrator listens
 on port 8080 on the local interfaces of the PC that runs it, so a watch
 on the same network can reach it. The address it prints is the
 placeholder `<this-laptop's-LAN-IP>` unless you set `JARVIS_LAN_IP`.
@@ -284,7 +284,7 @@ this GPU (the reference card is an RTX 2060 6GB), not a hidden reasoning
 pass. `jarvis.py` uses the smaller `qwen2.5:3b` for `ask` and `chat`.
 
 **VLC is unreachable.** Start `C:\Jarvis\vlc_remote.cmd`. That binds the
-HTTP interface to `127.0.0.1:8090`. If VLC answers 401, `VLC_HTTP_PASSWORD`
+HTTP interface to `localhost:8090`. If VLC answers 401, `VLC_HTTP_PASSWORD`
 does not match the password in VLC's Lua HTTP preferences.
 
 ## Files
@@ -298,7 +298,7 @@ does not match the password in VLC's Lua HTTP preferences.
 | `jarvis.cmd` | Launches `jarvis.py` with the venv. |
 | `enroll.py` | Records 5 takes and writes `profiles.json`. |
 | `voice_gate.py`, `voice_gate.json` | Speaker check. Threshold 0.45, UNCALIBRATED. |
-| `vlc_remote.cmd` | VLC HTTP on `127.0.0.1:8090`. No password in the file. |
+| `vlc_remote.cmd` | VLC HTTP on `localhost:8090`. No password in the file. |
 | `requirements-voice.txt` | Venv packages. |
 | `requirements-orchestrator.txt` | SpeechBrain stack for the gate and enrollment. |
 | `install.ps1` | Prerequisite check, venv, pip, next steps. |

@@ -20,8 +20,8 @@ These rules are absolute in all public material, prompts, logs, and metadata:
   **@hgxengineering**. Never a legal name, in any public context.
 - The principal's real name, family details, addresses, finances, credentials,
   and personal data NEVER appear in public material. Ever.
-- Public contact: **@hgxengineering** on X — **HgXengineering@gmail.com**.
-- Accounts for this release live under **basementjarvisunleashed@gmail.com**.
+- Public contact: **@hgxengineering** on X — **HgX's engineering inbox**.
+- Accounts for this release live under **the estate's inbox**.
 
 ## Doctrine
 
