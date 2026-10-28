@@ -1,0 +1,74 @@
+﻿# MediaMTX config - Jarvis Recon Kit glasses ingest (PKG-1 rev2, SAF GO-WITH-CHANGES 2026-10-28)
+# Pinned for MediaMTX v1.21.3. OFFLINE-FIRST: no STUN/TURN, no API/metrics/pprof/playback,
+# no recording, no outbound calls. ONE path ("glasses"); all other paths rejected.
+# Launch ONLY via start-mediamtx.ps1 (refuses to start without real secrets). No autostart.
+
+# Logging: info, file only, outside synced trees. Creds never in URLs we print.
+logLevel: info
+logDestinations: [file]
+logFile: C:\JarvisData\mediamtx\mediamtx.log
+
+api: no
+metrics: no
+pprof: no
+playback: no
+
+# RTMP: OFF (plaintext creds). If Mentra compat forces it: bind rtmpAddress to the
+# laptop's Tailscale IP only (100.x.y.z:1935) OR rtmpEncryption: strict + local cert
+# (rtmpsAddress :1936). Auth required. Needs SAF re-review.
+rtmp: no
+rtmpEncryption: "no"
+
+# SRT: ON, publish passphrase REQUIRED (env MTX_PATHS_GLASSES_SRTPUBLISHPASSPHRASE).
+# srt://<laptop>:8890?streamid=publish:glasses:<user>:<pass>&passphrase=<pp>
+srt: yes
+srtAddress: :8890                 # UDP - PKG-4
+
+# WebRTC/WHIP: ON, tailnet/LAN only, NO public ICE servers.
+# WHIP: http://<laptop>:8889/glasses/whip
+webrtc: yes
+webrtcAddress: :8889              # TCP signalling - PKG-4
+webrtcEncryption: no              # transport encrypted by WireGuard (Tailscale); DTLS-SRTP on media
+webrtcLocalUDPAddress: :8189      # UDP media - PKG-4 (pinned)
+webrtcLocalTCPAddress: ''         # TCP ICE disabled
+webrtcIPsFromInterfaces: yes
+webrtcAdditionalHosts: []
+webrtcICEServers2: []             # NO Google STUN
+
+# RTSP: localhost read for recon_ingest.py; TCP only (no UDP :8000/:8001 listeners)
+rtsp: yes
+rtspAddress: 127.0.0.1:8554
+rtspTransports: [tcp]
+rtspEncryption: "no"
+
+hls: no
+moq: no
+
+# Auth on publish AND read. Placeholders are replaced from env by the launcher:
+#   MTX_AUTHINTERNALUSERS_0_USER/_0_PASS publisher; _1_USER/_1_PASS reader (localhost)
+#   MTX_AUTHINTERNALUSERS_0_IPS optional: tailnet + SPECIFIC device /32s, never a /24
+authMethod: internal
+authInternalUsers:
+  - user: CHANGE_VIA_ENV
+    pass: CHANGE_VIA_ENV
+    ips: ['100.64.0.0/10']
+    permissions:
+      - action: publish
+        path: glasses
+  - user: CHANGE_VIA_ENV
+    pass: CHANGE_VIA_ENV
+    ips: ['127.0.0.1/32']
+    permissions:
+      - action: read
+        path: glasses
+
+pathDefaults:
+  record: no
+  overridePublisher: no
+
+paths:
+  # Only accepted path (no all_others/regex => others rejected)
+  glasses:
+    source: publisher
+    record: no
+    srtPublishPassphrase: CHANGE_VIA_ENV

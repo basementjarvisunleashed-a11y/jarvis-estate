@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "jarvis-recon-kit/envelope/v1",
+  "title": "Jarvis Recon Kit message envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["v", "id", "ts", "src", "kind", "payload"],
+  "properties": {
+    "v":       { "const": 1 },
+    "id":      { "type": "string", "pattern": "^[0-9a-z]{1,8}$" },
+    "ts":      { "type": "number" },
+    "src":     { "enum": ["glasses", "watch", "flipper", "brain"] },
+    "kind":    { "enum": ["frame", "audio", "scan", "cmd", "reply", "snapshot", "escalate"],
+               "description": "Unknown kinds are rejected. snapshot = ONE still for escalation (JPEG <=640 px, q<=70, <=150 KB) + local_summary; escalate = text-first deep-reasoning request. Never a stream to the cloud." },
+    "payload": { "type": "object" },
+    "ack_of":  { "type": "string", "pattern": "^[0-9a-z]{1,8}$" }
+  },
+  "allOf": [
+    { "if": { "properties": { "kind": { "const": "snapshot" } } },
+      "then": { "properties": { "payload": { "type": "object", "additionalProperties": false,
+        "required": ["jpeg_b64", "w", "h", "q", "local_summary"],
+        "properties": {
+          "jpeg_b64": { "type": "string", "maxLength": 204800 },
+          "w": { "type": "integer", "minimum": 1, "maximum": 640 },
+          "h": { "type": "integer", "minimum": 1, "maximum": 640 },
+          "q": { "type": "integer", "minimum": 1, "maximum": 70 },
+          "local_summary": { "type": "object" } } } } } },
+    { "if": { "properties": { "kind": { "const": "escalate" } } },
+      "then": { "properties": { "payload": { "type": "object",
+        "required": ["question", "local_summary"],
+        "properties": { "question": { "type": "string", "maxLength": 2000 },
+                        "local_summary": { "type": "object" },
+                        "snapshot_id": { "type": "string", "pattern": "^[0-9a-z]{1,8}$" } } } } } }
+  ]
+}

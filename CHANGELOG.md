@@ -208,3 +208,7 @@ versions are unchanged.
 - Release identity: @hgxengineering (X), contact HgXengineering@gmail.com;
   Jarvis is @basementjarvisu on X; accounts under
   basementjarvisunleashed@gmail.com.
+
+## 2026-10-28
+- Added projects/recon-kit/: Jarvis Recon Kit (watch, glasses, Flipper), open source under the MIT licence. Source scrubbed and cleared by Security Audit Force.
+

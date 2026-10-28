@@ -1,0 +1,25 @@
+﻿# Paths NEVER mirrored to OneDrive/Dropbox (code+docs only). Used by tools\sync-preflight.ps1.
+.env
+.env.*
+secrets.ini
+*.key
+*.pem
+*.p12
+*.crt
+certs
+tokens*
+*.log
+logs
+captures
+lifelog
+footage
+*.mp4
+*.mov
+*.h264
+*.jpg
+*.jpeg
+.venv
+node_modules
+.pio
+__pycache__
+*.bak
