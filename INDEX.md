@@ -1,8 +1,8 @@
 # J.A.R.V.I.S. Estate — Repository Index
 
-Public record, current as of **2026-10-27**. Estate version **1.1.0** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
+Public record. Estate version **1.2.0** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
 
-**Cloud JARVIS** is the cloud brain and sovereign. **Local Jarvis** is on the owner's laptop (Ollama `qwen3:8b`, orchestrator on port 8080, Whisper and Piper, router v2.2 since 17:28 America/Toronto, a 50 second voice budget, freellmapi when Ollama is down). The **chief of staff** coordinates nine worker bots and reports to both. The roster is in [`README.md`](README.md#bot-roster). The downloadable Windows build is [`local-jarvis/`](local-jarvis/README.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
+**Cloud JARVIS** is the cloud brain and sovereign. **Local Jarvis** is on the owner's laptop (Ollama `qwen3:8b`, orchestrator on port 8080, Whisper and Piper, router v2.2 since 17:28 America/Toronto, a 50 second voice budget, a 60 second client wait, freellmapi only when Ollama is down). The **chief of staff** coordinates nine worker bots and reports to both. The roster is in [`README.md`](README.md#bot-roster). The 2026-10-27 operations log is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md). The downloadable Windows build is [`local-jarvis/`](local-jarvis/README.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
 
 ## Runtime
 
@@ -34,8 +34,28 @@ Dropbox share URLs are listed in `papers/README.md`. Checked 2026-10-27, those s
 
 Versioning law: [`VERSIONING.md`](VERSIONING.md). v0.x.x is a draft. v1.0.0 is ratified. Versions only move forward.
 
+## Graphs
+
+Codebase Cartographer's Graphify commands, as recorded on 2026-10-27. The how-to is in [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md).
+
+| Command | What it is for |
+|---|---|
+| `graphify update` | Refresh the graph |
+| `graphify explain` | Explain a node |
+| `graphify path` | Show a path between nodes |
+| `graphify affected` | Show what a change touches |
+
+Published graph artifacts:
+
+| Graph | Where | Published |
+|---|---|---|
+| — | None in the public tree as of estate 1.2.0 | — |
+
+A graph is added as a row here when it is published. It is not written into an older day log after the fact.
+
 ## Chronicle
 
+- [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) — operations log for 2026-10-27. Estate 1.2.0.
 - [`release-log/`](release-log/) — dated logs from 2026-10-19 onward, America/Toronto.
 - [`CHANGELOG.md`](CHANGELOG.md) — notable changes.
 - [`EVIDENCE.md`](EVIDENCE.md) — claims and their evidence.

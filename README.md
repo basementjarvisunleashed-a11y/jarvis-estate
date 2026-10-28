@@ -8,10 +8,11 @@ One operator. Durable roles. Current facts, inspectable evidence, and human auth
 [![License: MIT](https://img.shields.io/github/license/basementjarvisunleashed-a11y/jarvis-estate)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/basementjarvisunleashed-a11y/jarvis-estate)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/commits/main)
 
-**Estate 1.1.0**, recorded 2026-10-27. The version file is [`VERSION`](VERSION). The previous release tag remains `v1.0.0`. The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
+**Estate 1.2.0.** The version file is [`VERSION`](VERSION). Estate 1.1.0 was the roster. The release tag before that remains `v1.0.0`. The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
 
 ## Contents
 
+- [Recent](#recent)
 - [Overview](#overview)
 - [Architecture](#architecture)
 - [Bot roster](#bot-roster)
@@ -20,6 +21,19 @@ One operator. Durable roles. Current facts, inspectable evidence, and human auth
 - [Security](#security)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Recent
+
+Estate **1.2.0** is the operations log of 2026-10-27, morning to night. HgX commissioned it at 00:26 America/Toronto on 2026-10-28. The full note is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md).
+
+- Router v2.2 went live at 17:28. The voice budget is 50 seconds. The client waits 60 seconds. freellmapi is the fallback only.
+- Code, pull requests, and router work go to The Plugin Armoury. Security Audit Force is the security gate.
+- Grok Bot's computer filled its disk, locked out, and was recovered. An hourly disk watch alerts at 45% and caps at 50%.
+- That night, four startup apps were disabled through StartupApproved (Discord, Acrobat Sync, Edge autolaunch, Firefox). The disable can be undone. ComfyUI VRAM was freed. `qwen3:8b` stays warm for voice.
+- REA's quick wins and larger items are waiting on Security Audit Force's GO. The fallback address is not published.
+- Graphify's how-to is `update`, `explain`, `path`, and `affected`. Graphs are indexed in [`INDEX.md`](INDEX.md#graphs).
+
+House rules for this version: no deletions; a pull request for every GitHub change; no secrets in public; approval for each laptop change.
 
 ## Overview
 
@@ -30,14 +44,14 @@ The operator is **HgX**. Personal details stay off the public tree.
 On 2026-10-27 the live estate has three command roles and nine worker bots:
 
 - **Cloud JARVIS** is the cloud brain and the sovereign of the estate.
-- **Local Jarvis** runs on the owner's laptop. It uses Ollama `qwen3:8b`, an orchestrator on port 8080, and voice through Whisper and Piper. Router v2.2 went live the same day at 17:28 America/Toronto. A voice turn has a 50 second budget. When Ollama is down, freellmapi is the fallback.
+- **Local Jarvis** runs on the owner's laptop. It uses Ollama `qwen3:8b`, an orchestrator on port 8080, and voice through Whisper and Piper. Router v2.2 went live the same day at 17:28 America/Toronto. A voice turn has a 50 second budget. The client waits 60 seconds. freellmapi is the fallback only, and only when Ollama is down.
 - **Chief of staff** coordinates the worker bots and reports to Cloud JARVIS and to Local Jarvis.
 
 The custody loop is unchanged:
 
 **Role → live source → tool → artifact → evidence → approval → routine**
 
-Standing rules, in force with this record: nothing is deleted; every change is a pull request; a security review happens before anything touches the laptop; every bot answers by voice memo.
+House rules from 1.2.0: nothing is deleted; every GitHub change is a pull request; nothing secret is published; each laptop change needs approval. Every bot answers by voice memo. The day record is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md).
 
 This repository is the public record: doctrine, skills, the formal programme, Watchtower, the laptop build, and the estate record above. Doctoral programme, as of 2026-10-27: Phases 0–5 are closed. Phase 6 (router optimality) is open. Evidence is in [`EVIDENCE.md`](EVIDENCE.md).
 
@@ -59,7 +73,7 @@ flowchart TB
     workers --> chief
 ```
 
-A spoken turn on the laptop is audio in and audio out. Router v2.2, live at 17:28 America/Toronto on 2026-10-27, chooses the model. The budget for that turn is 50 seconds. Plain VLC commands match a regex and skip the model. freellmapi answers only when Ollama is down.
+A spoken turn on the laptop is audio in and audio out. Router v2.2, live at 17:28 America/Toronto on 2026-10-27, chooses the model. The budget for that turn is 50 seconds. The client waits 60 seconds. Plain VLC commands match a regex and skip the model. freellmapi is the fallback only, when Ollama is down.
 
 ```mermaid
 flowchart LR
@@ -88,9 +102,11 @@ Nine workers. Each has a persona. The chief of staff is the coordinator, not a t
 | The Free Model Gateway | Brooklyn hustler | freellmapi; about 15 free LLM provider keys pooled 2026-10-27 |
 | Memory | Scottish librarian | ai-memory |
 | HyperFrames | Hollywood director | HyperFrames |
-| The Plugin Armoury | Viking blacksmith | Router and orchestration work |
+| The Plugin Armoury | Viking blacksmith | Code, pull requests, router, and orchestration |
 | Codebase Cartographer | Victorian explorer | Graphify |
 | REA, Reverse Engineer Anything | Cold War spy | REA |
+
+Hand-off: code, pull requests, and router work go to The Plugin Armoury. Security Audit Force is the security gate.
 
 The eight skill playbooks under [`skills/`](skills/) stay the written methods. They are not a second copy of this roster.
 
@@ -98,7 +114,7 @@ The eight skill playbooks under [`skills/`](skills/) stay the written methods. T
 
 The Windows laptop build is [`local-jarvis/`](local-jarvis/README.md). It does not start on its own. The voice loop is not a login item. The orchestrator listens on port 8080 only after you start it.
 
-Router v2.2, the 50 second voice budget, ComfyUI v0.43.0, and the freellmapi fallback are live on the owner's laptop. `install.ps1` does not install them.
+Router v2.2, the 50 second voice budget, the 60 second client wait, ComfyUI v0.43.0, and the freellmapi fallback are live on the owner's laptop. freellmapi is the fallback only. `install.ps1` does not install them.
 
 Tested on Windows 10/11 with an NVIDIA GPU (reference card: RTX 2060 6GB). CPU Whisper works without the GPU.
 
@@ -119,7 +135,8 @@ Tested on Windows 10/11 with an NVIDIA GPU (reference card: RTX 2060 6GB). CPU W
 
 | Path | What it is |
 |---|---|
-| [`VERSION`](VERSION) | Estate version. **1.1.0** on 2026-10-27. The prior release tag is `v1.0.0`. |
+| [`VERSION`](VERSION) | Estate version. **1.2.0**. 1.1.0 was the roster. The prior release tag is `v1.0.0`. |
+| [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) | Operations log for 2026-10-27. |
 | [`local-jarvis/`](local-jarvis/README.md) | Downloadable Windows build: voice loop, orchestrator, `install.ps1`. Live 2026-10-27. |
 | [`skills/`](skills/) | Eight role playbooks. Duties do not cross. |
 | [`watchtower/`](watchtower/README.md) | Stdlib monitor and [`STATUS.md`](watchtower/STATUS.md). Paused is a decision, not an outage. |
@@ -144,7 +161,7 @@ This tree is sanitized on purpose.
 - Voice profiles, enrollment audio, and model weights stay local. They are gitignored.
 - The voice path, VLC, and Ollama bind to localhost. The orchestrator listens on port 8080 on the PC that runs it.
 - The build has no delete tool. File tools stay inside the configured roots.
-- Standing rules recorded with estate 1.1.0: no deletions; a pull request for every change; a security review before anything touches the laptop; every bot answers by voice memo.
+- House rules recorded with estate 1.2.0: no deletions; a pull request for every GitHub change; no secrets in public; approval for each laptop change. Security Audit Force is the security gate. Every bot answers by voice memo. The 1.1.0 record said the same thing in shorter form.
 - Provider keys for the free-model pool are not in this repository. The public fact is the count: about 15 keys pooled on 2026-10-27.
 
 Report vulnerabilities the way [`SECURITY.md`](SECURITY.md) describes. Do not open a public issue for a secret.
