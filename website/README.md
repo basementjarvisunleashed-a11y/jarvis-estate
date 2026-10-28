@@ -5,11 +5,13 @@ homepage is [`/index.html`](../index.html):
 
 https://basementjarvisunleashed-a11y.github.io/jarvis-estate/
 
-That page is the current site as of 2026-10-27, estate **1.1.0**
-(`VERSION` at the repository root): Cloud JARVIS, Local Jarvis, the chief
-of staff, the nine-bot roster, architecture, download, docs, research, and
-the build chronicle. It is static. It loads no tracking scripts and no
-third-party fonts. The visible version on the page matches `VERSION`.
+That page is the current site at estate **1.2.0** (`VERSION` at the
+repository root): the 2026-10-27 operations log, Cloud JARVIS, Local
+Jarvis, the chief of staff, the nine-bot roster, architecture, download,
+docs, research, and the build chronicle. It is static. It loads no
+tracking scripts and no third-party fonts. The visible version on the
+page matches `VERSION`. The full day note is
+[`docs/logs/2026-10-27.md`](../docs/logs/2026-10-27.md).
 
 ## Archived hub — deprecated for publishing
 

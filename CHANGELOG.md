@@ -4,6 +4,35 @@ All notable changes to the J.A.R.V.I.S. open-source release. Versions follow
 the papers; the repo itself is tagged at release milestones. From 1.1.0 the
 estate version also lives in `VERSION`.
 
+## [1.2.0] — 2026-10-28 — operations log for 2026-10-27
+
+Next minor after 1.1.0. Contract versions and paper versions are unchanged.
+Commissioned by HgX at 00:26 America/Toronto.
+
+### Added
+
+- `docs/logs/2026-10-27.md`, the public operations log from morning to night.
+  Roster and personas, hand-off (code, pull requests, and router work to
+  The Plugin Armoury; Security Audit Force is the security gate), router
+  v2.2 at 17:28 (50 second voice budget, 60 second client wait, freellmapi
+  as fallback only), the Grok Bot disk-full lockout and recovery, the
+  hourly disk watch (45% alert, 50% cap), the night's StartupApproved
+  efficiency pass, Cloud JARVIS's three inefficiencies, REA's list pending
+  GO, and the Graphify how-to.
+- README section **Recent**, pointing at that log.
+- Homepage section for the same log. `VERSION` is **1.2.0**.
+- [`INDEX.md`](INDEX.md) indexes graphs. None are published yet.
+
+### Notes
+
+- The freellmapi fallback address is not in the log. No keys, tokens,
+  machine identifiers, or personal paths were added.
+- StartupApproved disabled Discord, Acrobat Sync, Edge autolaunch, and
+  Firefox. The disable can be undone. ComfyUI VRAM was freed. `qwen3:8b`
+  stays warm for voice.
+- REA's filing waited on the security gate. The same log now includes the night-of-27–28 laptop changelog: Security Audit Force cleared it, and each cleared item has a backup. Still open: FreeLLMAPI returns 503 with 0 provider keys, and the VoiceMeeter task error. sshd hardening and a reboot wait on HgX. No address, account name, or backup path is published.
+- The 1.1.0 entry below stays as it was written.
+
 ## [1.1.0] — 2026-10-27 — estate roster
 
 Next minor after the `v1.0.0` release tag. Contract versions and paper
