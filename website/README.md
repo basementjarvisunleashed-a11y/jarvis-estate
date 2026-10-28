@@ -5,9 +5,11 @@ homepage is [`/index.html`](../index.html):
 
 https://basementjarvisunleashed-a11y.github.io/jarvis-estate/
 
-That page is the current site as of 2026-10-27: Local Jarvis, architecture,
-download, docs, research, and the build chronicle. It is static. It loads
-no tracking scripts and no third-party fonts.
+That page is the current site as of 2026-10-27, estate **1.1.0**
+(`VERSION` at the repository root): Cloud JARVIS, Local Jarvis, the chief
+of staff, the nine-bot roster, architecture, download, docs, research, and
+the build chronicle. It is static. It loads no tracking scripts and no
+third-party fonts. The visible version on the page matches `VERSION`.
 
 ## Archived hub — deprecated for publishing
 
