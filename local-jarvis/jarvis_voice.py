@@ -7,7 +7,7 @@ import warnings; warnings.filterwarnings("ignore")
 import sys, os, re, json, time, subprocess, urllib.request, wave
 sys.path.insert(0, r"C:\Jarvis")
 import jarvis as J   # reuse dev(), transcribe(), MIC/SPK, VOICE (same Whisper, same devices)
-ORCH = "http://localhost:8080/jarvis"
+ORCH = "http://127.0.0.1:8080/jarvis"
 GATE_PY = r"C:\Users\<user>\AppData\Local\Programs\Python\Python313\python.exe"  # has SpeechBrain
 GATE = r"C:\Jarvis\voice_gate.py"
 OUT = os.path.join(J.BASE, "out")

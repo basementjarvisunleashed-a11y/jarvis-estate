@@ -386,7 +386,7 @@ def mqtt_start():
 import shutil
 import urllib.parse
 
-OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434").rstrip("/")
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:8b")  # <-- change the "qwen3:8b" part here if you pulled a different model
 JARVIS_MAX_STEPS = 6       # hard cap on the tool loop -- no runaways
 JARVIS_TIMEOUT = 120       # seconds per Ollama call (CPU inference is slow)
@@ -551,7 +551,7 @@ def tool_file_move(args):
 # --- VLC tools (HTTP interface; verified against VLC's own requests README) --
 def _vlc_request(path):
     """GET against VLC's HTTP interface. Returns (data_or_None, err_or_None)."""
-    url = "http://localhost:%d%s" % (VLC_HTTP_PORT, path)
+    url = "http://127.0.0.1:%d%s" % (VLC_HTTP_PORT, path)
     import base64
     req = urllib.request.Request(url, headers={"Authorization": "Basic " + base64.b64encode(
         (":" + VLC_HTTP_PASSWORD).encode("utf-8")).decode("ascii")})  # VLC auth: empty user + password, sent up front
@@ -645,7 +645,7 @@ def tool_vlc_status(args):
 def _vlc_ping_live():
     """1-second reachability check for the status page. Never raises."""
     try:
-        url = "http://localhost:%d/requests/status.json" % VLC_HTTP_PORT
+        url = "http://127.0.0.1:%d/requests/status.json" % VLC_HTTP_PORT
         pm = urllib.request.HTTPPasswordMgrWithDefaultRealm()
         pm.add_password(None, url, "", VLC_HTTP_PASSWORD)
         opener = urllib.request.build_opener(urllib.request.HTTPBasicAuthHandler(pm))

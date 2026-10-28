@@ -35,8 +35,9 @@ The 1.2.0 sections of `docs/logs/2026-10-27.md` are not rewritten.
 - Mailbox addresses that remained in the 2026-10-19 notes, and the same
   addresses elsewhere in the tree, now read as HgX's engineering inbox
   and the estate's inbox. The addresses themselves are not published.
-  Loopback numeric addresses in the laptop notes and the Local Jarvis
-  sources now read as localhost.
+  Loopback numeric addresses in the laptop notes now read as localhost.
+  The programs still call 127.0.0.1, because on Windows localhost can
+  resolve to the IPv6 loopback while those services bind to the IPv4 one.
 - The 1.2.0 entry below stays as it was written.
 
 ## [1.2.0] — 2026-10-28 — operations log for 2026-10-27
