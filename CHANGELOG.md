@@ -1,7 +1,50 @@
 # Changelog
 
 All notable changes to the J.A.R.V.I.S. open-source release. Versions follow
-the papers; the repo itself is tagged at release milestones.
+the papers; the repo itself is tagged at release milestones. From 1.1.0 the
+estate version also lives in `VERSION`.
+
+## [1.1.0] — 2026-10-27 — estate roster
+
+Next minor after the `v1.0.0` release tag. Contract versions and paper
+versions are unchanged.
+
+### Added
+
+- `VERSION` declares estate **1.1.0**.
+- README estate overview: Cloud JARVIS is the cloud brain and sovereign;
+  Local Jarvis is on the owner's laptop; the chief of staff coordinates
+  the worker bots and reports to both.
+- Bot roster of nine workers, each with a persona: Image Forge (ComfyUI
+  v0.43.0, flamboyant Renaissance painter), Security Audit Force (noir
+  detective; the security gate), OpenMuse (serene Greek muse), The Free
+  Model Gateway (freellmapi, Brooklyn hustler), Memory (ai-memory,
+  Scottish librarian), HyperFrames (Hollywood director), The Plugin
+  Armoury (Viking blacksmith; router and orchestration), Codebase
+  Cartographer (Graphify, Victorian explorer), and REA, Reverse Engineer
+  Anything (Cold War spy).
+- Standing rules on the public record: no deletions; a pull request for
+  every change; a security review before anything touches the laptop;
+  every bot answers by voice memo.
+- GitHub Pages homepage (`index.html`) carries the same overview,
+  architecture, roster, and version.
+
+### Changed
+
+- Local Jarvis architecture: router v2.2 went live 2026-10-27 at 17:28
+  America/Toronto. A voice turn has a 50 second budget. freellmapi is the
+  fallback when Ollama is down. Ollama remains `qwen3:8b`. The orchestrator
+  remains on port 8080. Voice remains Whisper and Piper.
+- The downloadable `local-jarvis/` installer is unchanged. ComfyUI v0.43.0
+  and freellmapi are on the laptop; they are not added to `install.ps1`.
+
+### Notes
+
+- About 15 free LLM provider keys were pooled on 2026-10-27 for The Free
+  Model Gateway. No key material is in this repository.
+- A box disk incident on 2026-10-27 was recovered. No host names, disk
+  identifiers, or recovery steps are published.
+- Earlier 2026-10-27 entries below stay as they were written.
 
 ## [2026-10-27] — public site and living docs
 

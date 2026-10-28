@@ -1,8 +1,8 @@
 # J.A.R.V.I.S. Estate — Repository Index
 
-Public record, current as of **2026-10-27**. The operator is **HgX**. No real names.
+Public record, current as of **2026-10-27**. Estate version **1.1.0** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
 
-**Local Jarvis is live.** The downloadable Windows build is [`local-jarvis/`](local-jarvis/README.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
+**Cloud JARVIS** is the cloud brain and sovereign. **Local Jarvis** is on the owner's laptop (Ollama `qwen3:8b`, orchestrator on port 8080, Whisper and Piper, router v2.2 since 17:28 America/Toronto, a 50 second voice budget, freellmapi when Ollama is down). The **chief of staff** coordinates nine worker bots and reports to both. The roster is in [`README.md`](README.md#bot-roster). The downloadable Windows build is [`local-jarvis/`](local-jarvis/README.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
 
 ## Runtime
 

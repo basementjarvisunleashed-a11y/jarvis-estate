@@ -8,13 +8,14 @@ One operator. Durable roles. Current facts, inspectable evidence, and human auth
 [![License: MIT](https://img.shields.io/github/license/basementjarvisunleashed-a11y/jarvis-estate)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/basementjarvisunleashed-a11y/jarvis-estate)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/commits/main)
 
-**Local Jarvis is live.** On 2026-10-27 the downloadable Windows build landed in [`local-jarvis/`](local-jarvis/README.md). The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
+**Estate 1.1.0**, recorded 2026-10-27. The version file is [`VERSION`](VERSION). The previous release tag remains `v1.0.0`. The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
 
 ## Contents
 
 - [Overview](#overview)
-- [Get Local Jarvis](#get-local-jarvis)
 - [Architecture](#architecture)
+- [Bot roster](#bot-roster)
+- [Get Local Jarvis](#get-local-jarvis)
 - [Repository structure](#repository-structure)
 - [Security](#security)
 - [Contributing](#contributing)
@@ -24,17 +25,80 @@ One operator. Durable roles. Current facts, inspectable evidence, and human auth
 
 J.A.R.V.I.S. is an operating system for a personal AI estate. Named roles own durable jobs. Changing facts are re-read from the system that owns them. A fluent "done" is not proof: consequential work ends in an artifact the operator can inspect. Nothing is sent, spent, published, or deleted without explicit approval.
 
-The estate loop is:
+The operator is **HgX**. Personal details stay off the public tree.
+
+On 2026-10-27 the live estate has three command roles and nine worker bots:
+
+- **Cloud JARVIS** is the cloud brain and the sovereign of the estate.
+- **Local Jarvis** runs on the owner's laptop. It uses Ollama `qwen3:8b`, an orchestrator on port 8080, and voice through Whisper and Piper. Router v2.2 went live the same day at 17:28 America/Toronto. A voice turn has a 50 second budget. When Ollama is down, freellmapi is the fallback.
+- **Chief of staff** coordinates the worker bots and reports to Cloud JARVIS and to Local Jarvis.
+
+The custody loop is unchanged:
 
 **Role → live source → tool → artifact → evidence → approval → routine**
 
-This repository is the public record: doctrine, skills, the formal programme, Watchtower, and the laptop build. Personal details stay off the public tree. The operator is **HgX**.
+Standing rules, in force with this record: nothing is deleted; every change is a pull request; a security review happens before anything touches the laptop; every bot answers by voice memo.
 
-Doctoral programme, as of 2026-10-27: Phases 0–5 are closed. Phase 6 (router optimality) is open. Evidence is in [`EVIDENCE.md`](EVIDENCE.md).
+This repository is the public record: doctrine, skills, the formal programme, Watchtower, the laptop build, and the estate record above. Doctoral programme, as of 2026-10-27: Phases 0–5 are closed. Phase 6 (router optimality) is open. Evidence is in [`EVIDENCE.md`](EVIDENCE.md).
+
+ComfyUI v0.43.0 and freellmapi run on that laptop. They are estate facts. They are not installed by the downloadable `local-jarvis/` installer. About 15 free LLM provider keys were pooled on 2026-10-27 for The Free Model Gateway. No key material is in this repository. A box disk incident the same day was recovered. No host names or recovery steps are published.
+
+## Architecture
+
+Command sits with Cloud JARVIS. Local Jarvis is the laptop presence. The chief of staff coordinates the workers and reports to both.
+
+```mermaid
+flowchart TB
+    cloud["Cloud JARVIS — sovereign"]
+    local["Local Jarvis — laptop"]
+    chief["Chief of staff"]
+    workers["Nine worker bots"]
+    cloud --- local
+    chief --> cloud
+    chief --> local
+    workers --> chief
+```
+
+A spoken turn on the laptop is audio in and audio out. Router v2.2, live at 17:28 America/Toronto on 2026-10-27, chooses the model. The budget for that turn is 50 seconds. Plain VLC commands match a regex and skip the model. freellmapi answers only when Ollama is down.
+
+```mermaid
+flowchart LR
+    mic[Mic] --> whisper[Whisper small.en]
+    whisper --> gate[Voice gate]
+    gate --> orch["Orchestrator :8080"]
+    orch --> router["Router v2.2"]
+    router --> ollama["Ollama qwen3:8b"]
+    router --> free["freellmapi fallback"]
+    ollama --> tools["Tools / VLC / REA"]
+    free --> tools
+    tools --> piper[Piper TTS]
+```
+
+`jarvis.py` is a separate helper on `qwen2.5:3b`. The voice loop does not use that model. VLC's HTTP remote and Ollama stay on localhost. The downloadable file map is in [`local-jarvis/README.md`](local-jarvis/README.md).
+
+## Bot roster
+
+Nine workers. Each has a persona. The chief of staff is the coordinator, not a tenth worker.
+
+| Bot | Persona | What is public |
+|---|---|---|
+| Image Forge | Flamboyant Renaissance painter | ComfyUI v0.43.0 on the laptop |
+| Security Audit Force | Noir detective | The security gate |
+| OpenMuse | Serene Greek muse | OpenMuse |
+| The Free Model Gateway | Brooklyn hustler | freellmapi; about 15 free LLM provider keys pooled 2026-10-27 |
+| Memory | Scottish librarian | ai-memory |
+| HyperFrames | Hollywood director | HyperFrames |
+| The Plugin Armoury | Viking blacksmith | Router and orchestration work |
+| Codebase Cartographer | Victorian explorer | Graphify |
+| REA, Reverse Engineer Anything | Cold War spy | REA |
+
+The eight skill playbooks under [`skills/`](skills/) stay the written methods. They are not a second copy of this roster.
 
 ## Get Local Jarvis
 
 The Windows laptop build is [`local-jarvis/`](local-jarvis/README.md). It does not start on its own. The voice loop is not a login item. The orchestrator listens on port 8080 only after you start it.
+
+Router v2.2, the 50 second voice budget, ComfyUI v0.43.0, and the freellmapi fallback are live on the owner's laptop. `install.ps1` does not install them.
 
 Tested on Windows 10/11 with an NVIDIA GPU (reference card: RTX 2060 6GB). CPU Whisper works without the GPU.
 
@@ -51,38 +115,11 @@ Tested on Windows 10/11 with an NVIDIA GPU (reference card: RTX 2060 6GB). CPU W
 
 `install.ps1` is idempotent. It does not register scheduled tasks unless you pass `-RegisterTasks`, and it refuses that flag while placeholders are still in the task XML. Full steps, Piper voice files, VLC, and troubleshooting are in [`local-jarvis/README.md`](local-jarvis/README.md).
 
-## Architecture
-
-A spoken turn is audio in and audio out. Plain VLC commands match a regex and skip the model.
-
-```mermaid
-flowchart LR
-    mic[Mic] --> whisper[Whisper small.en]
-    whisper --> gate[Voice gate]
-    gate --> orch["Orchestrator :8080"]
-    orch --> ollama["Ollama qwen3:8b"]
-    ollama --> tools["Tools / VLC / REA"]
-    tools --> piper[Piper TTS]
-```
-
-The estate around that laptop stack still follows the same custody chain:
-
-```mermaid
-flowchart LR
-    role[Role] --> source[Live source]
-    source --> tool[Tool]
-    tool --> artifact[Artifact]
-    artifact --> evidence[Evidence]
-    evidence --> approval[Approval]
-    approval --> routine[Routine]
-```
-
-`jarvis.py` is a separate helper on `qwen2.5:3b`. The voice loop does not use that model. VLC's HTTP remote and Ollama stay on localhost. Details and the file map are in [`local-jarvis/README.md`](local-jarvis/README.md).
-
 ## Repository structure
 
 | Path | What it is |
 |---|---|
+| [`VERSION`](VERSION) | Estate version. **1.1.0** on 2026-10-27. The prior release tag is `v1.0.0`. |
 | [`local-jarvis/`](local-jarvis/README.md) | Downloadable Windows build: voice loop, orchestrator, `install.ps1`. Live 2026-10-27. |
 | [`skills/`](skills/) | Eight role playbooks. Duties do not cross. |
 | [`watchtower/`](watchtower/README.md) | Stdlib monitor and [`STATUS.md`](watchtower/STATUS.md). Paused is a decision, not an outage. |
@@ -107,6 +144,8 @@ This tree is sanitized on purpose.
 - Voice profiles, enrollment audio, and model weights stay local. They are gitignored.
 - The voice path, VLC, and Ollama bind to localhost. The orchestrator listens on port 8080 on the PC that runs it.
 - The build has no delete tool. File tools stay inside the configured roots.
+- Standing rules recorded with estate 1.1.0: no deletions; a pull request for every change; a security review before anything touches the laptop; every bot answers by voice memo.
+- Provider keys for the free-model pool are not in this repository. The public fact is the count: about 15 keys pooled on 2026-10-27.
 
 Report vulnerabilities the way [`SECURITY.md`](SECURITY.md) describes. Do not open a public issue for a secret.
 
@@ -114,7 +153,7 @@ Report vulnerabilities the way [`SECURITY.md`](SECURITY.md) describes. Do not op
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Issues and pull requests use the templates in [`.github/`](.github/pull_request_template.md).
 
-Versions only move forward ([`VERSIONING.md`](VERSIONING.md)). User-visible changes get a [`CHANGELOG.md`](CHANGELOG.md) entry. Historical logs are not rewritten to match later facts; a correction is a new note.
+Versions only move forward ([`VERSIONING.md`](VERSIONING.md)). User-visible changes get a [`CHANGELOG.md`](CHANGELOG.md) entry. Historical logs are not rewritten to match later facts; a correction is a new note. The estate version in [`VERSION`](VERSION) moves on its own line. Contract and paper versions do not move with it.
 
 ## License
 
