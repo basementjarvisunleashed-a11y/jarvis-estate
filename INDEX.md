@@ -1,6 +1,6 @@
 # J.A.R.V.I.S. Estate — Repository Index
 
-Public record. Estate version **1.2.0** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
+Public record. Estate version **1.2.1** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
 
 **Cloud JARVIS** is the cloud brain and sovereign. **Local Jarvis** is on the owner's laptop (Ollama `qwen3:8b`, orchestrator on port 8080, Whisper and Piper, router v2.2 since 17:28 America/Toronto, a 50 second voice budget, a 60 second client wait, freellmapi only when Ollama is down). The **chief of staff** coordinates nine worker bots and reports to both. The roster is in [`README.md`](README.md#bot-roster). The 2026-10-27 operations log is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md). The downloadable Windows build is [`local-jarvis/`](local-jarvis/README.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
 
@@ -55,7 +55,7 @@ A graph is added as a row here when it is published. It is not written into an o
 
 ## Chronicle
 
-- [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) — operations log for 2026-10-27. Estate 1.2.0.
+- [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) — operations log for 2026-10-27, with the 1.2.1 addendum.
 - [`release-log/`](release-log/) — dated logs from 2026-10-19 onward, America/Toronto.
 - [`CHANGELOG.md`](CHANGELOG.md) — notable changes.
 - [`EVIDENCE.md`](EVIDENCE.md) — claims and their evidence.

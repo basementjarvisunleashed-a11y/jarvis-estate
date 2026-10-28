@@ -4,6 +4,36 @@ All notable changes to the J.A.R.V.I.S. open-source release. Versions follow
 the papers; the repo itself is tagged at release milestones. From 1.1.0 the
 estate version also lives in `VERSION`.
 
+## [1.2.1] — 2026-10-28 — night addendum
+
+Patch on 1.2.0. Contract versions and paper versions are unchanged.
+The 1.2.0 sections of `docs/logs/2026-10-27.md` are not rewritten.
+
+### Added
+
+- Addendum on the 2026-10-27 operations log, America/Toronto:
+  - Three watchdog launcher lines in the box shell startup files were
+    commented out, not deleted, and backed up. Policy: no launchers in
+    startup files. The box shell was still hanging after 12:36 AM.
+  - The voice loop and voice gate ran from about 11:38 PM to 12:15 AM
+    (REA, at HgX's request). They stay off until HgX starts them. A
+    single-instance lock and a start audit log remain.
+  - At 12:47 AM, with HgX's admin approval: Remote Mouse firewall rules
+    limited to the Private network, `OLLAMA_KEEP_ALIVE` changed from 24h
+    to 4h and Ollama restarted, process-creation auditing turned on.
+    ComfyUI already runs with `--disable-smart-memory`.
+  - Risk: Ollama uses about 5.2 of 6 GB VRAM, so Whisper on CUDA may run
+    out of memory. Cold voice turns take 6.0 s; warm turns take 1.7 s.
+  - The free gateway has 0 provider keys and returns 503. Work is ongoing.
+  - Still waiting on HgX: sshd password-login hardening, and a reboot.
+- Homepage chronicle entry and version **1.2.1**.
+
+### Notes
+
+- No startup-file paths, backup paths, account names, addresses, or ssh
+  configuration were added.
+- The 1.2.0 entry below stays as it was written.
+
 ## [1.2.0] — 2026-10-28 — operations log for 2026-10-27
 
 Next minor after 1.1.0. Contract versions and paper versions are unchanged.

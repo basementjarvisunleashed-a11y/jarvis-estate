@@ -8,7 +8,7 @@ One operator. Durable roles. Current facts, inspectable evidence, and human auth
 [![License: MIT](https://img.shields.io/github/license/basementjarvisunleashed-a11y/jarvis-estate)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/basementjarvisunleashed-a11y/jarvis-estate)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/commits/main)
 
-**Estate 1.2.0.** The version file is [`VERSION`](VERSION). Estate 1.1.0 was the roster. The release tag before that remains `v1.0.0`. The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
+**Estate 1.2.1.** The version file is [`VERSION`](VERSION). Estate 1.2.0 was the operations log. 1.1.0 was the roster. The release tag before that remains `v1.0.0`. The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
 
 ## Contents
 
@@ -24,13 +24,13 @@ One operator. Durable roles. Current facts, inspectable evidence, and human auth
 
 ## Recent
 
-Estate **1.2.0** is the operations log of 2026-10-27, morning to night. HgX commissioned it at 00:26 America/Toronto on 2026-10-28. The full note is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md).
+Estate **1.2.1** appends the after-midnight addendum to the 2026-10-27 operations log. The full note is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md). 1.2.0 remains the morning-to-night record above that addendum.
 
 - Router v2.2 went live at 17:28. The voice budget is 50 seconds. The client waits 60 seconds. freellmapi is the fallback only.
 - Code, pull requests, and router work go to The Plugin Armoury. Security Audit Force is the security gate.
 - Grok Bot's computer filled its disk, locked out, and was recovered. An hourly disk watch alerts at 45% and caps at 50%.
 - That night, four startup apps were disabled through StartupApproved (Discord, Acrobat Sync, Edge autolaunch, Firefox). The disable can be undone. ComfyUI VRAM was freed. `qwen3:8b` stays warm for voice.
-- REA's night changelog was cleared by Security Audit Force. Each cleared item has a backup. Still open: the FreeLLMAPI fallback returns 503 with 0 provider keys, and the VoiceMeeter task error. sshd hardening and a reboot wait on HgX. No address is published.
+- Estate 1.2.1: three watchdog launcher lines were commented out, not deleted, and backed up. No launchers in startup files. The box shell was still hanging after 12:36 AM. Voice ran from about 11:38 PM to 12:15 AM and now stays off until HgX starts it. At 12:47 AM, with admin approval: Remote Mouse limited to the Private network, `OLLAMA_KEEP_ALIVE` from 24h to 4h, process-creation auditing on. Ollama uses about 5.2 of 6 GB VRAM. The free gateway still returns 503 with 0 provider keys. sshd password-login hardening and a reboot wait on HgX.
 - Graphify's how-to is `update`, `explain`, `path`, and `affected`. Graphs are indexed in [`INDEX.md`](INDEX.md#graphs).
 
 House rules for this version: no deletions; a pull request for every GitHub change; no secrets in public; approval for each laptop change.
@@ -135,7 +135,7 @@ Tested on Windows 10/11 with an NVIDIA GPU (reference card: RTX 2060 6GB). CPU W
 
 | Path | What it is |
 |---|---|
-| [`VERSION`](VERSION) | Estate version. **1.2.0**. 1.1.0 was the roster. The prior release tag is `v1.0.0`. |
+| [`VERSION`](VERSION) | Estate version. **1.2.1**. 1.2.0 was the operations log. 1.1.0 was the roster. The prior release tag is `v1.0.0`. |
 | [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) | Operations log for 2026-10-27. |
 | [`local-jarvis/`](local-jarvis/README.md) | Downloadable Windows build: voice loop, orchestrator, `install.ps1`. Live 2026-10-27. |
 | [`skills/`](skills/) | Eight role playbooks. Duties do not cross. |

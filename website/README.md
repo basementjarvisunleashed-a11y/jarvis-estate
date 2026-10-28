@@ -5,7 +5,7 @@ homepage is [`/index.html`](../index.html):
 
 https://basementjarvisunleashed-a11y.github.io/jarvis-estate/
 
-That page is the current site at estate **1.2.0** (`VERSION` at the
+That page is the current site at estate **1.2.1** (`VERSION` at the
 repository root): the 2026-10-27 operations log, Cloud JARVIS, Local
 Jarvis, the chief of staff, the nine-bot roster, architecture, download,
 docs, research, and the build chronicle. It is static. It loads no
