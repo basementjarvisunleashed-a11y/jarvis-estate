@@ -30,7 +30,7 @@ Commissioned by HgX at 00:26 America/Toronto.
 - StartupApproved disabled Discord, Acrobat Sync, Edge autolaunch, and
   Firefox. The disable can be undone. ComfyUI VRAM was freed. `qwen3:8b`
   stays warm for voice.
-- REA's items do not run until Security Audit Force says GO.
+- REA's filing waited on the security gate. The same log now includes the night-of-27–28 laptop changelog: Security Audit Force cleared it, and each cleared item has a backup. Still open: FreeLLMAPI returns 503 with 0 provider keys, and the VoiceMeeter task error. sshd hardening and a reboot wait on HgX. No address, account name, or backup path is published.
 - The 1.1.0 entry below stays as it was written.
 
 ## [1.1.0] — 2026-10-27 — estate roster

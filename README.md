@@ -30,7 +30,7 @@ Estate **1.2.0** is the operations log of 2026-10-27, morning to night. HgX comm
 - Code, pull requests, and router work go to The Plugin Armoury. Security Audit Force is the security gate.
 - Grok Bot's computer filled its disk, locked out, and was recovered. An hourly disk watch alerts at 45% and caps at 50%.
 - That night, four startup apps were disabled through StartupApproved (Discord, Acrobat Sync, Edge autolaunch, Firefox). The disable can be undone. ComfyUI VRAM was freed. `qwen3:8b` stays warm for voice.
-- REA's quick wins and larger items are waiting on Security Audit Force's GO. The fallback address is not published.
+- REA's night changelog was cleared by Security Audit Force. Each cleared item has a backup. Still open: the FreeLLMAPI fallback returns 503 with 0 provider keys, and the VoiceMeeter task error. sshd hardening and a reboot wait on HgX. No address is published.
 - Graphify's how-to is `update`, `explain`, `path`, and `affected`. Graphs are indexed in [`INDEX.md`](INDEX.md#graphs).
 
 House rules for this version: no deletions; a pull request for every GitHub change; no secrets in public; approval for each laptop change.
