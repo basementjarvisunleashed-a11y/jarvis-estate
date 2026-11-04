@@ -112,32 +112,32 @@ The eight skill playbooks under [`skills/`](skills/) stay the written methods. T
 
 ## Get Local Jarvis
 
-The Windows laptop build is [`local-jarvis/`](local-jarvis/README.md). It does not start on its own. The voice loop is not a login item. The orchestrator listens on port 8080 only after you start it.
+The laptop platform is [`local-jarvis/`](local-jarvis/README.md). It does not start on its own. The voice loop is not a login item. The orchestrator listens on port 8080 only after you start it.
 
-Router v2.2, the 50 second voice budget, the 60 second client wait, ComfyUI v0.43.0, and the freellmapi fallback are live on the owner's laptop. freellmapi is the fallback only. `install.ps1` does not install them.
+**Platform as of 2026-11-04: Kali Linux on the internal drive.** The laptop runs Kali Linux with all tools updated, graphics driver installed, Bluetooth and Wi-Fi working, and login working. Windows is no longer on the internal drive. The Windows licence is motherboard-tied; a later reinstall via ISO is possible with no product key needed. The prior Windows build files remain in this tree for reference; the live platform is Kali Linux. See [`local-jarvis/PLATFORM-KALI.md`](local-jarvis/PLATFORM-KALI.md) for the current platform record.
 
-Tested on Windows 10/11 with an NVIDIA GPU (reference card: RTX 2060 6GB). CPU Whisper works without the GPU.
+Router v2.2, the 50 second voice budget, the 60 second client wait, ComfyUI v0.43.0, and the freellmapi fallback are live on the owner's laptop. freellmapi is the fallback only.
+
+Hardware: Acer Nitro AN515-55, i7-10750H, 64GB RAM, RTX 2060 (about 6GB VRAM), 512GB NVMe internal drive. CPU Whisper works without the GPU.
+
+REA is ready for local app analysis: `rea-agents@6.7.0`, installed via `npx rea-agents setup`, with the REA reverse-engineering skill for CLI use. CLI: `npx rea-agents analyze /path/to/app`. Deep analysis uses Ghidra with guided reverse-engineering workflows installed.
+
+Planned, not yet built: Ollama check, a 4B abliterated local model resident on VRAM as the fast low-end brain, a 27B abliterated local model on RAM as the slow high-end brain, switching logic in the orchestrator layers and usage router (default VRAM fast, escalate to RAM high for hard tasks, de-escalate back), then the remaining software stacks in efficient order, Kali tools mapping into REA, and Project 25 prove-out. No middle 8B test. None of these are claimed as installed until confirmed built.
 
 1. Install Python 3.13, [Ollama](https://ollama.com/download), and the two models named in the guide (`qwen3:8b` for the orchestrator, `qwen2.5:3b` for `jarvis.py`).
-2. From `local-jarvis/`:
+2. Set passwords and the user account on the machine. The tree ships placeholders only (`CHANGE_ME`, `<user>`). Do not commit the real values.
+3. Start the orchestrator and open `http://localhost:8080`.
+4. Enroll the speaker before trusting the voice gate. The threshold starts at **0.45** and is **uncalibrated**.
 
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File .\install.ps1
-   ```
-
-3. Set passwords and the Windows account on the machine. The tree ships placeholders only (`CHANGE_ME`, `<user>`). Do not commit the real values.
-4. Start the orchestrator with `py -3.13 C:\Jarvis\orchestrator.py` and open `http://localhost:8080`.
-5. Enroll the speaker before trusting the voice gate. The threshold starts at **0.45** and is **uncalibrated**.
-
-`install.ps1` is idempotent. It does not register scheduled tasks unless you pass `-RegisterTasks`, and it refuses that flag while placeholders are still in the task XML. Full steps, Piper voice files, VLC, and troubleshooting are in [`local-jarvis/README.md`](local-jarvis/README.md).
+Full steps, Piper voice files, VLC, and troubleshooting are in [`local-jarvis/README.md`](local-jarvis/README.md).
 
 ## Repository structure
 
 | Path | What it is |
 |---|---|
-| [`VERSION`](VERSION) | Estate version. **1.2.0**. 1.1.0 was the roster. The prior release tag is `v1.0.0`. |
+| [`VERSION`](VERSION) | Estate version. **1.2.1**. 1.2.0 was the 2026-10-27 operations log. The prior release tag is `v1.0.0`. |
 | [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) | Operations log for 2026-10-27. |
-| [`local-jarvis/`](local-jarvis/README.md) | Downloadable Windows build: voice loop, orchestrator, `install.ps1`. Live 2026-10-27. |
+| [`local-jarvis/`](local-jarvis/README.md) | Laptop platform: Kali Linux build (live 2026-11-04) with voice loop, orchestrator, and REA. Prior Windows build files retained for reference. |
 | [`skills/`](skills/) | Eight role playbooks. Duties do not cross. |
 | [`watchtower/`](watchtower/README.md) | Stdlib monitor and [`STATUS.md`](watchtower/STATUS.md). Paused is a decision, not an outage. |
 | [`papers/`](papers/README.md) | White-paper index. Current versions and the Dropbox URLs. |

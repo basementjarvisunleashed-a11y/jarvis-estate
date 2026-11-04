@@ -1,13 +1,22 @@
 # Local Jarvis
 
-Installable Windows build of the laptop voice stack. Tested on Windows with
-an NVIDIA GPU, an RTX 2060 6GB. Nothing in this folder starts on its own.
-The orchestrator listens only after you start it, and the voice loop is
-deliberately not auto-started.
+Laptop voice stack. Platform as of 2026-11-04: Kali Linux on the internal
+drive, with an NVIDIA GPU, an RTX 2060 (about 6GB VRAM). Nothing in this
+folder starts on its own. The orchestrator listens only after you start it,
+and the voice loop is deliberately not auto-started.
 
-Passwords in this tree are the placeholder `CHANGE_ME`. Windows accounts
+The prior Windows build files in this folder are retained for reference;
+the live platform is Kali Linux. Windows is no longer on the internal
+drive. The Windows licence is motherboard-tied; a later reinstall via ISO
+is possible with no product key needed.
+
+Passwords in this tree are the placeholder `CHANGE_ME`. User accounts
 are the placeholder `<user>`. Set both on the machine. Do not commit the
 real values.
+
+See [`PLATFORM-KALI.md`](PLATFORM-KALI.md) for the current platform record:
+Kali Linux with all tools updated, graphics driver installed, Bluetooth
+and Wi-Fi working, login working, and REA ready for local app analysis.
 
 ## Architecture
 
@@ -42,8 +51,17 @@ listen / chat. Its model is `qwen2.5:3b` (`JARVIS_MODEL`), via Ollama
 
 ## Prerequisites
 
-Windows 10 or 11, and an NVIDIA GPU if you want Whisper on CUDA. The
-reference run used an RTX 2060 6GB. CPU Whisper works without the GPU.
+Kali Linux on the internal drive, and an NVIDIA GPU if you want Whisper
+on CUDA. The reference run used an RTX 2060 (about 6GB VRAM). CPU Whisper
+works without the GPU.
+
+**Note on the sections below:** the detailed steps from "Virtual
+environment and requirements" through "Files" describe the prior Windows
+10/11 build, retained in this folder for reference only. Windows paths
+(`C:\Jarvis`, `C:\Users\<user>`), the `py` launcher, `install.ps1`,
+and Windows sound-device and account references in those sections apply
+to that prior build, not to the live Kali Linux platform. The live
+platform record is [`PLATFORM-KALI.md`](PLATFORM-KALI.md).
 
 1. **Python 3.13**, with the `py` launcher
    ([python.org](https://www.python.org/downloads/)).

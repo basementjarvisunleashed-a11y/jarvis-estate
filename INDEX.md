@@ -2,13 +2,13 @@
 
 Public record. Estate version **1.2.0** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
 
-**Cloud JARVIS** is the cloud brain and sovereign. **Local Jarvis** is on the owner's laptop (Ollama `qwen3:8b`, orchestrator on port 8080, Whisper and Piper, router v2.2 since 17:28 America/Toronto, a 50 second voice budget, a 60 second client wait, freellmapi only when Ollama is down). The **chief of staff** coordinates nine worker bots and reports to both. The roster is in [`README.md`](README.md#bot-roster). The 2026-10-27 operations log is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md). The downloadable Windows build is [`local-jarvis/`](local-jarvis/README.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
+**Cloud JARVIS** is the cloud brain and sovereign. **Local Jarvis** is on the owner's laptop (Ollama `qwen3:8b`, orchestrator on port 8080, Whisper and Piper, router v2.2 since 17:28 America/Toronto, a 50 second voice budget, a 60 second client wait, freellmapi only when Ollama is down). The **chief of staff** coordinates nine worker bots and reports to both. The roster is in [`README.md`](README.md#bot-roster). The 2026-10-27 operations log is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md). The laptop platform is Kali Linux on the internal drive (live 2026-11-04); the platform record is [`local-jarvis/PLATFORM-KALI.md`](local-jarvis/PLATFORM-KALI.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
 
 ## Runtime
 
 | Path | What it is |
 |---|---|
-| [`local-jarvis/`](local-jarvis/README.md) | Windows 10/11 laptop stack. `install.ps1`, voice loop, orchestrator on port 8080. Placeholders only. Not auto-started. |
+| [`local-jarvis/`](local-jarvis/README.md) | Kali Linux laptop stack (live 2026-11-04). Voice loop, orchestrator on port 8080, REA. Prior Windows build files retained for reference. Placeholders only. Not auto-started. |
 | [`watchtower/`](watchtower/README.md) | Honest uptime monitor. Live states are in `STATUS.md`. |
 | [`skills/`](skills/) | Eight roles: `betting-engine`, `bitcoin-x-memes`, `gameday-bot`, `overlord-bot`, `tax-bot`, `team-deployment`, `tickler-bot`, `usage-router`. |
 

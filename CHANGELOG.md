@@ -4,6 +4,44 @@ All notable changes to the J.A.R.V.I.S. open-source release. Versions follow
 the papers; the repo itself is tagged at release milestones. From 1.1.0 the
 estate version also lives in `VERSION`.
 
+## [1.2.1] — 2026-11-04 — laptop platform: Kali Linux + REA
+
+Platform correction. The laptop is now fully on the Linux world, not
+Windows. Contract versions and paper versions are unchanged.
+
+### Added
+
+- [`local-jarvis/PLATFORM-KALI.md`](local-jarvis/PLATFORM-KALI.md), the
+  current platform record: Acer Nitro AN515-55 (i7-10750H, 64GB RAM,
+  RTX 2060 about 6GB VRAM, 512GB NVMe internal drive), Kali Linux on the
+  internal drive with all tools updated, graphics driver installed,
+  Bluetooth and Wi-Fi working, login working, and REA `rea-agents@6.7.0`
+  ready for local app analysis (CLI: `npx rea-agents analyze
+  /path/to/app`; Ghidra guided workflows installed). Planned-only items
+  are listed separately and are not claimed as built.
+
+### Changed
+
+- [`README.md`](README.md) "Get Local Jarvis" section: platform is now
+  Kali Linux on the internal drive; Windows is no longer on the internal
+  drive. Prior Windows build files are retained for reference.
+- [`local-jarvis/README.md`](local-jarvis/README.md): header and
+  prerequisites now state Kali Linux; Windows references marked as
+  prior-build reference only.
+- [`INDEX.md`](INDEX.md): laptop platform and `local-jarvis/` row now
+  state Kali Linux (live 2026-11-04).
+- `VERSION` is **1.2.1**.
+
+### Notes
+
+- No files deleted. The prior Windows build files (`install.ps1` and
+  related guides) remain in the tree for reference.
+- No 2.0 or 3.0 material is included in this change. No personal data:
+  no real names, product keys, account details, Wi-Fi names, addresses,
+  or serials.
+- Windows licence note is general only: motherboard-tied, later reinstall
+  via ISO possible, no product key needed.
+
 ## [1.2.0] — 2026-10-28 — operations log for 2026-10-27
 
 Next minor after 1.1.0. Contract versions and paper versions are unchanged.
