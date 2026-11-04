@@ -73,7 +73,22 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 | [plans/OPERATOR-PRIME-SCALING-FUTURE-COURSES-PLAN-DRAFT-v0.1.0.md](plans/OPERATOR-PRIME-SCALING-FUTURE-COURSES-PLAN-DRAFT-v0.1.0.md) | Scaling and future courses plan draft. New courses, new modules, new hardware, year-expansion locks, all as versioned items on HgX's word. |
 | [guides/OPERATOR-PRIME-OPERATOR-PORTFOLIO-GUIDE-DRAFT-v0.1.0.md](guides/OPERATOR-PRIME-OPERATOR-PORTFOLIO-GUIDE-DRAFT-v0.1.0.md) | Operator portfolio guide draft. How a student builds their operator portfolio. |
 | [tools/OPERATOR-PRIME-TOOL-VERSION-LOG-DRAFT-v0.1.0.md](tools/OPERATOR-PRIME-TOOL-VERSION-LOG-DRAFT-v0.1.0.md) | Tool version log draft. Tool, version, command, output, measurement, error, file path per entry. |
-| [dean/INDEX-DRAFT-v0.1.0.md](dean/INDEX-DRAFT-v0.1.0.md) | Dean's package index draft. Indexes all 14 Dean drafts above. |
+| [dean/INDEX-DRAFT-v0.1.0.md](dean/INDEX-DRAFT-v0.1.0.md) | Dean's package index draft (batch 1). Indexes all 14 Dean drafts above. |
+| [safety/OPERATOR-PRIME-RISK-ASSESSMENT-PACK-DRAFT-v0.1.0.md](safety/OPERATOR-PRIME-RISK-ASSESSMENT-PACK-DRAFT-v0.1.0.md) | Risk assessment pack draft (batch 2). Safety side, future-proofing. |
+| [safety/OPERATOR-PRIME-INSURANCE-LIABILITY-OVERVIEW-DRAFT-v0.1.0.md](safety/OPERATOR-PRIME-INSURANCE-LIABILITY-OVERVIEW-DRAFT-v0.1.0.md) | Insurance and liability overview draft (batch 2). DRAFT TEMPLATE ONLY — NOT legal advice, NOT a policy, NOT in use until reviewed by a qualified Ontario lawyer / broker and approved by HgX in a locked version. No cover, premium, limit, provider, or fee claimed. |
+| [safety/OPERATOR-PRIME-LIABILITY-WAIVER-TEMPLATE-DRAFT-v0.1.0.md](safety/OPERATOR-PRIME-LIABILITY-WAIVER-TEMPLATE-DRAFT-v0.1.0.md) | Liability waiver template draft (batch 2). DRAFT TEMPLATE ONLY — NOT legal advice, NOT in use until reviewed by a qualified Ontario lawyer and approved by HgX in a locked version. |
+| [safety/OPERATOR-PRIME-INCIDENT-REPORT-EMERGENCY-PLAN-DRAFT-v0.1.0.md](safety/OPERATOR-PRIME-INCIDENT-REPORT-EMERGENCY-PLAN-DRAFT-v0.1.0.md) | Incident report and emergency plan draft (batch 2). |
+| [handbook/OPERATOR-PRIME-STUDENT-CODE-OF-CONDUCT-DRAFT-v0.1.0.md](handbook/OPERATOR-PRIME-STUDENT-CODE-OF-CONDUCT-DRAFT-v0.1.0.md) | Student code of conduct draft (batch 2). |
+| [handbook/OPERATOR-PRIME-ENROLLMENT-ADMISSIONS-PACK-DRAFT-v0.1.0.md](handbook/OPERATOR-PRIME-ENROLLMENT-ADMISSIONS-PACK-DRAFT-v0.1.0.md) | Enrollment and admissions pack draft (batch 2). |
+| [handbook/OPERATOR-PRIME-ATTENDANCE-PROGRESSION-PACK-DRAFT-v0.1.0.md](handbook/OPERATOR-PRIME-ATTENDANCE-PROGRESSION-PACK-DRAFT-v0.1.0.md) | Attendance and progression pack draft (batch 2). |
+| [handbook/OPERATOR-PRIME-COMPLAINTS-APPEALS-PACK-DRAFT-v0.1.0.md](handbook/OPERATOR-PRIME-COMPLAINTS-APPEALS-PACK-DRAFT-v0.1.0.md) | Complaints and appeals pack draft (batch 2). |
+| [admin/OPERATOR-PRIME-DATA-PROTECTION-RECORDS-RETENTION-DRAFT-v0.1.0.md](admin/OPERATOR-PRIME-DATA-PROTECTION-RECORDS-RETENTION-DRAFT-v0.1.0.md) | Data protection and records retention pack draft (batch 2). DRAFT TEMPLATE ONLY — NOT legal advice, NOT in use until reviewed by a qualified Ontario lawyer and approved by HgX in a locked version. |
+| [hardware/OPERATOR-PRIME-EQUIPMENT-LOAN-CUSTODY-PACK-DRAFT-v0.1.0.md](hardware/OPERATOR-PRIME-EQUIPMENT-LOAN-CUSTODY-PACK-DRAFT-v0.1.0.md) | Equipment loan and custody pack draft (batch 2). |
+| [venues/OPERATOR-PRIME-VENUE-AGREEMENT-TEMPLATE-DRAFT-v0.1.0.md](venues/OPERATOR-PRIME-VENUE-AGREEMENT-TEMPLATE-DRAFT-v0.1.0.md) | Venue agreement template draft (batch 2). DRAFT TEMPLATE ONLY — NOT legal advice, NOT in use until reviewed by a qualified Ontario lawyer and approved by HgX in a locked version. No venue name claimed. |
+| [handbook/OPERATOR-PRIME-ACCESSIBILITY-INCLUSION-PACK-DRAFT-v0.1.0.md](handbook/OPERATOR-PRIME-ACCESSIBILITY-INCLUSION-PACK-DRAFT-v0.1.0.md) | Accessibility and inclusion pack draft (batch 2). |
+| [legal/OPERATOR-PRIME-INTELLECTUAL-PROPERTY-OPEN-LICENCE-PACK-DRAFT-v0.1.0.md](legal/OPERATOR-PRIME-INTELLECTUAL-PROPERTY-OPEN-LICENCE-PACK-DRAFT-v0.1.0.md) | Intellectual property and open licence pack draft (batch 2). MIT for code, CC-BY-4.0 for course text. |
+| [plans/OPERATOR-PRIME-COURSE-CONTINUITY-SUCCESSION-PLAN-DRAFT-v0.1.0.md](plans/OPERATOR-PRIME-COURSE-CONTINUITY-SUCCESSION-PLAN-DRAFT-v0.1.0.md) | Course continuity and succession plan draft (batch 2). No successor name claimed. |
+| [dean/INDEX-DRAFT-BATCH-2-v0.1.0.md](dean/INDEX-DRAFT-BATCH-2-v0.1.0.md) | Dean's package index draft (batch 2). Indexes all 14 batch 2 drafts above. Filed under a batch-2 name so batch 1's index is never overwritten. |
 
 ### SUPERSEDED / HISTORY — retained, not current
 
@@ -104,7 +119,7 @@ HgX ordered daily, weekly, monthly, everything in the course to be published. **
 
 ## Dropbox and OneDrive — Dean's package
 
-- **Dropbox:** Academy has uploaded the 30-file Dean's package (14 drafts + index, markdown + PDF) to `/J.A.R.V.I.S./education/course-dean-new-files/` and verified the listing. GitHub is the versioned source of truth; Dropbox holds the same package for sharing.
+- **Dropbox:** Academy has uploaded the 30-file Dean's package batch 1 (14 drafts + index, markdown + PDF) to `/J.A.R.V.I.S./education/course-dean-new-files/` and verified the listing, and the 30-file batch 2 package to `/J.A.R.V.I.S./education/course-dean-new-files-2/` and verified the listing (30 files). GitHub is the versioned source of truth; Dropbox holds the same packages for sharing.
 - **OneDrive:** GAP — OneDrive has no connector in Muse at this time, so Academy cannot upload directly. The same 30-file package is staged locally at `~/workspace/academy/operator-prime/onedrive-ready/course-dean-new-files/` for upload once OneDrive access is connected. OneDrive is NOT claimed as done until it is actually uploaded and verified.
 
 ## Future rule — every new course file
