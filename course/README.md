@@ -129,6 +129,15 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 | [year/facility/](year/facility/) | Year pack, testing facility packs draft (3 files: indoor lab, private airfield, private farm). No specific venue name claimed. |
 | [year/olympics/](year/olympics/) | Year pack, Operator Olympics Year Games pack draft (1 file). |
 | [year/INDEX-DRAFT-YEAR-PACK-v0.1.0.md](year/INDEX-DRAFT-YEAR-PACK-v0.1.0.md) | Year pack index draft. Indexes all 100 year pack files above. Filed under a year-pack name so no earlier index is overwritten. NO year, cohort start date, clock time, holiday date, specific venue name, fee, cover, premium, or limit claimed anywhere — all blank for HgX to lock. |
+| [professor/master/](professor/master/) | Professor teaching pack, master guide draft (1 file). How to Teach OPERATOR PRIME — PhD-level standard, daily/weekly/monthly rhythm, assessment, escalation, professor wiki map. |
+| [professor/modules/](professor/modules/) | Professor teaching pack, module teaching guides draft (15 files, M0–M14). PhD-level depth per module — outcomes, deep concepts, session plan, common errors, evidence standard, marking criteria. |
+| [professor/weekly/](professor/weekly/) | Professor teaching pack, weekly professor guides draft (52 files, W01–W52). W01–W49 follow L1–L49; W50–W52 are the L50 three-week stretch. Preparation, day-by-day teaching, homework marking, audit day, pitfalls, gate. |
+| [professor/monthly/](professor/monthly/) | Professor teaching pack, monthly professor plans draft (12 files). Progression, checkpoints, Project 25, venues, students at risk. |
+| [professor/marking/](professor/marking/) | Professor teaching pack, monthly marking and feedback guides draft (12 files). Criteria only — NO exam key, NO model answer, ever. |
+| [professor/quarterly/](professor/quarterly/) | Professor teaching pack, quarterly professor reviews draft (4 files). |
+| [professor/FINAL-YEAR-PROFESSOR-REVIEW-DRAFT-v0.1.0.md](professor/FINAL-YEAR-PROFESSOR-REVIEW-DRAFT-v0.1.0.md) | Professor teaching pack, final year professor review draft (1 file). |
+| [professor/facility/](professor/facility/) | Professor teaching pack, facility setup guides draft (3 files: indoor lab, private airfield, private farm). |
+| [professor/INDEX-DRAFT-PROFESSOR-PACK-v0.1.0.md](professor/INDEX-DRAFT-PROFESSOR-PACK-v0.1.0.md) | Professor teaching pack index draft. Professor wiki map: canon, student material, Dean Year Pack, Dean batches 1–3, teaching schedule, year logs, Dean feed, and this pack. NO student answer, measurement, mark, score, year, cohort start, clock time, holiday date, venue name, fee, cover, premium, limit, or pass mark claimed anywhere. |
 
 ### SUPERSEDED / HISTORY — retained, not current
 
