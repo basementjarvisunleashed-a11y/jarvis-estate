@@ -3,6 +3,20 @@
 **J.A.R.V.I.S. (Joint Ambient Ready Variance Intelligence System)** — public identity, first and prominent.
 Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
+## Start here — what this course is, in plain language
+
+**OPERATOR PRIME is a one-year, open-source course that teaches you to operate computers — really operate them.** Not use apps. Operate: take hardware and software apart, understand how it works, measure what it does, prove what you found with filed evidence, harden what you broke, and defend what you built. Tagline: *"You have used computers your whole life. Now you operate them."*
+
+**Who it is for:** consenting adults, in a controlled laboratory, working only on their own devices, tags, networks, and targets. No experience assumed beyond willingness to work in order, file evidence, and follow the hard rules below.
+
+**What you will be able to do (7 outcomes):** (1) Build and measure a laboratory estate, with ground truth, and quantify your own error. (2) Sense spectrum, cards, Bluetooth, chips, mesh, vision, and aerial systems with open-source hardware, and prove what you sensed with a filed log. (3) Reverse engineer your own firmware and applications locally with REA, and turn a verified finding into a teachable, fully documented presentation. (4) Harden what you broke, re-test it, and file before-and-after results that prove the defence. (5) Build a local knowledge graph of your own findings, and answer a stated question only from filed laboratory findings. (6) Audit an entire laboratory estate in one day, file findings per area, and write a defence brief. (7) Present a capstone defence, verified by re-measurement, with a full evidence pack, report, narration, and defence brief.
+
+**How it runs:** fifteen modules (M0–M14) in order, one at a time. Twenty laboratories (L1–L20) locked, each ending at a gate — you file your evidence pack and the gate passes or it does not; a failed gate is resubmitted until it passes. Twenty-one checkpoints mark your progress. The week runs three lab days, one homework day, one audit day, plus buffers. Roles rotate: Operator, Recorder, Auditor. The path ends at L20 Operator Olympics, then Project 25 proves the entire suite. Assessment is evidence-based: 40% evidence pack, 25% written report, 15% narrated summary, 20% defence (see syllabus). No faked passes. No mark for a fabricated, incomplete, or unverifiable result.
+
+**What to read first:** if you read one document, read the [Student Course Document](student/OPERATOR-PRIME-STUDENT-COURSE-DOCUMENT-DRAFT-v0.1.0.md) — the whole course in one student-facing document. Then the [Student Handbook, Full](student/OPERATOR-PRIME-STUDENT-HANDBOOK-FULL-DRAFT-v0.1.0.md). Then the syllabus below. **LOCKED** means in hand, ratified, taught. **DRAFT** means proposed, not taught, not final — draft is never presented as locked.
+
+**Where to see it laid out:** the [course website](index.html) presents this same course as a proper academy prospectus — start here, outcomes, how it runs, modules, labs, platform, assessment, rules, student pack, files — in that order.
+
 ## Embedded in 1.0 — not separate
 
 **This course is embedded in 1.0, not a separate product, not a side pipeline.** 1.0 = this course + all open-source hardware used in this course + the bracelet, all open source. The bracelet is one device in 1.0, not the whole of 1.0. The hardware in this course (H1–H20 in hand, H21–H30 draft) is part of 1.0. Kali Linux everything, REA `rea-agents@6.7.0`, Labs L1–L20, Modules M0–M14, Project 25, 21 checkpoints — all part of 1.0.
@@ -124,9 +138,9 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 - **Teaching schedule:** See [schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md](schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md). Weekly rhythm, daily blocks, month-by-month order, audits, assessment.
 - **Year logs:** See [logs/YEAR-LOGS-DRAFT-v0.1.0.md](logs/YEAR-LOGS-DRAFT-v0.1.0.md). Daily, lab, checkpoint, hardware, monthly, quarterly, year rollup, plus scrubbed student learning log.
 
-## Daily / weekly / monthly — explicit statement
+## Daily / weekly / monthly — current statement (updated 2026-11-04)
 
-HgX ordered daily, weekly, monthly, everything in the course to be published. **No daily, weekly, or monthly course schedule exists in the source files listed above.** No such schedule has been invented or added here. The course material is entered into the standing versioning and indexing system, and into the standing weekly and monthly audit cycle (release-weekly-audit, release-monthly-audit), which will cover it going forward. If a daily, weekly, or monthly course schedule is later delivered, it will be versioned and indexed here as its own item.
+HgX ordered daily, weekly, monthly, everything in the course to be published. **That schedule now exists as a draft:** the [Teaching Schedule draft](schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md) supplies the weekly rhythm template (3 lab days + 1 homework day + 1 audit day + buffers), daily blocks in order, month-by-month order January–December, audits and inspections, and assessment 40/25/15/20 — and the [Year Logs draft](logs/YEAR-LOGS-DRAFT-v0.1.0.md) supplies daily, lab, checkpoint, hardware, monthly, quarterly, and year rollup logs. The Dean feeds the Professor daily, weekly, and monthly (see Academy hierarchy below). Year, cohort start date, clock times, holiday dates, venue names, and buffer counts are NOT locked — blanks until HgX locks them with the cohort. Nothing here is invented as fixed.
 
 ## What was held back and why
 
@@ -139,7 +153,7 @@ HgX ordered daily, weekly, monthly, everything in the course to be published. **
 ## Dropbox and OneDrive — Dean's package
 
 - **Dropbox:** Academy has uploaded the 30-file Dean's package batch 1 (14 drafts + index, markdown + PDF) to `/J.A.R.V.I.S./education/course-dean-new-files/` and verified the listing, the 30-file batch 2 package to `/J.A.R.V.I.S./education/course-dean-new-files-2/` and verified the listing (30 files), the 22-file batch 3 package to `/J.A.R.V.I.S./education/course-dean-new-files-3/` and verified the listing (22 files), the 10-file student pack to `/J.A.R.V.I.S./education/course-student-pack/` and verified the listing (10 files), and the 6-file student pack L21–L50 to `/J.A.R.V.I.S./education/course-student-pack-l21-l50/` and verified the listing (6 files). GitHub is the versioned source of truth; Dropbox holds the same packages for sharing.
-- **OneDrive:** GAP — OneDrive has no connector in Muse at this time, so Academy cannot upload directly. The same 30-file package is staged locally at `~/workspace/academy/operator-prime/onedrive-ready/course-dean-new-files/` for upload once OneDrive access is connected. OneDrive is NOT claimed as done until it is actually uploaded and verified.
+- **OneDrive:** NO LONGER REQUIRED — per HgX's 2026-11-04 15:11 word, his own Dropbox suffices and OneDrive is no longer a requirement. Packages are still staged locally at `~/workspace/academy/operator-prime/onedrive-ready/` for reference, but nothing is held for OneDrive and OneDrive upload is never claimed as done or outstanding.
 
 ## Future rule — every new course file
 
