@@ -1,14 +1,25 @@
 # J.A.R.V.I.S.
 
-**Joint Ambient Ready Variance Intelligence System**
+## **J**oint **A**mbient **R**eady **V**ariance **I**ntelligence **S**ystem
 
-One operator. Durable roles. Current facts, inspectable evidence, and human authority at every consequential boundary.
+> 🔥 **Kali Linux. REA. The basement laptop that can rip apart anything.**
+>
+> One operator. Durable roles. Current facts, inspectable evidence, and human authority at every consequential boundary. Cloud JARVIS is the sovereign. Local Jarvis runs on Kali Linux in the basement lab — and it can rip apart anything, then put it back together with evidence.
 
 [![Validate](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/actions/workflows/validate.yml/badge.svg)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/github/license/basementjarvisunleashed-a11y/jarvis-estate)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/basementjarvisunleashed-a11y/jarvis-estate)](https://github.com/basementjarvisunleashed-a11y/jarvis-estate/commits/main)
 
-**Estate 1.2.0.** The version file is [`VERSION`](VERSION). Estate 1.1.0 was the roster. The release tag before that remains `v1.0.0`. The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
+**Estate 1.2.1.** The version file is [`VERSION`](VERSION). The public site is [GitHub Pages](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/).
+
+### The basement lab
+
+| | |
+|---|---|
+| 🔥 **Kali Linux** | Everything installed on the internal drive. All tools updated, graphics driver in, Bluetooth working, Wi-Fi working, login working. |
+| 🔬 **REA 6.7.0** | Reverse Engineer Anything, ready for local app analysis. `npx rea-agents analyze /path/to/app`. Ghidra guided workflows installed. |
+| 💻 **The machine** | Acer Nitro AN515-55. i7-10750H. 64GB RAM. RTX 2060, about 6GB VRAM. 512GB NVMe. |
+| 🎓 **OPERATOR PRIME** | The one-year open source course. Full-Spectrum Operator Systems. Labs L1–L20 locked. [Course index](course/README.md). |
 
 ## Contents
 
