@@ -31,7 +31,7 @@ superseded versions, which are kept for the record.
 
 ## Reporting a vulnerability
 
-Email **HgXengineering@gmail.com** (HgX, the operator) with the subject line
+Email **basementjarvisunleashed@gmail.com** (the public J.A.R.V.I.S. address) with the subject line
 `SECURITY: jarvis-estate`. Please include:
 
 - what you found and where (file, path, or URL),
@@ -42,3 +42,5 @@ Please do not open a public issue for a vulnerability, and do not disclose
 it publicly until we have had a reasonable opportunity to respond. We aim to
 acknowledge reports within three business days. Good-faith reports are
 welcome and credited in the release log when a fix lands.
+
+*Last updated: 2026-11-04.*

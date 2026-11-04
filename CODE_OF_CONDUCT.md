@@ -20,7 +20,8 @@ holds itself to:
 ## Enforcement
 
 Conduct is moderated by HgX, the operator. Reports go to
-**HgXengineering@gmail.com**. Consequences scale with the conduct: a private
+**basementjarvisunleashed@gmail.com** — the public J.A.R.V.I.S. address,
+first and prominent. Consequences scale with the conduct: a private
 note, a public correction, removal of content, or exclusion from the
 project's spaces. Decisions are final and are not debated in the threads
 they concern.
@@ -30,3 +31,5 @@ they concern.
 This code applies in all of the project's public spaces: this repository,
 its wiki, discussions, and the project's accounts when acting for the
 project.
+
+*Last updated: 2026-11-04.*
