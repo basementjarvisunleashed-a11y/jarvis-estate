@@ -89,6 +89,17 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 | [legal/OPERATOR-PRIME-INTELLECTUAL-PROPERTY-OPEN-LICENCE-PACK-DRAFT-v0.1.0.md](legal/OPERATOR-PRIME-INTELLECTUAL-PROPERTY-OPEN-LICENCE-PACK-DRAFT-v0.1.0.md) | Intellectual property and open licence pack draft (batch 2). MIT for code, CC-BY-4.0 for course text. |
 | [plans/OPERATOR-PRIME-COURSE-CONTINUITY-SUCCESSION-PLAN-DRAFT-v0.1.0.md](plans/OPERATOR-PRIME-COURSE-CONTINUITY-SUCCESSION-PLAN-DRAFT-v0.1.0.md) | Course continuity and succession plan draft (batch 2). No successor name claimed. |
 | [dean/INDEX-DRAFT-BATCH-2-v0.1.0.md](dean/INDEX-DRAFT-BATCH-2-v0.1.0.md) | Dean's package index draft (batch 2). Indexes all 14 batch 2 drafts above. Filed under a batch-2 name so batch 1's index is never overwritten. |
+| [opensource/OPERATOR-PRIME-OPEN-SOURCE-MANIFESTO-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-OPEN-SOURCE-MANIFESTO-DRAFT-v0.1.0.md) | Open source manifesto draft (batch 3). This is all open source and should remain open source. |
+| [opensource/OPERATOR-PRIME-CREDIT-ATTRIBUTION-POLICY-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-CREDIT-ATTRIBUTION-POLICY-DRAFT-v0.1.0.md) | Credit and attribution policy draft (batch 3). Credit rule: "OPERATOR PRIME, by HGX Engineering, HGX Academy, and Jarvis (J.A.R.V.I.S.)." |
+| [opensource/OPERATOR-PRIME-LICENCE-GUIDE-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-LICENCE-GUIDE-DRAFT-v0.1.0.md) | Licence guide draft (batch 3). Code MIT, course text CC-BY-4.0. Honest distinction: MIT and CC-BY-4.0 are permissive — they require credit and permit reuse, including in a closed work, unless a different licence is filed. HGX Academy's standing policy (remain open, full credit) is a condition of teaching, publishing, and partnering, not by itself a legal term of MIT or CC-BY-4.0. |
+| [opensource/OPERATOR-PRIME-REUSE-DERIVATIVES-GUIDE-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-REUSE-DERIVATIVES-GUIDE-DRAFT-v0.1.0.md) | Reuse and derivatives guide draft (batch 3). |
+| [opensource/OPERATOR-PRIME-CONTRIBUTOR-GUIDE-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-CONTRIBUTOR-GUIDE-DRAFT-v0.1.0.md) | Contributor guide draft (batch 3). |
+| [opensource/OPERATOR-PRIME-NAME-BRAND-USE-GUIDE-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-NAME-BRAND-USE-GUIDE-DRAFT-v0.1.0.md) | Name and brand use guide draft (batch 3). J.A.R.V.I.S. first and prominent, HgX small underneath, real name never in public materials. |
+| [opensource/OPERATOR-PRIME-CITATION-GUIDE-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-CITATION-GUIDE-DRAFT-v0.1.0.md) | Citation guide draft (batch 3). How to cite OPERATOR PRIME, by HGX Engineering, HGX Academy, and Jarvis. |
+| [opensource/OPERATOR-PRIME-OPEN-HARDWARE-CREDIT-PACK-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-OPEN-HARDWARE-CREDIT-PACK-DRAFT-v0.1.0.md) | Open hardware credit pack draft (batch 3). Hardware credit never replaces course credit. |
+| [opensource/OPERATOR-PRIME-THIRD-PARTY-ATTRIBUTION-REGISTER-TEMPLATE-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-THIRD-PARTY-ATTRIBUTION-REGISTER-TEMPLATE-DRAFT-v0.1.0.md) | Third-party attribution register template draft (batch 3). Third-party credit never replaces course credit. |
+| [opensource/OPERATOR-PRIME-OPEN-SOURCE-COMPLIANCE-CHECKLIST-DRAFT-v0.1.0.md](opensource/OPERATOR-PRIME-OPEN-SOURCE-COMPLIANCE-CHECKLIST-DRAFT-v0.1.0.md) | Open source compliance checklist draft (batch 3). |
+| [opensource/INDEX-DRAFT-BATCH-3-v0.1.0.md](opensource/INDEX-DRAFT-BATCH-3-v0.1.0.md) | Dean's package index draft (batch 3). Indexes all 10 batch 3 drafts above. Filed under a batch-3 name so batch 1 and 2 indexes are never overwritten. |
 
 ### SUPERSEDED / HISTORY — retained, not current
 
@@ -119,7 +130,7 @@ HgX ordered daily, weekly, monthly, everything in the course to be published. **
 
 ## Dropbox and OneDrive — Dean's package
 
-- **Dropbox:** Academy has uploaded the 30-file Dean's package batch 1 (14 drafts + index, markdown + PDF) to `/J.A.R.V.I.S./education/course-dean-new-files/` and verified the listing, and the 30-file batch 2 package to `/J.A.R.V.I.S./education/course-dean-new-files-2/` and verified the listing (30 files). GitHub is the versioned source of truth; Dropbox holds the same packages for sharing.
+- **Dropbox:** Academy has uploaded the 30-file Dean's package batch 1 (14 drafts + index, markdown + PDF) to `/J.A.R.V.I.S./education/course-dean-new-files/` and verified the listing, the 30-file batch 2 package to `/J.A.R.V.I.S./education/course-dean-new-files-2/` and verified the listing (30 files), and the 22-file batch 3 package to `/J.A.R.V.I.S./education/course-dean-new-files-3/` and verified the listing (22 files). GitHub is the versioned source of truth; Dropbox holds the same packages for sharing.
 - **OneDrive:** GAP — OneDrive has no connector in Muse at this time, so Academy cannot upload directly. The same 30-file package is staged locally at `~/workspace/academy/operator-prime/onedrive-ready/course-dean-new-files/` for upload once OneDrive access is connected. OneDrive is NOT claimed as done until it is actually uploaded and verified.
 
 ## Future rule — every new course file
