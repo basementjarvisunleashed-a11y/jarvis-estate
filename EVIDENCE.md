@@ -30,7 +30,7 @@ evidence forever. Nothing is asserted without it.
 
 | Surface              | State                                                              |
 |----------------------|--------------------------------------------------------------------|
-| Local Jarvis         | **Live in the repository** — downloadable Windows build in `local-jarvis/` (`install.ps1`). Voice loop is not auto-started. Placeholders only. |
+| Local Jarvis         | **Live in the repository** — Kali Linux laptop platform (live 2026-11-04) in `local-jarvis/` (platform record `PLATFORM-KALI.md`). Prior Windows build files retained for reference. Voice loop is not auto-started. Placeholders only. |
 | Public site (GitHub Pages) | **Live** — https://basementjarvisunleashed-a11y.github.io/jarvis-estate/ — source is `/` on `main` (legacy Pages). The refreshed homepage ships with the docs update dated 2026-10-27 and is what `main` serves after that commit lands. |
 | Website artifact (`j-a-r-v-i-s-hub`) | Last recorded share state remains `shared: false` (audit 2026-W44). GitHub Pages is the public site. `website/index.html` is the archived hub, not the homepage. |
 | Dropbox              | Share URLs are still the ones minted into the docs. Checked 2026-10-27: file links (`dl=1`) and the folder link respond with a Dropbox login page. Not public downloads until HgX remints them. |
