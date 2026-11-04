@@ -19,7 +19,7 @@
 | 🔥 **Kali Linux** | Everything installed on the internal drive. All tools updated, graphics driver in, Bluetooth working, Wi-Fi working, login working. |
 | 🔬 **REA 6.7.0** | Reverse Engineer Anything, ready for local app analysis. `npx rea-agents analyze /path/to/app`. Ghidra guided workflows installed. |
 | 💻 **The machine** | Acer Nitro AN515-55. i7-10750H. 64GB RAM. RTX 2060, about 6GB VRAM. 512GB NVMe. |
-| 🎓 **OPERATOR PRIME** | The one-year open source course. Full-Spectrum Operator Systems. Labs L1–L20 locked. [Course index](course/README.md). |
+| 🎓 **OPERATOR PRIME — HGX Academy** | The one-year open source course, taught by HGX Academy — HgX's own academy. Full-Spectrum Operator Systems. Labs L1–L20 locked. [Course index](course/README.md). |
 
 ## Contents
 

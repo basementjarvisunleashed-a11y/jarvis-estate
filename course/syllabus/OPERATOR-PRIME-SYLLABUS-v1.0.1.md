@@ -2,7 +2,7 @@
 **J.A.R.V.I.S. (Joint Ambient Ready Variance Intelligence System)** — public identity, first and prominent.
 Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
-> **DISCLAIMER — READ FIRST:** This is NOT an official University of Toronto calendar entry, course code, or accreditation. No university approval, blessing, government approval, or federal approval is claimed as verified. Any approval statement in this material is HgX's statement only, not independently verified. Do not invent a course code or claim accreditation.
+> **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 > **STATUS: LOCKED v1.0.1 — Syllabus ratified. Supersedes v1.0.0 on software stack count ONLY (10 → 17 items). All other content identical to v1.0.0. Modules M0–M14, Labs L1–L20, Hardware H1–H20 in hand, assessment 40/25/15/20, Project 25 prove entire suite, 21 checkpoints, no faked passes.**
 
@@ -16,9 +16,9 @@ Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmai
 **Short name: OPERATOR PRIME**
 **Level: Doctoral-level professional laboratory course**
 **Audience: Consenting adult engineers, doctoral-capable, with a background in non-destructive testing within materials engineering. All students are Toronto-based.**
-**Instructor: HgX, alumni, University of Toronto. Field: non-destructive testing within materials engineering.**
+**Instructor: HgX, founder, HGX Academy. Field: non-destructive testing within materials engineering.**
 **Delivery: Controlled laboratory only. Summer 2027 offering is optional in timing; the course build is complete now.**
-**Status: Proposed syllabus, written to a University of Toronto standard. This document is not an official University of Toronto calendar entry, course code, or accreditation, and no such approval is claimed.**
+**Status: HGX Academy syllabus. Taught by HGX Academy, HgX's own academy.**
 
 ## Course description
 This course teaches the operation, measurement, reverse engineering, and defensive hardening of open-source hardware systems as a single integrated discipline. Students move from using computing systems to operating them: one Kali Linux system serves as the central platform, REA (Reverse Engineer Anything) serves as the local analysis engine, and twenty open-source hardware devices serve as the sensing, communication, and target systems. Instruction is laboratory-based throughout. Every claim must be supported by an auditable evidence chain: see, document, log, and only then prevent. The course prepares graduates for defensive work in industry and government-adjacent sectors, where the ability to demonstrate a vulnerability and a working defence, with measurement, is the required standard.

@@ -2,7 +2,7 @@
 **J.A.R.V.I.S. (Joint Ambient Ready Variance Intelligence System)** — public identity, first and prominent.
 Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
-> **DISCLAIMER — READ FIRST:** This is NOT an official University of Toronto calendar entry, course code, or accreditation. No university approval, blessing, government approval, or federal approval is claimed as verified. Any approval statement in this material is HgX's statement only, not independently verified. Do not invent a course code or claim accreditation.
+> **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 > **STATUS: LOCKED v1.0.0 — Acer fit audit, 2026-10-29. Hardware platform verification.**
 

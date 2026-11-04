@@ -8,9 +8,9 @@ Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmai
 - **Short name:** OPERATOR PRIME — Full-Spectrum Operator Course.
 - **Tagline:** You have used computers your whole life. Now you operate them.
 - **Formal title:** Full-Spectrum Operator Systems: Open-Source Hardware, Reverse Engineering, and Evidence-Based Defense.
-- **University named:** University of Toronto, HgX alumni, field NDT within materials engineering.
+- **Academy:** HGX Academy, HgX's own academy. Field NDT within materials engineering.
 
-> **DISCLAIMER — ON EVERY COURSE OUTPUT:** This is NOT an official University of Toronto calendar entry, course code, or accreditation. Do not invent a code. Do not claim university approval, blessing, government approval, or federal approval as verified. Those are HgX statements only, not verified, and are labelled as such wherever they appear.
+> **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 ## Audience and hard rules
 

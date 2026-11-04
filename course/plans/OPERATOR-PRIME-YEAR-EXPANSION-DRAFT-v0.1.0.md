@@ -2,7 +2,7 @@
 **J.A.R.V.I.S. (Joint Ambient Ready Variance Intelligence System)** — public identity, first and prominent.
 Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
-> **DISCLAIMER — READ FIRST:** This is NOT an official University of Toronto calendar entry, course code, or accreditation. No university approval, blessing, government approval, or federal approval is claimed as verified. Any approval statement in this material is HgX's statement only, not independently verified. Do not invent a course code or claim accreditation.
+> **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 > **STATUS: DRAFT ONLY v0.1.0 — NOT FINAL. Year-long Jan 1 to Dec 31. Year NOT stated — do not invent a year. Do not finalise holiday dates, venues, buffers, audits, or inspection counts. Mark DRAFT on every output from this file.**
 
@@ -30,13 +30,11 @@ HgX orders, 2026-10-30 13:42–13:44 ET, in this room:
   for a lot bigger experiments and labs.
 - Homework assignments and lecture notes sectioned out. Image, Graphify, and
   Cartographer, and everybody, brought in on this.
-- Approval claim, HgX's words, 13:44 ET: "The courses approved by the local
-  jurisdiction the university and federal government has granted this fully
-  permissioned out. So, we're good to go." — Recorded as HIS statement, NOT
-  independently verified in this lab. No approval, permission, or accreditation
-  is asserted here as verified. This file does NOT change the earlier
-  distribution-copy line, and it does NOT claim a course code, calendar entry,
-  or accreditation.
+- Academy authority, HgX's words, 2026-11-04: OPERATOR PRIME is taught by
+  HGX Academy, HgX's own academy. No university affiliation. No external
+  accreditation claimed. HGX Academy stands on its own. This file does NOT
+  change the earlier distribution-copy line, and it does NOT claim a course
+  code, calendar entry, or external accreditation.
 
 **What stays, unchanged:**
 - Three pillars: Kali everything, REA everything, Grokbot.
@@ -273,8 +271,8 @@ structure. No module is taught without all five sections below, in draft.
 - Does NOT finalize the course. Year-long framework is draft, many more
   labs / modules / stacks to come, by HgX's order.
 - Does NOT add a software stack. Software is HgX's, per his 13:42 ET words.
-- Does NOT add a course code, calendar entry, accreditation, or verified
-  approval. Approval claims are HgX's statements, recorded, not verified here.
+- Does NOT add a course code, calendar entry, or external accreditation.
+  OPERATOR PRIME is taught by HGX Academy, HgX's own academy.
 - Does NOT distribute jailbreak prompts. Course load carries defense
   commentary, synthetic benign exercises, and evidence, not attack prompt text.
 - Does NOT run any lab. Labs L21–L50 and hardware H21–H30 are DRAFT proposals,
