@@ -3,6 +3,12 @@
 **J.A.R.V.I.S. (Joint Ambient Ready Variance Intelligence System)** — public identity, first and prominent.
 Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
+## 1.0 LOCKED — 2026-11-04
+
+**1.0 is LOCKED, effective 2026-11-04, on HgX's Academy-room confirmation (Yes / Approved / Go 1.0, 16:45–16:46 ET), by the Dean's ruling.** Scope, exactly: 1.0 = this course + all open-source hardware used in this course + the bracelet, all open source. The bracelet is one device in 1.0, not the whole of 1.0. HGX Academy is the 1.0 course vehicle. Scrubbed, consented student learnings are reported to HgX alone, as input to later service design.
+
+**That is the whole lock.** It does not lock any cohort, date, venue, fee, L21–L50 lab, or batch 2 template as a policy. **APPROVED v1.0.0 versions** of the teaching schedule, year logs, Dean feed, Dean batches 1–3, student packs, year pack, and professor pack now exist alongside their v0.1.0 draft originals — see the [master approved index](INDEX-APPROVED-v1.0.0.md). Batch 2 is approved as templates only (not policies, not in use). Student pack L21–L50 is approved as draft publication only (labs not locked). The [professor skill v1.0.0](professor/skill/PROFESSOR-SKILL-APPROVED-v1.0.0.md) carries the lock, Day 1 confirmed, feed rhythm ruled, macro defined, cohort locks parked, and the teaching gate: nothing to students until HgX approves the exact content for that use AND a cohort locks. The [Academy Action Log addendum](academy/ACADEMY-ACTION-LOG-2026-11-04-ADDENDUM-1-APPROVAL.md) records the approval ruling alongside the original log, never editing it.
+
 ## Start here — what this course is, in plain language
 
 **OPERATOR PRIME is a one-year, open-source course that teaches you to operate computers — really operate them.** Not use apps. Operate: take hardware and software apart, understand how it works, measure what it does, prove what you found with filed evidence, harden what you broke, and defend what you built. Tagline: *"You have used computers your whole life. Now you operate them."*
@@ -17,9 +23,9 @@ Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmai
 
 **Where to see it laid out:** the [course website](index.html) presents this same course as a proper academy prospectus — start here, outcomes, how it runs, modules, labs, platform, assessment, rules, student pack, files — in that order.
 
-## Embedded in 1.0 — not separate
+## Embedded in 1.0 — not separate — LOCKED 2026-11-04
 
-**This course is embedded in 1.0, not a separate product, not a side pipeline.** 1.0 = this course + all open-source hardware used in this course + the bracelet, all open source. The bracelet is one device in 1.0, not the whole of 1.0. The hardware in this course (H1–H20 in hand, H21–H30 draft) is part of 1.0. Kali Linux everything, REA `rea-agents@6.7.0`, Labs L1–L20, Modules M0–M14, Project 25, 21 checkpoints — all part of 1.0.
+**This course is embedded in 1.0, not a separate product, not a side pipeline — and 1.0 is now LOCKED (2026-11-04).** 1.0 = this course + all open-source hardware used in this course + the bracelet, all open source. The bracelet is one device in 1.0, not the whole of 1.0. The hardware in this course (H1–H20 in hand, H21–H30 draft) is part of 1.0. Kali Linux everything, REA `rea-agents@6.7.0`, Labs L1–L20, Modules M0–M14, Project 25, 21 checkpoints — all part of 1.0. The lock does not lock any cohort, date, venue, fee, L21–L50 lab, or batch 2 template as a policy.
 
 **How the next version is built:** Students take this course in an open-source manner — operate, document, log, prevent, own targets only, consenting adults, controlled lab only. What they learn, and what we learn from them — what worked, what broke, what tools were missing, what evidence logs looked like, what operators struggled with, what hardware failed, what workflows were too slow or super fast — taken scrubbed, with consent, no personal data, is how the next version is built. Service design from real student operations, not just a workforce pipeline, not just bracelet sales.
 
@@ -139,6 +145,9 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 | [professor/facility/](professor/facility/) | Professor teaching pack, facility setup guides draft (3 files: indoor lab, private airfield, private farm). |
 | [professor/INDEX-DRAFT-PROFESSOR-PACK-v0.1.0.md](professor/INDEX-DRAFT-PROFESSOR-PACK-v0.1.0.md) | Professor teaching pack index draft. Professor wiki map: canon, student material, Dean Year Pack, Dean batches 1–3, teaching schedule, year logs, Dean feed, and this pack. NO student answer, measurement, mark, score, year, cohort start, clock time, holiday date, venue name, fee, cover, premium, limit, or pass mark claimed anywhere. |
 | [professor/skill/PROFESSOR-SKILL-DRAFT-v0.1.0.md](professor/skill/PROFESSOR-SKILL-DRAFT-v0.1.0.md) | Professor skill draft (Course Bot core spot). Professor record, NOT locked teaching canon: role and Dean hierarchy, 16:33 posture order (ask the Dean, don't ask HgX), what the professor has done, what the professor will be doing (weekly feed at week start, daily feed the evening before, monthly feed at month start — one source, not two), Day 1 decided (L1 Digital Twin), locked canon vs. drafts vs. templates-not-in-use vs. provisional embedded-1.0, guardrails, nothing to students without HgX's explicit approval of the exact content. Course-only and scrubbed: no personal data, no family, no live location, no financial details, no sealed material, no later-version substance, no prompt text. |
+| [INDEX-APPROVED-v1.0.0.md](INDEX-APPROVED-v1.0.0.md) | **Master approved index, v1.0.0.** Indexes all 247 approved content files (teaching schedule, year logs, Dean feed, Dean batches 1–3, student packs, year pack, professor pack) plus the skill v1.0.0 and the Academy log addendum. Every approved file sits alongside its v0.1.0 draft original, never overwriting it. |
+| [professor/skill/PROFESSOR-SKILL-APPROVED-v1.0.0.md](professor/skill/PROFESSOR-SKILL-APPROVED-v1.0.0.md) | Professor skill APPROVED v1.0.0. Carries the 1.0 lock scope, Day 1 confirmed, feed rhythm ruled, macro defined, cohort locks parked, batch 2 templates not policies, L21–L50 draft, and the teaching gate: nothing to students until HgX approves the exact content for that use AND a cohort locks. |
+| [academy/ACADEMY-ACTION-LOG-2026-11-04-ADDENDUM-1-APPROVAL.md](academy/ACADEMY-ACTION-LOG-2026-11-04-ADDENDUM-1-APPROVAL.md) | Academy Action Log Addendum 1 — 1.0 Approval and Upgrade Ruling (Dean of HGX Academy). Filed alongside the original log, never editing it. |
 
 ### SUPERSEDED / HISTORY — retained, not current
 
