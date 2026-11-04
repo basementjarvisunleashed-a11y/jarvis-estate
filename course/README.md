@@ -32,7 +32,8 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 
 | File | What it is |
 |---|---|
-| [syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.0.md](syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.0.md) | Full syllabus. Modules M0–M14, Labs L1–L20, Hardware H1–H20 in hand, assessment 40/25/15/20, Project 25 prove entire suite, 21 checkpoints, no faked passes. |
+| [syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.1.md](syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.1.md) | **Current syllabus.** Modules M0–M14, Labs L1–L20, Hardware H1–H20 in hand, assessment 40/25/15/20, Project 25 prove entire suite, 21 checkpoints, no faked passes. Stack count corrected to 17 items (REA first, see syllabus). Supersedes v1.0.0 on stack count only. |
+| [syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.0.md](syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.0.md) | Prior syllabus version. Retained per versioning law. Stated ten stacks; superseded by v1.0.1 (seventeen stacks). |
 | [structure/COURSE-STRUCTURE-v2-v1.0.0.md](structure/COURSE-STRUCTURE-v2-v1.0.0.md) | Course structure v2. Spine, hard rules, 3 pillars, 20 hardware pieces, Modules M0–M14, Labs L1–L20. |
 | [labs/OPERATOR-PRIME-LABS-v1.0.0.md](labs/OPERATOR-PRIME-LABS-v1.0.0.md) | Labs L1–L20. Full lab write-ups, gates per laboratory, evidence filing required. |
 | [catalog/STACK-12-DOCUMENTED-CATALOG-v1.0.0.md](catalog/STACK-12-DOCUMENTED-CATALOG-v1.0.0.md) | Documented catalog. Inventory only, filenames only. NO prompt text reproduced. Distribution copy REFUSED. Muse EXCLUDED entirely. Lab work only, defensive only. |

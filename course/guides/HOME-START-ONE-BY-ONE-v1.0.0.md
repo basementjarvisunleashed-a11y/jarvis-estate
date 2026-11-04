@@ -12,10 +12,10 @@ Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmai
 
 ---
 
-# Home Start — One By One (SEALED 2026-10-29)
+# Home Start — One By One (Published 2026-11-04)
 **Rule:** One piece at a time. No parallel, no skipping. Each piece gets a phase gate before the next piece starts. Spoken walkthrough, one step at a time, starting with Activation (HgX's Q18 order). Photos / outputs for any error.
-**Status at seal:** All 11 hardware pieces in hand — first three at home + eight ordered and already here via secretary (2026-10-29 15:56 ET). Arrival only — unpack, test, and inventory are the home work, not yet done.
-**Sealed means:** This pack lives in the lab only. Nothing has been sent to Dropbox, GitHub, or website. No piece is started until HgX is home and says go for that piece.
+**Status (2026-10-29):** All 11 hardware pieces in hand — first three at home + eight ordered and already here via secretary (2026-10-29 15:56 ET). Arrival only — unpack, test, and inventory are the home work, not yet done.
+**Note:** No piece is started until HgX is home and says go for that piece.
 
 ## Phase 0 — Acer build (prerequisite, before any hardware lab)
 1. Sticks in hand: 32 GB Windows + 64 GB Kali (labelled, envelope, safe — after use).

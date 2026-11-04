@@ -77,8 +77,8 @@ Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmai
 - Defense brief: what was seen, what was logged, what prevention follows. No prevention claim without the evidence chain.
 
 ## Status log
-- 2026-10-29: Structure v1 started, all 11 slotted. First three at home. Eight via secretary (sent to buy, arrival pending). Course build lives in this lab until HgX orders publication elsewhere.
-- 2026-10-29 15:56 ET: SEALED — all eight ordered AND already here (via secretary). All 11 in hand. Arrival only — unpack/test/inventory pending. Home start is ONE BY ONE, see HOME-START-ONE-BY-ONE.md. Nothing in this course load has been sent to Dropbox, GitHub, or website — lab only, sealed tight.
+- 2026-10-29: Structure v1 started, all 11 slotted. First three at home. Eight via secretary (sent to buy, arrival pending). Published 2026-11-04 on HgX's explicit publication order for 1.0 course material.
+- 2026-10-29 15:56 ET: All eight ordered AND already here (via secretary). All 11 in hand. Arrival only — unpack/test/inventory pending. Home start is ONE BY ONE, see HOME-START-ONE-BY-ONE.md. Published 2026-11-04 on HgX's explicit publication order for 1.0 course material.
 - 2026-10-29 16:09 ET: ALL 7 NEW LOCKED — course load now 18 ITEMS TOTAL (11 in hand + 7 new locked, pending order/arrival). New items H12–H18 below, modules M11–M13 added. RPLIDAR tier (A1/A2/C1) still open — A1 is teaching default.
 
 ## Hardware — 7 new, locked 2026-10-29 16:09 ET (pending order/arrival)

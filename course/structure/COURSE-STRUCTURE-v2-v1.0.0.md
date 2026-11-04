@@ -16,7 +16,7 @@ Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmai
 **Formal title: Full-Spectrum Operator Systems: Open-Source Hardware, Reverse Engineering, and Evidence-Based Defense**
 **Short name: OPERATOR PRIME. Professional standard throughout: no informal, sports, or entertainment references in course materials.**
 **Version 2 — rebuilt 2026-10-29, after the crazy ideas. This is the current course. Version 1 is retained, not deleted, as history.**
-**Status: built in this lab, sealed tight, nothing sent to Dropbox, GitHub, or website until HgX orders publication elsewhere.**
+**Status: published 2026-11-04 on HgX's explicit publication order for 1.0 course material.**
 
 ## Name and description
 **OPERATOR PRIME.**
@@ -49,7 +49,7 @@ The course is the leading course in its area because it is newer and more pinnac
 ## The 20 hardware pieces (H1–H20)
 1 Flipper Zero + Starter Kit, 2 Mentra Live Camera Glasses, 3 T-Watch S3 Plus Meshtastic, 4 HackRF One, 5 Proxmark3 RDV4, 6 Ubertooth One, 7 ChipWhisperer-Lite, 8 KrakenSDR, 9 T-Beam Meshtastic, 10 OpenMV Cam, 11 GreatFET One, 12 PX4/ArduPilot Drone Kit, 13 Frigate Motion System, 14 Near-IR Night Vision, 15 Thermal MLX90640, 16 SatNOGS Satellite Station, 17 RPLIDAR A1, 18 RPLIDAR A2, 19 RPLIDAR C1, 20 DonkeyCar Rover.
 Status: H1–H20 ALL IN HAND, OPENED, TESTED, per HgX 2026-10-29 16:38 ET. No hardware is waiting on order or arrival anymore. Lab evidence filing (photos/outputs per piece) is still open if he wants it in the record.
-**Status: built in this lab, sealed tight, nothing sent to Dropbox, GitHub, or website until HgX orders publication elsewhere. All 20 labs L1–L20 are in this course — full lab write-ups in OPERATOR-PRIME-LABS.md.**
+**Status: published 2026-11-04 on HgX's explicit publication order. All 20 labs L1–L20 are in this course — full lab write-ups in OPERATOR-PRIME-LABS.md.**
 Mesh honesty: watch LoRa mesh is a real mesh; Flipper + glasses do NOT share that LoRa radio natively. System mesh = laptop-orchestrated: watch LoRa ↔ Acer gateway/orchestrator ↔ Flipper Wi-Fi/Bluetooth + glasses Wi-Fi/Bluetooth, verdicts bridged and logged.
 
 ## Modules (M0–M14) — the map
