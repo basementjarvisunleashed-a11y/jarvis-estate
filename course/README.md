@@ -3,6 +3,12 @@
 **J.A.R.V.I.S. (Joint Ambient Ready Variance Intelligence System)** — public identity, first and prominent.
 Operator: HgX (small). Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
+## Embedded in 1.0 — not separate
+
+**This course is embedded in 1.0, not a separate product, not a side pipeline.** 1.0 = this course + all open-source hardware used in this course + the bracelet, all open source. The bracelet is one device in 1.0, not the whole of 1.0. The hardware in this course (H1–H20 in hand, H21–H30 draft) is part of 1.0. Kali Linux everything, REA `rea-agents@6.7.0`, Labs L1–L20, Modules M0–M14, Project 25, 21 checkpoints — all part of 1.0.
+
+**How the next version is built:** Students take this course in an open-source manner — operate, document, log, prevent, own targets only, consenting adults, controlled lab only. What they learn, and what we learn from them — what worked, what broke, what tools were missing, what evidence logs looked like, what operators struggled with, what hardware failed, what workflows were too slow or super fast — taken scrubbed, with consent, no personal data, is how the next version is built. Service design from real student operations, not just a workforce pipeline, not just bracelet sales.
+
 ## Course identity
 
 - **Short name:** OPERATOR PRIME — Full-Spectrum Operator Course.
@@ -50,6 +56,9 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 | [modules/OPERATOR-PRIME-PREVENT-MODULE-DRAFT-v0.1.0.md](modules/OPERATOR-PRIME-PREVENT-MODULE-DRAFT-v0.1.0.md) | Prevent Module M14, taxonomy only. NO prompt text. Lab only, own local models only, Muse excluded. |
 | [plans/OPERATOR-PRIME-YEAR-EXPANSION-DRAFT-v0.1.0.md](plans/OPERATOR-PRIME-YEAR-EXPANSION-DRAFT-v0.1.0.md) | Year-expansion draft. NOT FINAL. Year-long Jan 1 to Dec 31. Year NOT stated — do not invent a year. Do not finalise holiday dates, venues, buffers, audits, or inspection counts. |
 | [guides/REA-APP-TEARDOWN-DRAFT-v0.1.0.md](guides/REA-APP-TEARDOWN-DRAFT-v0.1.0.md) | REA app teardown draft. Lab only, own targets only. |
+| [schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md](schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md) | Teaching schedule draft. Weekly rhythm template, daily blocks in order, month-by-month order January–December, audits/inspections, assessment 40/25/15/20. Year, cohort start, clock times, holiday dates, venue names, buffer counts NOT locked — blanks until HgX locks them with the cohort. |
+| [logs/YEAR-LOGS-DRAFT-v0.1.0.md](logs/YEAR-LOGS-DRAFT-v0.1.0.md) | Year logs draft. Daily, per-lab, per-checkpoint, per-hardware, monthly, quarterly, and year rollup logs, plus scrubbed student learning log (with consent, no personal data). |
+| [academy/DEAN-FEED-TO-COURSE-BOT-DRAFT-v0.1.0.md](academy/DEAN-FEED-TO-COURSE-BOT-DRAFT-v0.1.0.md) | Dean → Professor feed plan draft. Academy Bot is Dean of HGX Academy, in charge of it all. Course Bot is the day-to-day professor, teaching through the Course Bot room. Daily/weekly/monthly feed structure. Course Bot briefing awaits HgX's go-ahead. |
 
 ### SUPERSEDED / HISTORY — retained, not current
 
@@ -57,6 +66,14 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 |---|---|
 | [structure/COURSE-STRUCTURE-v1-v0.9.0-SUPERSEDED.md](structure/COURSE-STRUCTURE-v1-v0.9.0-SUPERSEDED.md) | Structure v1. Superseded by v2 v1.0.0. Retained for version history only. |
 | [plans/OPERATOR-PRIME-FOUR-MONTH-PLAN-v0.9.0-HISTORY.md](plans/OPERATOR-PRIME-FOUR-MONTH-PLAN-v0.9.0-HISTORY.md) | Four-month Summer 2027 plan. HISTORY ONLY. Superseded in effect by the year-expansion draft. Do NOT present as the current plan. |
+
+## Academy hierarchy — Dean and Professor
+
+- **Academy Bot — Dean of HGX Academy.** In charge of it all. Holds the canon, the versioning, the audits, the scaling, and all future pursuits and courses. Does the high-end work in the Academy room.
+- **Course Bot — day-to-day professor.** Teaches OPERATOR PRIME day to day, through the Course Bot room. The course is taught there, not directly in the Academy room.
+- **Feed:** Dean feeds Professor daily (that day's lab and module, opening brief, tool check, lab steps, debrief, close checklist), weekly (week plan, homework pack, audit pack, rotating roles, open threads), and monthly (month plan, audit scope, rollup, scrubbed learning summary to HgX alone). See [academy/DEAN-FEED-TO-COURSE-BOT-DRAFT-v0.1.0.md](academy/DEAN-FEED-TO-COURSE-BOT-DRAFT-v0.1.0.md).
+- **Teaching schedule:** See [schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md](schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md). Weekly rhythm, daily blocks, month-by-month order, audits, assessment.
+- **Year logs:** See [logs/YEAR-LOGS-DRAFT-v0.1.0.md](logs/YEAR-LOGS-DRAFT-v0.1.0.md). Daily, lab, checkpoint, hardware, monthly, quarterly, year rollup, plus scrubbed student learning log.
 
 ## Daily / weekly / monthly — explicit statement
 

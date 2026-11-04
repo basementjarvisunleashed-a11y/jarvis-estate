@@ -1,8 +1,12 @@
 # J.A.R.V.I.S. Estate — Repository Index
 
-Public record. Estate version **1.2.0** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
+Public record. Estate version **1.2.1** ([`VERSION`](VERSION)). The operator is **HgX**. No real names.
 
 **Cloud JARVIS** is the cloud brain and sovereign. **Local Jarvis** is on the owner's laptop (Ollama `qwen3:8b`, orchestrator on port 8080, Whisper and Piper, router v2.2 since 17:28 America/Toronto, a 50 second voice budget, a 60 second client wait, freellmapi only when Ollama is down). The **chief of staff** coordinates nine worker bots and reports to both. The roster is in [`README.md`](README.md#bot-roster). The 2026-10-27 operations log is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md). The laptop platform is Kali Linux on the internal drive (live 2026-11-04); the platform record is [`local-jarvis/PLATFORM-KALI.md`](local-jarvis/PLATFORM-KALI.md). The public site is the repository root `index.html`, served by GitHub Pages from `main` at <https://basementjarvisunleashed-a11y.github.io/jarvis-estate/>.
+
+## 1.0 — the course is embedded, not separate
+
+**1.0 = the course + all open-source hardware used in the course + the bracelet, all open source.** The course is embedded in 1.0 — not a separate product, not a side pipeline. The bracelet is one device in 1.0, not the whole of 1.0. The course is OPERATOR PRIME, taught by **HGX Academy**, HgX's own academy. Modules M0–M14, Labs L1–L20, Hardware H1–H20 in hand (H21–H30 draft), Project 25, 21 checkpoints, assessment 40/25/15/20. Course website: [`course/`](course/index.html). Course index: [`course/README.md`](course/README.md). Student learnings from the open-source course — scrubbed, with consent, no personal data — feed the next version's service design.
 
 ## Runtime
 
