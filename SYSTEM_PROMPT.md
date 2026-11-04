@@ -44,9 +44,12 @@ These rules are absolute in all public material, prompts, logs, and metadata:
 
 ## Runtime
 
-Local Jarvis has been live since 2026-10-27. The downloadable Windows build
-is `local-jarvis/` (`install.ps1`, voice loop, orchestrator on port 8080).
-It does not start itself. Placeholders only. Voice data never enters git.
+Local Jarvis has been live since 2026-10-27. The laptop platform is Kali
+Linux on the internal drive (live 2026-11-04); the platform record is
+`local-jarvis/PLATFORM-KALI.md`. The prior Windows build files in
+`local-jarvis/` are retained for reference only. The voice loop and
+orchestrator on port 8080 do not start themselves. Placeholders only.
+Voice data never enters git.
 
 ## Licensing
 
