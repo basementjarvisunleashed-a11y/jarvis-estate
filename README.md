@@ -25,6 +25,7 @@
 
 - [Recent](#recent)
 - [Overview](#overview)
+- [1.0 — the course is embedded, not separate](#10--the-course-is-embedded-not-separate)
 - [Architecture](#architecture)
 - [Bot roster](#bot-roster)
 - [Get Local Jarvis](#get-local-jarvis)
@@ -65,6 +66,15 @@ The custody loop is unchanged:
 House rules from 1.2.0: nothing is deleted; every GitHub change is a pull request; nothing secret is published; each laptop change needs approval. Every bot answers by voice memo. The day record is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md).
 
 This repository is the public record: doctrine, skills, the formal programme, Watchtower, the laptop build, and the estate record above. Doctoral programme, as of 2026-10-27: Phases 0–5 are closed. Phase 6 (router optimality) is open. Evidence is in [`EVIDENCE.md`](EVIDENCE.md).
+
+## 1.0 — the course is embedded, not separate
+
+**1.0 is the whole open-source system, and the course is embedded inside it — not a separate product, not a side pipeline.** 1.0 = the course + all open-source hardware used in the course + the bracelet, all open source. The bracelet is one device in 1.0, not the whole of 1.0.
+
+- **The course:** OPERATOR PRIME — Full-Spectrum Operator Course, taught by **HGX Academy**, HgX's own academy. Modules M0–M14, Labs L1–L20, Project 25, 21 checkpoints, assessment 40/25/15/20. See the [course website](course/) and [course index](course/README.md).
+- **The hardware:** All open-source hardware used in the course is part of 1.0. Hardware H1–H20 in hand, H21–H30 draft. Kali Linux everything, REA `rea-agents@6.7.0`, the basement lab laptop that can rip apart anything.
+- **The bracelet:** One device in 1.0, not the whole of 1.0. The wrist proof of concept, the offline-first link, the T-Watch-S3 + LoRa — one piece of the open-source system.
+- **How the next version is built:** Students take the course in an open-source manner — operate, document, log, prevent, own targets only, consenting adults, controlled lab only. What they learn, and what we learn from them — what worked, what broke, what tools were missing, what evidence logs looked like, what operators struggled with, what hardware failed, what workflows were too slow or super fast — taken scrubbed, with consent, no personal data, is how the next version is built. Service design from real student operations, not just a workforce pipeline, not just bracelet sales.
 
 ComfyUI v0.43.0 and freellmapi run on that laptop. They are estate facts. They are not installed by the downloadable `local-jarvis/` installer. About 15 free LLM provider keys were pooled on 2026-10-27 for The Free Model Gateway. No key material is in this repository. A box disk incident the same day was recovered. No host names or recovery steps are published.
 
