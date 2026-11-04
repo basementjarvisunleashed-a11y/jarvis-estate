@@ -7,7 +7,7 @@ Taught by HGX Academy, HgX's own academy. No university affiliation. No external
 Licence: MIT for code, CC-BY-4.0 for course text. Footer: @basementjarvisu · basementjarvisunleashed@gmail.com
 
 
-**Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04 — AS DRAFT PUBLICATION ONLY.** Labs L21–L50 are NOT locked as canon; a separate express lock by name is still required. Blank-results rule throughout. Paths are relative to course/.
+**Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04 — LOCKED FOR 1.0.** Labs L21–L50 locked for 1.0, effective 2026-11-04 (Addendum 2). Blank-results rule throughout. Paths are relative to course/.
 
 - [student/OPERATOR-PRIME-STUDENT-LAB-REPORTS-L21-L50-APPROVED-v1.0.0.md](student/OPERATOR-PRIME-STUDENT-LAB-REPORTS-L21-L50-APPROVED-v1.0.0.md)
 - [student/OPERATOR-PRIME-STUDENT-WORKSHEETS-L21-L50-APPROVED-v1.0.0.md](student/OPERATOR-PRIME-STUDENT-WORKSHEETS-L21-L50-APPROVED-v1.0.0.md)

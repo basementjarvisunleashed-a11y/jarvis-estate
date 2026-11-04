@@ -5,7 +5,7 @@ J.A.R.V.I.S. first, HgX small. Contact: @basementjarvisu · basementjarvisunleas
 **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 **Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.**
-Canon: syllabus v1.0.1 (17 stacks, REA first), labs L1–L20 locked v1.0.0, modules M0–M14, hardware H1–H20 in hand, assessment 40/25/15/20, Project 25, 21 checkpoints, no faked passes. Draft: H21–H30, L21–L50, year expansion.
+Canon: syllabus v1.0.1 (17 stacks, REA first), labs L1–L50 locked for 1.0 (Addendum 2), modules M0–M14, hardware H1–H30 as lab hardware, assessment 40/25/15/20, Project 25, 21 checkpoints, no faked passes. Draft: year expansion (document; its lab definitions are now locked for 1.0).
 
 ## 1. The course, in full
 Formal title: Full-Spectrum Operator Systems: Open-Source Hardware, Reverse Engineering, and Evidence-Based Defense. Short name: OPERATOR PRIME — Full-Spectrum Operator Course.
@@ -55,7 +55,7 @@ All open source, should remain open source, per Academy policy. Code MIT, course
 - L18 Wireless Implant Hunt — M2/M4
 - L19 Live Lecture Machine — M9
 - L20 Operator Olympics — M10 Capstone Extension
-Draft, not locked, not taught until locked: L21–L50, with L50 as the final year capstone in the year draft. No lab title, goal, or result for L21–L50 is invented in this handbook.
+Locked for 1.0 (Addendum 2): L21–L50, with L50 as the final year capstone. No lab title, goal, or result for L21–L50 is invented in this handbook.
 
 ## 5. Hardware H1–H20, in hand, and H21–H30, draft
 H1 Flipper Zero + Starter Kit, H2 Mentra Live Camera Glasses, H3 T-Watch S3 Plus Meshtastic, H4 HackRF One, H5 Proxmark3 RDV4, H6 Ubertooth One, H7 ChipWhisperer-Lite, H8 KrakenSDR, H9 T-Beam Meshtastic, H10 OpenMV Cam, H11 GreatFET One, H12 PX4/ArduPilot Drone Kit, H13 Frigate Motion System, H14 Near-IR Night Vision, H15 Thermal MLX90640, H16 SatNOGS Satellite Station, H17 RPLIDAR A1, H18 RPLIDAR A2, H19 RPLIDAR C1, H20 DonkeyCar Rover.

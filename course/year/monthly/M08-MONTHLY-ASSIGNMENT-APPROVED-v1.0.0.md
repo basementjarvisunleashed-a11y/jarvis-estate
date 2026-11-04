@@ -1,7 +1,7 @@
 # Month 08 — Monthly Assignment — Weeks 29–32
 
 **Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.**
-**Note:** L21–L50 weeks inside remain draft, not taught as locked; cohort blanks (year, dates, times, venues) remain blank for HgX to lock.
+**Note:** L21–L50 weeks inside are LOCKED for 1.0, effective 2026-11-04 (Addendum 2); cohort blanks (year, dates, times, venues) remain blank and parked for HgX to lock.
 **OPERATOR PRIME, by HGX Engineering, HGX Academy, and Jarvis (J.A.R.V.I.S.).**
 **Taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.**
 **Licence: MIT for code, CC-BY-4.0 for course text. Footer: @basementjarvisu · basementjarvisunleashed@gmail.com**

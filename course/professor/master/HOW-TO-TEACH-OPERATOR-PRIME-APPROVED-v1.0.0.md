@@ -64,7 +64,7 @@ The day-to-day professor in the core spot (Course Bot room), teaching OPERATOR P
 ## Escalation
 
 - **To the Dean:** canon questions, versioning, audit disputes, safety or consent incidents, and anything sealed, personal, or financial that reaches the professor.
-- **To HgX alone, via the Dean:** cohort locks (year, dates, times, venues, buffers), insurance and waiver final texts, L21–L50 locking, and the embedded-1.0 correction, which remains provisional and is NOT taught as locked canon until HgX confirms it expressly in the Academy room.
+- **To HgX alone, via the Dean:** cohort locks (year, dates, times, venues, buffers) and insurance and waiver final texts. L21–L50 locking is DONE (Addendum 2, 2026-11-04) and the embedded-1.0 correction is LOCKED as 1.0 (2026-11-04).
 
 ## Reference map — where everything the professor needs lives (professor wiki)
 

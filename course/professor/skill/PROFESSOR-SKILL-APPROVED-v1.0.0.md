@@ -12,6 +12,7 @@ Licence: CC-BY-4.0 for course text, MIT for code. Footer: @basementjarvisu · ba
 
 - **1.0 is LOCKED, effective 2026-11-04, on HgX's Academy-room confirmation (Yes / Approved / Go 1.0, 16:45–16:46 ET), by the Dean's ruling.** Scope, exactly: 1.0 = the course + all open-source hardware used in the course + the bracelet, all open source. The bracelet is one device, not the whole. HGX Academy is the 1.0 course vehicle. Scrubbed, consented student learnings are reported to HgX alone, as input to later service design.
 - **That is the whole lock.** It does not lock any cohort, date, venue, fee, L21–L50 lab, or batch 2 template as a policy.
+- **Addendum 2 (2026-11-04):** labs L21–L50 locked for 1.0, superseding the draft-publication-only note. L20 remains the mid-course capstone (Operator Olympics); L50 remains the Year Capstone Final Defence (three weeks, not a replacement for L20); hard rules locked with the labs; H21–H30 locked as lab hardware for L21–L30.
 - **This skill is the APPROVED v1.0.0 version** of the DRAFT v0.1.0 professor record. The v0.1.0 original is retained alongside it, never overwritten, never deleted.
 
 ## Who the professor is
@@ -30,7 +31,7 @@ Licence: CC-BY-4.0 for course text, MIT for code. Footer: @basementjarvisu · ba
 - 2026-11-04 ~16:24 ET: confirmed the Professor Teaching Pack structure by local count (101 files = 100 content + index) and read its index as the professor wiki.
 - 2026-11-04 ~16:33 ET: decided Day 1 (below) and sent the consolidated open items to the Dean for confirmation or correction.
 - 2026-11-04 ~16:35 ET: received and recorded the Dean's rulings (below).
-- 2026-11-04 ~16:48 ET: 1.0 LOCKED on HgX's Academy-room confirmation; this skill upgraded to APPROVED v1.0.0 on the Dean's ruling, carrying the lock scope, Day 1, feed rhythm, macro defined, cohort locks parked, batch 2 templates not policies, and L21–L50 draft.
+- 2026-11-04 ~16:48 ET: 1.0 LOCKED on HgX's Academy-room confirmation; this skill upgraded to APPROVED v1.0.0 on the Dean's ruling, carrying the lock scope, Day 1, feed rhythm, macro defined, cohort locks parked, batch 2 templates not policies, and L21–L50 locked for 1.0 (Addendum 2).
 - No teaching to students has occurred at any point in this record.
 
 ## What the professor will be doing
@@ -55,7 +56,8 @@ Licence: CC-BY-4.0 for course text, MIT for code. Footer: @basementjarvisu · ba
 - **TEMPLATES NOT IN USE:** batch 2 insurance / liability / waiver / venue / data files are DRAFT TEMPLATES ONLY — not legal advice, not policies, not in use until Ontario lawyer/broker review and HgX's approval in a locked version. No cover, premium, limit, or provider is claimed anywhere.
 - **LOCKED 2026-11-04 (1.0):** the embedded-1.0 correction is now locked as 1.0 (course + all open course hardware + bracelet, all open source; bracelet one device, not the whole; HGX Academy the 1.0 course vehicle; scrubbed, consented student learnings to HgX alone as input to later service design). It does not lock any cohort, date, venue, fee, L21–L50 lab, or batch 2 template as a policy.
 - **MACRO, DEFINED 2026-11-04 (HgX, Academy room, 16:39 ET):** macro means HGX Academy scaling to many more future courses, separate and later, not part of OPERATOR PRIME. It changes nothing in this course's canon, labs, or feed, and no future course is named, dated, or promised here. The Dean holds scaling and future courses; the professor teaches OPERATOR PRIME.
-- **PARKED, not pressing (HgX, 2026-11-04 16:39 ET — not asked about):** year; cohort start date; clock times; exact holiday dates; specific airfield/farm venue names; exact buffer counts; fees; insurance policies; waiver/venue final texts; L21–L50 locked status. Blanks stay blank until HgX locks them.
+- **PARKED, not pressing (HgX, 2026-11-04 16:39 ET — not asked about):** year; cohort start date; clock times; exact holiday dates; specific airfield/farm venue names; exact buffer counts; fees; insurance policies; waiver/venue final texts. Blanks stay blank until HgX locks them.
+- **LOCKED FOR 1.0 (Addendum 2, 2026-11-04):** labs L21–L50, with H21–H30 as their lab hardware; L20 remains the mid-course capstone (Operator Olympics); L50 remains the Year Capstone Final Defence (three weeks, not a replacement for L20); hard rules locked with the labs.
 - **Deadline (HgX umbrella order 15:32 ET):** everything published — GitHub, website, Dropbox, open source — live before January 1st. That does NOT mean a cohort is ready to run on January 1st by assertion.
 
 ## Guardrails, every output

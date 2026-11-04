@@ -5,7 +5,7 @@ J.A.R.V.I.S. first, HgX small. Contact: @basementjarvisu · basementjarvisunleas
 **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 **Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.**
-Teaching canon: syllabus v1.0.1 (17 stacks, REA first), v1.0.0 retained. Locked: Modules M0–M14, Labs L1–L20, Hardware H1–H20 in hand, assessment 40/25/15/20, Project 25, 21 checkpoints, no faked passes. Draft: Hardware H21–H30, Labs L21–L50, year expansion.
+Teaching canon: syllabus v1.0.1 (17 stacks, REA first), v1.0.0 retained. Locked: Modules M0–M14, Labs L1–L50 (1.0, Addendum 2), Hardware H1–H30 as lab hardware, assessment 40/25/15/20, Project 25, 21 checkpoints, no faked passes. Draft: year expansion (document; its lab definitions are now locked for 1.0).
 Prior drafts indexed, NOT taught from as-is: `daily-schedule-detailed.pdf` and `year-course-detailed.pdf` (2026-10-30, pre-rebrand, outdated stack counts). This draft corrects branding and stack count to v1.0.1 and keeps their order-only structure.
 
 ## What is NOT locked in this draft — do not teach these as fixed
@@ -36,7 +36,7 @@ Capstone day: scope and team roles, scoring evidence quality first, then complet
 Operator (runs the test, records command and output), Recorder (owns the evidence log, file paths, measurements, errors), Auditor (checks gates, inspects logs, verifies re-measurement). Roles rotate daily. No student audits their own log alone.
 
 ## Month-by-month order, draft only (month order, no year, no dates)
-- January — Foundations: M0, M1, start of M14. Labs in draft order: L1, L15 (first pass), L21, L22, L31 (first pass, foundations only). Indoor lab. Project 25 Tier 1.
+- January — Foundations: M0, M1, start of M14. Labs in order: L1, L15 (first pass), L21, L22, L31 (first pass, foundations only). Indoor lab. Project 25 Tier 1.
 - February — Spectrum, Cards, Bluetooth: M2, M3, M4, M14. Labs: L2, L3, L10, L11, L18, L23, L33. Indoor lab, airfield only for outdoor spectrum if weather gates pass.
 - March — Chips, Bridge, Firmware: M5, M8, M9 (first pass), M14. Labs: L5, L9, L12, L24, L25, L37, L40. Indoor lab.
 - April — Mesh, Vision, Night foundations: M6, M7, M12 (foundations), M14. Labs: L4, L6, L8, L14 (consent only, templates deleted after), L26, L29, L30. Indoor lab + farm, spring rain fallback indoor.

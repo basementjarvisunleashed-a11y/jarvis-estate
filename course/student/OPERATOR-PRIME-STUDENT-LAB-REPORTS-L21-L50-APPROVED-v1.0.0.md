@@ -5,8 +5,8 @@ J.A.R.V.I.S. first, HgX small. Contact: @basementjarvisu · basementjarvisunleas
 **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 **Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.**
-**APPROVED AS DRAFT PUBLICATION ONLY** — labs L21–L50 are NOT locked as canon; a separate express lock by name is still required.
-Canon: syllabus v1.0.1, labs L1–L20 locked v1.0.0, year-expansion draft v0.1.0 for L21–L50 and H21–H30. Report templates follow the year-expansion draft; they do not lock any lab, and they do not change any locked lab, gate, or assessment. General draft gate, per the year-expansion draft, for every lab below unless a lab-specific gate is stated: present + safe self-test on own lab target only + evidence saved. No lab passes on assertion.
+**LOCKED FOR 1.0** — labs L21–L50 locked for 1.0, effective 2026-11-04, on HgX's express lock (Addendum 2).
+Canon: syllabus v1.0.1, labs L1–L50 locked for 1.0 (Addendum 2, 2026-11-04); lab definitions from the year-expansion draft v0.1.0, now locked. Report templates follow the locked lab definitions; they do not change any locked lab, gate, or assessment. General gate, locked for 1.0, for every lab below unless a lab-specific gate is stated: present + safe self-test on own lab target only + evidence saved. No lab passes on assertion.
 
 ## How to file a lab report (every lab, same order)
 1. Title, lab code, hardware, tools and versions, date-order, student role — roles only in any published copy, no personal data.

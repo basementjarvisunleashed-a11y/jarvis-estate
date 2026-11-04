@@ -5,8 +5,8 @@ J.A.R.V.I.S. first, HgX small. Contact: @basementjarvisu · basementjarvisunleas
 **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 **Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.**
-**APPROVED AS DRAFT PUBLICATION ONLY** — labs L21–L50 are NOT locked as canon; a separate express lock by name is still required.
-Canon: syllabus v1.0.1, labs L1–L20 locked v1.0.0, year-expansion draft v0.1.0 for L21–L50 and H21–H30. Worksheet instructions follow the year-expansion draft; they do not lock any lab, and they do not change any locked lab, gate, or assessment. General draft gate, per the year-expansion draft, for every lab below unless a lab-specific gate is stated: present + safe self-test on own lab target only + evidence saved. No lab passes on assertion. Venue per lab: Lab = indoor lab, Airfield = private airfield, Farm = private farm.
+**LOCKED FOR 1.0** — labs L21–L50 locked for 1.0, effective 2026-11-04, on HgX's express lock (Addendum 2).
+Canon: syllabus v1.0.1, labs L1–L50 locked for 1.0 (Addendum 2, 2026-11-04); lab definitions from the year-expansion draft v0.1.0, now locked. Worksheet instructions follow the locked lab definitions; they do not change any locked lab, gate, or assessment. General gate, locked for 1.0, for every lab below unless a lab-specific gate is stated: present + safe self-test on own lab target only + evidence saved. No lab passes on assertion. Venue per lab: Lab = indoor lab, Airfield = private airfield, Farm = private farm.
 
 ## How to use a worksheet (every lab, same order)
 Pre-lab: read the lab goal and hardware, pass the hardware gate, record tool versions, answer the pre-lab questions in writing, before any test. During-lab: follow the lab steps, in order, record tool, version, command, output, measurement, error, and file path, for every step. Post-lab: answer the post-lab questions, file the hardening change and re-test where applicable, file the deletion log where required, tick the evidence checklist on filed evidence only. Gate: stated per lab, passed only on filed evidence.

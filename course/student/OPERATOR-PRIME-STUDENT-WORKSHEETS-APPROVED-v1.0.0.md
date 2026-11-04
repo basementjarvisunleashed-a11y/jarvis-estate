@@ -153,7 +153,7 @@ During-lab: in teams, scan a laboratory estate; break an own target; defend it; 
 Post-lab: [1] What did your team break, defend, and prove, by measurement? [2] What was your strongest evidence, and what was your weakest? [3] What would your team do differently, as a team, next time?
 Evidence checklist: [ ] full evidence pack [ ] report [ ] narration [ ] defence brief [ ] team score sheet. Gate: capstone defence presented and verified by re-measurement.
 
-## Draft laboratories L21–L50 (not locked, not taught until locked)
-No worksheet is issued for L21–L50 in this draft. When HgX locks a draft laboratory expressly, the Dean will issue its worksheet as a new version, with its goal, modules, hardware, steps, evidence, and gate, in the same format as L1–L20 above, and index it here. Until then, do not invent a worksheet, a goal, or a result for any draft laboratory. L50, in the year draft, is the final year capstone, with a three-week structure (rehearsal and evidence review, team challenges, defence briefs and capstone defence verified by re-measurement) — its worksheet will be issued only when L50 itself is locked.
+## Laboratories L21–L50 (locked for 1.0)
+Worksheets for L21–L50 are issued in the approved L21–L50 pack (labs locked for 1.0, Addendum 2), in the same format as L1–L20 above. Do not invent a worksheet, a goal, or a result for any laboratory. L50 is the final year capstone, with a three-week structure (rehearsal and evidence review, team challenges, defence briefs and capstone defence verified by re-measurement).
 
 @basementjarvisu · basementjarvisunleashed@gmail.com

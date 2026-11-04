@@ -11,7 +11,7 @@ Licence: MIT for code, CC-BY-4.0 for course text. Footer: @basementjarvisu · ba
 
 Scope, exactly: 1.0 = the course + all open-source hardware used in the course + the bracelet, all open source. The bracelet is one device, not the whole. HGX Academy is the 1.0 course vehicle. Scrubbed, consented student learnings are reported to HgX alone, as input to later service design.
 
-That is the whole lock. It does not lock any cohort, date, venue, fee, L21–L50 lab, or batch 2 template as a policy.
+That is the whole lock. It does not lock any cohort, date, venue, fee, or batch 2 template as a policy. Labs L21–L50 are locked for 1.0 (Addendum 2).
 
 
 Every file below is a NEW versioned file alongside its v0.1.0 draft original, never an overwrite, never a deletion.
@@ -24,8 +24,8 @@ Every file below is a NEW versioned file alongside its v0.1.0 draft original, ne
 - [Dean batch 3](opensource/INDEX-APPROVED-BATCH-3-v1.0.0.md) — 10 files, approved in full.
 - [Teaching schedule, year logs, Dean feed](schedule/TEACHING-SCHEDULE-APPROVED-v1.0.0.md) — 3 files: [teaching schedule](schedule/TEACHING-SCHEDULE-APPROVED-v1.0.0.md), [year logs](logs/YEAR-LOGS-APPROVED-v1.0.0.md), [Dean feed](academy/DEAN-FEED-TO-COURSE-BOT-APPROVED-v1.0.0.md).
 - [Student pack L1–L20](student/INDEX-APPROVED-STUDENT-PACK-v1.0.0.md) — 4 files, approved in full.
-- [Student pack L21–L50](student/INDEX-APPROVED-STUDENT-PACK-L21-L50-v1.0.0.md) — 2 files, APPROVED AS DRAFT PUBLICATION ONLY (labs not locked).
-- [Dean Year Pack](year/INDEX-APPROVED-YEAR-PACK-v1.0.0.md) — 100 files, approved in full (L21–L50 weeks inside remain draft).
+- [Student pack L21–L50](student/INDEX-APPROVED-STUDENT-PACK-L21-L50-v1.0.0.md) — 2 files, LOCKED FOR 1.0 (Addendum 2).
+- [Dean Year Pack](year/INDEX-APPROVED-YEAR-PACK-v1.0.0.md) — 100 files, approved in full (L21–L50 weeks inside now LOCKED for 1.0, Addendum 2).
 - [Professor Teaching Pack](professor/INDEX-APPROVED-PROFESSOR-PACK-v1.0.0.md) — 100 files, approved in full (no exam key, no model answer).
 
 ## Professor skill and Academy log

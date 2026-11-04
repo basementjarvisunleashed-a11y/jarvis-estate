@@ -7,7 +7,7 @@ Taught by HGX Academy, HgX's own academy. No university affiliation. No external
 Licence: MIT for code, CC-BY-4.0 for course text. Footer: @basementjarvisu · basementjarvisunleashed@gmail.com
 
 
-**Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.** L21–L50 weeks inside remain draft, not taught as locked; cohort blanks remain blank for HgX to lock. Blank-results rule throughout. Paths are relative to course/.
+**Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.** L21–L50 weeks inside are LOCKED for 1.0, effective 2026-11-04 (Addendum 2); cohort blanks remain blank and parked for HgX to lock. Blank-results rule throughout. Paths are relative to course/.
 
 - [year/audits/FINAL-YEAR-AUDIT-APPROVED-v1.0.0.md](year/audits/FINAL-YEAR-AUDIT-APPROVED-v1.0.0.md)
 - [year/audits/monthly/M01-MONTHLY-AUDIT-APPROVED-v1.0.0.md](year/audits/monthly/M01-MONTHLY-AUDIT-APPROVED-v1.0.0.md)

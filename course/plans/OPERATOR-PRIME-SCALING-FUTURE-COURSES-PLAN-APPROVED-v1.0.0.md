@@ -12,7 +12,7 @@ Scale by versioning, not by overwriting. A new course, module, lab, or hardware 
 
 ## Pipeline, in order (ideas only, not locked)
 1. Finish the locked core first: M0–M14, L1–L20, H1–H20, Project 25, 21 checkpoints, assessment, capstone L20, all with filed evidence.
-2. Prove the draft expansion next, one piece at a time: H21–H30, each with an openness check at purchase and a hardware gate; L21–L50, each with a lab gate; L50 final year capstone, with its three-week structure in the year draft.
+2. Expansion locked for 1.0 (Addendum 2): H21–H30, each with an openness check at purchase and a hardware gate; L21–L50, each with a lab gate; L50 final year capstone, with its three-week structure.
 3. Add future modules only on HgX's word, each as its own draft: a module draft names its labs, its hardware, its evidence standard, and its place in the sequence before it is taught.
 4. Add future courses only on HgX's word, each as its own course tree: its own syllabus draft, its own structure draft, its own labs draft, its own handbook, its own schedule draft, its own logs draft, its own Dean feed. A future course never borrows a locked OPERATOR PRIME lab as its own without a new version naming the borrowing.
 5. Scale the professor feed with the course count: one Dean feed per course, daily / weekly / monthly, each feed versioned separately, each professor room briefed separately on HgX's word.

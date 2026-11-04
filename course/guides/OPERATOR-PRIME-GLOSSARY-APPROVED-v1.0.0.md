@@ -16,7 +16,7 @@ Canon: syllabus v1.0.1. Definitions here are course definitions, taken from the 
 - **Gate** — A pass/fail check with filed evidence. A laboratory, a hardware piece, a checkpoint, or a capstone is not complete until its gate passes. A failed gate is resubmitted until it passes. No faked passes.
 - **Project 25** — Prove the entire suite. 21 family checkpoints (15 core + 6 specialty: GPU, Bluetooth, RFID, SDR, VoIP, Labs), Tier 1 presence + self-test for all 21, Tier 2 lab-target functional tests for core 15.
 - **Module (M0–M14)** — A teaching unit. M0 Lab Rules, M1 Kali + Project 25, M2 Spectrum, M3 Cards, M4 Bluetooth, M5 Chips, M6 Mesh, M7 Vision, M8 Bridge, M9 Brain / Voice, M10 Capstone, M11 Aerial, M12 Motion + Night, M13 Space + Mapping, M14 Prompt-Injection Defense.
-- **Laboratory (L1–L20 locked, L21–L50 draft)** — A full chain: sense → analyze → prove → defend → report, completed in order, one at a time, with a gate per laboratory.
+- **Laboratory (L1–L50 locked for 1.0)** — A full chain: sense → analyze → prove → defend → report, completed in order, one at a time, with a gate per laboratory.
 - **Hardware (H1–H20 locked, H21–H30 draft)** — Open-source hardware pieces used as senses, hands, and targets. Openness is verified at purchase; closed drops to reference only.
 - **Graphify** — Local knowledge graph: flaw, device, method, defence linked, part of the evidence pack.
 - **Cartographer** — Mapping track: LiDAR, drone, satellite, mesh, site maps, with ground truth. Not a new software stack.

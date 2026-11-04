@@ -23,7 +23,7 @@ If a student's work fails any test, the professor marks that failure plainly, re
 
 ## Week 14 at a glance (professor side)
 
-- **Lab focus:** L14 — Face-ID Defense Lab, Consent Only. Student material: Weekly Assignment Pack W14 and the L14 worksheet and lab report (locked L1–L20, draft L21–L50 — L21–L50 are NOT taught as locked until HgX locks them expressly).
+- **Lab focus:** L14 — Face-ID Defense Lab, Consent Only. Student material: Weekly Assignment Pack W14 and the L14 worksheet and lab report (labs L1–L50 locked for 1.0).
 - **Week dates:** ______________________ (blank — set only on cohort lock)
 - **Venue:** ______________________ (blank — as the lab sheet requires)
 - **Roles this week (rotating, professor assigns):** Operator / Recorder / Auditor.

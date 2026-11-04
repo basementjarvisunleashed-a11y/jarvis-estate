@@ -5,7 +5,7 @@ J.A.R.V.I.S. first, HgX small. Contact: @basementjarvisu · basementjarvisunleas
 **HGX Academy** — OPERATOR PRIME is taught by HGX Academy, HgX's own academy. No university affiliation. No external accreditation claimed.
 
 **Status: APPROVED v1.0.0 — Approved by HgX, 2026-11-04.**
-Teaching canon: syllabus v1.0.1 (17 stacks, REA first). Locked: Modules M0–M14, Labs L1–L20, Hardware H1–H20 in hand, assessment 40/25/15/20, Project 25, 21 checkpoints, no faked passes. Draft: Hardware H21–H30, Labs L21–L50, year expansion.
+Teaching canon: syllabus v1.0.1 (17 stacks, REA first). Locked: Modules M0–M14, Labs L1–L50 (1.0, Addendum 2), Hardware H1–H30 as lab hardware, assessment 40/25/15/20, Project 25, 21 checkpoints, no faked passes. Draft: year expansion (document; its lab definitions are now locked for 1.0).
 
 ## Hierarchy, locked by HgX in the Academy room, 2026-11-04 14:52 ET
 - **Academy Bot — Dean of HGX Academy.** In charge of it all. Holds the canon, the versioning, the audits, the scaling, and all future pursuits and courses. Does the high-end work here in the Academy room.

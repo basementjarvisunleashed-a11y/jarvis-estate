@@ -137,7 +137,7 @@ Results (blank): [full evidence pack] [report] [narration] [defence brief] [team
 Analysis (blank): [findings, one ledger row per finding, confidence scored before write-up] [strongest evidence, weakest evidence, team lesson].
 Gate: capstone defence presented and verified by re-measurement. Status: [passed / failed / not yet run].
 
-## Draft laboratories L21–L50 (not locked, not taught until locked)
-No report template is issued for L21–L50 in this draft. When HgX locks a draft laboratory expressly, the Dean will issue its report template as a new version, with its goal, modules, hardware, steps, evidence, and gate, in the same format as L1–L20 above, and index it here. Until then, do not invent a report, a goal, or a result for any draft laboratory. L50, in the year draft, is the final year capstone, with a three-week structure (rehearsal and evidence review, team challenges, defence briefs and capstone defence verified by re-measurement) — its report template will be issued only when L50 itself is locked.
+## Laboratories L21–L50 (locked for 1.0)
+Report templates for L21–L50 are issued in the approved L21–L50 pack (labs locked for 1.0, Addendum 2), in the same format as L1–L20 above. Do not invent a report, a goal, or a result for any laboratory. L50 is the final year capstone, with a three-week structure (rehearsal and evidence review, team challenges, defence briefs and capstone defence verified by re-measurement).
 
 @basementjarvisu · basementjarvisunleashed@gmail.com
