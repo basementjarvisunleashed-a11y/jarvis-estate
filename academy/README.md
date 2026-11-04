@@ -13,6 +13,13 @@ The Academy is where the white papers are taught as a course. The Academy Bot ho
 | 1 | 2026-10-14 | The Vision (white paper v1.1) — expert depth, 42 slides | — | — |
 | 2 | 2026-10-21 | The Vision (white paper v1.2) — expert depth, 48 slides | [PDF](decks/vision-white-paper-slideshow.pdf) · [PPTX](decks/vision-white-paper-slideshow.pptx) | [v1](lecture-records/lecture-record-2026-10-21.md) · [v2](lecture-records/lecture-record-2026-10-21-v2.md) · [v3](lecture-records/lecture-record-2026-10-21-v3.md) |
 | 3 | 2026-10-22 | Memory — persistence and semantics. Deck published. The 06:00–08:00 window recorded no exchanges; whether the session ran is unrecorded. | [PDF](decks/memory-slideshow.pdf) · [PPTX](decks/memory-slideshow.pptx) | [record](lecture-records/lecture-record-2026-10-22.md) |
+| 4 | 2026-10-29 | Silent 06:00–08:00 window. Session 3 Memory deck stands as latest material. | — (Memory deck stands) | [record](lecture-records/lecture-record-2026-10-29.md) |
+| 5 | 2026-11-03 | Silent 06:00–08:00 window. Session 3 Memory deck stands as latest material. | — (Memory deck stands) | [record](lecture-records/lecture-record-2026-11-03.md) |
+| 6 | 2026-11-04 | Silent 06:00–08:00 window. Session 3 Memory deck stands as latest material. | — (Memory deck stands) | [record](lecture-records/lecture-record-2026-11-04.md) |
+
+## One-year open source course — coming soon
+
+A one-year open source course is planned, teaching the J.A.R.V.I.S. trilogy and the Kali Linux + REA platform as a full curriculum. This section will index the course material as it is built and published. No course content is claimed here until it is confirmed built and delivered for publication.
 
 ## Materials
 
