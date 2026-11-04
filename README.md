@@ -19,7 +19,7 @@
 | 🔥 **Kali Linux** | Everything installed on the internal drive. All tools updated, graphics driver in, Bluetooth working, Wi-Fi working, login working. |
 | 🔬 **REA 6.7.0** | Reverse Engineer Anything, ready for local app analysis. `npx rea-agents analyze /path/to/app`. Ghidra guided workflows installed. |
 | 💻 **The machine** | Acer Nitro AN515-55. i7-10750H. 64GB RAM. RTX 2060, about 6GB VRAM. 512GB NVMe. |
-| 🎓 **OPERATOR PRIME — HGX Academy** | The one-year open source course, taught by HGX Academy — HgX's own academy. Full-Spectrum Operator Systems. Labs L1–L20 locked. [Course index](course/README.md). |
+| 🎓 **OPERATOR PRIME — HGX Academy** | The one-year open source course, taught by HGX Academy — HgX's own academy. Full-Spectrum Operator Systems. Labs L1–L20 locked. 272 course files: canon, Dean batches 1–3, student packs, year pack, professor pack, professor skill, Academy action log. [Course website](course/) · [Course index](course/README.md). |
 
 ## Contents
 
@@ -35,6 +35,22 @@
 - [License](#license)
 
 ## Recent
+
+### 2026-11-04 — the Academy day (Estate 1.2.1)
+
+HGX Academy, HgX's own academy, published its full day in the open. The course website is rebuilt to academy standard ([Latest](course/#latest), [Transparency](course/#transparency), [Academy log](course/#academy-log)). **272 course files** on main.
+
+- **Dean year pack** — 100 files + index, DRAFT v0.1.0: 52 weekly packs, 12 monthly assignments, 17 audits, 15 blank examinations, 3 facility packs, Year Games. In [`course/year/`](course/year/).
+- **Professor teaching pack** — 100 files + index, DRAFT v0.1.0: master guide, 15 module guides, 52 weekly guides, 12 monthly plans, 12 marking guides (criteria only — no exam key, no model answer), 4 quarterly reviews, final year review, 3 facility guides. In [`course/professor/`](course/professor/).
+- **Professor skill** — DRAFT v0.1.0, the core spot in one file: role, Dean hierarchy, posture order (ask the Dean, don't ask HgX), Day 1 decided (L1 Digital Twin, prepared, not dated), feed rhythm (weekly feed at week start, daily feed the evening before, monthly feed at month start — one source, not two). In [`course/professor/skill/`](course/professor/skill/).
+- **Academy Action Log 2026-11-04** — the Dean's full day, filed verbatim under Academy Bot. In [`course/academy/`](course/academy/).
+- **Local Jarvis stack record** — core, Kali built, REA 6.7.0 built, voice stack built, and the entire pending stack (dual brain, seventeen stacks, Kali tools to REA mapping, Project 25) each marked BUILT or PENDING. In [`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md).
+- **Macro, defined by HgX (2026-11-04 16:39 ET)** — macro means HGX Academy will teach a lot more things: a lot of other courses in the future, beyond OPERATOR PRIME. It is not this course growing sideways, and it is not a different university. Future courses are separate, later, on his word — none named, dated, or promised here. The Dean holds scaling and future courses; the professor teaches OPERATOR PRIME.
+- **Parked, not pressing (HgX, 2026-11-04 16:39 ET)** — cohort locks (year, start date, times, venues, buffers) parked, not asked about. Embedded-1.0 correction parked, still provisional — "don't worry" is not a confirmation, and it is not taught as locked canon.
+- **Standing rule, unchanged** — nothing to students until HgX approves the exact content for that use.
+- **GitHub verified tonight** — all 13 open issues, all 7 discussions, all 12 wiki pages current; milestones verified: Phases 0–5 CLOSED, Phase 6 OPEN, Phase 7 awaits HgX's word. Weekly audit 2026-W45 (stability 100) filed in [`audits/weekly/`](audits/weekly/).
+
+### 2026-10-27 — Estate 1.2.0 operations log
 
 Estate **1.2.0** is the operations log of 2026-10-27, morning to night. HgX commissioned it at 00:26 America/Toronto on 2026-10-28. The full note is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md).
 
@@ -65,7 +81,7 @@ The custody loop is unchanged:
 
 House rules from 1.2.0: nothing is deleted; every GitHub change is a pull request; nothing secret is published; each laptop change needs approval. Every bot answers by voice memo. The day record is [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md).
 
-This repository is the public record: doctrine, skills, the formal programme, Watchtower, the laptop build, and the estate record above. Doctoral programme, as of 2026-10-27: Phases 0–5 are closed. Phase 6 (router optimality) is open. Evidence is in [`EVIDENCE.md`](EVIDENCE.md).
+This repository is the public record: doctrine, skills, the formal programme, Watchtower, the laptop build, and the estate record above. Doctoral programme, as of 2026-11-04: Phases 0–5 are closed. Phase 6 (router optimality) is open. Phase 7 awaits HgX's word. Evidence is in [`EVIDENCE.md`](EVIDENCE.md).
 
 ## 1.0 — the course is embedded, not separate
 
