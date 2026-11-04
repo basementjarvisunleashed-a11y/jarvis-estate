@@ -143,7 +143,7 @@ Hardware: Acer Nitro AN515-55, i7-10750H, 64GB RAM, RTX 2060 (about 6GB VRAM), 5
 
 REA is ready for local app analysis: `rea-agents@6.7.0`, installed via `npx rea-agents setup`, with the REA reverse-engineering skill for CLI use. CLI: `npx rea-agents analyze /path/to/app`. Deep analysis uses Ghidra with guided reverse-engineering workflows installed.
 
-Planned, not yet built: Ollama check, a 4B abliterated local model resident on VRAM as the fast low-end brain, a 27B abliterated local model on RAM as the slow high-end brain, switching logic in the orchestrator layers and usage router (default VRAM fast, escalate to RAM high for hard tasks, de-escalate back), then the remaining software stacks in efficient order, Kali tools mapping into REA, and Project 25 prove-out. No middle 8B test. None of these are claimed as installed until confirmed built.
+Planned, not yet built: Ollama check, a 4B abliterated local model resident on VRAM as the fast low-end brain, a 27B abliterated local model on RAM as the slow high-end brain, switching logic in the orchestrator layers and usage router (default VRAM fast, escalate to RAM high for hard tasks, de-escalate back), then the remaining software stacks in efficient order, Kali tools mapping into REA, and Project 25 prove-out. No middle 8B test. None of these are claimed as installed until confirmed built. The full consolidated record — core, Kali, REA, and the entire pending stack, each item marked BUILT or PENDING — is [`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md).
 
 1. Install Python 3.13, [Ollama](https://ollama.com/download), and the two models named in the guide (`qwen3:8b` for the orchestrator, `qwen2.5:3b` for `jarvis.py`).
 2. Set passwords and the user account on the machine. The tree ships placeholders only (`CHANGE_ME`, `<user>`). Do not commit the real values.
@@ -159,6 +159,7 @@ Full steps, Piper voice files, VLC, and troubleshooting are in [`local-jarvis/RE
 | [`VERSION`](VERSION) | Estate version. **1.2.1**. 1.2.0 was the 2026-10-27 operations log. The prior release tag is `v1.0.0`. |
 | [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) | Operations log for 2026-10-27. |
 | [`local-jarvis/`](local-jarvis/README.md) | Laptop platform: Kali Linux build (live 2026-11-04) with voice loop, orchestrator, and REA. Guide rewritten for Kali; prior Windows guide in git history. |
+| [`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md) | Consolidated stack record: core, Jarvis on Kali (built), REA (built), voice stack (built), and the entire pending stack — dual brain, seventeen stacks in efficient order, Kali tools → REA mapping, Project 25 prove-out — each item marked BUILT or PENDING. |
 | [`skills/`](skills/) | Eight role playbooks. Duties do not cross. |
 | [`watchtower/`](watchtower/README.md) | Stdlib monitor and [`STATUS.md`](watchtower/STATUS.md). Paused is a decision, not an outage. |
 | [`papers/`](papers/README.md) | White-paper index. Current versions and the Dropbox URLs. |
