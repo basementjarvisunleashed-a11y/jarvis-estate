@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OPERATOR PRIME — HGX Academy</title>
+<meta name="description" content="OPERATOR PRIME — Full-Spectrum Operator Course, taught by HGX Academy. You have used computers your whole life. Now you operate them. Kali Linux, REA, open-source hardware, reverse engineering, evidence-based defense." />
+<meta name="color-scheme" content="dark" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="OPERATOR PRIME — HGX Academy" />
+<meta property="og:description" content="You have used computers your whole life. Now you operate them. Kali Linux. REA. The basement lab. HGX Academy." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23090c10'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%238ee7ff' stroke-width='2'/%3E%3Cpath d='M32 16 46 42H18Z' fill='%238ee7ff'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #090c10;
+    --bg-raise: #10161d;
+    --line: #243140;
+    --text: #e7eef4;
+    --muted: #93a3b3;
+    --cyan: #8ee7ff;
+    --amber: #e7c27a;
+    --green: #7ae7a0;
+    --orange: #e7a87a;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+    --sans: "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --max: 1080px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(900px 420px at 80% -10%, rgba(142, 231, 255, 0.08), transparent 60%),
+      radial-gradient(700px 380px at -10% 20%, rgba(231, 194, 122, 0.05), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  a { color: var(--cyan); text-underline-offset: 0.18em; }
+  a:hover { color: #fff; }
+  :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+  .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+  header.site {
+    position: sticky; top: 0; z-index: 4;
+    background: rgba(9, 12, 16, 0.9);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; min-height: 64px; flex-wrap: wrap; padding: 8px 0;
+  }
+  .brand { font-family: var(--serif); font-size: 20px; text-decoration: none; color: var(--text); }
+  .brand b { color: var(--cyan); }
+  nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
+  nav a:hover { color: var(--text); }
+  .hero { padding: 72px 0 28px; }
+  .kicker {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--amber); margin: 0 0 14px;
+  }
+  .hero-academy {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(48px, 9vw, 100px);
+    line-height: 0.95; letter-spacing: -0.03em; margin: 0 0 8px;
+    background: linear-gradient(180deg, #fff 0%, #8ee7ff 55%, #2a9dc4 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 60px rgba(142, 231, 255, 0.25);
+  }
+  .hero-course {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 16px;
+  }
+  .tagline {
+    font-family: var(--serif); font-size: clamp(20px, 3vw, 28px);
+    font-style: italic; color: var(--cyan); margin: 0 0 20px;
+  }
+  .lede { font-size: 20px; color: var(--muted); max-width: 46rem; margin: 0 0 28px; }
+  .lede strong { color: var(--text); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+  .btn {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+    border-radius: 999px; text-decoration: none; font-size: 15px;
+  }
+  .btn.primary { background: var(--cyan); color: #041016; }
+  .btn.primary:hover { background: #fff; color: #041016; }
+  .btn.ghost { border: 1px solid var(--line); color: var(--text); }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 12px; list-style: none; }
+  .pills li {
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px;
+    background: var(--bg-raise);
+  }
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 4vw, 40px);
+    margin: 0 0 8px; letter-spacing: -0.02em;
+  }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 46rem; }
+  .grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) {
+    .grid.features { grid-template-columns: 1fr 1fr; }
+    .grid.modules { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 980px) {
+    .grid.modules { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  article.card, .doc {
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--bg-raise); padding: 18px;
+  }
+  article.card h3 { margin: 0 0 8px; font-size: 18px; }
+  article.card p { margin: 0; color: var(--muted); }
+  article.card p strong { color: var(--text); }
+  article.card .labs { font-family: var(--mono); font-size: 13px; color: var(--cyan); margin-top: 8px; }
+  .badge {
+    display: inline-block; font-family: var(--mono); font-size: 11px;
+    padding: 2px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle;
+  }
+  .badge.locked { background: rgba(122, 231, 160, 0.15); color: var(--green); border: 1px solid rgba(122, 231, 160, 0.3); }
+  .badge.draft { background: rgba(231, 168, 122, 0.15); color: var(--orange); border: 1px solid rgba(231, 168, 122, 0.3); }
+  .assessment { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 28px; }
+  .assessment .slice {
+    flex: 1 1 200px; border: 1px solid var(--line); border-radius: 12px;
+    background: var(--bg-raise); padding: 18px; text-align: center;
+  }
+  .assessment .slice .pct { font-family: var(--serif); font-size: 40px; color: var(--cyan); line-height: 1; }
+  .assessment .slice .label { color: var(--muted); font-size: 15px; margin-top: 6px; }
+  .rules { border: 1px solid var(--line); border-radius: 12px; background: var(--bg-raise); padding: 24px; }
+  .rules ul { margin: 0; padding-left: 20px; color: var(--muted); }
+  .rules li { margin-bottom: 6px; }
+  .rules li strong { color: var(--text); }
+  .stack-list { columns: 1; padding-left: 20px; color: var(--muted); }
+  @media (min-width: 720px) { .stack-list { columns: 2; } }
+  .stack-list li { margin-bottom: 6px; }
+  .stack-list li strong { color: var(--text); }
+  table { width: 100%; border-collapse: collapse; margin: 0 0 28px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-family: var(--mono); font-size: 13px; color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em; }
+  td { color: var(--muted); }
+  td a { color: var(--cyan); }
+  footer { padding: 40px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer .big { font-size: 18px; color: var(--text); }
+  footer .small { font-size: 13px; }
+  @media (max-width: 720px) {
+    .hero { padding-top: 40px; }
+    .lede { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="../">J.A.R.V.I.S. — <b>HGX Academy</b></a>
+    <nav>
+      <a href="#overview">Course</a>
+      <a href="#modules">Modules</a>
+      <a href="#assessment">Assessment</a>
+      <a href="#platform">Platform</a>
+      <a href="#files">Files</a>
+      <a href="../">Main site</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero" id="overview">
+    <p class="kicker">HGX Academy · One-year open source course · Kali Linux · REA</p>
+    <h1 class="hero-academy">HGX Academy</h1>
+    <h2 class="hero-course">OPERATOR PRIME</h2>
+    <p class="tagline">"You have used computers your whole life. Now you operate them."</p>
+    <p class="lede">Full-Spectrum Operator Systems: <strong>open-source hardware, reverse engineering, and evidence-based defense.</strong> Taught by HGX Academy — HgX's own academy. No university affiliation. No external accreditation claimed. One operator. Durable skills. Evidence at every step.</p>
+    <div class="actions">
+      <a class="btn primary" href="#modules">Course breakdown</a>
+      <a class="btn ghost" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/course">Course files on GitHub</a>
+      <a class="btn ghost" href="../">Back to J.A.R.V.I.S.</a>
+    </div>
+    <ul class="pills">
+      <li>15 modules M0–M14</li>
+      <li>20 labs L1–L20 locked</li>
+      <li>20 hardware pieces H1–H20</li>
+      <li>21 checkpoints</li>
+      <li>Project 25</li>
+      <li>17 software stacks</li>
+    </ul>
+  </div>
+
+  <section id="pillars">
+    <div class="wrap">
+      <h2>Three pillars</h2>
+      <p class="sub">Everything in the course stands on three pillars. No pillar, no pass.</p>
+      <div class="grid features">
+        <article class="card">
+          <h3>🔥 Kali everything</h3>
+          <p>Kali Linux on the internal drive. All tools updated, graphics driver in, Bluetooth working, Wi-Fi working, login working. The full suite, all families.</p>
+        </article>
+        <article class="card">
+          <h3>🔬 REA everything</h3>
+          <p>Reverse Engineer Anything, local model and local providers. <strong>REA 6.7.0</strong> ready for local app analysis. Ghidra guided workflows installed. Local only, own targets only.</p>
+        </article>
+        <article class="card">
+          <h3>🤖 Grokbot</h3>
+          <p>Cloud reasoning with local execution. The brain in the cloud, the hands on the machine. Every action logged, every claim evidenced.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="modules">
+    <div class="wrap">
+      <h2>Course breakdown — modules M0 to M14</h2>
+      <p class="sub">Fifteen modules, twenty laboratories, completed in order, one at a time, with a gate per laboratory. A laboratory is not complete until its evidence is filed. No faked passes.</p>
+      <div class="grid modules">
+        <article class="card">
+          <h3>M0 — Laboratory Rules, Consent, and Audit <span class="badge locked">LOCKED</span></h3>
+          <p>Foundations: consent, logging, safety, academic integrity.</p>
+        </article>
+        <article class="card">
+          <h3>M1 — Kali Linux and Project 25 <span class="badge locked">LOCKED</span></h3>
+          <p>The platform, the suite, the prove-out.</p>
+          <p class="labs">Lab: L16 (in part, audit preparation)</p>
+        </article>
+        <article class="card">
+          <h3>M2 — Spectrum <span class="badge locked">LOCKED</span></h3>
+          <p>Radio frequency, signals, the invisible landscape.</p>
+          <p class="labs">Labs: L2, L3, L11, L18 (in part)</p>
+        </article>
+        <article class="card">
+          <h3>M3 — Cards and Access Systems <span class="badge locked">LOCKED</span></h3>
+          <p>RFID, NFC, access control — how doors open and how they fail.</p>
+          <p class="labs">Lab: L5 (in part)</p>
+        </article>
+        <article class="card">
+          <h3>M4 — Bluetooth <span class="badge locked">LOCKED</span></h3>
+          <p>Pairing, protocols, the air around you.</p>
+          <p class="labs">Labs: L10, L18 (in part)</p>
+        </article>
+        <article class="card">
+          <h3>M5 — Chips and Side Channels <span class="badge locked">LOCKED</span></h3>
+          <p>What the silicon leaks when it thinks no one is listening.</p>
+          <p class="labs">Labs: L5 (in part), L12</p>
+        </article>
+        <article class="card">
+          <h3>M6 — Mesh Systems <span class="badge locked">LOCKED</span></h3>
+          <p>Meshtastic, LoRa, networks that build themselves.</p>
+          <p class="labs">Labs: L2, L3, L8, L13, L17 (in part)</p>
+        </article>
+        <article class="card">
+          <h3>M7 — Vision and Sensing <span class="badge locked">LOCKED</span></h3>
+          <p>Cameras, sensors, seeing what the machine sees.</p>
+          <p class="labs">Labs: L1, L4, L14</p>
+        </article>
+        <article class="card">
+          <h3>M8 — Hardware Bridging and Reverse Engineering <span class="badge locked">LOCKED</span></h3>
+          <p>Take it apart. Understand it. Put it back with evidence.</p>
+          <p class="labs">Labs: L5 (in part), L9</p>
+        </article>
+        <article class="card">
+          <h3>M9 — Brain, Voice, and Local Intelligence <span class="badge locked">LOCKED</span></h3>
+          <p>Local models, voice, the machine that listens.</p>
+          <p class="labs">Labs: L6, L15, L19</p>
+        </article>
+        <article class="card">
+          <h3>M10 — Capstone Preparation <span class="badge locked">LOCKED</span></h3>
+          <p>Evidence pack, report, narration, defence brief.</p>
+        </article>
+        <article class="card">
+          <h3>M11 — Aerial Systems <span class="badge locked">LOCKED</span></h3>
+          <p>Drones, safe controlled flying areas, Transport Canada rules first.</p>
+          <p class="labs">Labs: L7, L13</p>
+        </article>
+        <article class="card">
+          <h3>M12 — Motion and Night Sensing <span class="badge locked">LOCKED</span></h3>
+          <p>Movement in the dark, sensors that never sleep.</p>
+          <p class="labs">Lab: L4 (in part)</p>
+        </article>
+        <article class="card">
+          <h3>M13 — Space and Mapping <span class="badge locked">LOCKED</span></h3>
+          <p>Cartography, coordinates, the world as data.</p>
+          <p class="labs">Labs: L1 (in part), L7 (in part), L17</p>
+        </article>
+        <article class="card">
+          <h3>M14 — Prompt-Injection Defense <span class="badge draft">DRAFT</span></h3>
+          <p>Taxonomy only. No prompt text. Lab only, own local models only, Muse excluded.</p>
+          <p class="labs">Exercises: E-P1 to E-P6 (synthetic, benign)</p>
+        </article>
+      </div>
+      <p class="sub" style="margin-top: 28px;"><strong style="color: var(--text);">Capstone: L20 Operator Olympics.</strong> All twenty hardware pieces, team challenges, scored on evidence quality, not speed alone.</p>
+    </div>
+  </section>
+
+  <section id="assessment">
+    <div class="wrap">
+      <h2>Assessment — evidence-based, no exceptions</h2>
+      <p class="sub">No laboratory passes on assertion alone. A failed gate is resubmitted until it passes. No mark is awarded for a fabricated, incomplete, or unverifiable result.</p>
+      <div class="assessment">
+        <div class="slice">
+          <div class="pct">40%</div>
+          <div class="label">Evidence pack — one folder per laboratory, with checklist, raw outputs, measurements, and logs</div>
+        </div>
+        <div class="slice">
+          <div class="pct">25%</div>
+          <div class="label">Written report (GenOffice) — findings, method, error analysis, and defence, with tracked revisions</div>
+        </div>
+        <div class="slice">
+          <div class="pct">15%</div>
+          <div class="label">Narrated summary (VoiceStudio) — clear, professional narration of method and result</div>
+        </div>
+        <div class="slice">
+          <div class="pct">20%</div>
+          <div class="label">Defence brief and capstone defence — presentation of the capstone, including a defence verified by re-measurement</div>
+        </div>
+      </div>
+      <p class="sub"><strong style="color: var(--text);">Project 25:</strong> prove the entire suite. Twenty-one family checkpoints (fifteen core plus GPU, Bluetooth, RFID, SDR, VoIP, and Labs). Each checkpoint requires tool presence, a safe self-test, and saved evidence.</p>
+    </div>
+  </section>
+
+  <section id="platform">
+    <div class="wrap">
+      <h2>Platform — the basement lab</h2>
+      <p class="sub">One laptop. Kali Linux. REA. It can rip apart anything — software, firmware, hardware — and put it back together with evidence.</p>
+      <div class="grid features">
+        <article class="card">
+          <h3>💻 The machine</h3>
+          <p><strong>Acer Nitro AN515-55.</strong> i7-10750H. 64GB RAM. RTX 2060, about 6GB VRAM. 512GB NVMe internal drive.</p>
+        </article>
+        <article class="card">
+          <h3>🔥 Kali Linux</h3>
+          <p>Everything installed on the internal drive. All tools updated, graphics driver in, Bluetooth working, Wi-Fi working, login working. Windows is no longer on the drive.</p>
+        </article>
+        <article class="card">
+          <h3>🔬 REA 6.7.0</h3>
+          <p><code>npx rea-agents analyze /path/to/app</code>. Ghidra guided workflows installed. Local only, own targets only.</p>
+        </article>
+      </div>
+      <h2 style="margin-top: 40px;">Seventeen software stacks, in efficient order</h2>
+      <p class="sub">REA first. Present planned stacks as planned, built stacks as built. (The syllabus v1.0.0 stated ten stacks; corrected to seventeen in v1.0.1.)</p>
+      <ol class="stack-list">
+        <li><strong>REA</strong> — first, always</li>
+        <li><strong>Quick tools</strong> — security-audit-skill (sandboxed), Graphify, HyperFrames</li>
+        <li><strong>Ollama tools</strong> — FreeLLMAPI routed to local Ollama, ai-memory</li>
+        <li><strong>Heavy GPU separate venvs</strong> — ComfyUI</li>
+        <li><strong>DeepTutor</strong></li>
+        <li><strong>Prism</strong></li>
+        <li><strong>Macro</strong> — Kali only</li>
+        <li><strong>Hacking-Tools gaps</strong> — one by one</li>
+        <li><strong>Claude Plugins</strong> — requires Claude Code</li>
+        <li><strong>VoiceStudio</strong></li>
+        <li><strong>GenOffice</strong></li>
+        <li><strong>Reference libraries</strong> — last</li>
+      </ol>
+      <p class="sub">Plus the remaining items in the full stack catalog — see the <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/catalog/STACK-12-DOCUMENTED-CATALOG-v1.0.0.md">documented catalog</a> (inventory only, no prompt text).</p>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <h2>Hard rules — non-negotiable</h2>
+      <div class="rules">
+        <ul>
+          <li><strong>Consenting adults only.</strong> Controlled laboratory only.</li>
+          <li><strong>Own devices, own tags, own networks, own targets only.</strong> Never anyone else's.</li>
+          <li><strong>Spine: SEE → DOCUMENT → LOG → PREVENT.</strong> No prevention claim without that chain.</li>
+          <li><strong>Face work</strong> only on consenting adult participants, in the lab only, for defensive education. Templates stay in the lab, deleted after the exercise.</li>
+          <li><strong>Never family, never his son, never strangers,</strong> never real-world surveillance or deployment.</li>
+          <li><strong>Radio transmit</strong> only on own authorised frequencies. <strong>Drone</strong> only in a safe, controlled flying area, Transport Canada rules first. <strong>Lasers</strong> Class 1 only.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="draft">
+    <div class="wrap">
+      <h2>What's next — draft, not final</h2>
+      <p class="sub">The course is still building. Many more labs, modules, and stacks to come. Draft items are marked draft everywhere — never presented as locked.</p>
+      <div class="grid features">
+        <article class="card">
+          <h3>Year expansion <span class="badge draft">DRAFT</span></h3>
+          <p>Year-long Jan 1 to Dec 31. <strong>Year NOT stated — do not invent a year.</strong> Do not finalise holiday dates, venues, buffers, audits, or inspection counts. This is the MAIN plan.</p>
+        </article>
+        <article class="card">
+          <h3>Labs L21–L50, Hardware H21–H30 <span class="badge draft">DRAFT</span></h3>
+          <p>Proposed, not in hand, not locked. L50 is the final year capstone.</p>
+        </article>
+        <article class="card">
+          <h3>Four-month plan <span class="badge draft">HISTORY ONLY</span></h3>
+          <p>Summer 2027 plan. Retained for version history only. Superseded in effect by the year-expansion draft. Do NOT present as the current plan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="files">
+    <div class="wrap">
+      <h2>Course files — every version kept, never overwritten</h2>
+      <p class="sub">Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept, never overwrite, PR for every change, no deletions.</p>
+      <table>
+        <tr><th>File</th><th>Status</th></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.1.md">Syllabus v1.0.1</a></td><td>Current — 17 stacks, REA first</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.0.md">Syllabus v1.0.0</a></td><td>Prior version, retained</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/structure/COURSE-STRUCTURE-v2-v1.0.0.md">Course Structure v2</a></td><td>Locked v1.0.0</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/labs/OPERATOR-PRIME-LABS-v1.0.0.md">Labs L1–L20</a></td><td>Locked v1.0.0</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/catalog/STACK-12-DOCUMENTED-CATALOG-v1.0.0.md">Stack Catalog</a></td><td>Locked v1.0.0 — inventory only, no prompt text</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/hardware/ACER-FIT-AUDIT-2026-10-29-v1.0.0.md">Acer Fit Audit</a></td><td>Locked v1.0.0</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/guides/HOME-START-ONE-BY-ONE-v1.0.0.md">Home Start Guide</a></td><td>Locked v1.0.0</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/guides/CRAZY-IDEAS-REA-KALI-HARDWARE-v1.0.0.md">REA + Kali + Hardware Ideas</a></td><td>Locked v1.0.0</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/modules/OPERATOR-PRIME-PREVENT-MODULE-DRAFT-v0.1.0.md">Prevent Module M14</a></td><td>Draft v0.1.0 — taxonomy only</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/plans/OPERATOR-PRIME-YEAR-EXPANSION-DRAFT-v0.1.0.md">Year Expansion</a></td><td>Draft v0.1.0 — MAIN plan</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/plans/OPERATOR-PRIME-FOUR-MONTH-PLAN-v0.9.0-HISTORY.md">Four-Month Plan</a></td><td>History only</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/guides/REA-APP-TEARDOWN-DRAFT-v0.1.0.md">REA App Teardown</a></td><td>Draft v0.1.0</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/structure/COURSE-STRUCTURE-v1-v0.9.0-SUPERSEDED.md">Structure v1</a></td><td>Superseded, retained</td></tr>
+        <tr><td><a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/course/poster/course-poster.html">Course Poster</a></td><td>Locked v1.0.0</td></tr>
+      </table>
+      <p class="sub">Course text CC-BY-4.0. Code MIT. © HGX Engineering. J.A.R.V.I.S. first and prominent; HgX small underneath.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="big">J.A.R.V.I.S. — Joint Ambient Ready Variance Intelligence System</p>
+    <p>OPERATOR PRIME — Full-Spectrum Operator Course, taught by HGX Academy.</p>
+    <p class="small">HgX · @basementjarvisu · basementjarvisunleashed@gmail.com</p>
+    <p class="small">No university affiliation. No external accreditation claimed. No prompt text. No 2.0/3.0 material. No personal data.</p>
+  </div>
+</footer>
+</body>
+</html>
