@@ -59,6 +59,21 @@ Versioning law: v0.x.x draft, v1.0.0 ratified, forward only, every version kept,
 | [schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md](schedule/TEACHING-SCHEDULE-DRAFT-v0.1.0.md) | Teaching schedule draft. Weekly rhythm template, daily blocks in order, month-by-month order January–December, audits/inspections, assessment 40/25/15/20. Year, cohort start, clock times, holiday dates, venue names, buffer counts NOT locked — blanks until HgX locks them with the cohort. |
 | [logs/YEAR-LOGS-DRAFT-v0.1.0.md](logs/YEAR-LOGS-DRAFT-v0.1.0.md) | Year logs draft. Daily, per-lab, per-checkpoint, per-hardware, monthly, quarterly, and year rollup logs, plus scrubbed student learning log (with consent, no personal data). |
 | [academy/DEAN-FEED-TO-COURSE-BOT-DRAFT-v0.1.0.md](academy/DEAN-FEED-TO-COURSE-BOT-DRAFT-v0.1.0.md) | Dean → Professor feed plan draft. Academy Bot is Dean of HGX Academy, in charge of it all. Course Bot is the day-to-day professor, teaching through the Course Bot room. Daily/weekly/monthly feed structure. Course Bot briefing awaits HgX's go-ahead. |
+| [handbook/OPERATOR-PRIME-STUDENT-HANDBOOK-DRAFT-v0.1.0.md](handbook/OPERATOR-PRIME-STUDENT-HANDBOOK-DRAFT-v0.1.0.md) | Student handbook draft. What the student needs to know, do, and file. |
+| [guides/OPERATOR-PRIME-INSTRUCTOR-GUIDE-DEAN-DRAFT-v0.1.0.md](guides/OPERATOR-PRIME-INSTRUCTOR-GUIDE-DEAN-DRAFT-v0.1.0.md) | Instructor guide draft, Dean-owned. How the Dean runs the course. |
+| [hardware/OPERATOR-PRIME-HARDWARE-GATE-CHECKLIST-PACK-DRAFT-v0.1.0.md](hardware/OPERATOR-PRIME-HARDWARE-GATE-CHECKLIST-PACK-DRAFT-v0.1.0.md) | Hardware gate checklist pack draft. Gate per piece, box photo to HgX says go. |
+| [templates/OPERATOR-PRIME-EVIDENCE-PACK-TEMPLATE-DRAFT-v0.1.0.md](templates/OPERATOR-PRIME-EVIDENCE-PACK-TEMPLATE-DRAFT-v0.1.0.md) | Evidence pack template draft. One folder per lab, checklist, raw outputs, measurements, logs. |
+| [assessment/OPERATOR-PRIME-ASSESSMENT-RUBRICS-DRAFT-v0.1.0.md](assessment/OPERATOR-PRIME-ASSESSMENT-RUBRICS-DRAFT-v0.1.0.md) | Assessment rubrics draft. 40/25/15/20, gate criteria, resubmission rules. |
+| [safety/OPERATOR-PRIME-SAFETY-CONSENT-ETHICS-PACK-DRAFT-v0.1.0.md](safety/OPERATOR-PRIME-SAFETY-CONSENT-ETHICS-PACK-DRAFT-v0.1.0.md) | Safety, consent, ethics pack draft. Hard rules, consent forms, ethics boundaries. |
+| [project25/OPERATOR-PRIME-PROJECT-25-PROVE-OUT-WORKBOOK-DRAFT-v0.1.0.md](project25/OPERATOR-PRIME-PROJECT-25-PROVE-OUT-WORKBOOK-DRAFT-v0.1.0.md) | Project 25 prove-out workbook draft. 21 checkpoints, Tier 1 and Tier 2, evidence per checkpoint. |
+| [venues/OPERATOR-PRIME-VENUE-INSPECTION-PACK-DRAFT-v0.1.0.md](venues/OPERATOR-PRIME-VENUE-INSPECTION-PACK-DRAFT-v0.1.0.md) | Venue inspection pack draft. Lab, farm, airfield inspection templates. |
+| [capstone/OPERATOR-PRIME-CAPSTONE-OLYMPICS-PLAYBOOK-DRAFT-v0.1.0.md](capstone/OPERATOR-PRIME-CAPSTONE-OLYMPICS-PLAYBOOK-DRAFT-v0.1.0.md) | Capstone Olympics playbook draft. Team challenges, evidence quality first, defence verified by re-measurement. |
+| [templates/OPERATOR-PRIME-HOMEWORK-LECTURE-NOTES-TEMPLATE-DRAFT-v0.1.0.md](templates/OPERATOR-PRIME-HOMEWORK-LECTURE-NOTES-TEMPLATE-DRAFT-v0.1.0.md) | Homework and lecture notes template draft. Reading, REA teardown, evidence log, hardening answer. |
+| [guides/OPERATOR-PRIME-GLOSSARY-DRAFT-v0.1.0.md](guides/OPERATOR-PRIME-GLOSSARY-DRAFT-v0.1.0.md) | Glossary draft. Course terms, plain words. |
+| [plans/OPERATOR-PRIME-SCALING-FUTURE-COURSES-PLAN-DRAFT-v0.1.0.md](plans/OPERATOR-PRIME-SCALING-FUTURE-COURSES-PLAN-DRAFT-v0.1.0.md) | Scaling and future courses plan draft. New courses, new modules, new hardware, year-expansion locks, all as versioned items on HgX's word. |
+| [guides/OPERATOR-PRIME-OPERATOR-PORTFOLIO-GUIDE-DRAFT-v0.1.0.md](guides/OPERATOR-PRIME-OPERATOR-PORTFOLIO-GUIDE-DRAFT-v0.1.0.md) | Operator portfolio guide draft. How a student builds their operator portfolio. |
+| [tools/OPERATOR-PRIME-TOOL-VERSION-LOG-DRAFT-v0.1.0.md](tools/OPERATOR-PRIME-TOOL-VERSION-LOG-DRAFT-v0.1.0.md) | Tool version log draft. Tool, version, command, output, measurement, error, file path per entry. |
+| [dean/INDEX-DRAFT-v0.1.0.md](dean/INDEX-DRAFT-v0.1.0.md) | Dean's package index draft. Indexes all 14 Dean drafts above. |
 
 ### SUPERSEDED / HISTORY — retained, not current
 
@@ -86,6 +101,15 @@ HgX ordered daily, weekly, monthly, everything in the course to be published. **
 - **2.0/3.0 material:** None included. This publication is 1.0 only.
 - **Personal data:** None included. No real names, no Wi-Fi names, no home addresses, no serials, no passwords, no credentials, no live location, no family details, no financial details.
 - **Distribution copy:** REFUSED for the stack catalog, per the standing line. Lab work only, defensive only.
+
+## Dropbox and OneDrive — Dean's package
+
+- **Dropbox:** Academy has uploaded the 30-file Dean's package (14 drafts + index, markdown + PDF) to `/J.A.R.V.I.S./education/course-dean-new-files/` and verified the listing. GitHub is the versioned source of truth; Dropbox holds the same package for sharing.
+- **OneDrive:** GAP — OneDrive has no connector in Muse at this time, so Academy cannot upload directly. The same 30-file package is staged locally at `~/workspace/academy/operator-prime/onedrive-ready/course-dean-new-files/` for upload once OneDrive access is connected. OneDrive is NOT claimed as done until it is actually uploaded and verified.
+
+## Future rule — every new course file
+
+HgX's order, Dean's standing rule: every new or revised course file from now on is versioned (new version, never an overwrite, never a deletion), indexed, sent to the Publishing House for GitHub + course website, filed in Dropbox in a versioned subfolder, and staged OneDrive-ready. The Publishing House reports back with commits and live addresses each time.
 
 ## Licence
 
