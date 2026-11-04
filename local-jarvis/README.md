@@ -5,10 +5,10 @@ drive, with an NVIDIA GPU, an RTX 2060 (about 6GB VRAM). Nothing in this
 folder starts on its own. The orchestrator listens only after you start it,
 and the voice loop is deliberately not auto-started.
 
-The prior Windows build files in this folder are retained for reference;
-the live platform is Kali Linux. Windows is no longer on the internal
-drive. The Windows licence is motherboard-tied; a later reinstall via ISO
-is possible with no product key needed.
+Kali Linux: all tools updated, graphics driver installed, Bluetooth
+working, Wi-Fi working, login working. Windows is no longer on the
+internal drive. The Windows licence is motherboard-tied; a later reinstall
+via ISO is possible with no product key needed.
 
 Passwords in this tree are the placeholder `CHANGE_ME`. User accounts
 are the placeholder `<user>`. Set both on the machine. Do not commit the
@@ -55,18 +55,9 @@ Kali Linux on the internal drive, and an NVIDIA GPU if you want Whisper
 on CUDA. The reference run used an RTX 2060 (about 6GB VRAM). CPU Whisper
 works without the GPU.
 
-**Note on the sections below:** the detailed steps from "Virtual
-environment and requirements" through "Files" describe the prior Windows
-10/11 build, retained in this folder for reference only. Windows paths
-(`C:\Jarvis`, `C:\Users\<user>`), the `py` launcher, `install.ps1`,
-and Windows sound-device and account references in those sections apply
-to that prior build, not to the live Kali Linux platform. The live
-platform record is [`PLATFORM-KALI.md`](PLATFORM-KALI.md).
-
-1. **Python 3.13**, with the `py` launcher
-   ([python.org](https://www.python.org/downloads/)).
+1. **Python 3.13** (Kali package `python3`).
    `voice_gate.py` and `enroll.py` run on this interpreter.
-   `jarvis.py` and `jarvis_voice.py` run in `C:\Jarvis\venv`, also Python 3.13.
+   `jarvis.py` and `jarvis_voice.py` run in `~/Jarvis/venv`, also Python 3.13.
 2. **Ollama** ([ollama.com](https://ollama.com/download)):
 
    ```
@@ -80,22 +71,23 @@ platform record is [`PLATFORM-KALI.md`](PLATFORM-KALI.md).
    - Interface → Main interfaces → check **Web**
    - Interface → Main interfaces → Lua → **Lua HTTP** → set a password
 
-   `vlc_remote.cmd` starts VLC bound to `127.0.0.1:8090`. It does not
+   `vlc_remote.sh` starts VLC bound to `127.0.0.1:8090`. It does not
    contain the password. The password lives in VLC's preferences and in
    `VLC_HTTP_PASSWORD`, and the two must match.
-4. **Piper voice** `en_GB-alan-medium` in `C:\Jarvis\voices`. Download both
+4. **Piper voice** `en_GB-alan-medium` in `~/Jarvis/voices`. Download both
    files into that folder:
 
    - [en_GB-alan-medium.onnx](https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_GB/alan/medium/en_GB-alan-medium.onnx)
    - [en_GB-alan-medium.onnx.json](https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_GB/alan/medium/en_GB-alan-medium.onnx.json)
 
-5. **Optional.** [VoiceMeeter Banana](https://vb-audio.com/Voicemeeter/)
-   if you want the mic mix the reference laptop used. The logon task
-   starts `C:\Program Files (x86)\VB\Voicemeeter\voicemeeterpro.exe`.
-6. **Optional.** [Node.js](https://nodejs.org/) plus `rea-agents` for
-   read-only REA. The orchestrator calls
-   `C:\Program Files\nodejs\npx.cmd -y rea-agents@6.8.0`. No separate
-   install of the package is required beyond Node.
+5. **Optional.** PipeWire audio routing if you want the mic mix the
+   reference laptop used. Kali ships PipeWire by default.
+6. **REA** for read-only reverse engineering. Installed via
+   `npx rea-agents setup` (`rea-agents@6.7.0`). The REA
+   reverse-engineering skill is installed for CLI use. CLI:
+   `npx rea-agents analyze /path/to/app`. Deep analysis uses Ghidra
+   with guided workflows installed. The orchestrator calls REA for
+   local app analysis only.
 
 ## Virtual environment and requirements
 
@@ -103,30 +95,30 @@ Two requirements files, two interpreters:
 
 | File | Interpreter | What it runs |
 |---|---|---|
-| `requirements-voice.txt` | `C:\Jarvis\venv` (Python 3.13) | `jarvis.py`, `jarvis_voice.py` (Whisper, Piper, audio) |
+| `requirements-voice.txt` | `~/Jarvis/venv` (Python 3.13) | `jarvis.py`, `jarvis_voice.py` (Whisper, Piper, audio) |
 | `requirements-orchestrator.txt` | System Python 3.13, and the venv | `voice_gate.py`, `enroll.py` (SpeechBrain). The orchestrator itself is stdlib. |
 
 From this folder:
 
 ```
-powershell -ExecutionPolicy Bypass -File .\install.ps1
+./install.sh
 ```
 
-`install.ps1` is idempotent. It checks the prerequisites above, creates
-`C:\Jarvis` and `C:\Jarvis\venv` when they are missing, and pip-installs
+`install.sh` is idempotent. It checks the prerequisites above, creates
+`~/Jarvis` and `~/Jarvis/venv` when they are missing, and pip-installs
 both requirements files (voice requirements into the venv; orchestrator
-requirements into the venv and into `py -3.13`, because the gate runs
-outside the venv). It copies each package file into `C:\Jarvis` only
+requirements into the venv and into system `python3`, because the gate runs
+outside the venv). It copies each package file into `~/Jarvis` only
 when that filename is not already there, so a later run leaves local
 edits in place. It does not remove files, does not write secrets, and
-does not register scheduled tasks unless you pass `-RegisterTasks`.
+does not register autostart unless you pass `--register-autostart`.
 
 ## Environment variables
 
 The programs read the process environment. They do not load `.env`.
 [`.env.example`](.env.example) lists the names with placeholders only.
-Set them in System Properties, or with `setx` (open a new terminal
-afterwards). Do not commit the real values.
+Set them in `~/.bashrc`, or export them in the terminal before starting.
+Do not commit the real values.
 
 | Variable | Role |
 |---|---|
@@ -148,36 +140,37 @@ out of the requirements file; HTTP works without it.
 
 ## Enrollment and calibration
 
-`voice_gate.py` reads the profile from `C:\Users\<user>\Downloads` and
-the threshold from `C:\Jarvis\voice_gate.json`. Before the first enroll,
+`voice_gate.py` reads the profile from `~/Downloads` and
+the threshold from `~/Jarvis/voice_gate.json`. Before the first enroll,
 edit the installed copies (the copies in git keep the placeholder):
 
-- `C:\Jarvis\voice_gate.py` — set `DL` to your Downloads folder.
-- `C:\Jarvis\jarvis_voice.py` — set `GATE_PY` to the Python 3.13
+- `~/Jarvis/voice_gate.py` — set `DL` to your Downloads folder.
+- `~/Jarvis/jarvis_voice.py` — set `GATE_PY` to the Python 3.13
   executable that has SpeechBrain
-  (`py -3.13 -c "import sys; print(sys.executable)"`).
-- `C:\Jarvis\jarvis.py` — `MIC` and `SPK` are the reference laptop's
-  Maono device names. Change them to this PC's Windows sound devices.
+  (`python3 -c "import sys; print(sys.executable)"`).
+- `~/Jarvis/jarvis.py` — `MIC` and `SPK` are the reference laptop's
+  Maono device names. Change them to this machine's PipeWire/PulseAudio
+  device names (see `pactl list sources` and `pactl list sinks`).
 
 Enrollment records **5 takes** of "hey local jarvis" (3 seconds each),
 embeds them with SpeechBrain ECAPA-TDNN, and writes `profiles.json` in
 the current directory. The first run downloads the ECAPA model into
-`pretrained_models\` under that directory. Run it from the same
+`pretrained_models/` under that directory. Run it from the same
 Downloads folder `voice_gate.py` reads:
 
 ```
-cd C:\Users\<user>\Downloads
-py -3.13 C:\Jarvis\enroll.py
-py -3.13 C:\Jarvis\enroll.py --verify
+cd ~/Downloads
+python3 ~/Jarvis/enroll.py
+python3 ~/Jarvis/enroll.py --verify
 ```
 
 `--verify` records one take and prints similarity to the stored primary.
-`profiles.json`, `take1.wav` … `take5.wav`, and `pretrained_models\`
-stay on this PC.
+`profiles.json`, `take1.wav` … `take5.wav`, and `pretrained_models/`
+stay on this machine.
 
 The gate threshold **starts at 0.45 and is UNCALIBRATED**. Treat 0.45
 as a starting point, not a measured cutoff. `voice_gate.json` says so.
-Score three clips with `py -3.13 C:\Jarvis\voice_gate.py clip.wav`
+Score three clips with `python3 ~/Jarvis/voice_gate.py clip.wav`
 before you change the number:
 
 - your voice, quiet
@@ -191,10 +184,10 @@ below the threshold is ignored, including every unenrolled voice. One
 ## Running and testing
 
 1. Ollama is running.
-2. Start the orchestrator and leave the window open:
+2. Start the orchestrator and leave the terminal open:
 
    ```
-   py -3.13 C:\Jarvis\orchestrator.py
+   python3 ~/Jarvis/orchestrator.py
    ```
 
    Open `http://localhost:8080`. Turns are `POST /jarvis` with
@@ -202,71 +195,60 @@ below the threshold is ignored, including every unenrolled voice. One
 3. For media commands, start VLC:
 
    ```
-   C:\Jarvis\vlc_remote.cmd
+   ~/Jarvis/vlc_remote.sh
    ```
 
-4. One file through the pipeline (reply written to `C:\Jarvis\out\reply.wav`):
+4. One file through the pipeline (reply written to `~/Jarvis/out/reply.wav`):
 
    ```
-   C:\Jarvis\jarvis_voice.cmd test file.wav
+   ~/Jarvis/jarvis_voice.sh test file.wav
    ```
 
 5. Live loop, 5 seconds per listen. Say "stop" to end it:
 
    ```
-   C:\Jarvis\jarvis_voice.cmd loop 5
+   ~/Jarvis/jarvis_voice.sh loop 5
    ```
 
-`jarvis_voice.cmd` is a manual launcher. It is not a login item.
+`jarvis_voice.sh` is a manual launcher. It is not a login item.
 `test file.wav --bypass-gate` still scores the gate and still speaks,
 which is how you hear Piper before enrollment is finished. Without
 `--bypass-gate`, an unenrolled voice is ignored.
 
-`C:\Jarvis\jarvis.cmd` is the direct helper (`ask`, `say`, `listen`,
+`~/Jarvis/jarvis.sh` is the direct helper (`ask`, `say`, `listen`,
 `chat`, VLC) on `qwen2.5:3b`.
 
 ## Optional autostart
 
-The voice loop is deliberately not auto-started. There is no task for it.
+The voice loop is deliberately not auto-started. There is no service for it.
 
-Two optional logon tasks ship in [`tasks/`](tasks/):
+Two optional systemd user units ship in [`units/`](units/):
 
-| File | Task name | What it starts |
+| File | Unit name | What it starts |
 |---|---|---|
-| `tasks/orchestrator.xml` | Jarvis - Orchestrator 8080 | The orchestrator at logon, if port 8080 is not already listening. |
-| `tasks/voicemeeter.xml` | Jarvis - VoiceMeeter Banana | VoiceMeeter Banana at logon. |
+| `units/orchestrator.service` | jarvis-orchestrator | The orchestrator at login, if port 8080 is not already listening. |
+| `units/pipewire-mix.service` | jarvis-pipewire-mix | PipeWire audio routing at login. |
 
-The first `install.ps1` run copies these templates to `C:\Jarvis\tasks\`
-when those filenames are not already there. Edit the **C:\Jarvis\tasks**
-copies. Leave the git copies generic, and do not commit a real SID.
+The first `install.sh` run copies these templates to `~/.config/systemd/user/`
+when those filenames are not already there. Edit the **~/.config/systemd/user**
+copies. Leave the git copies generic, and do not commit a real username.
 
 Replace, in both files:
 
-- `S-1-5-21-CHANGE_ME_USER_SID` with the SID from `whoami /user`
-- `<COMPUTER>\<user>` with this PC and this Windows account
-- in `orchestrator.xml`, the Python executable and the working directory
-  (`C:\Users\<user>\...`)
+- `CHANGE_ME_USER` with your Linux username
+- in `orchestrator.service`, the Python executable and the working directory
+  (`/home/<user>/Jarvis/...`)
 
-The committed files declare UTF-16 and are stored as UTF-8 text so they
-stay readable in git. `install.ps1 -RegisterTasks` reads
-`C:\Jarvis\tasks\*.xml`, registers that text, and does not rewrite the
-files. Import only after the placeholders are gone:
+Enable only after the placeholders are gone:
 
 ```
-powershell -ExecutionPolicy Bypass -File .\install.ps1 -RegisterTasks
+systemctl --user enable jarvis-orchestrator.service
+systemctl --user start jarvis-orchestrator.service
 ```
 
-The script refuses `-RegisterTasks` while `CHANGE_ME`, `<user>`,
-`<COMPUTER>`, or `CHANGE_ME_USER_SID` is still in either file, and it
-registers nothing in that case. It never registers the voice loop.
-
-To import with `schtasks` instead, re-save the edited XML as UTF-16 LE
-and then:
-
-```
-schtasks /Create /TN "Jarvis - Orchestrator 8080" /XML C:\Jarvis\tasks\orchestrator.xml /F
-schtasks /Create /TN "Jarvis - VoiceMeeter Banana" /XML C:\Jarvis\tasks\voicemeeter.xml /F
-```
+The script refuses `--register-autostart` while `CHANGE_ME` or `<user>`
+is still in either file, and it registers nothing in that case. It never
+registers the voice loop.
 
 ## Security
 
@@ -277,7 +259,7 @@ refused.
 The voice path, VLC, and Ollama are bound to localhost. VLC's HTTP
 remote is `127.0.0.1:8090`. Ollama is `127.0.0.1:11434`. The voice loop
 posts only to `http://127.0.0.1:8080/jarvis`. The orchestrator listens
-on port 8080 on the local interfaces of the PC that runs it, so a watch
+on port 8080 on the local interfaces of the machine that runs it, so a watch
 on the same network can reach it. The address it prints is the
 placeholder `<this-laptop's-LAN-IP>` unless you set `JARVIS_LAN_IP`.
 This tree does not contain a public IP.
@@ -289,21 +271,25 @@ local too. See the root `.gitignore`.
 
 ## Troubleshooting
 
-**`cublas64_12.dll` is missing.** Whisper tried the CUDA 12 runtime and
-did not find it. Install the CUDA 12 runtime, or leave
-`JARVIS_WHISPER_DEVICE` unset so `jarvis_voice.py` loads `small.en` on
-CPU (`int8`). Setting `JARVIS_WHISPER_DEVICE=cuda` asks for the GPU
-build on purpose. `jarvis.py` tries CUDA first and falls back to CPU
-when that load fails.
+**CUDA runtime is missing.** Whisper tried the CUDA 12 runtime and
+did not find it. Install the CUDA 12 runtime (Kali package
+`nvidia-cuda-toolkit`), or leave `JARVIS_WHISPER_DEVICE` unset so
+`jarvis_voice.py` loads `small.en` on CPU (`int8`). Setting
+`JARVIS_WHISPER_DEVICE=cuda` asks for the GPU build on purpose.
+`jarvis.py` tries CUDA first and falls back to CPU when that load fails.
 
 **`qwen3:8b` feels slow.** Thinking is off by default. Every orchestrator
 call sends `"think": false`, so the wait is the 8B model generating on
 this GPU (the reference card is an RTX 2060 6GB), not a hidden reasoning
 pass. `jarvis.py` uses the smaller `qwen2.5:3b` for `ask` and `chat`.
 
-**VLC is unreachable.** Start `C:\Jarvis\vlc_remote.cmd`. That binds the
+**VLC is unreachable.** Start `~/Jarvis/vlc_remote.sh`. That binds the
 HTTP interface to `127.0.0.1:8090`. If VLC answers 401, `VLC_HTTP_PASSWORD`
 does not match the password in VLC's Lua HTTP preferences.
+
+**PipeWire device names changed.** Run `pactl list sources` and
+`pactl list sinks` to see current device names, then update `MIC` and
+`SPK` in `~/Jarvis/jarvis.py` to match.
 
 ## Files
 
@@ -311,15 +297,27 @@ does not match the password in VLC's Lua HTTP preferences.
 |---|---|
 | `orchestrator.py` | HTTP brain on port **8080**. Stdlib only. |
 | `jarvis_voice.py` | Mic, Whisper, gate, orchestrator, Piper. Manual. |
-| `jarvis_voice.cmd` | Launches the voice loop with `C:\Jarvis\venv`. |
+| `jarvis_voice.sh` | Launches the voice loop with `~/Jarvis/venv`. |
 | `jarvis.py` | Direct helper. Model `JARVIS_MODEL`, default `qwen2.5:3b`. |
-| `jarvis.cmd` | Launches `jarvis.py` with the venv. |
+| `jarvis.sh` | Launches `jarvis.py` with the venv. |
 | `enroll.py` | Records 5 takes and writes `profiles.json`. |
 | `voice_gate.py`, `voice_gate.json` | Speaker check. Threshold 0.45, UNCALIBRATED. |
-| `vlc_remote.cmd` | VLC HTTP on `127.0.0.1:8090`. No password in the file. |
+| `vlc_remote.sh` | VLC HTTP on `127.0.0.1:8090`. No password in the file. |
 | `requirements-voice.txt` | Venv packages. |
 | `requirements-orchestrator.txt` | SpeechBrain stack for the gate and enrollment. |
-| `install.ps1` | Prerequisite check, venv, pip, next steps. |
+| `install.sh` | Prerequisite check, venv, pip, next steps. |
 | `.env.example` | Placeholder names only. |
-| `tasks/orchestrator.xml` | Optional logon task for the orchestrator. |
-| `tasks/voicemeeter.xml` | Optional logon task for VoiceMeeter Banana. |
+| `units/orchestrator.service` | Optional login service for the orchestrator. |
+| `units/pipewire-mix.service` | Optional login service for PipeWire routing. |
+
+## History note
+
+The prior Windows build of this guide (with `install.ps1`, `C:\Jarvis`
+paths, Windows scheduled tasks, and VoiceMeeter) is preserved in git
+history. It was removed from this file on HgX's explicit word
+(2026-11-04) and rewritten for Kali Linux. The live platform is Kali
+Linux; the Windows build is not the current platform.
+
+---
+
+@basementjarvisu · basementjarvisunleashed@gmail.com

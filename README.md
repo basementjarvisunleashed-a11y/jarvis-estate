@@ -114,7 +114,7 @@ The eight skill playbooks under [`skills/`](skills/) stay the written methods. T
 
 The laptop platform is [`local-jarvis/`](local-jarvis/README.md). It does not start on its own. The voice loop is not a login item. The orchestrator listens on port 8080 only after you start it.
 
-**Platform as of 2026-11-04: Kali Linux on the internal drive.** The laptop runs Kali Linux with all tools updated, graphics driver installed, Bluetooth and Wi-Fi working, and login working. Windows is no longer on the internal drive. The Windows licence is motherboard-tied; a later reinstall via ISO is possible with no product key needed. The prior Windows build files remain in this tree for reference; the live platform is Kali Linux. See [`local-jarvis/PLATFORM-KALI.md`](local-jarvis/PLATFORM-KALI.md) for the current platform record.
+**Platform as of 2026-11-04: Kali Linux on the internal drive.** The laptop runs Kali Linux with all tools updated, graphics driver installed, Bluetooth and Wi-Fi working, and login working. Windows is no longer on the internal drive. The Windows licence is motherboard-tied; a later reinstall via ISO is possible with no product key needed. The local-jarvis guide is rewritten for Kali Linux; the prior Windows guide is preserved in git history. The live platform is Kali Linux. See [`local-jarvis/PLATFORM-KALI.md`](local-jarvis/PLATFORM-KALI.md) for the current platform record.
 
 Router v2.2, the 50 second voice budget, the 60 second client wait, ComfyUI v0.43.0, and the freellmapi fallback are live on the owner's laptop. freellmapi is the fallback only.
 
@@ -137,7 +137,7 @@ Full steps, Piper voice files, VLC, and troubleshooting are in [`local-jarvis/RE
 |---|---|
 | [`VERSION`](VERSION) | Estate version. **1.2.1**. 1.2.0 was the 2026-10-27 operations log. The prior release tag is `v1.0.0`. |
 | [`docs/logs/2026-10-27.md`](docs/logs/2026-10-27.md) | Operations log for 2026-10-27. |
-| [`local-jarvis/`](local-jarvis/README.md) | Laptop platform: Kali Linux build (live 2026-11-04) with voice loop, orchestrator, and REA. Prior Windows build files retained for reference. |
+| [`local-jarvis/`](local-jarvis/README.md) | Laptop platform: Kali Linux build (live 2026-11-04) with voice loop, orchestrator, and REA. Guide rewritten for Kali; prior Windows guide in git history. |
 | [`skills/`](skills/) | Eight role playbooks. Duties do not cross. |
 | [`watchtower/`](watchtower/README.md) | Stdlib monitor and [`STATUS.md`](watchtower/STATUS.md). Paused is a decision, not an outage. |
 | [`papers/`](papers/README.md) | White-paper index. Current versions and the Dropbox URLs. |
