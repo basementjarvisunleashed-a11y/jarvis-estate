@@ -18,6 +18,11 @@ See [`PLATFORM-KALI.md`](PLATFORM-KALI.md) for the current platform record:
 Kali Linux with all tools updated, graphics driver installed, Bluetooth
 and Wi-Fi working, login working, and REA ready for local app analysis.
 
+Run the whole system from this repo alone — start at
+[`SETUP.md`](SETUP.md): clone, install in order, verify. It lists every
+component, the models by name and tag only (no weights shipped), and what
+is still to land.
+
 ## Architecture
 
 ```

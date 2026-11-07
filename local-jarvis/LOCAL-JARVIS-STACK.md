@@ -132,6 +132,7 @@ Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient o
 - This file: `local-jarvis/LOCAL-JARVIS-STACK.md` — the consolidated stack record.
 - Platform record: `local-jarvis/PLATFORM-KALI.md` — the Kali + REA build record.
 - Full guide: `local-jarvis/README.md` — install, voice loop, orchestrator, troubleshooting.
+- Run it yourself: `local-jarvis/SETUP.md` — the whole system from this repo alone, in order.
 - Course stacks: `course/syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.1.md` — the seventeen stacks in course canon.
 - Course site: `course/` — the platform section lists the stacks for students.
 
