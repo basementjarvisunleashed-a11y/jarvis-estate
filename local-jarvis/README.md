@@ -328,6 +328,7 @@ does not match the password in VLC's Lua HTTP preferences.
 | `autostart/` | The autostart launchers (router, orchestrator, dashboard, keep-alive). |
 | `ipad-kali-plan.md` | Kali on the iPad plan. PARKED; downloads done, build not started. |
 | `transcripts/` | The model-response archive: every reply from the 9B, the 27B and REA, scrubbed, one file per day. Capture starts 2026-11-07 ~00:31 ET. |
+| `RECAP-2026-11-06.md` | The full day 2026-11-06 into 2026-11-07, state as of ~00:35 ET — done, in progress, parked, standing rules. |
 | `STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands. |
 
 ## History note

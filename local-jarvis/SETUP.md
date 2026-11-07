@@ -41,6 +41,7 @@ on your own machine. Do not commit the real values.
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
 | Current state snapshot | `local-jarvis/STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands | — |
 | Model responses | `local-jarvis/transcripts/` | The transcript archive: every model response (9B, 27B, REA), scrubbed, one file per day | — |
+| Day's recap | `local-jarvis/RECAP-2026-11-06.md` | The full day 2026-11-06 into 2026-11-07, state as of ~00:35 ET — done, in progress, parked, standing rules | — |
 | Autostart launchers | `local-jarvis/autostart/` | Live launchers (23:36 snapshot; keep-alive v2 superseded the ping at 23:46) | — |
 | C270 captures | `local-jarvis/c270/` | Descriptors, usbmon, 9B summary, rainbow clip | — |
 | Voice-loop patch v5 | `local-jarvis/voice-loop/` | Built, applied on the reference machine | — |
