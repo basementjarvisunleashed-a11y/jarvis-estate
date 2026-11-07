@@ -36,7 +36,8 @@ on your own machine. Do not commit the real values.
 | REA (reverse engineering) | `local-jarvis/LOCAL-JARVIS-STACK.md` §3 | Built | CLI |
 | Dashboard v7 | `local-jarvis/dashboard/v7/` | Previous dashboard, kept as history | 8899 |
 | Dashboard v8 | `local-jarvis/dashboard/v8/` | Previous dashboard, kept as history (live until 2026-11-07 ~00:18 ET) | 8899 |
-| Dashboard v9 | `local-jarvis/dashboard/v9/` | LIVE on the reference machine since 2026-11-07 ~00:18 ET (v8 backed up) | 8899 |
+| Dashboard v9 | `local-jarvis/dashboard/v9/` | Previous dashboard, kept as history (live until 2026-11-07 ~00:45 ET) | 8899 |
+| Dashboard v10 | `local-jarvis/dashboard/v10/` | LIVE on the reference machine since 2026-11-07 ~00:45 ET (v9 backed up) — two media roots: the iPad Pro MP4 folder primary, the drive secondary | 8899 |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
 | Current state snapshot | `local-jarvis/STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands | — |
@@ -219,12 +220,21 @@ workflows. Local app analysis only — own devices and own targets only,
 consenting adults, controlled lab only, spine SEE → DOCUMENT → LOG →
 PREVENT. See `LOCAL-JARVIS-STACK.md` §3.
 
-### 6. Dashboard v9 (port 8899)
+### 6. Dashboard v10 (port 8899)
 
-**v9 is live** on the reference machine since 2026-11-07 ~00:18 ET
-(applied from `local-jarvis/dashboard/v9/`, v8 backed up to
-`dashboard.bak-v8`). Install it the same way below, from the v9
-folder. v8 and v7 stay in the repo as history.
+**v10 is live** on the reference machine since 2026-11-07 ~00:45 ET
+(applied from `local-jarvis/dashboard/v10/`, v9 backed up to
+`dashboard.bak-v9`). Install it the same way below, from the v10
+folder. v9, v8, and v7 stay in the repo as history.
+
+What changed vs v9: two media roots, primary first. A local folder of
+2,785 H.264/AAC MP4 files (239 GB, 24 shows) is the primary media
+source for VLC and in-browser playback; the drive is secondary, only
+for shows not in that folder. One entry per show, MP4 version wins, no
+duplicates; `/api/media` reports the roots. If the MP4 folder is
+missing, the drive alone carries the list. First media call after a
+restart may be slow (the real folder was tested only on a small copy),
+then cached.
 
 What it is: the always-on screen — GPU, temperatures, RAM, what's
 running, what each model is doing, local weather, Wi-Fi, REA status,
@@ -234,7 +244,7 @@ conversation feed, and a live webcam panel.
 
 ```bash
 # from the repo:
-cp -r local-jarvis/dashboard/v9 ~/tonight-scripts/dashboard/   # or any folder
+cp -r local-jarvis/dashboard/v10 ~/tonight-scripts/dashboard/   # or any folder
 cd ~/tonight-scripts/dashboard/
 chmod +x restart-dashboard-tailnet.sh
 ./restart-dashboard-tailnet.sh
@@ -331,7 +341,7 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 | 8080 | Orchestrator (voice-loop brain) |
 | 8090 | VLC HTTP remote |
 | 8188 | ComfyUI (only in COMFY mode) |
-| 8899 | Dashboard v9 (live; v8/v7 history) |
+| 8899 | Dashboard v10 (live; v9/v8/v7 history) |
 | 11434 | Ollama |
 | 11435 | Router |
 | 11436 | GPU orchestrator |

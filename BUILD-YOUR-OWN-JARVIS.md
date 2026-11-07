@@ -81,12 +81,13 @@ ready to be heard.
 
 ### 6. The screen — the dashboard (port 8899)
 
-`local-jarvis/dashboard/v9/` — the current dashboard, live on the
+`local-jarvis/dashboard/v10/` — the current dashboard, live on the
 reference machine. One screen, no scroll: GPU, temperatures, RAM,
 what's running, what each model is doing, REA status, the media tile
-(the shows on your drive, played in the tile or in VLC), the webcam
-beside the video player, and the live two-way conversation feed. Served
-on the tailnet so your phone sees it too.
+(two media roots — the iPad Pro MP4 folder primary, the drive
+secondary — played in the tile or in VLC), the webcam beside the video
+player, and the live two-way conversation feed. Served on the tailnet
+so your phone sees it too.
 
 ### 7. REA — reverse engineering (own devices only)
 

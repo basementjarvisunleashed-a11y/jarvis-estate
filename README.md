@@ -60,8 +60,10 @@ orchestrator is **DEPLOYED** (2026-11-06 ~23:50 ET): router wired, autostart
 in, keep-alive v2 in, and the swap loop proven end to end (ComfyUI freed
 the card to 132 MiB; one easy call brought the 9B back, both brains
 resident; midnight keep-alive confirmed 2026-11-07 00:02). Dashboard
-**v9 is LIVE** on the Acer since 2026-11-07 ~00:18 ET (visual polish,
-webcam beside the video player; v8 and v7 kept as history). The
+**v10 is LIVE** on the Acer since 2026-11-07 ~00:45 ET (two media
+roots, primary first: the iPad Pro MP4 folder for VLC and in-browser
+playback, the drive secondary; v9 backed up; v8 and v7 kept as
+history). The
 run-it-yourself guide ([`local-jarvis/SETUP.md`](local-jarvis/SETUP.md))
 now carries the full reference machine, and the dated snapshot
 [`local-jarvis/STATE-2026-11-07.md`](local-jarvis/STATE-2026-11-07.md)

@@ -318,7 +318,8 @@ does not match the password in VLC's Lua HTTP preferences.
 | `units/pipewire-mix.service` | Optional login service for PipeWire routing. |
 | `dashboard/v7/` | The previous dashboard, kept as history. |
 | `dashboard/v8/` | The previous dashboard, kept as history (live until 2026-11-07 ~00:18 ET). |
-| `dashboard/v9/` | Visual polish — deeper dark, arc-reactor glow, cleaner type, the webcam beside the video player. LIVE on the Acer since 2026-11-07 ~00:18 ET. |
+| `dashboard/v9/` | The previous dashboard, kept as history (live until 2026-11-07 ~00:45 ET). |
+| `dashboard/v10/` | Two media roots, primary first: the iPad Pro MP4 folder for VLC and in-browser playback, the drive secondary. LIVE on the Acer since 2026-11-07 ~00:45 ET. |
 | `gpu-orchestrator/` | GPU brain manager (9B VRAM / 27B RAM). **DEPLOYED 2026-11-06, loop proven, keep-alive v2** (midnight run confirmed 2026-11-07 00:02). |
 | `router/` | The little router (`04-little-router.py`, port 11435) + its design record (`03-router.md`, `PLAN.md`, `TONIGHT-RUNBOOK-2026-11-05.md`). |
 | `scripts/` | Acer setup scripts in run order: drive mount + inventory, the 2026-11-05 consolidation scripts, autostart, keep-alive, router tests, brain inventory + backup. |
