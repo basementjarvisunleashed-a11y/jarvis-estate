@@ -31,9 +31,15 @@ nothing trimmed: the full reply, as the model gave it.**
   logged decision lines (timestamp, route, model, prompt character
   count) — no prompt text, no response text. Past responses that were
   never logged in full can't be recovered; the archive starts from now.
-- First batch (whatever was already logged: router.log,
-  rea-history.jsonl, REA evidence files) lands here when the REA room
-  sends it.
+- **First batch landed: [`2026-11-07.md`](2026-11-07.md)** — the
+  recoverable past (seven router decision records, the orchestrator
+  access log with two incidents, one REA output on evidence workflows).
+  `router-responses.jsonl` was missing from the batch (the tee was not
+  installed yet); `actions.log`, `verdicts.log`, and `rea-history.jsonl`
+  were not found on the Acer.
+- **The router response tee is installed and live** (verified by a test
+  call, 2026-11-07). Every router call is now captured in full to
+  `router-responses.jsonl` — future batches carry the full responses.
 
 ---
 
