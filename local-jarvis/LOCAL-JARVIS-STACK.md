@@ -51,21 +51,26 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
   temperatures, RAM, what's running, what each model is doing, local weather,
   Wi-Fi, REA status, models online/offline, last things REA did, media tile,
   live two-way conversation feed.
-- **v7** is the previous dashboard, applied and live until 2026-11-07
-  ~00:00 ET. 18 issues fixed over v6. Kept in the repo as history.
-  Files: `local-jarvis/dashboard/v7/` (scrubbed published copy — one folder
-  name replaced with the placeholder `ownerlaptop`; rename it to match your
-  own drive).
-- **v8 is the current dashboard, LIVE on the Acer (2026-11-07 ~00:00
-  ET):** one screen, no scroll, pinned shows + Recent, honest health
-  dots, the playback fault fixed. Applied from the published copy
-  (`local-jarvis/dashboard/v8/`), v7 backed up to `dashboard.bak-v7`.
-  Confirmed live by photos 2026-11-07 ~00:01 ET (Router online, honest
-  dots, one screen, sports compact, webcam live).
+- **v8** is the previous dashboard, applied and live until 2026-11-07
+  ~00:18 ET. Kept in the repo as history.
+  Files: `local-jarvis/dashboard/v8/`.
+- **v9 is the current dashboard, LIVE on the Acer (2026-11-07 ~00:18
+  ET):** visual polish only — deeper dark, arc-reactor glow, cleaner
+  type, room to breathe — and the webcam now sits in the MEDIA tile,
+  directly beside the video player (no more floating webcam tile).
+  Applied from the published copy (`local-jarvis/dashboard/v9/`), v8
+  backed up to `dashboard.bak-v8`. Confirmed live by terminal output
+  (`/api/status` 200, GPU 34°C, media mounted).
 - v8 (redesign — one screen, no scrolling) is built, verified
   (2026-11-06 ~23:54 ET, 7 directives + 5 playback fixes, API 28/28,
   layout 31/31), PUBLISHED here (`local-jarvis/dashboard/v8/`) and
-  APPLIED to the Acer (2026-11-07 ~00:00 ET, v7 backed up).
+  APPLIED to the Acer (2026-11-07 ~00:00 ET, v7 backed up). Superseded
+  by v9 as the live dashboard.
+- v9 (visual polish — deeper dark, arc-reactor glow, cleaner type, the
+  webcam beside the video player) is built, verified (API 28/28, layout
+  35/35), PUBLISHED here (`local-jarvis/dashboard/v9/`) and APPLIED to
+  the Acer (2026-11-07 ~00:18 ET, v8 backed up). **v9 is the live
+  dashboard.**
 
 **GPU orchestrator — DEPLOYED on the Acer (2026-11-06 ~23:50 ET):**
 

@@ -35,7 +35,8 @@ on your own machine. Do not commit the real values.
 | Router (easy → 9B, hard → 27B) | `local-jarvis/router/04-little-router.py` | Live on the reference machine (23:36 snapshot; integration wiring post-snapshot, see `router/README.md`) | 11435 |
 | REA (reverse engineering) | `local-jarvis/LOCAL-JARVIS-STACK.md` §3 | Built | CLI |
 | Dashboard v7 | `local-jarvis/dashboard/v7/` | Previous dashboard, kept as history | 8899 |
-| Dashboard v8 | `local-jarvis/dashboard/v8/` | LIVE on the reference machine since 2026-11-07 ~00:00 ET (v7 backed up) | 8899 |
+| Dashboard v8 | `local-jarvis/dashboard/v8/` | Previous dashboard, kept as history (live until 2026-11-07 ~00:18 ET) | 8899 |
+| Dashboard v9 | `local-jarvis/dashboard/v9/` | LIVE on the reference machine since 2026-11-07 ~00:18 ET (v8 backed up) | 8899 |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
 | Current state snapshot | `local-jarvis/STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands | — |
@@ -216,12 +217,12 @@ workflows. Local app analysis only — own devices and own targets only,
 consenting adults, controlled lab only, spine SEE → DOCUMENT → LOG →
 PREVENT. See `LOCAL-JARVIS-STACK.md` §3.
 
-### 6. Dashboard v8 (port 8899)
+### 6. Dashboard v9 (port 8899)
 
-**v8 is live** on the reference machine since 2026-11-07 ~00:00 ET
-(applied from `local-jarvis/dashboard/v8/`, v7 backed up to
-`dashboard.bak-v7`). Install it the same way below, from the v8
-folder. v7 stays in the repo as history.
+**v9 is live** on the reference machine since 2026-11-07 ~00:18 ET
+(applied from `local-jarvis/dashboard/v9/`, v8 backed up to
+`dashboard.bak-v8`). Install it the same way below, from the v9
+folder. v8 and v7 stay in the repo as history.
 
 What it is: the always-on screen — GPU, temperatures, RAM, what's
 running, what each model is doing, local weather, Wi-Fi, REA status,
@@ -231,7 +232,7 @@ conversation feed, and a live webcam panel.
 
 ```bash
 # from the repo:
-cp -r local-jarvis/dashboard/v8 ~/tonight-scripts/dashboard/   # or any folder
+cp -r local-jarvis/dashboard/v9 ~/tonight-scripts/dashboard/   # or any folder
 cd ~/tonight-scripts/dashboard/
 chmod +x restart-dashboard-tailnet.sh
 ./restart-dashboard-tailnet.sh
@@ -251,7 +252,7 @@ folder name in the published copy is a placeholder (`ownerlaptop` in
 backup folder. The media endpoints have no password by design — the
 dashboard is meant to be reachable over the private tailnet only.
 
-Checks (from `dashboard/v8/README-FIRST.txt`): the clock ticks every
+Checks (from `dashboard/v9/README-FIRST.txt`): the clock ticks every
 second; the shows list episodes; Sports, Tailscale and Health tiles are
 filled; the webcam panel shows a LIVE feed. Stream check:
 `curl -s -o /dev/null -w "%{http_code}\n" --max-time 15
@@ -328,7 +329,7 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 | 8080 | Orchestrator (voice-loop brain) |
 | 8090 | VLC HTTP remote |
 | 8188 | ComfyUI (only in COMFY mode) |
-| 8899 | Dashboard v8 (live; v7 history) |
+| 8899 | Dashboard v9 (live; v8/v7 history) |
 | 11434 | Ollama |
 | 11435 | Router |
 | 11436 | GPU orchestrator |
