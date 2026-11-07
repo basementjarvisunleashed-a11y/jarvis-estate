@@ -6,7 +6,9 @@ Your own Jarvis is a local, private personal intelligence that lives on
 your machine: two local brains, one router, a voice, a screen, and REA
 (reverse engineering). Nothing leaves the house unless you choose it.
 This repository is the whole build. The course teaches you to operate
-it. The website is the public face.
+it. The website is the public face. The guide is also published as a
+full page on the website:
+[build-your-own-jarvis/](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/build-your-own-jarvis/).
 
 ## The three things
 

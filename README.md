@@ -43,7 +43,9 @@ your machine: two local brains, one router, a voice, a screen, and REA.
 Nothing leaves the house unless you choose it. The how-to is
 [`BUILD-YOUR-OWN-JARVIS.md`](BUILD-YOUR-OWN-JARVIS.md) — the course,
 the build, and the website, in order — and the run-it-yourself guide is
-[`local-jarvis/SETUP.md`](local-jarvis/SETUP.md).
+[`local-jarvis/SETUP.md`](local-jarvis/SETUP.md). The guide is also a
+full page on the website:
+[build-your-own-jarvis/](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/build-your-own-jarvis/).
 
 ## Recent
 
