@@ -1,9 +1,10 @@
 # Local Jarvis
 
 Laptop voice stack. Platform as of 2026-11-04: Kali Linux on the internal
-drive, with an NVIDIA GPU, an RTX 2060 (about 6GB VRAM). Nothing in this
-folder starts on its own. The orchestrator listens only after you start it,
-and the voice loop is deliberately not auto-started.
+drive, with an NVIDIA GPU, an RTX 2060 (about 6GB VRAM). On the
+reference machine the services autostart (router, orchestrator,
+dashboard — see [`SETUP.md`](SETUP.md)); the voice loop itself is
+deliberately not auto-started.
 
 Kali Linux: all tools updated, graphics driver installed, Bluetooth
 working, Wi-Fi working, login working. Windows is no longer on the
@@ -315,9 +316,17 @@ does not match the password in VLC's Lua HTTP preferences.
 | `.env.example` | Placeholder names only. |
 | `units/orchestrator.service` | Optional login service for the orchestrator. |
 | `units/pipewire-mix.service` | Optional login service for PipeWire routing. |
-| `dashboard/v7/` | Always-on dashboard, port **8899**. v7 live on the Acer (scrubbed copy). |
-| `dashboard/v8/` | The redesign (one screen, no scroll, pinned + Recent, honest dots, playback fault fixed). Published here, NOT applied to the Acer yet — v7 stays live until HgX says so. |
-| `gpu-orchestrator/` | GPU brain manager (9B VRAM / 27B RAM). Built, verified, not deployed. |
+| `dashboard/v7/` | The previous dashboard, kept as history. |
+| `dashboard/v8/` | The redesign (one screen, no scroll, pinned + Recent, honest dots, playback fault fixed). LIVE on the Acer since 2026-11-07 ~00:00 ET. |
+| `gpu-orchestrator/` | GPU brain manager (9B VRAM / 27B RAM). **DEPLOYED 2026-11-06, loop proven, keep-alive v2** (midnight run confirmed 2026-11-07 00:02). |
+| `router/` | The little router (`04-little-router.py`, port 11435) + its design record (`03-router.md`, `PLAN.md`, `TONIGHT-RUNBOOK-2026-11-05.md`). |
+| `scripts/` | Acer setup scripts in run order: drive mount + inventory, the 2026-11-05 consolidation scripts, autostart, keep-alive, router tests, brain inventory + backup. |
+| `plans/` | The design plans behind the build (dashboard, drive clean-out, C270 teardown, REA bench shopping list), each with a dated status note. |
+| `pi500/` | The Raspberry Pi 500+ rig: top 10, software stack, accessories. Ordered and paid for 2026-11-05; role still to be decided. |
+| `c270/` | The Logitech C270 enumeration, captures and the rainbow clip. |
+| `autostart/` | The autostart launchers (router, orchestrator, dashboard, keep-alive). |
+| `ipad-kali-plan.md` | Kali on the iPad plan. PARKED; downloads done, build not started. |
+| `STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands. |
 
 ## History note
 

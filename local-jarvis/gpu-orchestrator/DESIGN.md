@@ -295,7 +295,8 @@ PASS/FAIL per scenario and exits non-zero if anything fails.
 5. Loop proven: acquire `comfy` → 9B parked, ComfyUI up (HTTP 200),
    VRAM 132 of 6,144; one easy call → 9B back, both brains resident,
    VRAM 4,830, mode `llm`.
-6. It just happens.
+6. It just happens. Midnight run confirmed: 2026-11-07 00:02:00, v2
+   pinged both brains (mode `llm`).
 
 ## Open questions and limits
 

@@ -51,15 +51,21 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
   temperatures, RAM, what's running, what each model is doing, local weather,
   Wi-Fi, REA status, models online/offline, last things REA did, media tile,
   live two-way conversation feed.
-- **v7** is the current dashboard, applied and live. 18 issues fixed over v6.
+- **v7** is the previous dashboard, applied and live until 2026-11-07
+  ~00:00 ET. 18 issues fixed over v6. Kept in the repo as history.
   Files: `local-jarvis/dashboard/v7/` (scrubbed published copy — one folder
   name replaced with the placeholder `ownerlaptop`; rename it to match your
   own drive).
+- **v8 is the current dashboard, LIVE on the Acer (2026-11-07 ~00:00
+  ET):** one screen, no scroll, pinned shows + Recent, honest health
+  dots, the playback fault fixed. Applied from the published copy
+  (`local-jarvis/dashboard/v8/`), v7 backed up to `dashboard.bak-v7`.
+  Confirmed live by photos 2026-11-07 ~00:01 ET (Router online, honest
+  dots, one screen, sports compact, webcam live).
 - v8 (redesign — one screen, no scrolling) is built, verified
   (2026-11-06 ~23:54 ET, 7 directives + 5 playback fixes, API 28/28,
-  layout 31/31) and PUBLISHED here (`local-jarvis/dashboard/v8/`) — not
-  applied to the Acer; v7 stays the live dashboard until HgX says to
-  apply v8.
+  layout 31/31), PUBLISHED here (`local-jarvis/dashboard/v8/`) and
+  APPLIED to the Acer (2026-11-07 ~00:00 ET, v7 backed up).
 
 **GPU orchestrator — DEPLOYED on the Acer (2026-11-06 ~23:50 ET):**
 
@@ -137,6 +143,9 @@ Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient o
 ## 5. Where this document lives
 
 - This file: `local-jarvis/LOCAL-JARVIS-STACK.md` — the consolidated stack record.
+- Current state snapshot: `local-jarvis/STATE-2026-11-07.md` — the exact moment, 2026-11-07 ~00:10 ET.
+- Build plans: `local-jarvis/plans/` — the design records (dashboard, drive clean-out, C270 teardown, REA bench list).
+- Pi 500+ rig: `local-jarvis/pi500/` — top 10, software stack, accessories (ordered + paid 2026-11-05).
 - Platform record: `local-jarvis/PLATFORM-KALI.md` — the Kali + REA build record.
 - Full guide: `local-jarvis/README.md` — install, voice loop, orchestrator, troubleshooting.
 - Run it yourself: `local-jarvis/SETUP.md` — the whole system from this repo alone, in order.

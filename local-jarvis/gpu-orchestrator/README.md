@@ -9,7 +9,8 @@ the service answers on :11436, the keep-alive is v2, and the loop is
 proven end to end: an acquire for ComfyUI parked the 9B and freed the
 card to 132 MiB of 6,144 with ComfyUI up; one easy router call brought
 the 9B straight back and both brains were resident again (VRAM 4,830).
-See `DESIGN.md` → "Deployed 2026-11-06".
+Midnight run confirmed: 2026-11-07 00:02:00, v2 pinged both brains
+(mode `llm`). See `DESIGN.md` → "Deployed 2026-11-06".
 
 ## Files
 

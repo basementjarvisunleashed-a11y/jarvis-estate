@@ -1,5 +1,18 @@
 # Kali on iPad — the plan (HgX approved 2026-11-06 ~14:03 ET)
 
+**STATUS 2026-11-07 ~00:10 ET — PARKED, downloads done, build NOT
+started.** Parked on HgX's order 2026-11-06 22:02 ET. Downloads DONE on
+the Acer (`~/Downloads/`): UTM.ipa v5.0.8 (150,556,413 bytes), Kali
+**2026.3** ARM64 installer ISO (4,051,513,344 bytes, SHA256
+`c4a7f9bf3a0ff07c8263fe9e9b0edba0cc3d9b408f1d8f06c066df0afce23072`,
+matches the official 2026.3 SHA256SUMS), StikDebug v3.2.0 (16,818,331
+bytes). Still to fetch: iloader (from https://sidestore.io/ in a
+browser), LocalDevVPN v1.3.0 (App Store, on the iPad). **Use Kali
+2026.3, not the 2025.4 named in Step 3 below** — the plan was written
+before the download, and 2026.3 is what was fetched and verified.
+iPhone/iPad dashboard playback is PARKED under the same order. The rest
+of this plan stands as written.
+
 **The iPad:** iPad Pro 11" 3rd gen (M1), model A2459, 1TB, 16GB RAM, iPadOS 26.6.2, 433 GB free.
 **The verdict:** TrollStore is IMPOSSIBLE (26.6.2 >> 17.0 ceiling). Route = SideStore + UTM.ipa (JIT via StikDebug) + Kali ARM64.
 **The goal:** pocket REA lab + Jarvis — Ghidra, rea-agents, little Qwen (3B) in the VM; Acer's 9B/27B brains over Tailscale.

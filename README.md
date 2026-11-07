@@ -46,10 +46,18 @@ and published under [`local-jarvis/`](local-jarvis/). The GPU
 orchestrator is **DEPLOYED** (2026-11-06 ~23:50 ET): router wired, autostart
 in, keep-alive v2 in, and the swap loop proven end to end (ComfyUI freed
 the card to 132 MiB; one easy call brought the 9B back, both brains
-resident). The run-it-yourself guide ([`local-jarvis/SETUP.md`](local-jarvis/SETUP.md))
-now carries the full reference machine. Still to land: the iPad Kali
-downloads (sources only, never the installers) and dashboard v8 — built
-and verified, awaiting HgX's word, not applied, not published.
+resident; midnight keep-alive confirmed 2026-11-07 00:02). Dashboard
+**v8 is LIVE** on the Acer since 2026-11-07 ~00:00 ET (v7 kept as
+history). The run-it-yourself guide ([`local-jarvis/SETUP.md`](local-jarvis/SETUP.md))
+now carries the full reference machine, and the dated snapshot
+[`local-jarvis/STATE-2026-11-07.md`](local-jarvis/STATE-2026-11-07.md)
+is the exact moment as of 2026-11-07 ~00:10 ET — the whole system, as
+it stands. The build plans, the Pi 500+ rig docs, the router design
+record and the 2026-11-05 consolidation scripts are all published
+alongside, scrubbed. Still to land: the iPad Kali downloads are done
+(UTM 5.0.8, Kali 2026.3 ISO + SHA256, StikDebug 3.2.0) with the build
+PARKED, and dashboard v9 is being built (visual polish + webcam beside
+the VLC player).
 
 ### 2026-11-04 — the Academy day (Estate 1.2.1)
 

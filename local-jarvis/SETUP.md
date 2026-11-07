@@ -34,15 +34,18 @@ on your own machine. Do not commit the real values.
 | Dual brain (9B VRAM + 27B RAM) | `local-jarvis/LOCAL-JARVIS-STACK.md` §2, §4.1 | Built | via 11434/11435 |
 | Router (easy → 9B, hard → 27B) | `local-jarvis/router/04-little-router.py` | Live on the reference machine (23:36 snapshot; integration wiring post-snapshot, see `router/README.md`) | 11435 |
 | REA (reverse engineering) | `local-jarvis/LOCAL-JARVIS-STACK.md` §3 | Built | CLI |
-| Dashboard v7 | `local-jarvis/dashboard/v7/` | Built, live on the reference machine | 8899 |
-| Dashboard v8 | `local-jarvis/dashboard/v8/` | Built, verified, published here — NOT applied to the reference machine (v7 stays live until HgX says so) | 8899 |
+| Dashboard v7 | `local-jarvis/dashboard/v7/` | Previous dashboard, kept as history | 8899 |
+| Dashboard v8 | `local-jarvis/dashboard/v8/` | LIVE on the reference machine since 2026-11-07 ~00:00 ET (v7 backed up) | 8899 |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
+| Current state snapshot | `local-jarvis/STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands | — |
 | Autostart launchers | `local-jarvis/autostart/` | Live launchers (23:36 snapshot; keep-alive v2 superseded the ping at 23:46) | — |
 | C270 captures | `local-jarvis/c270/` | Descriptors, usbmon, 9B summary, rainbow clip | — |
 | Voice-loop patch v5 | `local-jarvis/voice-loop/` | Built, applied on the reference machine | — |
 | Acer setup scripts | `local-jarvis/scripts/` | Built (autostart, keep-alive, CPU fix, router test, inventory, backup) | — |
-| iPad Kali plan | `local-jarvis/ipad-kali-plan.md` | Plan (not yet built) | — |
+| iPad Kali plan | `local-jarvis/ipad-kali-plan.md` | PARKED (HgX's order 2026-11-06 22:02 ET); downloads done, build not started | — |
+| Build plans | `local-jarvis/plans/` | The design records: dashboard, drive clean-out, C270 teardown, REA bench shopping list | — |
+| Pi 500+ rig | `local-jarvis/pi500/` | The Raspberry Pi 500+ rig: top 10, software stack, accessories (ordered + paid 2026-11-05) | — |
 | Tonight's runbook (2026-11-06) | `local-jarvis/tonight-runbook-2026-11-06.md` | Dated record of the build night | — |
 | ComfyUI (picture brain) | See `gpu-orchestrator/DESIGN.md` → "ComfyUI contract" | Installed separately | 8188 |
 | VLC remote | `vlc_remote.sh` / `vlc_remote.cmd` | Built | 8090 |
@@ -52,7 +55,10 @@ on your own machine. Do not commit the real values.
 ## Reference machine — the complete list (2026-11-06)
 
 Everything below is the machine this guide reproduces. It is the whole
-list: if it is not here, it is not part of the setup.
+list: if it is not here, it is not part of the setup. The dated
+snapshot `local-jarvis/STATE-2026-11-07.md` is the exact moment as of
+2026-11-07 ~00:10 ET — read that first for the current state; this
+section is the stable reference underneath it.
 
 **Hardware:** Acer Nitro laptop; 512 GB NVMe internal drive; 64 GB RAM,
 DDR4, 2× 32 GB, 3200 MT/s rated, 2933 MT/s running; NVIDIA GeForce RTX
@@ -77,17 +83,29 @@ to the 27B, cloud route (Grok) unconfigured, free route on port 3001
 
 **Dashboard:** port 8899, reachable over the tailnet.
 
-**Picture brain:** ComfyUI 0.44.0 on port 8188 (SD 1.5).
+**Picture brain:** ComfyUI 0.44.0 on port 8188 (SD 1.5) — DOWN as of
+2026-11-07 ~00:10 ET (parked, the 9B has the GPU).
 
 **Voice:** faster-whisper `small.en` for speech-to-text, Piper
-`en_GB-alan-medium` for speech; VoiceStudio 0.5.7; Hex 3.3.0 for
-dictation.
+`en_GB-alan-medium` for speech; VoiceStudio 0.5.7 (not running);
+Hex 3.3.0 (never run).
 
 **REA:** `rea-agents@6.7.0`.
 
 **Peripherals:** Logitech C270 webcam, MaonoCaster AU-AM200 audio
 interface, 4 TB external drive (mounted at `/mnt/hgx`), second monitor,
 cooling mat.
+
+**Brain backup (NOT on GitHub):** `/mnt/hgx/JarvisBackup/llm-2026-11-06/`
+— 58 GB on the 4 TB drive (Hugging Face cache 12 GB, loose GGUFs
+~14.5 GB, Ollama models 32 GB). Documented so the copy is known; the
+weights and the backup never go to GitHub.
+
+**Apple devices:** iPhone 16 Pro Max (iOS 26.6.2, 256 GB); iPad Pro 11"
+3rd gen (M1, 1 TB, 16 GB RAM, iPadOS 26.6.2); Apple Watch Ultra 2
+(49mm, watchOS 26.6, 64 GB). iPad Kali: PARKED, downloads done (UTM
+5.0.8, Kali 2026.3 ISO + SHA256, StikDebug 3.2.0), build not started —
+see `local-jarvis/ipad-kali-plan.md`.
 
 ## Prerequisites
 
@@ -198,13 +216,12 @@ workflows. Local app analysis only — own devices and own targets only,
 consenting adults, controlled lab only, spine SEE → DOCUMENT → LOG →
 PREVENT. See `LOCAL-JARVIS-STACK.md` §3.
 
-### 6. Dashboard v7 (port 8899)
+### 6. Dashboard v8 (port 8899)
 
-**v8 is published** (`local-jarvis/dashboard/v8/`) — the redesign, one
-screen, no scroll, pinned shows + Recent, honest health dots, the
-playback fault fixed. It is NOT applied to the reference machine yet;
-v7 below is what runs live, and the install below is v7. Apply v8 the
-same way (back up first), on HgX's word only.
+**v8 is live** on the reference machine since 2026-11-07 ~00:00 ET
+(applied from `local-jarvis/dashboard/v8/`, v7 backed up to
+`dashboard.bak-v7`). Install it the same way below, from the v8
+folder. v7 stays in the repo as history.
 
 What it is: the always-on screen — GPU, temperatures, RAM, what's
 running, what each model is doing, local weather, Wi-Fi, REA status,
@@ -214,7 +231,7 @@ conversation feed, and a live webcam panel.
 
 ```bash
 # from the repo:
-cp -r local-jarvis/dashboard/v7 ~/tonight-scripts/dashboard/   # or any folder
+cp -r local-jarvis/dashboard/v8 ~/tonight-scripts/dashboard/   # or any folder
 cd ~/tonight-scripts/dashboard/
 chmod +x restart-dashboard-tailnet.sh
 ./restart-dashboard-tailnet.sh
@@ -234,7 +251,7 @@ folder name in the published copy is a placeholder (`ownerlaptop` in
 backup folder. The media endpoints have no password by design — the
 dashboard is meant to be reachable over the private tailnet only.
 
-Checks (from `dashboard/v7/README-FIRST.txt`): the clock ticks every
+Checks (from `dashboard/v8/README-FIRST.txt`): the clock ticks every
 second; the shows list episodes; Sports, Tailscale and Health tiles are
 filled; the webcam panel shows a LIVE feed. Stream check:
 `curl -s -o /dev/null -w "%{http_code}\n" --max-time 15
@@ -311,7 +328,7 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 | 8080 | Orchestrator (voice-loop brain) |
 | 8090 | VLC HTTP remote |
 | 8188 | ComfyUI (only in COMFY mode) |
-| 8899 | Dashboard (v7 live, v8 published) |
+| 8899 | Dashboard v8 (live; v7 history) |
 | 11434 | Ollama |
 | 11435 | Router |
 | 11436 | GPU orchestrator |

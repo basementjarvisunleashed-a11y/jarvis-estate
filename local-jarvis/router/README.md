@@ -19,14 +19,14 @@ source parcel of 2026-11-06 23:36 ET (`jarvis-acer-source-2026-11-06.zip`).
 **Post-snapshot change — read this before wiring it in:** the live
 router on the Acer was patched *after* this snapshot (~23:44 ET) to call
 the GPU orchestrator before an easy call (`router_integration.py` in
-`local-jarvis/gpu-orchestrator/`, fail open when the orchestrator is
-down, fail closed with 503 when the GPU is busy rendering). This
-published file predates that wiring. To reproduce the live router, take
-this file and apply the wiring exactly as documented in
-`gpu-orchestrator/DESIGN.md` → "Router integration". The wiring itself
-is proven: after the patch, an easy call through the router answered
-via the 9B ("Hello"), and the full swap loop was proven the same night
-(see `gpu-orchestrator/README.md` → "Deployed").
+`local-jarvis/gpu-orchestrator/`, `ensure_gpu_llm(timeout=180)`, fail
+open when the orchestrator is down, fail closed with 503 when the GPU
+is busy rendering). This published file predates that wiring. To
+reproduce the live router, take this file and apply the wiring exactly
+as documented in `gpu-orchestrator/DESIGN.md` → "Router integration".
+The wiring itself is proven: after the patch, an easy call through the
+router answered via the 9B ("Hello"), and the full swap loop was proven
+the same night (see `gpu-orchestrator/README.md` → "Deployed").
 
 **Test it:** `local-jarvis/scripts/jarvis-router-both-brains-test.sh`
 asks an easy question (expect the 9B) and a hard question (expect the
