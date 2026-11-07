@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jarvis GPU Orchestrator
+Comment=Owns the RTX 2060 VRAM so LLM and ComfyUI swaps just happen
+Exec=/home/hgx/Jarvis/autostart/start-gpu-orchestrator.sh
+Icon=utilities-terminal
+Terminal=false
+X-GNOME-Autostart-enabled=true
