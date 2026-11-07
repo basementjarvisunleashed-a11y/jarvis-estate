@@ -20,9 +20,11 @@
 | 🔬 **REA 6.7.0** | Reverse Engineer Anything, ready for local app analysis. `npx rea-agents analyze /path/to/app`. Ghidra guided workflows installed. |
 | 💻 **The machine** | Acer Nitro AN515-55. i7-10750H. 64GB RAM. RTX 2060, about 6GB VRAM. 512GB NVMe. |
 | 🎓 **OPERATOR PRIME — HGX Academy** | The one-year open source course, taught by HGX Academy — HgX's own academy. Full-Spectrum Operator Systems. Labs L1–L20 locked. 272 course files: canon, Dean batches 1–3, student packs, year pack, professor pack, professor skill, Academy action log. [Course website](course/) · [Course index](course/README.md). |
+| 🛠️ **Build your own Jarvis** | The how-to: the course, the build, and the website, in order — the two brains, the router, the voice, the dashboard, REA, and the hard rules. [BUILD-YOUR-OWN-JARVIS.md](BUILD-YOUR-OWN-JARVIS.md). |
 
 ## Contents
 
+- [Build your own Jarvis](#build-your-own-jarvis)
 - [Recent](#recent)
 - [Overview](#overview)
 - [1.0 — the course is embedded, not separate](#10--the-course-is-embedded-not-separate)
@@ -33,6 +35,15 @@
 - [Security](#security)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Build your own Jarvis
+
+Your own Jarvis is a local, private personal intelligence that lives on
+your machine: two local brains, one router, a voice, a screen, and REA.
+Nothing leaves the house unless you choose it. The how-to is
+[`BUILD-YOUR-OWN-JARVIS.md`](BUILD-YOUR-OWN-JARVIS.md) — the course,
+the build, and the website, in order — and the run-it-yourself guide is
+[`local-jarvis/SETUP.md`](local-jarvis/SETUP.md).
 
 ## Recent
 
