@@ -1,15 +1,15 @@
 """Local Jarvis voice loop: Maono mic -> Whisper -> voice gate -> 8080 orchestrator -> Piper (Alan).
 Does NOT auto-start. Usage (venv python):
   jarvis_voice.py loop [seconds]             live loop (only when the operator says so)
-  jarvis_voice.py test WAV [--bypass-gate]   offline: one file through the pipeline, reply to out\\reply.wav
+  jarvis_voice.py test WAV [--bypass-gate]   offline: one file through the pipeline, reply to out/reply.wav
 No delete capability by design."""
 import warnings; warnings.filterwarnings("ignore")
 import sys, os, re, json, time, subprocess, urllib.request, wave
-sys.path.insert(0, r"C:\Jarvis")
+sys.path.insert(0, r"/home/hgx/Jarvis")
 import jarvis as J   # reuse dev(), transcribe(), MIC/SPK, VOICE (same Whisper, same devices)
 ORCH = "http://127.0.0.1:8080/jarvis"
 GATE_PY = r"C:\Users\<user>\AppData\Local\Programs\Python\Python313\python.exe"  # has SpeechBrain
-GATE = r"C:\Jarvis\voice_gate.py"
+GATE = r"/home/hgx/Jarvis\voice_gate.py"
 OUT = os.path.join(J.BASE, "out")
 # jarvis.py tries CUDA first, but cublas64_12.dll is missing on this laptop, so it fails at first use.
 # Preload the same Whisper (small.en) on CPU unless JARVIS_WHISPER_DEVICE=cuda.
@@ -24,13 +24,24 @@ _whisper()
 
 class Gate:
     def __init__(self):
-        self.p = subprocess.Popen([GATE_PY, GATE, "--serve"], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                  stderr=subprocess.DEVNULL, text=True, bufsize=1)
-        self.info = json.loads(self.p.stdout.readline())
+        # The voice gate was dropped (HgX, 2026-11-05): if its program is
+        # missing (GATE_PY still points at Windows), the gate becomes a
+        # pass-through that approves everything instead of crashing the loop.
+        try:
+            self.p = subprocess.Popen([GATE_PY, GATE, "--serve"], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                      stderr=subprocess.DEVNULL, text=True, bufsize=1)
+            self.info = json.loads(self.p.stdout.readline())
+        except Exception:
+            self.p = None
+            self.info = {"gate": "disabled"}
     def check(self, path):
+        if self.p is None:
+            return True, 1.0
         self.p.stdin.write(path + "\n"); self.p.stdin.flush()
         r = json.loads(self.p.stdout.readline()); return r["ok"], r["score"]
     def close(self):
+        if self.p is None:
+            return
         try: self.p.stdin.close(); self.p.wait(5)
         except Exception: self.p.kill()
 
@@ -49,13 +60,26 @@ def tts(text, path):
 
 def play(path):
     import sounddevice as sd, soundfile as sf
-    d, sr = sf.read(path); sd.play(d, sr, device=J.dev(J.SPK, "output")); sd.wait()
+    import numpy as np
+    d, sr = sf.read(path)
+    if sr != 48000:  # Piper speaks at 22050; the speakers only take 48000
+        n = int(len(d) * 48000 / sr)
+        x = np.linspace(0, len(d) - 1, n)
+        if d.ndim > 1:
+            d = np.stack([np.interp(x, np.arange(len(d)), d[:, c]) for c in range(d.shape[1])], axis=1).astype("float32")
+        else:
+            d = np.interp(x, np.arange(len(d)), d).astype("float32")
+        sr = 48000
+    sd.play(d, sr, device=J.dev(J.SPK, "output")); sd.wait()
 
 def record(seconds, path):
     import sounddevice as sd, soundfile as sf
-    sr = 16000
-    a = sd.rec(int(seconds * sr), samplerate=sr, channels=2, device=J.dev(J.MIC, "input")); sd.wait()
-    sf.write(path, a.mean(axis=1), sr); return path
+    sr = 48000  # ALSA hardware rate: the mic refuses 16000 (PortAudio has no resampler)
+    try:
+        a = sd.rec(int(seconds * sr), samplerate=sr, channels=2, device=J.dev(J.MIC, "input")); sd.wait()
+    except Exception:  # mono-only mic (C270): fall back to one channel
+        a = sd.rec(int(seconds * sr), samplerate=sr, channels=1, device=J.dev(J.MIC, "input")); sd.wait()
+    sf.write(path, a.mean(axis=1) if a.ndim > 1 else a, sr); return path
 
 # --- VG-2c 2026-10-27: replay mitigation -------------------------------------------
 # A recording of HgX could pass the speaker gate. For commands that look like they
@@ -79,6 +103,78 @@ def confirm(gate, speak, secs=4):
         return False
     return "confirm" in J.transcribe(wav).lower()
 
+# --- Patch v5 (rebuilt 2026-11-06): deterministic dispatcher ----------------
+# Runs BEFORE the VG-2c confirm gate and BEFORE the model, so commands that
+# act (Firefox, terminal, VLC) are no longer killed by "unconfirmed" and no
+# longer left to the model to merely talk about. Risky commands (move,
+# commit, verdict) are NOT dispatched here, so they still need confirm.
+def _vlc_running():
+    try:
+        return subprocess.run(["pgrep", "-x", "vlc"],
+                              capture_output=True).returncode == 0
+    except Exception:
+        return False
+
+def _sopranos_dir():
+    import glob
+    import os as _os
+    neat = "/mnt/hgx/TV SHOWS/THE SOPRANOS/The Sopranos/"
+    if _os.path.isdir(neat):
+        return neat
+    for cand in glob.glob("/mnt/hgx/TV SHOWS/**/The Sopranos/", recursive=True):
+        if _os.path.isdir(cand):
+            return cand
+    return None
+
+def dispatch(text):
+    t = (text or "").lower().strip()
+    if t.strip(" .!") in ("stop", "exit", "goodbye"):
+        return {"action": "stop", "reply": "Goodbye, sir."}
+    if "open fire" in t or "open firefox" in t or t.startswith("firefox"):
+        subprocess.Popen(["firefox"], stdout=subprocess.DEVNULL,
+                         stderr=subprocess.DEVNULL)
+        return {"action": "dispatched", "reply": "Opening Firefox, sir."}
+    if ("open a terminal" in t or "open terminal" in t
+            or "open the terminal" in t):
+        term = None
+        for cand in ("xfce4-terminal", "gnome-terminal", "konsole", "xterm"):
+            term = shutil.which(cand)
+            if term:
+                break
+        if not term:
+            return {"action": "dispatched",
+                    "reply": "I could not find a terminal to open, sir."}
+        subprocess.Popen([term], stdout=subprocess.DEVNULL,
+                         stderr=subprocess.DEVNULL)
+        return {"action": "dispatched", "reply": "Opening a terminal, sir."}
+    if "vlc" in t or "sopranos" in t:
+        if "play" in t or "vlc on" in t or "sopranos" in t:
+            d = _sopranos_dir()
+            if d is None:
+                return {"action": "dispatched",
+                        "reply": "The Sopranos drive is not mounted, sir."}
+            if _vlc_running():
+                return {"action": "dispatched",
+                        "reply": "VLC is already playing, sir."}
+            subprocess.Popen(["vlc", "--loop", d],
+                             stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL)
+            return {"action": "dispatched",
+                    "reply": "Playing the Sopranos, sir."}
+    if "list" in t and "file" in t:
+        home = os.path.expanduser("~")
+        try:
+            names = sorted(os.listdir(home))[:12]
+        except Exception:
+            names = []
+        if names:
+            return {"action": "dispatched",
+                    "reply": "Here are the files in your home folder: "
+                             + ", ".join(names) + "."}
+        return {"action": "dispatched",
+                "reply": "Your home folder is empty, sir."}
+    return None
+
 def handle(wav, gate, out_wav, speak, bypass=False):
     t = {}; s = time.time()
     # VG-4 2026-10-27: gate FIRST; other people's speech is never transcribed.
@@ -90,11 +186,16 @@ def handle(wav, gate, out_wav, speak, bypass=False):
     res["text"] = text
     if not text.strip():
         res["action"] = "ignored"; res["t"] = t; return res
+    d = dispatch(text)
+    if d is not None:
+        s = time.time(); tts(d["reply"], out_wav); t["piper_s"] = time.time() - s
+        if speak: s = time.time(); play(out_wav); t["play_s"] = time.time() - s
+        res.update(action=d.get("action", "dispatched"), reply=d["reply"], wav=out_wav, t=t); return res
     if MUTATING_RE.search(text) and not confirm(gate, speak):  # VG-2c
         res["action"] = "unconfirmed"; res["t"] = t; return res
     s = time.time(); reply = orchestrate(text); t["orchestrator_s"] = time.time() - s
     s = time.time(); tts(reply, out_wav); t["piper_s"] = time.time() - s
-    if speak: s = time.time(); play(out_wav); t["play_s"] = time.time() - s
+    if speak and reply: s = time.time(); play(out_wav); t["play_s"] = time.time() - s
     res.update(reply=reply, wav=out_wav, t=t); return res
 
 def main():

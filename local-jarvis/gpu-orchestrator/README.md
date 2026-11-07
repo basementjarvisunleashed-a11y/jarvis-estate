@@ -3,9 +3,13 @@
 Makes VRAM swaps on the Acer automatic, so HgX never has to say "swap" or
 run a manual park/resume — it just happens, through the router.
 
-**Status: built and verified here. NOT deployed to the Acer, NOT delivered
-to HgX.** Deployment is a separate step, on HgX's word (see
-`DESIGN.md` → "Deploying later").
+**Status: DEPLOYED on the Acer, 2026-11-06 ~23:50 ET — it just happens.**
+The router is wired in (easy route only), the autostart is installed,
+the service answers on :11436, the keep-alive is v2, and the loop is
+proven end to end: an acquire for ComfyUI parked the 9B and freed the
+card to 132 MiB of 6,144 with ComfyUI up; one easy router call brought
+the 9B straight back and both brains were resident again (VRAM 4,830).
+See `DESIGN.md` → "Deployed 2026-11-06".
 
 ## Files
 
@@ -15,8 +19,8 @@ to HgX.** Deployment is a separate step, on HgX's word (see
 | `DESIGN.md` | The full design: states, operations, safe rules, router and keep-alive contracts, failure modes, deployment steps. |
 | `router_integration.py` | Drop-in helper for the router (easy route only). Fail open when the orchestrator is down; fail closed when the GPU is busy. |
 | `keep-brains-alive-v2.sh` | Patched keep-alive: skips the 9B ping while it is parked. |
-| `start-gpu-orchestrator.sh` | Launcher for autostart (not yet installed). |
-| `gpu-orchestrator.desktop` | Xfce autostart entry (not yet installed). |
+| `start-gpu-orchestrator.sh` | Launcher for autostart (installed on the Acer 2026-11-06). |
+| `gpu-orchestrator.desktop` | Xfce autostart entry (installed on the Acer 2026-11-06). |
 | `test/` | Fake Ollama / nvidia-smi / ComfyUI harness and the test runner. |
 
 ## Verify (here, no Acer needed)

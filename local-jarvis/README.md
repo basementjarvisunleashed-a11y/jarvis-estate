@@ -26,7 +26,7 @@ is still to land.
 ## Architecture
 
 ```
-mic → Whisper small.en → voice gate → orchestrator :8080 → Ollama qwen3:8b → tools / VLC / REA → Piper TTS
+mic → Whisper small.en → voice gate → orchestrator :8080 → Ollama qwen9b-abliterated → tools / VLC / REA → Piper TTS
 ```
 
 ```mermaid
@@ -34,7 +34,7 @@ flowchart LR
     mic[Mic] --> whisper[Whisper small.en]
     whisper --> gate[Voice gate]
     gate --> orch["Orchestrator :8080"]
-    orch --> ollama["Ollama qwen3:8b"]
+    orch --> ollama["Ollama qwen9b-abliterated"]
     ollama --> tools["Tools / VLC / REA"]
     tools --> piper["Piper TTS"]
 ```
@@ -42,7 +42,7 @@ flowchart LR
 A turn is audio in and audio out. Whisper transcribes the mic (or a wav
 file). The voice gate scores that audio against the enrolled profile and
 drops the turn when the speaker is unenrolled. The orchestrator on port
-8080 sends the text to Ollama `qwen3:8b` with thinking off, may call a
+8080 sends the text to Ollama `qwen9b-abliterated` with thinking off, may call a
 tool, and returns a short reply. Piper speaks that reply with the
 `en_GB-alan-medium` voice.
 
@@ -66,11 +66,12 @@ works without the GPU.
 2. **Ollama** ([ollama.com](https://ollama.com/download)):
 
    ```
-   ollama pull qwen3:8b
+   ollama pull qwen9b-abliterated
    ollama pull qwen2.5:3b
+   ollama pull qwen3:8b  # fallback only
    ```
 
-   `qwen3:8b` is the orchestrator. `qwen2.5:3b` is `jarvis.py`.
+   `qwen9b-abliterated` is the orchestrator. `qwen2.5:3b` is `jarvis.py`.
 3. **VLC**, with the HTTP remote on `127.0.0.1:8090`.
    Install VLC, then in Preferences (Show settings: All):
    - Interface → Main interfaces → check **Web**
@@ -134,7 +135,7 @@ Do not commit the real values.
 | `XAI_API_KEY` | Optional. When set, demo briefs are drafted by Grok. When unset, the orchestrator serves a canned DEMO card. |
 
 Also read by the orchestrator, with safe defaults: `OLLAMA_URL`
-(`http://127.0.0.1:11434`), `OLLAMA_MODEL` (`qwen3:8b`), `VLC_HTTP_PORT`
+(`http://127.0.0.1:11434`), `OLLAMA_MODEL` (`qwen9b-abliterated`), `VLC_HTTP_PORT`
 (`8090`), `JARVIS_ROOTS` (Desktop, Documents, and Downloads under your
 home directory), `JARVIS_LAN_IP` (printed for a watch on the same
 network; unset prints a placeholder).
@@ -283,8 +284,8 @@ did not find it. Install the CUDA 12 runtime (Kali package
 `JARVIS_WHISPER_DEVICE=cuda` asks for the GPU build on purpose.
 `jarvis.py` tries CUDA first and falls back to CPU when that load fails.
 
-**`qwen3:8b` feels slow.** Thinking is off by default. Every orchestrator
-call sends `"think": false`, so the wait is the 8B model generating on
+**`qwen9b-abliterated` feels slow.** Thinking is off by default. Every orchestrator
+call sends `"think": false`, so the wait is the 9B model generating on
 this GPU (the reference card is an RTX 2060 6GB), not a hidden reasoning
 pass. `jarvis.py` uses the smaller `qwen2.5:3b` for `ask` and `chat`.
 

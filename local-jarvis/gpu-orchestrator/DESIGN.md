@@ -281,6 +281,22 @@ PASS/FAIL per scenario and exits non-zero if anything fails.
    resident), then the midnight keep-alive (9B skipped while parked).
 6. Only then tell HgX it "just happens". Not before.
 
+## Deployed 2026-11-06 (~23:42–23:50 ET) — all six steps done
+
+1. Helper copied next to the router; patch script written; router
+   backed up, patched, compiles clean.
+2. Router restarted; easy call through the patched router answered via
+   the 9B ("Hello").
+3. Autostart installed (`start-gpu-orchestrator.sh` +
+   `gpu-orchestrator.desktop`); service up, mode `llm`, both brains
+   resident, VRAM 4,830 of 6,144.
+4. Keep-alive swapped to v2 (old kept as `.bak`); dry run pings both
+   brains in the right order.
+5. Loop proven: acquire `comfy` → 9B parked, ComfyUI up (HTTP 200),
+   VRAM 132 of 6,144; one easy call → 9B back, both brains resident,
+   VRAM 4,830, mode `llm`.
+6. It just happens.
+
 ## Open questions and limits
 
 - A mode swap takes roughly 30–90 s (ComfyUI stop/start, model load).

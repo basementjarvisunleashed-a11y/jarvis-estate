@@ -1,0 +1,77 @@
+--- chunk 1 ---
+Interfaces:
+Interface 0: Video Control (Interface Association, 1 endpoint IN)
+Interface 1: Video Streaming (1 endpoint IN, 16-byte interrupt)
+
+Endpoints:
+EP 7 IN (Interrupt): Control/Status data transfer (16 bytes per packet)
+EP 1 IN (Streaming): Video data transfer (16-byte interrupt endpoint)
+
+Video Formats:
+Format 1: Uncompressed (GUID: 32595559-0000-0010-8000-00aa00389b71)
+Bits per pixel: 16
+
+Resolutions:
+640x480 (Default)
+160x120
+176x144
+320x176
+(Note: Additional resolutions likely exist beyond the provided excerpt)
+
+Frame Rates:
+30 fps (333333 interval)
+24 fps (400000 interval)
+20 fps (500000 interval)
+15 fps (666666 interval)
+10 fps (1000000 interval)
+5 fps (2000000 interval)
+
+Controls:
+Auto-Exposure Mode
+Auto-Exposure Priority
+Exposure Time (Absolute)
+Brightness
+Contrast
+Saturation
+Sharpness
+White Balance Temperature
+Backlight Compensation
+Gain
+Power Line Frequency
+White Balance Temperature (Auto)
+
+--- chunk 2 ---
+- Interfaces: 1 VideoStreaming interface (USB class 0x0e)
+- Endpoints: 1 Bulk endpoint for streaming (inferred from single interface)
+- Video Formats: MJPEG (FORMAT_MJPEG), Uncompressed (FRAME_UNCOMPRESSED)
+- Resolutions: Range from 320x240 to 1280x960 (VGA, HD, and HD+ variants)
+- Frame Rates: Variable, typically 25–30 fps (derived from 333333–2000000 ns intervals)
+- Controls: Still image support, interlace flags (progressive), copy protection (off)
+
+--- chunk 3 ---
+Interfaces: 1 (VideoStreaming)
+Endpoints: 1 (Streaming endpoint for MJPEG)
+Video Format: MJPEG (Still image supported)
+Resolutions: 17 modes ranging from 160x120 to 1024x768 (truncated)
+Frame Rates: 6 intervals selectable (approx 30fps, 24fps, 20fps, 15fps, 10fps, 5fps)
+Controls: Bitrate ranges and frame buffer sizes defined per resolution
+
+--- chunk 4 ---
+- **Interfaces**: 1 USB Video Class (UVC) interface (Interface 1)
+- **Endpoint**: Single IN endpoint (EP 1) with Isochronous transfer type
+- **Video Formats**: MJPEG (Frame Index 17, 18, 19)
+- **Resolutions**: 1184x576, 1280x656, 1280x720, 1280x960
+- **Frame Rates**: 30fps (333333), 25fps (400000), 24fps (500000), 15fps (666666), 10fps (1000000), 5fps (2000000)
+- **Color Space**: BT.709 (sRGB) primaries, BT.709 transfer characteristics, SMPTE 170M matrix coefficients
+- **Controls**: Still image capture supported (bmCapabilities bit 0)
+
+--- chunk 5 ---
+- Interface 2: Audio Control (Class 1, Subclass 1)
+- Interface 3: Audio Streaming (Class 1, Subclass 2)
+- Endpoint 6: Isochronous IN endpoint for audio data
+- Audio format: PCM (Format Type I)
+- Bit resolution: 16-bit
+- Sampling rates: 16kHz, 24kHz, 32kHz, 48kHz
+- Controls: Mute and Volume on Unit ID 5
+- Max packet sizes: 68, 100, 132, or 196 bytes depending on sample rate
+- Note: No Video class interfaces or resolutions are present in this excerpt

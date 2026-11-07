@@ -387,7 +387,7 @@ import shutil
 import urllib.parse
 
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:8b")  # <-- change the "qwen3:8b" part here if you pulled a different model
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen9b-abliterated")  # <-- change the "qwen9b-abliterated" part here if you pulled a different model
 JARVIS_MAX_STEPS = 6       # hard cap on the tool loop -- no runaways
 JARVIS_TIMEOUT = 120       # seconds per Ollama call (CPU inference is slow)
 
@@ -959,7 +959,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json({
                     "ok": False, "error": "ollama-down",
                     "reply": ("The laptop's brain isn't answering -- is Ollama running? "
-                              "Open Ollama from the Start menu and try again.")}, 200)
+                              "Check that Ollama is running and try again.")}, 200)
                 return
             except Exception as e:
                 print("JARVIS failed: %s" % e)

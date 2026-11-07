@@ -29,10 +29,11 @@ and print what they did. Run them on the Acer, in this order.
 | `llm-inventory.sh` | Read-only: `ollama list` + `ollama ps`, every GGUF on disk, Hugging Face cache, Ollama store size, and what each model is for. Send the whole output to Jarvis. |
 | `llm-backup.sh` | Copy-only to `/mnt/hgx/JarvisBackup/llm-2026-11-06/`: Ollama models + Hugging Face cache + loose GGUFs. Guards on the drive being mounted and free space covering the copy; verifies with sizes and file counts. Nothing is moved or deleted. Note: the backup was started on 2026-11-06 but its completion was not confirmed in the record — do not read this as proof the backup finished. |
 
-**Superseded (do not use):** once the GPU orchestrator is deployed,
-`keep-brains-alive-v2.sh` (in `local-jarvis/gpu-orchestrator/`) replaces
-`keep-brains-alive.sh` — same log file, same order, plus the skip logic
-that never reloads a parked 9B mid-render.
+**Superseded (do not use the old one):** the GPU orchestrator IS deployed
+(2026-11-06), so `keep-brains-alive-v2.sh` (in
+`local-jarvis/gpu-orchestrator/`) is the live keep-alive — swapped in on
+the Acer at 23:46, old file kept as `.bak`. The `keep-brains-alive.sh`
+in `local-jarvis/autostart/` is the pre-swap version (23:36 snapshot).
 
 **Files:**
 

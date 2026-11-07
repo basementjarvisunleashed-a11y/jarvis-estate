@@ -7,13 +7,16 @@ renders pictures — with the GPU handed between them automatically.
 
 **Status: 2026-11-07.** This guide covers what is in the repo today: the
 core voice stack, the dual brain, REA, dashboard v7, the GPU
-orchestrator, the voice-loop patch v5, the Acer setup scripts, the brain
-inventory/backup scripts, the iPad Kali plan, and tonight's runbook.
-The router source, the orchestrator source, the voice-loop source, the
-autostart launchers, the keep-alive script, the C270 captures, and the
-iPad Kali downloads are Acer-side files that land in a later batch; this
-guide says plainly where each one goes and will be updated when they
-arrive. Nothing here is faked: a step marked pending is pending.
+orchestrator (deployed), the voice-loop patch v5, the Acer setup scripts,
+the brain inventory/backup scripts, the iPad Kali plan, tonight's
+runbook, and the Acer source snapshot — the live router, orchestrator,
+voice loop, autostart launchers, and C270 captures from the laptop
+(2026-11-06 23:36 ET).
+Still to land: the iPad Kali downloads (UTM, Kali ISO, StikDebug —
+sources documented in the plan, installers never uploaded) and dashboard
+v8 (built and verified 2026-11-06 ~23:54 ET, awaiting HgX's word — not
+applied, not published). Nothing here is faked: a step marked pending
+is pending.
 
 **What is NOT in this repo (by design):** no model weights, no backups,
 no personal media, no credentials, no personal data. Model names and tags
@@ -29,10 +32,13 @@ on your own machine. Do not commit the real values.
 | Core voice stack + orchestrator | `local-jarvis/README.md`, `orchestrator.py`, `jarvis_voice.py` | Built | 8080 |
 | Voice gate + enrollment | `voice_gate.py`, `enroll.py`, `calibrate.py` | Built | — |
 | Dual brain (9B VRAM + 27B RAM) | `local-jarvis/LOCAL-JARVIS-STACK.md` §2, §4.1 | Built | via 11434/11435 |
-| Router (easy → 9B, hard → 27B) | Documented in `LOCAL-JARVIS-STACK.md` + `gpu-orchestrator/DESIGN.md`; setup + test scripts in `local-jarvis/scripts/` | Script lands in a later batch | 11435 |
+| Router (easy → 9B, hard → 27B) | `local-jarvis/router/04-little-router.py` | Live on the reference machine (23:36 snapshot; integration wiring post-snapshot, see `router/README.md`) | 11435 |
 | REA (reverse engineering) | `local-jarvis/LOCAL-JARVIS-STACK.md` §3 | Built | CLI |
 | Dashboard v7 | `local-jarvis/dashboard/v7/` | Built, live on the reference machine | 8899 |
-| GPU orchestrator | `local-jarvis/gpu-orchestrator/` | Built, verified, not deployed | 11436 |
+| GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
+| Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
+| Autostart launchers | `local-jarvis/autostart/` | Live launchers (23:36 snapshot; keep-alive v2 superseded the ping at 23:46) | — |
+| C270 captures | `local-jarvis/c270/` | Descriptors, usbmon, 9B summary, rainbow clip | — |
 | Voice-loop patch v5 | `local-jarvis/voice-loop/` | Built, applied on the reference machine | — |
 | Acer setup scripts | `local-jarvis/scripts/` | Built (autostart, keep-alive, CPU fix, router test, inventory, backup) | — |
 | iPad Kali plan | `local-jarvis/ipad-kali-plan.md` | Plan (not yet built) | — |
@@ -161,20 +167,23 @@ after you start it; the voice loop is deliberately not auto-started.
 Enroll first (`enroll.py`, 5 takes) and calibrate (`CALIBRATE.md`): the
 voice gate scores audio against the enrolled profile and drops the turn
 when the speaker is unenrolled. Mic → Whisper `small.en` → voice gate →
-orchestrator `:8080` → Ollama `qwen3:8b` → tools / VLC / REA → Piper
+orchestrator `:8080` → Ollama `qwen9b-abliterated` → tools / VLC / REA → Piper
 (`en_GB-alan-medium`). Router v2.2, 50 second voice budget, 60 second
 client wait.
 
 ### 4. The router (port 11435)
 
 The router is the single door for LLM calls: easy calls go to the 9B,
-hard calls go to the 27B. Its script lands with the Acer-side batch; the
-behaviour it must have is already documented in
-`gpu-orchestrator/DESIGN.md` → "Router integration" (ask the orchestrator
-before an easy call; fail open when the orchestrator is down; fail closed
-with 503 when the GPU is busy rendering). Do not guess the router's
-internals from this guide — wire in `router_integration.py` from the
-orchestrator folder when the script arrives.
+hard calls go to the 27B. The live file is in the repo:
+`local-jarvis/router/04-little-router.py` (snapshot 2026-11-06 23:36
+ET). It already carries the CPU fix (hard route `num_gpu 0`). The GPU
+orchestrator wiring — ask the orchestrator before an easy call, fail
+open when it is down, fail closed with 503 when the GPU is busy
+rendering — was applied to the live router after the snapshot (~23:44
+ET); apply it exactly as documented in `gpu-orchestrator/DESIGN.md` →
+"Router integration" (helper: `router_integration.py` in the
+orchestrator folder). Test it with
+`scripts/jarvis-router-both-brains-test.sh` (easy → 9B, hard → 27B).
 
 ### 5. REA
 
@@ -242,23 +251,23 @@ python3 test/run_tests.py        # 7/7 scenarios must PASS
 python3 gpu_orchestrator.py --serve   # HTTP on 127.0.0.1:11436
 ```
 
-Then wire it in, in this order:
+Deployed on the reference machine 2026-11-06 (~23:42–23:50 ET), in this
+order:
 
-1. **Router:** call `router_integration.py` (`ensure_gpu_llm`) before an
-   easy call only. The hard route never asks.
-2. **Autostart:** place `start-gpu-orchestrator.sh` in
-   `~/Jarvis/autostart/` and `gpu-orchestrator.desktop` in
-   `~/.config/autostart/`; confirm the service answers on `:11436`
-   after a reboot.
-3. **Keep-alive:** replace `keep-brains-alive.sh` with
-   `keep-brains-alive-v2.sh` (keep the old one as `.bak`). Same log file,
-   same order (9B first, then 27B) — the one change is that it skips the
-   9B ping while the 9B is parked, so it never reloads it mid-render.
-   Cron stays `0 */6 * * *`. Dry-run first:
-   `./keep-brains-alive-v2.sh --dry-run`.
-4. **Prove the loop:** render in ComfyUI (GPU goes to COMFY), then an
-   easy router call (GPU comes back to LLM, both brains resident), then
-   the next keep-alive (9B skipped while parked).
+1. **Router:** `router_integration.py` (`ensure_gpu_llm`) wired into the
+   easy route only. The hard route never asks.
+2. **Autostart:** `start-gpu-orchestrator.sh` in `~/Jarvis/autostart/`
+   and `gpu-orchestrator.desktop` in `~/.config/autostart/`; service
+   answers on `:11436`.
+3. **Keep-alive:** `keep-brains-alive.sh` replaced with
+   `keep-brains-alive-v2.sh` (old kept as `.bak`). Same log file, same
+   order (9B first, then 27B) — the one change is that it skips the 9B
+   ping while the 9B is parked, so it never reloads it mid-render. Cron
+   stays `0 */6 * * *`. Dry-run first: `./keep-brains-alive-v2.sh
+   --dry-run`.
+4. **Loop proven:** acquire `comfy` → 9B parked, ComfyUI up, VRAM 132
+   of 6,144; one easy router call → 9B back, both brains resident, VRAM
+   4,830, mode `llm`.
 
 State and health: `GET /state` (mode, models, ComfyUI, VRAM, last swap,
 last error), `GET /health` (liveness). A swap takes roughly 30–90 s; the

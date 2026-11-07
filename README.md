@@ -36,6 +36,21 @@
 
 ## Recent
 
+### 2026-11-07 — GitHub reconciled with the laptop build
+
+The repo now matches the Acer, file for file. The Acer source snapshot
+(`jarvis-acer-source-2026-11-06.zip`, 155,653 bytes) landed: the live
+router, the live orchestrator and voice loop (Kali versions, patch v5
+applied), the autostart launchers, and the C270 captures — all scrubbed
+and published under [`local-jarvis/`](local-jarvis/). The GPU
+orchestrator is **DEPLOYED** (2026-11-06 ~23:50 ET): router wired, autostart
+in, keep-alive v2 in, and the swap loop proven end to end (ComfyUI freed
+the card to 132 MiB; one easy call brought the 9B back, both brains
+resident). The run-it-yourself guide ([`local-jarvis/SETUP.md`](local-jarvis/SETUP.md))
+now carries the full reference machine. Still to land: the iPad Kali
+downloads (sources only, never the installers) and dashboard v8 — built
+and verified, awaiting HgX's word, not applied, not published.
+
 ### 2026-11-04 — the Academy day (Estate 1.2.1)
 
 HGX Academy, HgX's own academy, published its full day in the open. The course website is rebuilt to academy standard ([Latest](course/#latest), [Transparency](course/#transparency), [Academy log](course/#academy-log)). **272 course files** on main.
