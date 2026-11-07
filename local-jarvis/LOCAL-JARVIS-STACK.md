@@ -45,6 +45,25 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 - Plain VLC commands (`pause`, `play`, `resume`, `stop`, `next`, `skip`, `previous`, with an optional "hey jarvis") match a regex and run without a model round trip.
 - VLC's HTTP remote and Ollama stay on localhost.
 
+**Dashboard — BUILT, live on the Acer (2026-11-06):**
+
+- Always-on dashboard on port **8899** (iPhone/iPad over the tailnet): GPU,
+  temperatures, RAM, what's running, what each model is doing, local weather,
+  Wi-Fi, REA status, models online/offline, last things REA did, media tile,
+  live two-way conversation feed.
+- **v7** is the current dashboard, applied and live. 18 issues fixed over v6.
+  Files: `local-jarvis/dashboard/v7/` (scrubbed published copy — one folder
+  name replaced with the placeholder `ownerlaptop`; rename it to match your
+  own drive).
+- v8 (redesign — one screen, no scrolling) is being built separately.
+
+**GPU orchestrator — BUILT, verified, NOT deployed (2026-11-06):**
+
+- Router-integrated GPU brain manager: keeps the 9B model resident on VRAM
+  and the 27B model on RAM, hot-swaps on demand, never both generating at
+  once. Files: `local-jarvis/gpu-orchestrator/` (test harness 7/7 green,
+  twice). Not yet deployed to the Acer.
+
 ---
 
 ## 3. REA — BUILT

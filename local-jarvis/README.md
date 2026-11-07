@@ -309,6 +309,8 @@ does not match the password in VLC's Lua HTTP preferences.
 | `.env.example` | Placeholder names only. |
 | `units/orchestrator.service` | Optional login service for the orchestrator. |
 | `units/pipewire-mix.service` | Optional login service for PipeWire routing. |
+| `dashboard/v7/` | Always-on dashboard, port **8899**. v7 live on the Acer (scrubbed copy). |
+| `gpu-orchestrator/` | GPU brain manager (9B VRAM / 27B RAM). Built, verified, not deployed. |
 
 ## History note
 
