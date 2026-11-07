@@ -55,10 +55,11 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
   Files: `local-jarvis/dashboard/v7/` (scrubbed published copy — one folder
   name replaced with the placeholder `ownerlaptop`; rename it to match your
   own drive).
-- v8 (redesign — one screen, no scrolling) is built and verified
+- v8 (redesign — one screen, no scrolling) is built, verified
   (2026-11-06 ~23:54 ET, 7 directives + 5 playback fixes, API 28/28,
-  layout 31/31) and awaits HgX's word — not applied to the Acer, not
-  published. v7 stays the live dashboard until he says so.
+  layout 31/31) and PUBLISHED here (`local-jarvis/dashboard/v8/`) — not
+  applied to the Acer; v7 stays the live dashboard until HgX says to
+  apply v8.
 
 **GPU orchestrator — DEPLOYED on the Acer (2026-11-06 ~23:50 ET):**
 

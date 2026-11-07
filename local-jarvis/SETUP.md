@@ -35,6 +35,7 @@ on your own machine. Do not commit the real values.
 | Router (easy → 9B, hard → 27B) | `local-jarvis/router/04-little-router.py` | Live on the reference machine (23:36 snapshot; integration wiring post-snapshot, see `router/README.md`) | 11435 |
 | REA (reverse engineering) | `local-jarvis/LOCAL-JARVIS-STACK.md` §3 | Built | CLI |
 | Dashboard v7 | `local-jarvis/dashboard/v7/` | Built, live on the reference machine | 8899 |
+| Dashboard v8 | `local-jarvis/dashboard/v8/` | Built, verified, published here — NOT applied to the reference machine (v7 stays live until HgX says so) | 8899 |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
 | Autostart launchers | `local-jarvis/autostart/` | Live launchers (23:36 snapshot; keep-alive v2 superseded the ping at 23:46) | — |
@@ -199,6 +200,12 @@ PREVENT. See `LOCAL-JARVIS-STACK.md` §3.
 
 ### 6. Dashboard v7 (port 8899)
 
+**v8 is published** (`local-jarvis/dashboard/v8/`) — the redesign, one
+screen, no scroll, pinned shows + Recent, honest health dots, the
+playback fault fixed. It is NOT applied to the reference machine yet;
+v7 below is what runs live, and the install below is v7. Apply v8 the
+same way (back up first), on HgX's word only.
+
 What it is: the always-on screen — GPU, temperatures, RAM, what's
 running, what each model is doing, local weather, Wi-Fi, REA status,
 models online/offline, the last things REA did, a media tile (one quarter
@@ -304,7 +311,7 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 | 8080 | Orchestrator (voice-loop brain) |
 | 8090 | VLC HTTP remote |
 | 8188 | ComfyUI (only in COMFY mode) |
-| 8899 | Dashboard v7 |
+| 8899 | Dashboard (v7 live, v8 published) |
 | 11434 | Ollama |
 | 11435 | Router |
 | 11436 | GPU orchestrator |

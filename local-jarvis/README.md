@@ -316,6 +316,7 @@ does not match the password in VLC's Lua HTTP preferences.
 | `units/orchestrator.service` | Optional login service for the orchestrator. |
 | `units/pipewire-mix.service` | Optional login service for PipeWire routing. |
 | `dashboard/v7/` | Always-on dashboard, port **8899**. v7 live on the Acer (scrubbed copy). |
+| `dashboard/v8/` | The redesign (one screen, no scroll, pinned + Recent, honest dots, playback fault fixed). Published here, NOT applied to the Acer yet — v7 stays live until HgX says so. |
 | `gpu-orchestrator/` | GPU brain manager (9B VRAM / 27B RAM). Built, verified, not deployed. |
 
 ## History note
