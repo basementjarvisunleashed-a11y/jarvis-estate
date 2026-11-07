@@ -6,12 +6,14 @@ listens, reasons on two local brains, shows everything on a dashboard, and
 renders pictures — with the GPU handed between them automatically.
 
 **Status: 2026-11-07.** This guide covers what is in the repo today: the
-core voice stack, the dual brain, REA, dashboard v7, and the GPU
-orchestrator. The router script, the voice-loop scripts, the autostart
-scripts, the C270 camera work, and the brain inventory/backup scripts are
-Acer-side files that land in a later batch; this guide says plainly where
-each one goes and will be updated when they arrive. Nothing here is
-faked: a step marked pending is pending.
+core voice stack, the dual brain, REA, dashboard v7, the GPU
+orchestrator, the voice-loop patch v5, the Acer setup scripts, the brain
+inventory/backup scripts, the iPad Kali plan, and tonight's runbook.
+The router source, the orchestrator source, the voice-loop source, the
+autostart launchers, the keep-alive script, the C270 captures, and the
+iPad Kali downloads are Acer-side files that land in a later batch; this
+guide says plainly where each one goes and will be updated when they
+arrive. Nothing here is faked: a step marked pending is pending.
 
 **What is NOT in this repo (by design):** no model weights, no backups,
 no personal media, no credentials, no personal data. Model names and tags
@@ -27,14 +29,58 @@ on your own machine. Do not commit the real values.
 | Core voice stack + orchestrator | `local-jarvis/README.md`, `orchestrator.py`, `jarvis_voice.py` | Built | 8080 |
 | Voice gate + enrollment | `voice_gate.py`, `enroll.py`, `calibrate.py` | Built | — |
 | Dual brain (9B VRAM + 27B RAM) | `local-jarvis/LOCAL-JARVIS-STACK.md` §2, §4.1 | Built | via 11434/11435 |
-| Router (easy → 9B, hard → 27B) | Documented in `LOCAL-JARVIS-STACK.md` + `gpu-orchestrator/DESIGN.md` | Script lands in a later batch | 11435 |
+| Router (easy → 9B, hard → 27B) | Documented in `LOCAL-JARVIS-STACK.md` + `gpu-orchestrator/DESIGN.md`; setup + test scripts in `local-jarvis/scripts/` | Script lands in a later batch | 11435 |
 | REA (reverse engineering) | `local-jarvis/LOCAL-JARVIS-STACK.md` §3 | Built | CLI |
 | Dashboard v7 | `local-jarvis/dashboard/v7/` | Built, live on the reference machine | 8899 |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | Built, verified, not deployed | 11436 |
+| Voice-loop patch v5 | `local-jarvis/voice-loop/` | Built, applied on the reference machine | — |
+| Acer setup scripts | `local-jarvis/scripts/` | Built (autostart, keep-alive, CPU fix, router test, inventory, backup) | — |
+| iPad Kali plan | `local-jarvis/ipad-kali-plan.md` | Plan (not yet built) | — |
+| Tonight's runbook (2026-11-06) | `local-jarvis/tonight-runbook-2026-11-06.md` | Dated record of the build night | — |
 | ComfyUI (picture brain) | See `gpu-orchestrator/DESIGN.md` → "ComfyUI contract" | Installed separately | 8188 |
 | VLC remote | `vlc_remote.sh` / `vlc_remote.cmd` | Built | 8090 |
 | C270 camera work | Lands in a later batch | Pending | — |
 | Brain inventory + backup scripts | Lands in a later batch | Pending | — |
+
+## Reference machine — the complete list (2026-11-06)
+
+Everything below is the machine this guide reproduces. It is the whole
+list: if it is not here, it is not part of the setup.
+
+**Hardware:** Acer Nitro laptop; 512 GB NVMe internal drive; 64 GB RAM,
+DDR4, 2× 32 GB, 3200 MT/s rated, 2933 MT/s running; NVIDIA GeForce RTX
+2060, 6 GB VRAM; graphics driver 550.163.01, CUDA 12.4.
+
+**OS:** Kali Linux, everything on the internal drive.
+
+**AI brains (Ollama):** `qwen9b-abliterated` (9B, VRAM, default, fast);
+`huihui_ai/Qwen3.8-abliterated:27b` (27B, system RAM, hard reasoning).
+Also present: `qwen3:8b` (former orchestrator default, fallback only),
+`qwen2.5:3b` (helper, fallback only),
+`richardyoung/agents-a1-4b-heretic:Q4_K_M` (present, in no live code).
+The inventory script (`scripts/llm-inventory.sh`) also documents the
+embedding model, the speech models, and the unused weight files — see
+its output notes in the script itself.
+
+**Router:** model router on port 11435 — easy calls to the 9B, hard calls
+to the 27B, cloud route (Grok) unconfigured, free route on port 3001
+(FreeLLMAPI, fallback only).
+
+**Orchestrator:** voice orchestrator on port 8080.
+
+**Dashboard:** port 8899, reachable over the tailnet.
+
+**Picture brain:** ComfyUI 0.44.0 on port 8188 (SD 1.5).
+
+**Voice:** faster-whisper `small.en` for speech-to-text, Piper
+`en_GB-alan-medium` for speech; VoiceStudio 0.5.7; Hex 3.3.0 for
+dictation.
+
+**REA:** `rea-agents@6.7.0`.
+
+**Peripherals:** Logitech C270 webcam, MaonoCaster AU-AM200 audio
+interface, 4 TB external drive (mounted at `/mnt/hgx`), second monitor,
+cooling mat.
 
 ## Prerequisites
 
@@ -65,6 +111,7 @@ shipped here.
 | Voice in | Whisper `small.en` | — | CPU | — | Speech to text |
 | Voice out | Piper `en_GB-alan-medium` | — | CPU | — | Text to speech |
 | Picture brain | SD 1.5 (`v1-5-pruned-emaonly-fp16.safetensors`) | ~2 GB VRAM | ComfyUI | — | Image renders |
+| Also present | `qwen3:8b`, `qwen2.5:3b`, `richardyoung/agents-a1-4b-heretic:Q4_K_M` | — | — | — | Fallbacks / unused; see `scripts/llm-inventory.sh` |
 
 **The safe order (do not break it):** load the 9B first, then the 27B.
 Reloading the 9B while the 27B is resident can evict the 27B. The 27B
@@ -252,6 +299,7 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 | 11434 | Ollama |
 | 11435 | Router |
 | 11436 | GPU orchestrator |
+| 3001 | FreeLLMAPI (free route, fallback only) |
 
 ## Troubleshooting
 
