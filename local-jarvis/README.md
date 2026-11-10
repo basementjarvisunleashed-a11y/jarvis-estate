@@ -159,8 +159,9 @@ the threshold from `~/Jarvis/voice_gate.json`. Before the first enroll,
 edit the installed copies (the copies in git keep the placeholder):
 
 - `~/Jarvis/voice_gate.py` — set `DL` to your Downloads folder.
-- `~/Jarvis/jarvis_voice.py` — set `GATE_PY` to the Python 3.13
-  executable that has SpeechBrain
+- `~/Jarvis/jarvis_voice.py` — the gate stays off unless
+  `JARVIS_VOICE_GATE=on`. When it is on, it uses this interpreter.
+  Set `JARVIS_GATE_PY` only if SpeechBrain lives in a different one
   (`python3 -c "import sys; print(sys.executable)"`).
 - `~/Jarvis/jarvis.py` — `MIC` and `SPK` are the reference laptop's
   Maono device names. Change them to this machine's PipeWire/PulseAudio
@@ -225,9 +226,12 @@ below the threshold is ignored, including every unenrolled voice. One
    ```
 
 `jarvis_voice.sh` is a manual launcher. It is not a login item.
-`test file.wav --bypass-gate` still scores the gate and still speaks,
-which is how you hear Piper before enrollment is finished. Without
-`--bypass-gate`, an unenrolled voice is ignored.
+The voice gate defaults to off (`JARVIS_VOICE_GATE=off`): every speaker
+is approved, and the process logs that. Set `JARVIS_VOICE_GATE=on` to
+enforce it. In that mode an unknown voice is ignored, and if the gate
+cannot start every speaker is refused. `--bypass-gate` still skips the
+check and still speaks, which is how you hear Piper before enrollment
+is finished.
 
 `~/Jarvis/jarvis.sh` is the direct helper (`ask`, `say`, `listen`,
 `chat`, VLC) on `qwen2.5:3b`.
