@@ -387,7 +387,7 @@ import shutil
 import urllib.parse
 
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:8b")  # <-- change the "qwen3:8b" part here if you pulled a different model
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen9b-abliterated")  # <-- change the "qwen9b-abliterated" part here if you pulled a different model
 JARVIS_MAX_STEPS = 6       # hard cap on the tool loop -- no runaways
 JARVIS_TIMEOUT = 120       # seconds per Ollama call (CPU inference is slow)
 
@@ -419,6 +419,17 @@ else:
 
 ACTIONS_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "actions.log")
 
+# Response capture (2026-11-07): every Ollama call the voice loop makes is
+# logged in full to orchestrator-responses.jsonl (next to this file), one
+# JSON object per line -- time, model, the full prompt (messages), the full
+# reply, and the tool calls + tool results when present. Fail-open: a
+# logging failure never breaks a call. The publishing house scrubs each
+# batch before it reaches GitHub; raw logs never go to GitHub.
+RESPONSE_LOG_PATH = os.environ.get(
+    "ORCHESTRATOR_RESPONSES_LOG",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                 "orchestrator-responses.jsonl"))
+
 
 class _OllamaDown(Exception):
     pass
@@ -433,6 +444,37 @@ def _log_action(tool, args, result):
                 f.write(json.dumps(entry) + "\n")
     except Exception as e:
         print("actions.log write failed: %s" % e)
+
+
+_NO_MODEL = object()  # sentinel: no model passed (use OLLAMA_MODEL)
+
+
+def _log_response(messages, response, tool_calls, tool_results,
+                  model=_NO_MODEL, fast_path=False, error=None):
+    """Append one response-capture entry (JSONL) to RESPONSE_LOG_PATH.
+
+    One entry per Ollama call (plus one per fast-path media command, which
+    makes no model call): time, model, the full prompt (messages), the FULL
+    reply text (whole, not summarized), and the tool calls + tool results
+    when present. Fail-open: a logging failure must never break a call, so
+    every failure path here is swallowed. The entry is written best-effort;
+    if the file cannot be written, the call still succeeds.
+    """
+    entry = {"ts": datetime.now().isoformat(timespec="seconds"),
+             "model": OLLAMA_MODEL if model is _NO_MODEL else model,
+             "messages": messages,
+             "response": response,
+             "tool_calls": tool_calls,
+             "tool_results": tool_results,
+             "fast_path": bool(fast_path),
+             "error": error or ""}
+    try:
+        with _lock:
+            with open(RESPONSE_LOG_PATH, "a", encoding="utf-8") as f:
+                f.write(json.dumps(entry) + "\n")
+                f.flush()
+    except Exception as e:
+        print("orchestrator-responses.jsonl write failed: %s" % e)
 
 
 def _safe_path(p):
@@ -834,17 +876,28 @@ def jarvis_ask(text):
         result = str(JARVIS_DISPATCH[name]({}))
         _log_action(name, {}, result)
         actions.append({"tool": name, "ok": not result.startswith("ERROR")})
+        _log_response([{"role": "user", "content": text}], result,
+                      [{"function": {"name": name, "arguments": "{}"}}],
+                      [{"tool": name, "arguments": {}, "result": result}],
+                      model=None, fast_path=True)
         return result, actions
     messages = [{"role": "system", "content": JARVIS_SYSTEM},
                 {"role": "user", "content": text}]
     for _ in range(JARVIS_MAX_STEPS):
-        data = _ollama_chat(messages)
+        sent = json.loads(json.dumps(messages))  # prompt as sent, deep-copied
+        try:
+            data = _ollama_chat(messages)
+        except _OllamaDown as e:
+            _log_response(sent, "", [], [], error="ollama-down: %s" % e)
+            raise
         msg = data.get("message") or {}
         calls = msg.get("tool_calls") or []
         if not calls:
+            _log_response(sent, msg.get("content") or "", [], [])
             return (msg.get("content") or "(no answer)").strip(), actions
         messages.append({"role": "assistant", "content": msg.get("content") or "",
                          "tool_calls": calls})
+        tool_results = []
         for tc in calls:
             fn = tc.get("function") or {}
             name = fn.get("name", "")
@@ -865,8 +918,10 @@ def jarvis_ask(text):
                     result = "ERROR: tool crashed: %s" % e
             _log_action(name, fargs, result)
             actions.append({"tool": name, "ok": not result.startswith("ERROR")})
+            tool_results.append({"tool": name, "arguments": fargs, "result": result})
             messages.append({"role": "tool", "tool_name": name,
                              "content": result})
+        _log_response(sent, msg.get("content") or "", calls, tool_results)
         if all(((tc.get("function") or {}).get("name") in _SIMPLE_VLC) for tc in calls):
             return " ".join(x["content"] for x in messages[-len(calls):]), actions
     return ("I ran the tools but did not reach a final answer -- "
@@ -959,7 +1014,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json({
                     "ok": False, "error": "ollama-down",
                     "reply": ("The laptop's brain isn't answering -- is Ollama running? "
-                              "Open Ollama from the Start menu and try again.")}, 200)
+                              "Check that Ollama is running and try again.")}, 200)
                 return
             except Exception as e:
                 print("JARVIS failed: %s" % e)
