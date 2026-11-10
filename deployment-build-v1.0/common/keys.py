@@ -32,15 +32,25 @@ class KeyError(Exception):
 
 def ceremony_generate(key_dir: str = KEY_DIR, surfaces=()) -> dict:
     """Run the key ceremony. Returns {name: key_bytes}."""
-    os.makedirs(key_dir, exist_ok=True)
+    # SAF-08: key material is owner-only (dir 0700, files 0600) whatever
+    # the umask; test keys today, the same code path for real ones later.
+    os.makedirs(key_dir, mode=0o700, exist_ok=True)
+    os.chmod(key_dir, 0o700)
     with open(os.path.join(key_dir, MARKER), "w", encoding="utf-8") as fh:
         fh.write(MARKER_TEXT)
     keys = {"master": secrets.token_bytes(32)}
     for s in surfaces:
         keys["surface:%s" % s] = secrets.token_bytes(32)
     for name, kb in keys.items():
-        with open(os.path.join(key_dir, name.replace(":", "_") + ".key"),
-                  "wb") as fh:
+        path = os.path.join(key_dir, name.replace(":", "_") + ".key")
+        # 0600 is applied by open() and again by fchmod, so a umask cannot
+        # widen it. O_NOFOLLOW refuses to write the key through a symlink.
+        flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC
+        if hasattr(os, "O_NOFOLLOW"):
+            flags |= os.O_NOFOLLOW
+        fd = os.open(path, flags, 0o600)
+        os.fchmod(fd, 0o600)
+        with os.fdopen(fd, "wb") as fh:
             fh.write(kb)
     return keys
 
