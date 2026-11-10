@@ -26,16 +26,16 @@ evidence forever. Nothing is asserted without it.
 | E-011 | Phase 4 closed — L2 20/20, L3 15/15, 35 claims | formal-spec/tests/phase4/ | 2026-10-21 22:31 ET |
 | E-012 | Phase 5 closed — L2 93/93, L3 34/34, 0 findings, 146/146 claims | formal-spec/tests/phase5/ | 2026-10-22 12:44 ET |
 
-## PRESENT — verified (checked 2026-10-27)
+## PRESENT — verified (checked 2026-11-09 ~09:11 ET)
 
 | Surface              | State                                                              |
 |----------------------|--------------------------------------------------------------------|
 | Local Jarvis         | **Live in the repository** — Kali Linux laptop platform (live 2026-11-04) in `local-jarvis/` (platform record `PLATFORM-KALI.md`). Prior Windows build files retained for reference. Voice loop is not auto-started. Placeholders only. |
-| Public site (GitHub Pages) | **Live** — https://basementjarvisunleashed-a11y.github.io/jarvis-estate/ — source is `/` on `main` (legacy Pages). The refreshed homepage ships with the docs update dated 2026-10-27 and is what `main` serves after that commit lands. |
-| Website artifact (`j-a-r-v-i-s-hub`) | Last recorded share state remains `shared: false` (audit 2026-W44). GitHub Pages is the public site. `website/index.html` is the archived hub, not the homepage. |
-| Dropbox              | Share URLs are still the ones minted into the docs. Checked 2026-10-27: file links (`dl=1`) and the folder link respond with a Dropbox login page. Not public downloads until HgX remints them. |
+| Public site (GitHub Pages) | **Live** — https://basementjarvisunleashed-a11y.github.io/jarvis-estate/ — fetched in the 2026-W46 audit (homepage "J.A.R.V.I.S. — Estate 1.2.1", chronicle newest 2026-10-28) |
+| Website artifact (`j-a-r-v-i-s-hub`) | Last recorded share state remains `shared: false` (audit 2026-W46). GitHub Pages is the public site. `website/index.html` is the archived hub, not the homepage. |
+| Dropbox              | Archive present; audits/weekly holds 2026-W43/W44/W45 (W46 uploaded by this audit); scores/ holds updated versions; logs current through build-log-2026-11-09. Folder share link returns a Dropbox login page to anonymous fetchers (re-verified 2026-11-01; see F-006) |
 | Muse share           | https://muse.ai/s/j-a-r-v-i-s-white-paper-wxs6bxaxyuhxafxi returned "Shared link unavailable" on 2026-10-27. |
-| Repo                 | Public GitHub repository `basementjarvisunleashed-a11y/jarvis-estate`. Default branch `main`. |
+| Repo                 | Local `master` at 7168f4a (Academy Session 7 log 2026-11-05) before this audit's commit, **not pushed**; canonical `main` at 728bc84 (nightly publish 2026-11-09), `VERSION` 1.2.1, in sync with `origin/main` (0 ahead/behind — W45's ahead-1 resolved by nightly publish) |
 
 ## FUTURE — tracked
 
