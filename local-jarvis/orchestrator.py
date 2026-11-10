@@ -689,7 +689,14 @@ def _vlc_watch():
         time.sleep(3)
 
 
-threading.Thread(target=_vlc_watch, daemon=True).start()
+def _start_vlc_watch():
+    """Start the VLC probe from main(), not at import.
+
+    A daemon thread that is inside a socket call at interpreter shutdown
+    can crash the process. Tests import this module and must be able to
+    exit cleanly.
+    """
+    threading.Thread(target=_vlc_watch, daemon=True).start()
 
 
 def _vlc_ping():
@@ -1046,6 +1053,7 @@ def _lan_ip():
 
 
 def main():
+    _start_vlc_watch()
     print("=" * 60)
     print("Bracelet PoC orchestrator -- one brain, two surfaces")
     print("=" * 60)
