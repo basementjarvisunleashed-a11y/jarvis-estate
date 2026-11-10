@@ -11,14 +11,17 @@ core voice stack, the dual brain (9B now at context 32768), REA with all
 the GPU orchestrator (deployed), the voice-loop patch v5, brains
 autostart (installed + verified 2026-11-08), BLA 3.2.3 (counter-REA),
 Free Claude Code 6.19.6, Ghidra in two copies, Craft Anything 0.5.0,
-the CrackMe v9 runner (in progress), the Acer setup scripts, the brain
+the CrackMe v9 runner (stopped 2026-11-10, resumable), the overnight
+BLA + 27B runner, Qwen Code 0.27.1, OpenMausBot 0.1.151 (the Grok Bot),
+the Acer setup scripts, the brain
 inventory/backup scripts, the iPad Kali plan, tonight's runbook, and
 the Acer source snapshot — the live router, orchestrator, voice loop,
 autostart launchers, and C270 captures from the laptop (2026-11-06
 23:36 ET).
 Still to land: the iPad Kali downloads (UTM, Kali ISO, StikDebug —
 sources documented in the plan, installers never uploaded) and the
-CrackMe v9 result (the runner is still going). Nothing here is faked: a
+CrackMe v9 result (the runner was stopped 2026-11-10; the overnight
+runner resumes it tonight). Nothing here is faked: a
 step marked pending is pending, and a result marked in-progress is
 in-progress.
 
@@ -52,6 +55,9 @@ on your own machine. Do not commit the real values.
 | Ghidra (two copies) | — (documented in `STATE-2026-11-10.md`) | apt 12.1.4 + upstream 12.2, confirmed 2026-11-10 | CLI |
 | Craft Anything 0.5.0 | — (documented in `STATE-2026-11-10.md`) | Installed 2026-11-07, doctor healthy | CLI |
 | CrackMe v9 runner | `local-jarvis/crackme-v9/` | STOPPED / OPEN — stopped by HgX 2026-11-10 08:25 ET to free the CPU for Claude; license done, WASM task killed on attempt 2; resumable from the WASM task; no key recovered, no solve claimed | — |
+| Overnight BLA + 27B runner v1 | `local-jarvis/overnight-runner/` | INSTALLED 2026-11-10 — resumes CrackMe to completion, then one BLA red-vs-blue smoke test; morning report + status.txt; HgX starts it tonight before bed | — |
+| Qwen Code 0.27.1 | — (service, documented in `STATE-2026-11-10.md`) | Installed 2026-11-10 — CLI at `~/.local/bin/qwen`; local Ollama config given (9B-32k), test run unconfirmed | 11434 (Ollama) |
+| OpenMausBot 0.1.151 (the Grok Bot) | — (service, documented in `STATE-2026-11-10.md`) | Installed + RUNNING 2026-11-10 — App :5199 + Harness :8799; Claude skills ON, MCP servers OFF; Engines step (point Claude at fcc-claude) still to do | 5199, 8799 |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
 | Current state snapshot | `local-jarvis/STATE-2026-11-10.md` | The exact moment, 2026-11-10 ~08:20 ET — the whole system, as it stands | — |
@@ -124,7 +130,14 @@ caveat in `STATE-2026-11-10.md`).
 **Ghidra:** two copies — apt 12.1.4 + upstream 12.2. **Craft
 Anything:** 0.5.0, doctor healthy. **CrackMe v9:** runner STOPPED by
 HgX 2026-11-10 08:25 ET (license done, WASM task killed on attempt 2;
-resumable; no key recovered).
+resumable; no key recovered). **Overnight runner v1:** installed at
+`~/overnight-27b-runner/` — resumes CrackMe, then one BLA red-vs-blue
+smoke test; HgX starts it tonight before bed. **Qwen Code:** 0.27.1,
+CLI at `~/.local/bin/qwen`, local Ollama 9B-32k config given,
+test run unconfirmed. **OpenMausBot (the Grok Bot):** 0.1.151, running
+(PID 334751), App :5199 + Harness :8799; Claude skills ON, MCP servers
+OFF; Engines step still to do (point Claude at fcc-claude); FCC server
+must be running and is NOT autostarted.
 
 **Voice:** faster-whisper `small.en` for speech-to-text, Piper
 `en_GB-alan-medium` for speech; VoiceStudio 0.5.7 (launched once, home

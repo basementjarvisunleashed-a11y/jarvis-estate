@@ -106,6 +106,15 @@ both 24-hour pins). Files: `local-jarvis/autostart/` (scrubbed).
 Update done 2026-11-10: the live `start-brains.sh` now loads
 `qwen9b-abliterated-32k` with `num_ctx` 32768 at boot (backup
 `start-brains.sh.bak-32kmodel`); the repo copy predates that update.
+`keep-brains-alive.sh` was updated to 32k too (line 63, cron present).
+**"Build it all"** (2026-11-10 ~09:08 ET): daytime = Claude Code
+(9B-32k) + REA + tools, interactive; nighttime = 27B + BLA overnight
+runners. The overnight runner v1 is installed at
+`~/overnight-27b-runner/` (resumes CrackMe, then one BLA red-vs-blue
+smoke test; HgX starts it tonight before bed). **Orchestrator SAF-01**
+(PR #67, merged 2026-11-10 15:19 ET): the voice orchestrator binds
+loopback by default; non-loopback needs `JARVIS_TOKEN`; Host-header +
+JSON-body request gate; VLC probe starts from `main()`.
 
 ---
 
@@ -178,7 +187,7 @@ Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient o
 6. **Prism** — PENDING.
 7. **Macro, Kali only** — PENDING.
 8. **Hacking-Tools gaps, one by one** — PENDING. The hacking-tools catalog is a reference map, not 900 installs: not all 900 run at once, not every listed item runs locally, installs wait for the Kali phase, one tool at a time and only on his order.
-9. **Claude Plugins** — PARTIAL: Claude Code 2.1.322 installed via Free Claude Code 6.19.6 (2026-11-10, server :8082) and WORKING — first fcc-claude answer 2026-11-10 08:46 ET via the custom `qwen9b-abliterated-32k` model; the plugins themselves unconfirmed.
+9. **Claude Plugins** — PARTIAL: Claude Code 2.1.322 installed via Free Claude Code 6.19.6 (2026-11-10, server :8082) and WORKING — first fcc-claude answer 2026-11-10 08:46 ET via the custom `qwen9b-abliterated-32k` model; the plugins themselves unconfirmed. **Qwen Code 0.27.1** installed 2026-11-10 (local Ollama 9B-32k config given, test run unconfirmed). **OpenMausBot 0.1.151 (the Grok Bot)** installed + running 2026-11-10 — Claude skills ON (REA + BLA skills load), MCP servers OFF, Engines step (point Claude at fcc-claude) still to do.
 10. **VoiceStudio** — INSTALLED 0.5.7, launched once (home screen verified), not running.
 11. **GenOffice** — INSTALLED 0.12.852, launch not yet verified.
 12. **Reference libraries, last** — PENDING.
