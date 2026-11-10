@@ -172,6 +172,11 @@ class SessionRegistry:
     def require_active(self, session_id):
         """The single gate every decision point uses (SL-21, SL-22)."""
         session = self._get_known(session_id)
+        # SAF-10: expiry is evaluated here, at the decision point (SL-11),
+        # not only when someone remembers to call sweep_expiry().
+        if session.state == "active" and \
+                self.clock.now() >= datetime.fromisoformat(session.expiry):
+            session.state = "expired"
         if session.state == "revoked":
             refuse("session-registry", "revoked-session",
                    f"{session_id} revoked: authority dead (SL-14)")
@@ -187,6 +192,10 @@ class SessionRegistry:
         if session.state == "unenrolled":
             refuse("session-registry", "unenrolled-device",
                    "no session: all requests refused (SL-3)")
+        if session.state != "active":
+            # SAF-10: fail closed on any state this gate does not know.
+            refuse("session-registry", "unknown-state",
+                   f"{session_id} in unrecognised state {session.state!r}")
         return session
 
     # -- expiry (SL-10...SL-13) ------------------------------------------
