@@ -17,9 +17,10 @@
 | | |
 |---|---|
 | 🔥 **Kali Linux** | Everything installed on the internal drive. All tools updated, graphics driver in, Bluetooth working, Wi-Fi working, login working. |
-| 🔬 **REA 6.7.0** | Reverse Engineer Anything, ready for local app analysis. `npx rea-agents analyze /path/to/app`. Ghidra guided workflows installed. |
+| 🔬 **REA 6.7.0** | Reverse Engineer Anything, ready for local app analysis. `npx rea-agents analyze /path/to/app`. All 15 REA tools installed (2026-11-07); Ghidra in two copies (apt 12.1.4 + upstream 12.2); C270 15-tool breakdown CLOSED 2026-11-08 (stock, clean UVC device). |
+| 📺 **Dashboard v12** | Always-on screen, live on the Acer since 2026-11-08 — GPU, temperatures, RAM, media tile, live two-way conversation feed, webcam beside the player. Brains autostart installed, both brains load in ~41s at reboot. |
 | 💻 **The machine** | Acer Nitro AN515-55. i7-10750H. 64GB RAM. RTX 2060, about 6GB VRAM. 512GB NVMe. |
-| 🎓 **OPERATOR PRIME — HGX Academy** | The one-year open source course, taught by HGX Academy — HgX's own academy. Full-Spectrum Operator Systems. Labs L1–L20 locked. 272 course files: canon, Dean batches 1–3, student packs, year pack, professor pack, professor skill, Academy action log. [Course website](course/) · [Course index](course/README.md). |
+| 🎓 **OPERATOR PRIME — HGX Academy** | The one-year open source course, taught by HGX Academy — HgX's own academy. Full-Spectrum Operator Systems. Labs L1–L50 locked. 531 course files: canon, Dean batches 1–3, student packs, year pack, professor pack, professor skill, Academy action log. [Course website](course/) · [Course index](course/README.md). |
 | 🛠️ **Build your own Jarvis** | The how-to: the course, the build, and the website, in order — the two brains, the router, the voice, the dashboard, REA, and the hard rules. [BUILD-YOUR-OWN-JARVIS.md](BUILD-YOUR-OWN-JARVIS.md). |
 
 ## Contents
@@ -48,6 +49,33 @@ full page on the website:
 [build-your-own-jarvis/](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/build-your-own-jarvis/).
 
 ## Recent
+
+### 2026-11-10 — The whole build, brought current
+
+The repo now matches the Acer again, three days on. Dashboard **v12
+is LIVE** on the Acer since 2026-11-08 (laptop camera stacked
+full-width below the C270, CPU temp + GPU on the top strip, whole page
+scrolls, REA tile shows the C270 breakdown; the laptop camera shows
+color bars — a camera fault, not the dashboard). Brains autostart is
+**installed + verified** (both brains load in ~41s at reboot). The 9B
+now runs at **context 32768** (was 8192, 7.1 GB loaded, verified
+2026-11-10). The C270 15-tool breakdown is **CLOSED** (373 functions,
+6,037 packets, 83.0% isochronous — stock, clean UVC device). All **15
+REA tools** are installed, with Ghidra in two copies (apt 12.1.4 +
+upstream 12.2). **BLA 3.2.3** is installed as the counter-REA defense
+(14/14 benchmark — internal modeled estimates, caveated in the state
+file). **Free Claude Code 6.19.6** is installed (server on :8082);
+fcc-claude's answer is still pending, not claimed working. The
+**CrackMe v9** runner is **in progress** (license done, WASM task
+running; no solve claimed). The dated snapshot
+[`local-jarvis/STATE-2026-11-10.md`](local-jarvis/STATE-2026-11-10.md)
+is the exact moment as of 2026-11-10 ~08:20 ET, and the run-it-yourself
+guide ([`local-jarvis/SETUP.md`](local-jarvis/SETUP.md)) and the stack
+record ([`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md))
+now carry the built dual brain, the installed stacks, and the dropped
+voice gate (everybody operator-approved since 2026-11-05). Still to
+land: the CrackMe v9 result, the C270 consolidated report file, and
+the iPad Kali build (PARKED).
 
 ### 2026-11-07 — GitHub reconciled with the laptop build
 
@@ -111,7 +139,7 @@ The operator is **HgX**. Personal details stay off the public tree.
 On 2026-10-27 the live estate has three command roles and nine worker bots:
 
 - **Cloud JARVIS** is the cloud brain and the sovereign of the estate.
-- **Local Jarvis** runs on the owner's laptop. It uses Ollama `qwen3:8b`, an orchestrator on port 8080, and voice through Whisper and Piper. Router v2.2 went live the same day at 17:28 America/Toronto. A voice turn has a 50 second budget. The client waits 60 seconds. freellmapi is the fallback only, and only when Ollama is down.
+- **Local Jarvis** runs on the owner's laptop. It uses Ollama `qwen9b-abliterated` (context 32768), an orchestrator on port 8080, and voice through Whisper and Piper. Router v2.2 went live the same day at 17:28 America/Toronto. A voice turn has a 50 second budget. The client waits 60 seconds. freellmapi is the fallback only, and only when Ollama is down.
 - **Chief of staff** coordinates the worker bots and reports to Cloud JARVIS and to Local Jarvis.
 
 The custody loop is unchanged:
@@ -127,11 +155,11 @@ This repository is the public record: doctrine, skills, the formal programme, Wa
 **1.0 is the whole open-source system, and the course is embedded inside it — not a separate product, not a side pipeline.** 1.0 = the course + all open-source hardware used in the course + the bracelet, all open source. The bracelet is one device in 1.0, not the whole of 1.0.
 
 - **The course:** OPERATOR PRIME — Full-Spectrum Operator Course, taught by **HGX Academy**, HgX's own academy. Modules M0–M14, Labs L1–L20, Project 25, 21 checkpoints, assessment 40/25/15/20. See the [course website](course/) and [course index](course/README.md).
-- **The hardware:** All open-source hardware used in the course is part of 1.0. Hardware H1–H20 in hand, H21–H30 draft. Kali Linux everything, REA `rea-agents@6.7.0`, the basement lab laptop that can rip apart anything.
+- **The hardware:** All open-source hardware used in the course is part of 1.0. Hardware H1–H20 in hand, H21–H30 locked as lab hardware for L21–L30 (Addendum 2). Kali Linux everything, REA `rea-agents@6.7.0`, the basement lab laptop that can rip apart anything.
 - **The bracelet:** One device in 1.0, not the whole of 1.0. The wrist proof of concept, the offline-first link, the T-Watch-S3 + LoRa — one piece of the open-source system.
 - **How the next version is built:** Students take the course in an open-source manner — operate, document, log, prevent, own targets only, consenting adults, controlled lab only. What they learn, and what we learn from them — what worked, what broke, what tools were missing, what evidence logs looked like, what operators struggled with, what hardware failed, what workflows were too slow or super fast — taken scrubbed, with consent, no personal data, is how the next version is built. Service design from real student operations, not just a workforce pipeline, not just bracelet sales.
 
-ComfyUI v0.43.0 and freellmapi run on that laptop. They are estate facts. They are not installed by the downloadable `local-jarvis/` installer. About 15 free LLM provider keys were pooled on 2026-10-27 for The Free Model Gateway. No key material is in this repository. A box disk incident the same day was recovered. No host names or recovery steps are published.
+ComfyUI v0.44.0 and freellmapi run on that laptop. They are estate facts. They are not installed by the downloadable `local-jarvis/` installer. About 15 free LLM provider keys were pooled on 2026-10-27 for The Free Model Gateway. No key material is in this repository. A box disk incident the same day was recovered. No host names or recovery steps are published.
 
 ## Architecture
 
@@ -157,7 +185,7 @@ flowchart LR
     whisper --> gate[Voice gate]
     gate --> orch["Orchestrator :8080"]
     orch --> router["Router v2.2"]
-    router --> ollama["Ollama qwen3:8b"]
+    router --> ollama["Ollama qwen9b-abliterated"]
     router --> free["freellmapi fallback"]
     ollama --> tools["Tools / VLC / REA"]
     free --> tools
@@ -172,7 +200,7 @@ Nine workers. Each has a persona. The chief of staff is the coordinator, not a t
 
 | Bot | Persona | What is public |
 |---|---|---|
-| Image Forge | Flamboyant Renaissance painter | ComfyUI v0.43.0 on the laptop |
+| Image Forge | Flamboyant Renaissance painter | ComfyUI v0.44.0 on the laptop |
 | Security Audit Force | Noir detective | The security gate |
 | OpenMuse | Serene Greek muse | OpenMuse |
 | The Free Model Gateway | Brooklyn hustler | freellmapi; about 15 free LLM provider keys pooled 2026-10-27 |
@@ -192,18 +220,18 @@ The laptop platform is [`local-jarvis/`](local-jarvis/README.md). It does not st
 
 **Platform as of 2026-11-04: Kali Linux on the internal drive.** The laptop runs Kali Linux with all tools updated, graphics driver installed, Bluetooth and Wi-Fi working, and login working. Windows is no longer on the internal drive. The Windows licence is motherboard-tied; a later reinstall via ISO is possible with no product key needed. The local-jarvis guide is rewritten for Kali Linux; the prior Windows guide is preserved in git history. The live platform is Kali Linux. See [`local-jarvis/PLATFORM-KALI.md`](local-jarvis/PLATFORM-KALI.md) for the current platform record.
 
-Router v2.2, the 50 second voice budget, the 60 second client wait, ComfyUI v0.43.0, and the freellmapi fallback are live on the owner's laptop. freellmapi is the fallback only.
+Router v2.2, the 50 second voice budget, the 60 second client wait, ComfyUI v0.44.0, and the freellmapi fallback are live on the owner's laptop. freellmapi is the fallback only.
 
 Hardware: Acer Nitro AN515-55, i7-10750H, 64GB RAM, RTX 2060 (about 6GB VRAM), 512GB NVMe internal drive. CPU Whisper works without the GPU.
 
 REA is ready for local app analysis: `rea-agents@6.7.0`, installed via `npx rea-agents setup`, with the REA reverse-engineering skill for CLI use. CLI: `npx rea-agents analyze /path/to/app`. Deep analysis uses Ghidra with guided reverse-engineering workflows installed.
 
-Planned, not yet built: Ollama check, a 4B abliterated local model resident on VRAM as the fast low-end brain, a 27B abliterated local model on RAM as the slow high-end brain, switching logic in the orchestrator layers and usage router (default VRAM fast, escalate to RAM high for hard tasks, de-escalate back), then the remaining software stacks in efficient order, Kali tools mapping into REA, and Project 25 prove-out. No middle 8B test. None of these are claimed as installed until confirmed built. The full consolidated record — core, Kali, REA, and the entire pending stack, each item marked BUILT or PENDING — is [`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md).
+Built: the dual brain — `qwen9b-abliterated` resident on VRAM (context 32768) as the fast low-end brain, `huihui_ai/Qwen3.8-abliterated:27b` on RAM as the slow high-end brain, switching through the Usage Router + Model Router (default VRAM fast, escalate to RAM high for hard tasks, de-escalate back), plus the GPU orchestrator, brains autostart, and the installed stacks (quick tools, Ollama tools, ComfyUI 0.44.0). Still pending: DeepTutor, Prism, Macro, the Hacking-Tools gaps one by one, Kali tools mapping into REA, and Project 25 prove-out. No middle 8B test. None of the pending items are claimed as installed until confirmed built. The full consolidated record — core, Kali, REA, and the entire pending stack, each item marked BUILT or PENDING — is [`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md).
 
-1. Install Python 3.13, [Ollama](https://ollama.com/download), and the two models named in the guide (`qwen3:8b` for the orchestrator, `qwen2.5:3b` for `jarvis.py`).
+1. Install Python 3.13, [Ollama](https://ollama.com/download), and the two models named in the guide (`qwen9b-abliterated` for the orchestrator, `qwen2.5:3b` for `jarvis.py`).
 2. Set passwords and the user account on the machine. The tree ships placeholders only (`CHANGE_ME`, `<user>`). Do not commit the real values.
 3. Start the orchestrator and open `http://localhost:8080`.
-4. Enroll the speaker before trusting the voice gate. The threshold starts at **0.45** and is **uncalibrated**.
+4. The voice gate is DROPPED on HgX's order (2026-11-05) — everybody is operator-approved, no voice check. The enrollment files stay in the repo as built artifacts for reference; do not re-enable the gate unprompted.
 
 Full steps, Piper voice files, VLC, and troubleshooting are in [`local-jarvis/README.md`](local-jarvis/README.md).
 

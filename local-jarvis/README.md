@@ -1,6 +1,6 @@
 # Local Jarvis
 
-Laptop voice stack. Platform as of 2026-11-04: Kali Linux on the internal
+Laptop voice stack. Platform as of 2026-11-10: Kali Linux on the internal
 drive, with an NVIDIA GPU, an RTX 2060 (about 6GB VRAM). On the
 reference machine the services autostart (router, orchestrator,
 dashboard — see [`SETUP.md`](SETUP.md)); the voice loop itself is
@@ -27,25 +27,25 @@ is still to land.
 ## Architecture
 
 ```
-mic → Whisper small.en → voice gate → orchestrator :8080 → Ollama qwen9b-abliterated → tools / VLC / REA → Piper TTS
+mic → Whisper small.en → orchestrator :8080 → Ollama qwen9b-abliterated → tools / VLC / REA → Piper TTS
 ```
 
 ```mermaid
 flowchart LR
     mic[Mic] --> whisper[Whisper small.en]
-    whisper --> gate[Voice gate]
-    gate --> orch["Orchestrator :8080"]
+    whisper --> orch["Orchestrator :8080"]
     orch --> ollama["Ollama qwen9b-abliterated"]
     ollama --> tools["Tools / VLC / REA"]
     tools --> piper["Piper TTS"]
 ```
 
 A turn is audio in and audio out. Whisper transcribes the mic (or a wav
-file). The voice gate scores that audio against the enrolled profile and
-drops the turn when the speaker is unenrolled. The orchestrator on port
-8080 sends the text to Ollama `qwen9b-abliterated` with thinking off, may call a
-tool, and returns a short reply. Piper speaks that reply with the
-`en_GB-alan-medium` voice.
+file). The orchestrator on port 8080 sends the text to Ollama
+`qwen9b-abliterated` with thinking off, may call a tool, and returns a
+short reply. Piper speaks that reply with the `en_GB-alan-medium`
+voice. The voice gate is DROPPED on HgX's order (2026-11-05) —
+everybody is operator-approved, no voice check; the gate files stay in
+the repo as built artifacts, not enforced.
 
 Plain VLC commands (`pause`, `play`, `resume`, `stop`, `next`, `skip`,
 `previous`, with an optional "hey jarvis") match a regex and run the
@@ -93,7 +93,9 @@ works without the GPU.
    `npx rea-agents setup` (`rea-agents@6.7.0`). The REA
    reverse-engineering skill is installed for CLI use. CLI:
    `npx rea-agents analyze /path/to/app`. Deep analysis uses Ghidra
-   with guided workflows installed. The orchestrator calls REA for
+   with guided workflows installed. All 15 REA tools are installed
+   (teach guide: `rea-tools/rea-tool-usage-guide.md`); Ghidra in two
+   copies (apt 12.1.4 + upstream 12.2). The orchestrator calls REA for
    local app analysis only.
 
 ## Virtual environment and requirements
@@ -146,6 +148,11 @@ Set it on the machine if you use the watch mesh. `paho-mqtt` is commented
 out of the requirements file; HTTP works without it.
 
 ## Enrollment and calibration
+
+> The voice gate is DROPPED on HgX's order (2026-11-05) — everybody
+> is operator-approved, no voice check. This section stays as the
+> reference for the gate files, which are built artifacts, not
+> enforced. Do not re-enable the gate unprompted.
 
 `voice_gate.py` reads the profile from `~/Downloads` and
 the threshold from `~/Jarvis/voice_gate.json`. Before the first enroll,
@@ -319,18 +326,23 @@ does not match the password in VLC's Lua HTTP preferences.
 | `dashboard/v7/` | The previous dashboard, kept as history. |
 | `dashboard/v8/` | The previous dashboard, kept as history (live until 2026-11-07 ~00:18 ET). |
 | `dashboard/v9/` | The previous dashboard, kept as history (live until 2026-11-07 ~00:45 ET). |
-| `dashboard/v10/` | Two media roots, primary first: the iPad Pro MP4 folder for VLC and in-browser playback, the drive secondary. LIVE on the Acer since 2026-11-07 ~00:45 ET. |
+| `dashboard/v10/` | Two media roots, primary first: the iPad Pro MP4 folder for VLC and in-browser playback, the drive secondary. Previous dashboard, kept as history (live until 2026-11-07 evening). |
+| `dashboard/v11/` | Applied 2026-11-07 evening, superseded by v12 — recorded as a version line only, files never sent. |
+| `dashboard/v12/` | Laptop camera stacked full-width below C270; CPU temp + GPU on top strip; whole page scrolls; REA tile shows the C270 breakdown; sports one NFL line. LIVE on the Acer since 2026-11-08. |
+| `crackme-v9/` | CrackMe v9 Sovereign runner v1 (script, README, start script, tests) — IN PROGRESS since 2026-11-10 06:49 ET; license done, WASM task running; no solve claimed. |
+| `rea-tools/` | The 15 REA tools: teach guide (`rea-tool-usage-guide.md`, scrubbed) + BLA 3.2.3 counter-REA note. The registry (`rea-toolset.md`) lives on the Acer. |
+| `STATE-2026-11-10.md` | The exact moment, 2026-11-10 ~08:20 ET — the whole system, as it stands. |
 | `gpu-orchestrator/` | GPU brain manager (9B VRAM / 27B RAM). **DEPLOYED 2026-11-06, loop proven, keep-alive v2** (midnight run confirmed 2026-11-07 00:02). |
 | `router/` | The little router (`04-little-router.py`, port 11435) + its design record (`03-router.md`, `PLAN.md`, `TONIGHT-RUNBOOK-2026-11-05.md`). |
 | `scripts/` | Acer setup scripts in run order: drive mount + inventory, the 2026-11-05 consolidation scripts, autostart, keep-alive, router tests, brain inventory + backup. |
 | `plans/` | The design plans behind the build (dashboard, drive clean-out, C270 teardown, REA bench shopping list), each with a dated status note. |
 | `pi500/` | The Raspberry Pi 500+ rig: top 10, software stack, accessories. Ordered and paid for 2026-11-05; role still to be decided. |
-| `c270/` | The Logitech C270 enumeration, captures and the rainbow clip. |
-| `autostart/` | The autostart launchers (router, orchestrator, dashboard, keep-alive). |
+| `c270/` | The Logitech C270 enumeration, captures and the rainbow clip — plus the 15-tool breakdown, CLOSED 2026-11-08 (373 functions, 6,037 packets, 83.0% isochronous; stock, clean UVC device). |
+| `autostart/` | The autostart launchers (router, orchestrator, dashboard, keep-alive) + brains autostart (installed + verified 2026-11-08, both brains load in ~41s at reboot). |
 | `ipad-kali-plan.md` | Kali on the iPad plan. PARKED; downloads done, build not started. |
 | `transcripts/` | The model-response archive: every reply from the 9B, the 27B and REA, scrubbed, one file per day. Capture starts 2026-11-07 ~00:31 ET. |
 | `RECAP-2026-11-06.md` | The full day 2026-11-06 into 2026-11-07, state as of ~00:35 ET — done, in progress, parked, standing rules. |
-| `STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands. |
+| `STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — kept as history. |
 
 ## History note
 

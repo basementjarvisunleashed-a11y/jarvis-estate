@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jarvis Brains
+Comment=Load the 9B and 27B brains at login (9B first, then 27B, 24h keep-alive)
+Exec=/home/owner/Jarvis/autostart/start-brains.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

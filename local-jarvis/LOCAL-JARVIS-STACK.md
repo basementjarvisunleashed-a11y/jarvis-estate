@@ -4,7 +4,7 @@
 
 Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
-**Status rule for this document:** every item is marked BUILT or PENDING. A PENDING item is planned only — it is not claimed as installed, running, or verified until HgX confirms it built. This document is the single consolidated record of the local Jarvis stack as of 2026-11-04. Platform 1.2.1.
+**Status rule for this document:** every item is marked BUILT or PENDING. A PENDING item is planned only — it is not claimed as installed, running, or verified until HgX confirms it built. This document is the single consolidated record of the local Jarvis stack as of 2026-11-10. Platform 1.2.1.
 
 ---
 
@@ -37,9 +37,9 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 
 **Voice stack — built:**
 
-- Mic → Whisper small.en → voice gate → orchestrator on port 8080 → Ollama `qwen3:8b` → tools / VLC / REA → Piper TTS (`en_GB-alan-medium`).
+- Mic → Whisper small.en → orchestrator on port 8080 → Ollama `qwen9b-abliterated` (context 32768 since 2026-11-10) → tools / VLC / REA → Piper TTS (`en_GB-alan-medium`).
 - The orchestrator listens only after you start it. The voice loop is deliberately not auto-started.
-- The voice gate scores audio against the enrolled profile and drops the turn when the speaker is unenrolled.
+- The voice gate is DROPPED on HgX's order (2026-11-05) — everybody is operator-approved, no voice check. The gate files stay in the repo as built artifacts, not enforced.
 - `jarvis.py` is a separate helper (list / play / pause / ask / say / listen / chat) on `qwen2.5:3b` via Ollama `/api/generate`. The voice loop does not use that model.
 - Router v2.2, 50 second voice budget, 60 second client wait, freellmapi as fallback only.
 - Plain VLC commands (`pause`, `play`, `resume`, `stop`, `next`, `skip`, `previous`, with an optional "hey jarvis") match a regex and run without a model round trip.
@@ -54,13 +54,23 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 - **v8** is the previous dashboard, applied and live until 2026-11-07
   ~00:18 ET. Kept in the repo as history.
   Files: `local-jarvis/dashboard/v8/`.
-- **v9 is the current dashboard, LIVE on the Acer (2026-11-07 ~00:18
-  ET):** visual polish only — deeper dark, arc-reactor glow, cleaner
-  type, room to breathe — and the webcam now sits in the MEDIA tile,
-  directly beside the video player (no more floating webcam tile).
-  Applied from the published copy (`local-jarvis/dashboard/v9/`), v8
-  backed up to `dashboard.bak-v8`. Confirmed live by terminal output
-  (`/api/status` 200, GPU 34°C, media mounted).
+- **v12 is the current dashboard, LIVE on the Acer (2026-11-08):**
+  laptop camera stacked full-width below the C270; CPU temp + GPU on
+  the top strip; whole page scrolls; REA tile shows the C270 breakdown;
+  sports shrunk to one NFL line. Applied from the published copy
+  (`local-jarvis/dashboard/v12/`), v11 backed up to `dashboard.bak-v11`.
+  Confirmed live by terminal output (`/api/status` 200). The laptop
+  camera shows color bars — a camera/firmware fault, not the dashboard;
+  the thread is closed.
+- v11 was applied 2026-11-07 evening and superseded by v12; its files
+  were never sent to the publishing house, so v11 is recorded as a
+  version line only, not as files.
+- **v10 was the previous dashboard, LIVE on the Acer (2026-11-07
+  ~00:45 ET):** two media roots, primary first — the iPad Pro MP4
+  folder for VLC and in-browser playback, the drive secondary — and the
+  webcam in the MEDIA tile, directly beside the video player.
+  Applied from the published copy (`local-jarvis/dashboard/v10/`), v9
+  backed up to `dashboard.bak-v9`.
 - v8 (redesign — one screen, no scrolling) is built, verified
   (2026-11-06 ~23:54 ET, 7 directives + 5 playback fixes, API 28/28,
   layout 31/31), PUBLISHED here (`local-jarvis/dashboard/v8/`) and
@@ -69,8 +79,16 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 - v9 (visual polish — deeper dark, arc-reactor glow, cleaner type, the
   webcam beside the video player) is built, verified (API 28/28, layout
   35/35), PUBLISHED here (`local-jarvis/dashboard/v9/`) and APPLIED to
-  the Acer (2026-11-07 ~00:18 ET, v8 backed up). **v9 is the live
-  dashboard.**
+  the Acer (2026-11-07 ~00:18 ET, v8 backed up). Superseded by v10 as
+  the live dashboard.
+- v10 (two media roots, primary first) is built, verified (API 38/38,
+  layout 36/36), PUBLISHED here (`local-jarvis/dashboard/v10/`) and
+  APPLIED to the Acer (2026-11-07 ~00:45 ET, v9 backed up). Superseded
+  by v11, then v12, as the live dashboard.
+- v12 is built, verified (API endpoints present, all six v12 changes
+  confirmed in the files), PUBLISHED here
+  (`local-jarvis/dashboard/v12/`) and APPLIED to the Acer (2026-11-08,
+  v11 backed up). **v12 is the live dashboard.**
 
 **GPU orchestrator — DEPLOYED on the Acer (2026-11-06 ~23:50 ET):**
 
@@ -82,6 +100,12 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
   MiB; one easy call brought the 9B back, both brains resident, VRAM
   4,830 of 6,144). See `gpu-orchestrator/README.md` → "Deployed".
 
+**Brains autostart — INSTALLED + VERIFIED (2026-11-08):** both brains
+load in ~41 seconds at reboot (9B ctx 8192 at load time, 27B ctx 4096,
+both 24-hour pins). Files: `local-jarvis/autostart/` (scrubbed).
+Pending: `start-brains.sh` still loads the 9B with `num_ctx` 8192 —
+update it to 32768 after fcc-claude is confirmed working.
+
 ---
 
 ## 3. REA — BUILT
@@ -92,39 +116,67 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 - REA reverse-engineering skill installed for CLI use.
 - CLI: `npx rea-agents analyze /path/to/app`
 - Deep analysis: Ghidra, guided reverse-engineering workflows installed.
+- **All 15 REA tools installed 2026-11-07:** Detect-It-Easy 4.0.0,
+  capa v10.0.0, ImHex 1.38.1, LIEF 0.16.2, Ghidra (two copies: apt
+  12.1.4 + upstream 12.2), GhidraMCP 2.0 (port 8081, GUI verification
+  pending), angr 10.0.5, Frida 17.26.2, objection 1.12.5, jadx 1.5.6,
+  Apktool 3.0.3, ILSpy ilspycmd 11.2.0.10050, asar 4.3.1, mitmproxy
+  12.3.1, Wireshark 4.6.9. Teach guide:
+  `local-jarvis/rea-tools/rea-tool-usage-guide.md`; registry
+  `~/Jarvis/rea-toolset.md` lives on the Acer.
+- **C270 15-tool breakdown — CLOSED 2026-11-08:** 373 functions
+  decompiled, 6,037 packets / 233 MB live pcap, 83.0% isochronous.
+  Verdict: stock, clean UVC device. Figures in
+  `local-jarvis/STATE-2026-11-10.md`; the full consolidated report
+  lives on the Acer, not yet sent.
+- **BLA 3.2.3 (counter-REA defense, not a REA tool)** — installed
+  2026-11-10; 14/14 benchmark (internal modeled estimates, caveated
+  in `STATE-2026-11-10.md`).
 - Status: REA is ready for local app analysis.
 
 **What REA is for here:** the basement laptop that can rip apart anything, then put it back together with evidence. Local app analysis only — own devices and own targets only, consenting adults, controlled lab only, spine SEE → DOCUMENT → LOG → PREVENT.
 
 ---
 
-## 4. The pending stack — PENDING, not built
+## 4. The pending stack — partly built, partly pending
 
-**These are planned only. None are claimed as installed until HgX confirms them built.**
+**Items marked BUILT are installed and verified. PENDING items are
+planned only — not claimed as installed until HgX confirms them built.**
 
-### 4.1 The local brain — dual brain, pending
+### 4.1 The local brain — dual brain, BUILT
 
-- **Ollama check** — pending. The next step before any model pull.
-- **Small model, resident on VRAM (fast low-end brain)** — pending. A small abliterated model under six gigabytes, resident on graphics memory, super fast, as the REA default.
-- **Large model, resident on system memory (slow high-end brain)** — pending. A large abliterated 27B model on RAM, slow, for hard reasoning, long code, multi-step chains, and context beyond the small model's range. The large model's exact tag must be verified before pulling.
-- **Switching logic (Usage Router + Model Router)** — pending. Default to the small VRAM model; escalate to the large RAM model on hard work or repeated failure; de-escalate afterwards. Never generating with both at once. Every switch logged.
+- **Ollama check** — BUILT. Ollama running on `127.0.0.1:11434`.
+- **Small model, resident on VRAM (fast low-end brain)** — BUILT.
+  `qwen9b-abliterated`, ~7.1 GB loaded, context 32768 since
+  2026-11-10 (was 8192), super fast, the REA default.
+- **Large model, resident on system memory (slow high-end brain)** —
+  BUILT. `huihui_ai/Qwen3.8-abliterated:27b`, ~18 GB loaded, 100% CPU,
+  `num_gpu 0`, context 4096, for hard reasoning, long code, multi-step
+  chains, and context beyond the small model's range.
+- **Switching logic (Usage Router + Model Router)** — BUILT. Default
+  to the small VRAM model; escalate to the large RAM model on hard work
+  or repeated failure; de-escalate afterwards. Never generating with
+  both at once. Every switch logged. Router on :11435; GPU orchestrator
+  on :11436 swaps the card without a spoken command (deployed
+  2026-11-06, loop proven). Both brains autostart at reboot (~41s)
+  and stay pinned 24h (keep-alive every 6h).
 - **No middle 8B test.** There is no middle test between the small and large models.
 
 ### 4.2 The seventeen software stacks — pending, in efficient order
 
-Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient order. REA (item 1) is BUILT. Everything after REA is PENDING, to be installed one by one, in this order, only on HgX's order, in his lab only:
+Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient order. Items 1–4 are BUILT; items 5–8 are PENDING; item 9 is PARTIAL; items 10–11 are installed but not running/verified; item 12 is PENDING. Installs happen one by one, in this order, only on HgX's order, in his lab only:
 
 1. **REA** — BUILT (`rea-agents@6.7.0`).
-2. **Quick tools** — PENDING: security-audit-skill (sandboxed), Graphify, HyperFrames.
-3. **Ollama tools** — PENDING: FreeLLMAPI (routed to local Ollama), ai-memory.
-4. **Heavy GPU, separate venvs** — PENDING: ComfyUI.
+2. **Quick tools** — BUILT: security-audit-skill (sandboxed), Graphify 0.9.102, HyperFrames (CLI 0.9.13, platform 1.2.1).
+3. **Ollama tools** — BUILT: FreeLLMAPI (routed to local Ollama, port 3001, fallback only), ai-memory 3.4.0 running.
+4. **Heavy GPU, separate venvs** — BUILT: ComfyUI 0.44.0 (SD 1.5), installed in its own venv, runs only through the GPU orchestrator; DOWN/parked standing, ran 2026-11-07 for 36 GPU-night visuals.
 5. **DeepTutor** — PENDING.
 6. **Prism** — PENDING.
 7. **Macro, Kali only** — PENDING.
 8. **Hacking-Tools gaps, one by one** — PENDING. The hacking-tools catalog is a reference map, not 900 installs: not all 900 run at once, not every listed item runs locally, installs wait for the Kali phase, one tool at a time and only on his order.
-9. **Claude Plugins** — PENDING (requires Claude Code).
-10. **VoiceStudio** — PENDING.
-11. **GenOffice** — PENDING.
+9. **Claude Plugins** — PARTIAL: Claude Code 2.1.322 installed via Free Claude Code 6.19.6 (2026-11-10, server :8082); the plugins themselves unconfirmed.
+10. **VoiceStudio** — INSTALLED 0.5.7, launched once (home screen verified), not running.
+11. **GenOffice** — INSTALLED 0.12.852, launch not yet verified.
 12. **Reference libraries, last** — PENDING.
 
 (Syllabus v1.0.1 states seventeen items total; the groups above follow the syllabus's own ordering. Present planned stacks as planned, built stacks as built.)
@@ -148,7 +200,7 @@ Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient o
 ## 5. Where this document lives
 
 - This file: `local-jarvis/LOCAL-JARVIS-STACK.md` — the consolidated stack record.
-- Current state snapshot: `local-jarvis/STATE-2026-11-07.md` — the exact moment, 2026-11-07 ~00:10 ET.
+- Current state snapshot: `local-jarvis/STATE-2026-11-10.md` — the exact moment, 2026-11-10 ~08:20 ET. (STATE-2026-11-07.md stays as history.)
 - Build plans: `local-jarvis/plans/` — the design records (dashboard, drive clean-out, C270 teardown, REA bench list).
 - Pi 500+ rig: `local-jarvis/pi500/` — top 10, software stack, accessories (ordered + paid 2026-11-05).
 - Platform record: `local-jarvis/PLATFORM-KALI.md` — the Kali + REA build record.

@@ -5,18 +5,22 @@ steps in order, and you end up with the same machine: a Kali laptop that
 listens, reasons on two local brains, shows everything on a dashboard, and
 renders pictures — with the GPU handed between them automatically.
 
-**Status: 2026-11-07.** This guide covers what is in the repo today: the
-core voice stack, the dual brain, REA, dashboard v7, the GPU
-orchestrator (deployed), the voice-loop patch v5, the Acer setup scripts,
-the brain inventory/backup scripts, the iPad Kali plan, tonight's
-runbook, and the Acer source snapshot — the live router, orchestrator,
-voice loop, autostart launchers, and C270 captures from the laptop
-(2026-11-06 23:36 ET).
+**Status: 2026-11-10.** This guide covers what is in the repo today: the
+core voice stack, the dual brain (9B now at context 32768), REA with all
+15 tools installed, the C270 15-tool breakdown (closed), dashboard v12,
+the GPU orchestrator (deployed), the voice-loop patch v5, brains
+autostart (installed + verified 2026-11-08), BLA 3.2.3 (counter-REA),
+Free Claude Code 6.19.6, Ghidra in two copies, Craft Anything 0.5.0,
+the CrackMe v9 runner (in progress), the Acer setup scripts, the brain
+inventory/backup scripts, the iPad Kali plan, tonight's runbook, and
+the Acer source snapshot — the live router, orchestrator, voice loop,
+autostart launchers, and C270 captures from the laptop (2026-11-06
+23:36 ET).
 Still to land: the iPad Kali downloads (UTM, Kali ISO, StikDebug —
-sources documented in the plan, installers never uploaded) and dashboard
-v8 (built and verified 2026-11-06 ~23:54 ET, awaiting HgX's word — not
-applied, not published). Nothing here is faked: a step marked pending
-is pending.
+sources documented in the plan, installers never uploaded) and the
+CrackMe v9 result (the runner is still going). Nothing here is faked: a
+step marked pending is pending, and a result marked in-progress is
+in-progress.
 
 **What is NOT in this repo (by design):** no model weights, no backups,
 no personal media, no credentials, no personal data. Model names and tags
@@ -37,10 +41,20 @@ on your own machine. Do not commit the real values.
 | Dashboard v7 | `local-jarvis/dashboard/v7/` | Previous dashboard, kept as history | 8899 |
 | Dashboard v8 | `local-jarvis/dashboard/v8/` | Previous dashboard, kept as history (live until 2026-11-07 ~00:18 ET) | 8899 |
 | Dashboard v9 | `local-jarvis/dashboard/v9/` | Previous dashboard, kept as history (live until 2026-11-07 ~00:45 ET) | 8899 |
-| Dashboard v10 | `local-jarvis/dashboard/v10/` | LIVE on the reference machine since 2026-11-07 ~00:45 ET (v9 backed up) — two media roots: the iPad Pro MP4 folder primary, the drive secondary | 8899 |
+| Dashboard v10 | `local-jarvis/dashboard/v10/` | Previous dashboard, kept as history (live until 2026-11-07 evening) | 8899 |
+| Dashboard v11 | — (files never sent) | Applied 2026-11-07 evening, superseded by v12 — recorded as a version line only | 8899 |
+| Dashboard v12 | `local-jarvis/dashboard/v12/` | LIVE on the reference machine since 2026-11-08 (v11 backed up) — two media roots: the iPad Pro MP4 folder primary, the drive secondary; laptop camera stacked full-width below C270 | 8899 |
+| Brains autostart | `local-jarvis/autostart/` | INSTALLED + verified 2026-11-08 — both brains load in ~41s at reboot | — |
+| C270 15-tool breakdown | `local-jarvis/c270/` (captures) + figures in `STATE-2026-11-10.md` | CLOSED 2026-11-08 — 373 functions, 6,037 packets, 83.0% isochronous; stock, clean UVC device (full consolidated report lives on the Acer, not yet sent) | — |
+| 15 REA tools | `local-jarvis/rea-tools/` (teach guide) | ALL installed 2026-11-07 — versions in `STATE-2026-11-10.md` | CLI |
+| BLA 3.2.3 (counter-REA) | `local-jarvis/rea-tools/BLA-COUNTER-REA.md` | Installed 2026-11-10 — defense tool, not a REA tool; 14/14 benchmark (internal modeled estimates, see caveat) | CLI |
+| Free Claude Code 6.19.6 | — (service, documented in `STATE-2026-11-10.md`) | Installed 2026-11-10 — server on :8082; fcc-claude answer still pending | 8082 |
+| Ghidra (two copies) | — (documented in `STATE-2026-11-10.md`) | apt 12.1.4 + upstream 12.2, confirmed 2026-11-10 | CLI |
+| Craft Anything 0.5.0 | — (documented in `STATE-2026-11-10.md`) | Installed 2026-11-07, doctor healthy | CLI |
+| CrackMe v9 runner | `local-jarvis/crackme-v9/` | IN PROGRESS since 2026-11-10 06:49 ET — license done, WASM task running; no solve claimed | — |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
-| Current state snapshot | `local-jarvis/STATE-2026-11-07.md` | The exact moment, 2026-11-07 ~00:10 ET — the whole system, as it stands | — |
+| Current state snapshot | `local-jarvis/STATE-2026-11-10.md` | The exact moment, 2026-11-10 ~08:20 ET — the whole system, as it stands | — |
 | Model responses | `local-jarvis/transcripts/` | The transcript archive: every model response (9B, 27B, REA), scrubbed, one file per day | — |
 | Day's recap | `local-jarvis/RECAP-2026-11-06.md` | The full day 2026-11-06 into 2026-11-07, state as of ~00:35 ET — done, in progress, parked, standing rules | — |
 | Autostart launchers | `local-jarvis/autostart/` | Live launchers (23:36 snapshot; keep-alive v2 superseded the ping at 23:46) | — |
@@ -53,8 +67,7 @@ on your own machine. Do not commit the real values.
 | Tonight's runbook (2026-11-06) | `local-jarvis/tonight-runbook-2026-11-06.md` | Dated record of the build night | — |
 | ComfyUI (picture brain) | See `gpu-orchestrator/DESIGN.md` → "ComfyUI contract" | Installed separately | 8188 |
 | VLC remote | `vlc_remote.sh` / `vlc_remote.cmd` | Built | 8090 |
-| C270 camera work | Lands in a later batch | Pending | — |
-| Brain inventory + backup scripts | Lands in a later batch | Pending | — |
+| Brain inventory + backup scripts | `local-jarvis/scripts/` | Built — inventory, backup, mount, drive-inventory scripts in run order | — |
 
 ## Reference machine — the complete list (2026-11-06)
 
@@ -70,8 +83,10 @@ DDR4, 2× 32 GB, 3200 MT/s rated, 2933 MT/s running; NVIDIA GeForce RTX
 
 **OS:** Kali Linux, everything on the internal drive.
 
-**AI brains (Ollama):** `qwen9b-abliterated` (9B, VRAM, default, fast);
-`huihui_ai/Qwen3.8-abliterated:27b` (27B, system RAM, hard reasoning).
+**AI brains (Ollama):** `qwen9b-abliterated` (9B, VRAM, default, fast,
+context 32768 since 2026-11-10, 7.1 GB loaded);
+`huihui_ai/Qwen3.8-abliterated:27b` (27B, system RAM, hard reasoning,
+context 4096).
 Also present: `qwen3:8b` (former orchestrator default, fallback only),
 `qwen2.5:3b` (helper, fallback only),
 `richardyoung/agents-a1-4b-heretic:Q4_K_M` (present, in no live code).
@@ -87,12 +102,28 @@ to the 27B, cloud route (Grok) unconfigured, free route on port 3001
 
 **Dashboard:** port 8899, reachable over the tailnet.
 
-**Picture brain:** ComfyUI 0.44.0 on port 8188 (SD 1.5) — DOWN as of
-2026-11-07 ~00:10 ET (parked, the 9B has the GPU).
+**Picture brain:** ComfyUI 0.44.0 on port 8188 (SD 1.5) — DOWN
+(parked, the 9B has the GPU). It ran 2026-11-07 for the GPU-night
+visuals (36 renders), then parked again.
+
+**Free Claude Code:** 6.19.6, server on :8082 (Ollama Default Model
+`ollama/qwen9b-abliterated:latest`); fcc-claude answer still pending.
+
+**BLA (counter-REA):** 3.2.3, CLIs `bla` / `bla-agents` /
+`bla-shield`; benchmark 14/14 (internal modeled estimates — see the
+caveat in `STATE-2026-11-10.md`).
+
+**Ghidra:** two copies — apt 12.1.4 + upstream 12.2. **Craft
+Anything:** 0.5.0, doctor healthy. **CrackMe v9:** runner in progress
+since 2026-11-10 06:49 ET (license done, WASM task running).
 
 **Voice:** faster-whisper `small.en` for speech-to-text, Piper
-`en_GB-alan-medium` for speech; VoiceStudio 0.5.7 (not running);
-Hex 3.3.0 (never run).
+`en_GB-alan-medium` for speech; VoiceStudio 0.5.7 (launched once, home
+screen verified, not running); Hex 3.3.0 (never run); GenOffice 0.12.852
+(installed, launch not yet verified). The voice gate is DROPPED on
+HgX's order (2026-11-05) — everybody operator-approved, no voice
+check; the gate files stay in the repo as built artifacts, not
+enforced.
 
 **REA:** `rea-agents@6.7.0`.
 
@@ -134,7 +165,7 @@ shipped here.
 
 | Model | Tag | Size | Home | Context | Role |
 |---|---|---|---|---|---|
-| Small brain | `qwen9b-abliterated` | ~6 GB loaded | VRAM (fast, default) | 8192 | REA default, voice loop, easy calls |
+| Small brain | `qwen9b-abliterated` | ~7.1 GB loaded | VRAM (fast, default) | 32768 | REA default, voice loop, easy calls |
 | Large brain | `huihui_ai/Qwen3.8-abliterated:27b` | ~18 GB loaded | System RAM (slow, hard reasoning) | 4096 | Hard reasoning, long code, multi-step chains |
 | Helper | `qwen2.5:3b` | Small | CPU/VRAM | — | `jarvis.py` helper (list/play/ask/say/chat) |
 | Voice in | Whisper `small.en` | — | CPU | — | Speech to text |
@@ -187,12 +218,13 @@ python3 jarvis_voice.py        # mic → Whisper → gate → orchestrator → P
 
 Neither starts on its own, by design. The orchestrator listens only
 after you start it; the voice loop is deliberately not auto-started.
-Enroll first (`enroll.py`, 5 takes) and calibrate (`CALIBRATE.md`): the
-voice gate scores audio against the enrolled profile and drops the turn
-when the speaker is unenrolled. Mic → Whisper `small.en` → voice gate →
-orchestrator `:8080` → Ollama `qwen9b-abliterated` → tools / VLC / REA → Piper
-(`en_GB-alan-medium`). Router v2.2, 50 second voice budget, 60 second
-client wait.
+Mic → Whisper `small.en` → orchestrator `:8080` → Ollama
+`qwen9b-abliterated` → tools / VLC / REA → Piper (`en_GB-alan-medium`).
+Router v2.2, 50 second voice budget, 60 second client wait. The voice
+gate is DROPPED on HgX's order (2026-11-05) — everybody is
+operator-approved, no voice check. `enroll.py`, `calibrate.py` and
+`CALIBRATE.md` stay in the repo as built artifacts for reference; do
+not re-enable the gate unprompted.
 
 ### 4. The router (port 11435)
 
@@ -216,25 +248,37 @@ npx rea-agents analyze /path/to/app
 ```
 
 `rea-agents@6.7.0`, with the reverse-engineering skill and Ghidra guided
-workflows. Local app analysis only — own devices and own targets only,
-consenting adults, controlled lab only, spine SEE → DOCUMENT → LOG →
-PREVENT. See `LOCAL-JARVIS-STACK.md` §3.
+workflows — plus all 15 REA tools installed 2026-11-07 (Detect-It-Easy,
+capa, ImHex, LIEF, Ghidra, GhidraMCP, angr, Frida, objection, jadx,
+Apktool, ILSpy, asar, mitmproxy, Wireshark; versions in
+`STATE-2026-11-10.md`). Teach guide:
+`local-jarvis/rea-tools/rea-tool-usage-guide.md`. Ghidra in two copies
+(apt 12.1.4 + upstream 12.2); GhidraMCP 2.0's port-8081 GUI steps are
+still unconfirmed. BLA 3.2.3 is the counter-REA defense, not a REA
+tool — see `local-jarvis/rea-tools/BLA-COUNTER-REA.md`. Local app
+analysis only — own devices and own targets only, consenting adults,
+controlled lab only, spine SEE → DOCUMENT → LOG → PREVENT. See
+`LOCAL-JARVIS-STACK.md` §3.
 
-### 6. Dashboard v10 (port 8899)
+### 6. Dashboard v12 (port 8899)
 
-**v10 is live** on the reference machine since 2026-11-07 ~00:45 ET
-(applied from `local-jarvis/dashboard/v10/`, v9 backed up to
-`dashboard.bak-v9`). Install it the same way below, from the v10
-folder. v9, v8, and v7 stay in the repo as history.
+**v12 is live** on the reference machine since 2026-11-08
+(applied from `local-jarvis/dashboard/v12/`, v11 backed up to
+`dashboard.bak-v11`). Install it the same way below, from the v12
+folder. v11, v10, v9, v8, and v7 stay in the repo as history (v11 as a
+version line only — its files were never sent).
 
-What changed vs v9: two media roots, primary first. A local folder of
+What changed vs v10: two media roots, primary first. A local folder of
 2,785 H.264/AAC MP4 files (239 GB, 24 shows) is the primary media
 source for VLC and in-browser playback; the drive is secondary, only
 for shows not in that folder. One entry per show, MP4 version wins, no
 duplicates; `/api/media` reports the roots. If the MP4 folder is
 missing, the drive alone carries the list. First media call after a
 restart may be slow (the real folder was tested only on a small copy),
-then cached.
+then cached. v12 adds: laptop camera stacked full-width below the
+C270; CPU temp + GPU on the top strip; whole page scrolls; REA tile
+shows the C270 breakdown; sports shrunk to one NFL line. The laptop
+camera shows color bars — a camera/firmware fault, not the dashboard.
 
 What it is: the always-on screen — GPU, temperatures, RAM, what's
 running, what each model is doing, local weather, Wi-Fi, REA status,
@@ -244,7 +288,7 @@ conversation feed, and a live webcam panel.
 
 ```bash
 # from the repo:
-cp -r local-jarvis/dashboard/v10 ~/tonight-scripts/dashboard/   # or any folder
+cp -r local-jarvis/dashboard/v12 ~/tonight-scripts/dashboard/   # or any folder
 cd ~/tonight-scripts/dashboard/
 chmod +x restart-dashboard-tailnet.sh
 ./restart-dashboard-tailnet.sh
@@ -264,7 +308,7 @@ folder name in the published copy is a placeholder (`ownerlaptop` in
 backup folder. The media endpoints have no password by design — the
 dashboard is meant to be reachable over the private tailnet only.
 
-Checks (from `dashboard/v9/README-FIRST.txt`): the clock ticks every
+Checks (from `dashboard/v12/README.md`): the clock ticks every
 second; the shows list episodes; Sports, Tailscale and Health tiles are
 filled; the webcam panel shows a LIVE feed. Stream check:
 `curl -s -o /dev/null -w "%{http_code}\n" --max-time 15
@@ -341,7 +385,10 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 | 8080 | Orchestrator (voice-loop brain) |
 | 8090 | VLC HTTP remote |
 | 8188 | ComfyUI (only in COMFY mode) |
-| 8899 | Dashboard v10 (live; v9/v8/v7 history) |
+| 8899 | Dashboard v12 (live; v11/v10/v9/v8/v7 history) |
+| 8081 | GhidraMCP (pending GUI verification) |
+| 8082 | Free Claude Code server |
+| 8898 | Webcam app, both cameras (built 2026-11-07) |
 | 11434 | Ollama |
 | 11435 | Router |
 | 11436 | GPU orchestrator |

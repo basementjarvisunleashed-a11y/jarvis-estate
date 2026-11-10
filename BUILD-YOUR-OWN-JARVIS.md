@@ -15,7 +15,7 @@ full page on the website:
 | | What it is | Where it lives |
 |---|---|---|
 | **The course** | OPERATOR PRIME — Full-Spectrum Operator Systems, taught by HGX Academy. Fifteen modules M0–M14, fifty labs L1–L50 (all locked for 1.0), twenty-one checkpoints, Project 25 proves the entire suite, assessment 40/25/15/20. This is how you learn to operate the machine. | [Course website](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/course/) · [Course index](course/README.md) · [Syllabus v1.0.1](course/syllabus/OPERATOR-PRIME-SYLLABUS-v1.0.1.md) |
-| **The build** | The reference machine, documented file for file: Kali Linux, the two brains, the router, the voice loop, the dashboard, the GPU orchestrator, REA, and the plans behind them. The run-it-yourself guide is `local-jarvis/SETUP.md`. | [`local-jarvis/`](local-jarvis/) · [`local-jarvis/SETUP.md`](local-jarvis/SETUP.md) · [`local-jarvis/STATE-2026-11-07.md`](local-jarvis/STATE-2026-11-07.md) |
+| **The build** | The reference machine, documented file for file: Kali Linux, the two brains, the router, the voice loop, the dashboard, the GPU orchestrator, REA, and the plans behind them. The run-it-yourself guide is `local-jarvis/SETUP.md`. | [`local-jarvis/`](local-jarvis/) · [`local-jarvis/SETUP.md`](local-jarvis/SETUP.md) · [`local-jarvis/STATE-2026-11-10.md`](local-jarvis/STATE-2026-11-10.md) |
 | **The website** | The public face: the hero, the basement lab, the Academy section, the build log, the papers. | [Main site](https://basementjarvisunleashed-a11y.github.io/jarvis-estate/) |
 
 ## What you need
@@ -81,7 +81,7 @@ ready to be heard.
 
 ### 6. The screen — the dashboard (port 8899)
 
-`local-jarvis/dashboard/v10/` — the current dashboard, live on the
+`local-jarvis/dashboard/v12/` — the current dashboard, live on the
 reference machine. One screen, no scroll: GPU, temperatures, RAM,
 what's running, what each model is doing, REA status, the media tile
 (two media roots — the iPad Pro MP4 folder primary, the drive
