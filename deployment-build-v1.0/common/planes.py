@@ -96,6 +96,16 @@ class PlaneGateway:
         server = self.servers.get(to_plane)
         if server is None:
             raise PlaneViolation("no server for plane %r" % to_plane)
+        # SAF-06: governance seals on request and its servers never learn
+        # who asked. Only the control plane (pull server / intent log) may
+        # ask for a seal; a surface asking for one would get master- or
+        # other-surface-key signatures (a signing oracle).
+        if (to_plane == Plane.GOVERNANCE
+                and "seal" in (query.get("op"), query.get("query"))
+                and requester.plane != Plane.CONTROL):
+            raise PlaneViolation(
+                "%s(%s): only the control plane may request a seal"
+                % (requester.name, requester.plane))
         req_id = query.get("req_id", "req-?")
         rec = PullRecord(req_id, requester.plane, to_plane,
                          query.get("query"), self.clock.now())
