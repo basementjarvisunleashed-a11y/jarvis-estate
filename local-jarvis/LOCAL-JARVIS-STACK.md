@@ -103,8 +103,9 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 **Brains autostart — INSTALLED + VERIFIED (2026-11-08):** both brains
 load in ~41 seconds at reboot (9B ctx 8192 at load time, 27B ctx 4096,
 both 24-hour pins). Files: `local-jarvis/autostart/` (scrubbed).
-Pending: `start-brains.sh` still loads the 9B with `num_ctx` 8192 —
-update it to 32768 after fcc-claude is confirmed working.
+Update done 2026-11-10: the live `start-brains.sh` now loads
+`qwen9b-abliterated-32k` with `num_ctx` 32768 at boot (backup
+`start-brains.sh.bak-32kmodel`); the repo copy predates that update.
 
 ---
 
@@ -147,8 +148,11 @@ planned only — not claimed as installed until HgX confirms them built.**
 
 - **Ollama check** — BUILT. Ollama running on `127.0.0.1:11434`.
 - **Small model, resident on VRAM (fast low-end brain)** — BUILT.
-  `qwen9b-abliterated`, ~7.1 GB loaded, context 32768 since
-  2026-11-10 (was 8192), super fast, the REA default.
+  `qwen9b-abliterated-32k` (custom model, FROM `qwen9b-abliterated`,
+  `num_ctx` 32768, temperature 0.7), ~7.1 GB loaded, context 32768
+  since 2026-11-10 (was 8192), super fast, the REA default. The
+  original 8192 model still exists in Ollama but is no longer loaded
+  at boot.
 - **Large model, resident on system memory (slow high-end brain)** —
   BUILT. `huihui_ai/Qwen3.8-abliterated:27b`, ~18 GB loaded, 100% CPU,
   `num_gpu 0`, context 4096, for hard reasoning, long code, multi-step
@@ -174,7 +178,7 @@ Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient o
 6. **Prism** — PENDING.
 7. **Macro, Kali only** — PENDING.
 8. **Hacking-Tools gaps, one by one** — PENDING. The hacking-tools catalog is a reference map, not 900 installs: not all 900 run at once, not every listed item runs locally, installs wait for the Kali phase, one tool at a time and only on his order.
-9. **Claude Plugins** — PARTIAL: Claude Code 2.1.322 installed via Free Claude Code 6.19.6 (2026-11-10, server :8082); the plugins themselves unconfirmed.
+9. **Claude Plugins** — PARTIAL: Claude Code 2.1.322 installed via Free Claude Code 6.19.6 (2026-11-10, server :8082) and WORKING — first fcc-claude answer 2026-11-10 08:46 ET via the custom `qwen9b-abliterated-32k` model; the plugins themselves unconfirmed.
 10. **VoiceStudio** — INSTALLED 0.5.7, launched once (home screen verified), not running.
 11. **GenOffice** — INSTALLED 0.12.852, launch not yet verified.
 12. **Reference libraries, last** — PENDING.

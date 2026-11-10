@@ -104,3 +104,15 @@ webcam app, the brains, and the router are never modified.
 - This runner has been verified only with simulated tests on this
   machine (see the test file). The first real proof is HgX running it
   on the Acer.
+
+---
+
+## Status 2026-11-10 ~08:50 ET (publishing-house note)
+
+STOPPED / OPEN. HgX stopped the runner at 08:25 ET ("lets kill it", to
+free the CPU for Claude) — confirmed dead ("crackme stopped"). It did
+NOT finish and NO key was recovered. License task DONE (07:41, 1,870
+chars, 2 attempts); WASM task killed on attempt 2; three tasks + key
+verification never started. RESUMABLE: re-running
+`start-crackme-v9.sh` picks up from the WASM task (the 27B would need
+to reload first). No solve claimed.

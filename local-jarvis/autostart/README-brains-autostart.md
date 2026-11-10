@@ -69,3 +69,14 @@ unchanged (`0 */6 * * *`). Source zip MD5
 `Exec` path is a placeholder — adjust it to your own home directory if
 you install by hand; `apply-brains-autostart.sh` installs the file
 verbatim.
+
+---
+
+## Update 2026-11-10 (publishing-house note)
+
+The live `start-brains.sh` on the Acer was updated after fcc-claude was
+confirmed working: it now loads `qwen9b-abliterated-32k` with `num_ctx`
+32768 at boot (line 18, backup `start-brains.sh.bak-32kmodel`). The
+repo copy of `start-brains.sh` in this folder predates that update —
+the updated file follows when the REA room sends it. The Modelfile for
+the custom model is at `../models/qwen9b-abliterated-32k.Modelfile`.

@@ -64,18 +64,22 @@ now runs at **context 32768** (was 8192, 7.1 GB loaded, verified
 REA tools** are installed, with Ghidra in two copies (apt 12.1.4 +
 upstream 12.2). **BLA 3.2.3** is installed as the counter-REA defense
 (14/14 benchmark — internal modeled estimates, caveated in the state
-file). **Free Claude Code 6.19.6** is installed (server on :8082);
-fcc-claude's answer is still pending, not claimed working. The
-**CrackMe v9** runner is **in progress** (license done, WASM task
-running; no solve claimed). The dated snapshot
+file). **Free Claude Code 6.19.6** is installed and **working** — first
+fcc-claude answer 2026-11-10 08:46 ET, via the custom
+`qwen9b-abliterated-32k` model (slow, 51s for a hello; the "Claude
+Opus 5.5" identity is what Claude Code instructs the model to claim —
+the actual model is the local 9B, free). The **CrackMe v9** runner was
+**stopped by HgX** 08:25 ET to free the CPU for Claude (license done,
+WASM task killed on attempt 2; resumable; no key recovered, no solve
+claimed). The dated snapshot
 [`local-jarvis/STATE-2026-11-10.md`](local-jarvis/STATE-2026-11-10.md)
 is the exact moment as of 2026-11-10 ~08:20 ET, and the run-it-yourself
 guide ([`local-jarvis/SETUP.md`](local-jarvis/SETUP.md)) and the stack
 record ([`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md))
 now carry the built dual brain, the installed stacks, and the dropped
 voice gate (everybody operator-approved since 2026-11-05). Still to
-land: the CrackMe v9 result, the C270 consolidated report file, and
-the iPad Kali build (PARKED).
+land: the CrackMe v9 result (runner stopped, resumable), the C270
+consolidated report file, and the iPad Kali build (PARKED).
 
 ### 2026-11-07 — GitHub reconciled with the laptop build
 
@@ -139,7 +143,7 @@ The operator is **HgX**. Personal details stay off the public tree.
 On 2026-10-27 the live estate has three command roles and nine worker bots:
 
 - **Cloud JARVIS** is the cloud brain and the sovereign of the estate.
-- **Local Jarvis** runs on the owner's laptop. It uses Ollama `qwen9b-abliterated` (context 32768), an orchestrator on port 8080, and voice through Whisper and Piper. Router v2.2 went live the same day at 17:28 America/Toronto. A voice turn has a 50 second budget. The client waits 60 seconds. freellmapi is the fallback only, and only when Ollama is down.
+- **Local Jarvis** runs on the owner's laptop. It uses Ollama `qwen9b-abliterated-32k` (context 32768), an orchestrator on port 8080, and voice through Whisper and Piper. Router v2.2 went live the same day at 17:28 America/Toronto. A voice turn has a 50 second budget. The client waits 60 seconds. freellmapi is the fallback only, and only when Ollama is down.
 - **Chief of staff** coordinates the worker bots and reports to Cloud JARVIS and to Local Jarvis.
 
 The custody loop is unchanged:
@@ -185,7 +189,7 @@ flowchart LR
     whisper --> gate[Voice gate]
     gate --> orch["Orchestrator :8080"]
     orch --> router["Router v2.2"]
-    router --> ollama["Ollama qwen9b-abliterated"]
+    router --> ollama["Ollama qwen9b-abliterated-32k"]
     router --> free["freellmapi fallback"]
     ollama --> tools["Tools / VLC / REA"]
     free --> tools
@@ -226,9 +230,9 @@ Hardware: Acer Nitro AN515-55, i7-10750H, 64GB RAM, RTX 2060 (about 6GB VRAM), 5
 
 REA is ready for local app analysis: `rea-agents@6.7.0`, installed via `npx rea-agents setup`, with the REA reverse-engineering skill for CLI use. CLI: `npx rea-agents analyze /path/to/app`. Deep analysis uses Ghidra with guided reverse-engineering workflows installed.
 
-Built: the dual brain — `qwen9b-abliterated` resident on VRAM (context 32768) as the fast low-end brain, `huihui_ai/Qwen3.8-abliterated:27b` on RAM as the slow high-end brain, switching through the Usage Router + Model Router (default VRAM fast, escalate to RAM high for hard tasks, de-escalate back), plus the GPU orchestrator, brains autostart, and the installed stacks (quick tools, Ollama tools, ComfyUI 0.44.0). Still pending: DeepTutor, Prism, Macro, the Hacking-Tools gaps one by one, Kali tools mapping into REA, and Project 25 prove-out. No middle 8B test. None of the pending items are claimed as installed until confirmed built. The full consolidated record — core, Kali, REA, and the entire pending stack, each item marked BUILT or PENDING — is [`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md).
+Built: the dual brain — `qwen9b-abliterated-32k` resident on VRAM (context 32768) as the fast low-end brain, `huihui_ai/Qwen3.8-abliterated:27b` on RAM as the slow high-end brain, switching through the Usage Router + Model Router (default VRAM fast, escalate to RAM high for hard tasks, de-escalate back), plus the GPU orchestrator, brains autostart, and the installed stacks (quick tools, Ollama tools, ComfyUI 0.44.0). Still pending: DeepTutor, Prism, Macro, the Hacking-Tools gaps one by one, Kali tools mapping into REA, and Project 25 prove-out. No middle 8B test. None of the pending items are claimed as installed until confirmed built. The full consolidated record — core, Kali, REA, and the entire pending stack, each item marked BUILT or PENDING — is [`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md).
 
-1. Install Python 3.13, [Ollama](https://ollama.com/download), and the two models named in the guide (`qwen9b-abliterated` for the orchestrator, `qwen2.5:3b` for `jarvis.py`).
+1. Install Python 3.13, [Ollama](https://ollama.com/download), and the two models named in the guide (`qwen9b-abliterated-32k` for the orchestrator, `qwen2.5:3b` for `jarvis.py`).
 2. Set passwords and the user account on the machine. The tree ships placeholders only (`CHANGE_ME`, `<user>`). Do not commit the real values.
 3. Start the orchestrator and open `http://localhost:8080`.
 4. The voice gate is DROPPED on HgX's order (2026-11-05) — everybody is operator-approved, no voice check. The enrollment files stay in the repo as built artifacts for reference; do not re-enable the gate unprompted.

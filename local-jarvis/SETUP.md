@@ -48,10 +48,10 @@ on your own machine. Do not commit the real values.
 | C270 15-tool breakdown | `local-jarvis/c270/` (captures) + figures in `STATE-2026-11-10.md` | CLOSED 2026-11-08 — 373 functions, 6,037 packets, 83.0% isochronous; stock, clean UVC device (full consolidated report lives on the Acer, not yet sent) | — |
 | 15 REA tools | `local-jarvis/rea-tools/` (teach guide) | ALL installed 2026-11-07 — versions in `STATE-2026-11-10.md` | CLI |
 | BLA 3.2.3 (counter-REA) | `local-jarvis/rea-tools/BLA-COUNTER-REA.md` | Installed 2026-11-10 — defense tool, not a REA tool; 14/14 benchmark (internal modeled estimates, see caveat) | CLI |
-| Free Claude Code 6.19.6 | — (service, documented in `STATE-2026-11-10.md`) | Installed 2026-11-10 — server on :8082; fcc-claude answer still pending | 8082 |
+| Free Claude Code 6.19.6 | — (service, documented in `STATE-2026-11-10.md`) | Installed + WORKING 2026-11-10 — server on :8082; first fcc-claude answer 08:46 ET via the custom `qwen9b-abliterated-32k` model | 8082 |
 | Ghidra (two copies) | — (documented in `STATE-2026-11-10.md`) | apt 12.1.4 + upstream 12.2, confirmed 2026-11-10 | CLI |
 | Craft Anything 0.5.0 | — (documented in `STATE-2026-11-10.md`) | Installed 2026-11-07, doctor healthy | CLI |
-| CrackMe v9 runner | `local-jarvis/crackme-v9/` | IN PROGRESS since 2026-11-10 06:49 ET — license done, WASM task running; no solve claimed | — |
+| CrackMe v9 runner | `local-jarvis/crackme-v9/` | STOPPED / OPEN — stopped by HgX 2026-11-10 08:25 ET to free the CPU for Claude; license done, WASM task killed on attempt 2; resumable from the WASM task; no key recovered, no solve claimed | — |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
 | Current state snapshot | `local-jarvis/STATE-2026-11-10.md` | The exact moment, 2026-11-10 ~08:20 ET — the whole system, as it stands | — |
@@ -83,10 +83,14 @@ DDR4, 2× 32 GB, 3200 MT/s rated, 2933 MT/s running; NVIDIA GeForce RTX
 
 **OS:** Kali Linux, everything on the internal drive.
 
-**AI brains (Ollama):** `qwen9b-abliterated` (9B, VRAM, default, fast,
-context 32768 since 2026-11-10, 7.1 GB loaded);
+**AI brains (Ollama):** `qwen9b-abliterated-32k` (9B, VRAM, default,
+fast, context 32768, 7.1 GB loaded) — a custom model created 2026-11-10
+(Modelfile: FROM `qwen9b-abliterated`, `num_ctx` 32768, temperature
+0.7; same weights, no disk duplication). The original
+`qwen9b-abliterated` (8192) still exists but is no longer loaded at
+boot.
 `huihui_ai/Qwen3.8-abliterated:27b` (27B, system RAM, hard reasoning,
-context 4096).
+context 4096) — not currently loaded as of 2026-11-10 ~08:50 ET.
 Also present: `qwen3:8b` (former orchestrator default, fallback only),
 `qwen2.5:3b` (helper, fallback only),
 `richardyoung/agents-a1-4b-heretic:Q4_K_M` (present, in no live code).
@@ -107,15 +111,20 @@ to the 27B, cloud route (Grok) unconfigured, free route on port 3001
 visuals (36 renders), then parked again.
 
 **Free Claude Code:** 6.19.6, server on :8082 (Ollama Default Model
-`ollama/qwen9b-abliterated:latest`); fcc-claude answer still pending.
+`ollama/qwen9b-abliterated-32k:latest`); fcc-claude WORKS — first
+successful answer 2026-11-10 08:46 ET ("hello, what model are you?",
+51s total). Slow (9B at 32K partly CPU-offloaded); the "Claude Opus
+5.5" identity is what Claude Code instructs the model to claim — the
+actual model is the local 9B, free, no Anthropic billing.
 
 **BLA (counter-REA):** 3.2.3, CLIs `bla` / `bla-agents` /
 `bla-shield`; benchmark 14/14 (internal modeled estimates — see the
 caveat in `STATE-2026-11-10.md`).
 
 **Ghidra:** two copies — apt 12.1.4 + upstream 12.2. **Craft
-Anything:** 0.5.0, doctor healthy. **CrackMe v9:** runner in progress
-since 2026-11-10 06:49 ET (license done, WASM task running).
+Anything:** 0.5.0, doctor healthy. **CrackMe v9:** runner STOPPED by
+HgX 2026-11-10 08:25 ET (license done, WASM task killed on attempt 2;
+resumable; no key recovered).
 
 **Voice:** faster-whisper `small.en` for speech-to-text, Piper
 `en_GB-alan-medium` for speech; VoiceStudio 0.5.7 (launched once, home
@@ -165,7 +174,8 @@ shipped here.
 
 | Model | Tag | Size | Home | Context | Role |
 |---|---|---|---|---|---|
-| Small brain | `qwen9b-abliterated` | ~7.1 GB loaded | VRAM (fast, default) | 32768 | REA default, voice loop, easy calls |
+| Small brain | `qwen9b-abliterated-32k` | ~7.1 GB loaded | VRAM (fast, default) | 32768 | REA default, voice loop, easy calls, FCC |
+| Small brain (original) | `qwen9b-abliterated` | ~6.1 GB loaded | VRAM | 8192 | Still in Ollama; no longer loaded at boot — the -32k model replaced it |
 | Large brain | `huihui_ai/Qwen3.8-abliterated:27b` | ~18 GB loaded | System RAM (slow, hard reasoning) | 4096 | Hard reasoning, long code, multi-step chains |
 | Helper | `qwen2.5:3b` | Small | CPU/VRAM | — | `jarvis.py` helper (list/play/ask/say/chat) |
 | Voice in | Whisper `small.en` | — | CPU | — | Speech to text |
@@ -202,6 +212,8 @@ calibration, running and testing, autostart, troubleshooting — is in
 ollama pull qwen9b-abliterated
 ollama pull huihui_ai/Qwen3.8-abliterated:27b
 ollama pull qwen2.5:3b
+# then create the 32k model (the boot default since 2026-11-10):
+ollama create qwen9b-abliterated-32k -f local-jarvis/models/qwen9b-abliterated-32k.Modelfile
 ```
 
 Verify both resident: `ollama ps` should show the 9B on the GPU and the
