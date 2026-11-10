@@ -90,5 +90,5 @@ JV1|7f|A|0|1|7f:0|9c11
 - The watch now sends `A` ACKs per chunk.
 
 ## Anti-replay (2026-10-28, SAF)
-Signing is mandatory. Signed frame: `JV1|msgid|type|seq|total|payload|ctr|mac|crc` - `ctr` = hex monotonic counter per sender (persisted: bridge `C:\JarvisData\lora\counters.json`, watch NVS). MAC = HMAC-SHA256/8 over everything before it, incl. ctr. Receivers drop any ctr <= last seen. Reply chunks are resent (4/8/16 s) until the watch ACKs `msgid:seq`; resends get a fresh ctr.
+Signing is mandatory. Signed frame: `JV1|msgid|type|seq|total|payload|ctr|mac|crc` - `ctr` = hex monotonic counter per sender (persisted: bridge `$XDG_STATE_HOME/jarvis-lora/counters.json`, default `~/.local/state/jarvis-lora/counters.json`, override `JV_LORA_CTR_FILE`, watch NVS). MAC = HMAC-SHA256/8 over everything before it, incl. ctr. Receivers drop any ctr <= last seen. Reply chunks are resent (4/8/16 s) until the watch ACKs `msgid:seq`; resends get a fresh ctr.
 
