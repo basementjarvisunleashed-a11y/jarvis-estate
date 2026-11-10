@@ -32,6 +32,8 @@ environment. Without a key, a canned DEMO brief is served -- everything
 works end to end before any key is wired.
 """
 
+import hmac
+import ipaddress
 import json
 import os
 import re
@@ -42,6 +44,11 @@ from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PORT = 8080
+# SAF-01: loopback by default. A non-loopback bind (watch on the same Wi-Fi)
+# needs JARVIS_TOKEN; remote callers must send "Authorization: Bearer <token>".
+HOST = os.environ.get("JARVIS_HOST", "127.0.0.1").strip()
+API_TOKEN = os.environ.get("JARVIS_TOKEN", "").strip()
+_LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 XAI_URL = "https://api.x.ai/v1/chat/completions"
 # If xAI renames models, check console.x.ai -- a wrong name just falls back
 # to the canned demo brief, nothing breaks.
@@ -667,7 +674,14 @@ def _vlc_watch():
         time.sleep(3)
 
 
-threading.Thread(target=_vlc_watch, daemon=True).start()
+def _start_vlc_watch():
+    """Start the VLC probe from main(), not at import.
+
+    A daemon thread that is inside a socket call at interpreter shutdown
+    can crash the process. Tests import this module and must be able to
+    exit cleanly.
+    """
+    threading.Thread(target=_vlc_watch, daemon=True).start()
 
 
 def _vlc_ping():
@@ -873,6 +887,67 @@ def jarvis_ask(text):
             f"try a simpler request, {OPERATOR_NAME}.", actions)
 
 
+def _allowed_hosts():
+    """Hostnames this process will answer. Compared case-insensitively.
+
+    The bind address is included when it is a name a client would send.
+    0.0.0.0 and :: are listen-all wildcards, not Host values.
+    """
+    hosts = set(_LOOPBACK)
+    bind = (HOST or "").strip().lower()
+    if bind and bind not in ("0.0.0.0", "::"):
+        hosts.add(bind)
+    for h in os.environ.get("JARVIS_ALLOWED_HOSTS", "").split(","):
+        item = h.strip().lower()
+        if item:
+            hosts.add(item)
+    return hosts
+
+
+def _peer_is_loopback(peer):
+    """True only for a loopback peer, including IPv4-mapped IPv6."""
+    try:
+        ip = ipaddress.ip_address(peer)
+    except ValueError:
+        return False
+    mapped = getattr(ip, "ipv4_mapped", None)
+    if mapped is not None:
+        ip = mapped
+    return bool(ip.is_loopback)
+
+
+def request_gate(handler, is_post):
+    """SAF-01: refuse before any work. Returns an error string or None.
+
+    * Host header must name this machine (blocks DNS rebinding).
+    * POST bodies must be application/json (blocks cross-site "simple"
+      form/text POSTs from any web page the operator visits).
+    * Callers that are not on loopback must present JARVIS_TOKEN.
+    """
+    host = (handler.headers.get("Host") or "").strip().lower()
+    if host.startswith("["):
+        hostname = host[1:].split("]", 1)[0]
+    else:
+        hostname = host.rsplit(":", 1)[0] if host.count(":") == 1 else host
+    if hostname not in _allowed_hosts():
+        return "host not allowed"
+    if is_post:
+        ctype = (handler.headers.get("Content-Type") or "").split(";", 1)[0].strip().lower()
+        if ctype != "application/json":
+            return "content-type must be application/json"
+    peer = handler.client_address[0] if handler.client_address else ""
+    # The whole 127.0.0.0/8 and ::1 are loopback. A string prefix on
+    # "::ffff:127." misses the hex form (::ffff:7f00:1) and is not how
+    # mapped addresses should be classified.
+    if not _peer_is_loopback(peer):
+        if not API_TOKEN:
+            return "remote callers need JARVIS_TOKEN set on the laptop"
+        got = (handler.headers.get("Authorization") or "").strip()
+        if not hmac.compare_digest(got.encode("utf-8"), ("Bearer " + API_TOKEN).encode("utf-8")):
+            return "unauthorized"
+    return None
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "BraceletPoC/2.0"
 
@@ -885,6 +960,11 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
+        err = request_gate(self, is_post=False)
+        if err:
+            self.close_connection = True
+            self._send_json({"ok": False, "error": err}, 403)
+            return
         if self.path == "/":
             key_set = bool(os.environ.get("XAI_API_KEY", "").strip())
             with _lock:
@@ -940,6 +1020,13 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json({"ok": False, "error": "unknown path"}, 404)
 
     def do_POST(self):
+        err = request_gate(self, is_post=True)
+        if err:
+            # Drop the connection. The body is unread, so keep-alive would
+            # desynchronise the next request on this socket.
+            self.close_connection = True
+            self._send_json({"ok": False, "error": err}, 403)
+            return
         if self.path == "/jarvis":
             # Local Jarvis, the agentic wrist: {"text": "<utterance>"}.
             try:
@@ -1020,17 +1107,28 @@ def _lan_ip():
 
 
 def main():
+    _start_vlc_watch()
     print("=" * 60)
     print("Bracelet PoC orchestrator -- one brain, two surfaces")
     print("=" * 60)
     mesh_up = mqtt_start()
-    # Empty host binds every local interface (same as the unspecified
-    # address) without hardcoding a public IP. Loopback is still localhost.
-    server = ThreadingHTTPServer(("", PORT), Handler)
+    # SAF-01: loopback unless JARVIS_HOST says otherwise; a wider bind
+    # without JARVIS_TOKEN is refused (anyone on the network could drive
+    # the file tools).
+    if (HOST or "").strip().lower() not in _LOOPBACK and not API_TOKEN:
+        print("REFUSING to listen on %r without JARVIS_TOKEN set." % (HOST or "all interfaces"))
+        raise SystemExit(2)
+    server = ThreadingHTTPServer((HOST, PORT), Handler)
     print("-" * 60)
-    print("HTTP (Apple Watch path) on port %d" % PORT)
-    print("On this laptop:  http://localhost:%d" % PORT)
-    print("From iPhone/watch (same WiFi): http://%s:%d" % (_lan_ip(), PORT))
+    print("HTTP listening on %s:%d" % (HOST, PORT))
+    print("On this laptop:  http://127.0.0.1:%d" % PORT)
+    if (HOST or "").strip().lower() in _LOOPBACK:
+        print("Wi-Fi and the watch Shortcut cannot reach a loopback bind.")
+        print("To open it: set JARVIS_HOST, JARVIS_TOKEN, and JARVIS_ALLOWED_HOSTS.")
+        print("The Shortcut must send Authorization: Bearer <JARVIS_TOKEN>.")
+    else:
+        print("Non-loopback callers must send Authorization: Bearer <JARVIS_TOKEN>.")
+        print("If their Host is not the bind address, list it in JARVIS_ALLOWED_HOSTS.")
     if mesh_up:
         print("MESH (T-Watch path): waiting for the watch -- send READY from it.")
     else:
