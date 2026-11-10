@@ -270,7 +270,18 @@ def start_push_server(send_text):
             if not PUSH_TOKEN or not hmac.compare_digest(tok, PUSH_TOKEN):   # shared secret, fail closed
                 log.warning("push rejected: auth")
                 self.send_response(401); self.send_header("Content-Length", "0"); self.end_headers(); return
-            n = min(int(self.headers.get("Content-Length", 0)), 2048)
+            try:
+                n = int(self.headers.get("Content-Length", 0))
+            except (TypeError, ValueError):
+                n = -1
+            # SAF-14: -1 would read until the client closes. Do not turn that
+            # into an empty push.
+            if n < 0 or n > 2048:
+                self.close_connection = True
+                self.send_response(413)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return
             try:
                 d = json.loads(self.rfile.read(n) or b"{}")
                 send_text(str(d.get("msgid", "0"))[:4] or "0", str(d.get("text", ""))[:MAX_REPLY_CHARS])

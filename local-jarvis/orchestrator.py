@@ -506,6 +506,17 @@ def tool_file_search(args):
         return "ERROR: %s" % e
 
 
+MAX_BODY = int(os.environ.get("JARVIS_MAX_BODY", 64 * 1024))  # SAF-14
+
+
+def _body_len(headers, cap=None):
+    """SAF-14: Content-Length must be 0..cap; negative would mean read-to-EOF."""
+    n = int(headers.get("Content-Length") or 0)
+    if n < 0 or n > (MAX_BODY if cap is None else cap):
+        raise ValueError("request body too large or invalid length")
+    return n
+
+
 def tool_file_read(args):
     p = args.get("path", "")
     ap, err = _safe_path(p)
@@ -667,7 +678,14 @@ def _vlc_watch():
         time.sleep(3)
 
 
-threading.Thread(target=_vlc_watch, daemon=True).start()
+def _start_vlc_watch():
+    """Start the VLC probe from main(), not at import.
+
+    A daemon thread that is inside a socket call at interpreter shutdown
+    can crash the process. Tests import this module and must be able to
+    exit cleanly.
+    """
+    threading.Thread(target=_vlc_watch, daemon=True).start()
 
 
 def _vlc_ping():
@@ -943,7 +961,10 @@ class Handler(BaseHTTPRequestHandler):
         if self.path == "/jarvis":
             # Local Jarvis, the agentic wrist: {"text": "<utterance>"}.
             try:
-                length = int(self.headers.get("Content-Length", 0))
+                try:
+                    length = _body_len(self.headers)
+                except ValueError:
+                    self.close_connection = True; raise
                 data = json.loads(self.rfile.read(length).decode("utf-8"))
                 text = str(data.get("text", "")).strip()
                 if not text:
@@ -975,7 +996,10 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json({"ok": False, "error": "unknown path"}, 404)
             return
         try:
-            length = int(self.headers.get("Content-Length", 0))
+            try:
+                length = _body_len(self.headers)
+            except ValueError:
+                self.close_connection = True; raise
             data = json.loads(self.rfile.read(length).decode("utf-8"))
             brief_id = str(data.get("id", "")).strip()
             decision = str(data.get("decision", "")).strip().lower()
@@ -1020,6 +1044,7 @@ def _lan_ip():
 
 
 def main():
+    _start_vlc_watch()
     print("=" * 60)
     print("Bracelet PoC orchestrator -- one brain, two surfaces")
     print("=" * 60)
