@@ -89,7 +89,7 @@ loading the REA and BLA skills, with the Engines step (point Claude at
 fcc-claude) still to do. **PR #67 (SAF-01)** merged 15:19 ET: the voice
 orchestrator binds loopback by default. Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
-the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (3 of 8 — ask script, workers' instructions + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
+the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
 ### 2026-11-07 — GitHub reconciled with the laptop build
 
