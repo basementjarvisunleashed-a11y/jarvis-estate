@@ -111,7 +111,9 @@ ALL SAF PRs ARE MERGED. Sub-item 5a DONE 20:05 ET: SAF-01 verified live on
 the Acer (orchestrator 127.0.0.1:8080, PID 55156). Item #7 DONE 20:07 ET:
 Qwen Code answers against the local 9B-32k model ("Hello!"). Item #6
 STARTED 20:13 ET: the overnight runner is running (PID 62402; CrackMe v9 +
-one BLA test; morning report tomorrow). Still to
+one BLA test; morning report tomorrow). Item #5 DONE 20:16 ET: the SAF
+sweep is complete — SAF-11 is a numbering gap, 14 exploits fixed, all merged,
+all live. Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
