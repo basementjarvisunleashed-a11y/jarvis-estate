@@ -107,7 +107,8 @@ inside the allowed roots, off npm. **PR #78 (SAF-13)** merged 19:55 ET: the
 LoRa replay counter is persisted under the state directory. **PR #79
 (SAF-14)** merged 19:57 ET: HTTP bodies capped before they are read.
 **PR #80 (SAF-15)** merged 20:02 ET: the voice gate mode is explicit.
-ALL SAF PRs ARE MERGED. Still to
+ALL SAF PRs ARE MERGED. Sub-item 5a DONE 20:05 ET: SAF-01 verified live on
+the Acer (orchestrator 127.0.0.1:8080, PID 55156). Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
