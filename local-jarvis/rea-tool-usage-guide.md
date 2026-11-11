@@ -2,6 +2,8 @@
 
 **Who this is for:** REA (the reverse-engineering agent on HgX's Acer Kali laptop), the 9B model (`qwen9b-abliterated`, fast, on GPU), the 27B model (`huihui_ai/Qwen3.8-abliterated:27b`, slow, on CPU RAM), and the little router (127.0.0.1:11435). Read this before starting any REA job. It is the operating manual for the 15 tools installed 2026-11-07 — every version, path, and quirk below is verified on this machine.
 
+**Cross-use with BLA:** see `REA-BLA-INTEGRATION.md` — BLA shields what REA takes apart. On any project that needs a build, a shield, and a test of the shield, use both (build → shield → test).
+
 **First rule of every job:** check the tool exists before you use it.
 
 ```bash
@@ -95,14 +97,14 @@ ghidra-mcp --help                   # flags: --ghidra-server, --transport, --hea
 
 **Port — read carefully:** GhidraMCP listens on **port 8081, NOT 8080**. Port 8080 is held by the Bracelet PoC Orchestrator. **Do not stop the bracelet orchestrator.** The port is set inside Ghidra's GUI: **Edit > Tool Options > GhidraMCP HTTP Server**. The plugin must be enabled first: **File > Configure > Developer**, tick **GhidraMCPPlugin**, then restart Ghidra.
 
-**⚠️ VERIFICATION IS OPEN:** as of 2026-11-07 ~19:18 ET, nothing was listening on 8081, and the GUI steps (tick the plugin, set the port, restart) are **unconfirmed**. **Do not claim GhidraMCP is live until 8081 answers.** Check with:
+**✅ VERIFIED LIVE 2026-11-11:** 127.0.0.1:8081 answers — `ss` shows Java listening, and `curl` returns the JSON `UNKNOWN_ENDPOINT` error for `/`, which is expected (no root endpoint). The plugin is enabled, Server Port 8081 is saved, and the bridge runs while CodeBrowser is open with a program loaded. Check with:
 
 ```bash
 ss -tlnp | grep 8081
 curl -s http://127.0.0.1:8081/
 ```
 
-**Notes:** the plugin lives at `~/.ghidra/.ghidra_12.1.4_PUBLIC/Extensions/GhidraMCP` and is built for **Ghidra 12.1.4 only** — install/use it with the **apt** Ghidra, not the 12.2 copy. The MCP server was installed with `uv tool install` from the local wheel (33 packages: ghidra-mcp 2.0.0, mcp 1.30.0, pydantic, httpx, uvicorn, starlette, …).
+**Notes:** the plugin is installed via File → Install Extensions into the apt Ghidra DEV settings dir (`~/.config/ghidra/ghidra_12.1.4_DEV/`) and is built for **Ghidra 12.1.4 only** — install/use it with the **apt** Ghidra, not the 12.2 copy. CORRECTION 2026-11-11: the manual copy at `~/.ghidra/.ghidra_12.1.4_PUBLIC/Extensions/GhidraMCP` is a DEAD DUPLICATE in the wrong dir. The MCP server was installed with `uv tool install` from the local wheel (33 packages: ghidra-mcp 2.0.0, mcp 1.30.0, pydantic, httpx, uvicorn, starlette, …).
 
 ### 7. angr 10.0.5 — Python library in a uv venv at `~/opt/angr-venv` (Python 3.13.18)
 **What:** symbolic execution and binary analysis — find reachable paths, solve for inputs that reach a target, analyse control flow symbolically. **When:** a question cannot be answered by reading the decompilation alone ("what input reaches this branch?", "is this path reachable?"). **How:**
@@ -354,7 +356,7 @@ asar extract app.asar extracted/
 4. **Never use `--force-overwrite` for a dpkg file conflict.** Remove the old package instead (this is how DIE 4.0.0 replaced 3.21).
 5. **Never reinstall `kali-linux-everything`.** It would pull detect-it-easy 3.21 back over 4.0.0.
 6. **Do not stop the Bracelet PoC Orchestrator on port 8080.** GhidraMCP lives on 8081 for exactly that reason.
-7. **Do not treat GhidraMCP as verified until 8081 answers** (`ss -tlnp | grep 8081`, `curl http://127.0.0.1:8081/`). The GUI steps are unconfirmed as of 2026-11-07.
+7. **GhidraMCP is verified — 8081 answers as of 2026-11-11** (`ss -tlnp | grep 8081` shows Java listening; `curl http://127.0.0.1:8081/` returns the JSON `UNKNOWN_ENDPOINT` for `/`, which is expected). The bridge only runs while CodeBrowser is open with a program loaded + plugin enabled.
 8. **Do not delete anything from HgX's drives or system without his explicit word per item.** That includes old installers in `~/Downloads`, the orphaned Craft Anything 0.3.0 files in `~/Applications/craft-anything/`, the orphaned Qt5 libs from the DIE removal, and the old models / unused GGUFs (deletion of those is **deferred** on his order — do not revive it).
 9. **Do not change the brain pinning.** 9B on VRAM, 27B on CPU RAM, both 24 h. If a job is slow, that is the 27B on CPU — it is the price of the big model on this machine, not a fault to fix by moving it.
 10. **The registry is the record.** `~/Jarvis/rea-toolset.md` (copied to `~/.agents/skills/reverse-engineer-anything/REA-TOOLSET.md`) lists all 15 tools with versions and locations. If this guide and the registry disagree, the registry wins — and report the disagreement.
