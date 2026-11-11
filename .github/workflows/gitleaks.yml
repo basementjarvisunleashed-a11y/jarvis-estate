@@ -6,17 +6,23 @@ on:
   push:
   pull_request:
 
+# SAF-09: least-privilege token for every job.
+permissions:
+  contents: read
+
 jobs:
   gitleaks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - name: Install gitleaks
         run: |
           curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.28.0/gitleaks_8.28.0_linux_x64.tar.gz \
             -o /tmp/gitleaks.tgz
+          # SAF-09: verify the release before running it (sha256 from gitleaks_8.28.0_checksums.txt).
+          echo "a65b5253807a68ac0cafa4414031fd740aeb55f54fb7e55f386acb52e6a840eb  /tmp/gitleaks.tgz" | sha256sum -c -
           tar -xzf /tmp/gitleaks.tgz -C /tmp gitleaks
           /tmp/gitleaks version
       - name: Scan for secrets
