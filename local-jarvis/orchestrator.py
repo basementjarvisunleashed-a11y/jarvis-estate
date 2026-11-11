@@ -844,7 +844,8 @@ JARVIS_TOOLS = [
                                       "dst": {"type": "string"}},
                        "required": ["src", "dst"]}}},
 ]
-REA_NPX = r"C:\Program Files\nodejs\npx.cmd"
+# SAF-12: Kali binary, no Windows path, no `npx -y` fetch at call time.
+REA_BIN = os.environ.get("JARVIS_REA_BIN") or shutil.which("rea-agents") or ""
 REA_COMMANDS = ["analyze", "inspect-pe-imports", "inspect-pe-certificates",
                 "inspect-pe-resources", "inspect-pe-load-config", "analyze-javascript-application"]
 
@@ -858,8 +859,14 @@ def tool_rea_analyze(args):
         return "ERROR: command must be one of: " + ", ".join(REA_COMMANDS)
     if not target or not os.path.isabs(target) or not os.path.exists(target):
         return "ERROR: target must be an existing absolute path."
+    # SAF-12: same allowed-folder check as every other file tool.
+    target, err = _safe_path(target)
+    if err:
+        return "ERROR: " + err
+    if not REA_BIN:
+        return "ERROR: REA is not installed (set JARVIS_REA_BIN)."
     try:
-        cp = subprocess.run([REA_NPX, "-y", "rea-agents@6.8.0", cmd, target, "--json"],
+        cp = subprocess.run([REA_BIN, cmd, target, "--json"],
                             capture_output=True, text=True, encoding="utf-8", errors="replace",
                             timeout=120, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     except subprocess.TimeoutExpired:
