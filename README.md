@@ -103,7 +103,8 @@ merged 19:44 ET: ceremony keys are owner-only. **PR #75 (SAF-09)** merged
 19:46 ET: workflow actions pinned, release binaries verified. **PR #76
 (SAF-10)** merged 19:52 ET: sessions expire at the decision gate, unknown
 states refused. **PR #77 (SAF-12)** merged 19:54 ET: REA analysis stays
-inside the allowed roots, off npm. Still to
+inside the allowed roots, off npm. **PR #78 (SAF-13)** merged 19:55 ET: the
+LoRa replay counter is persisted under the state directory. Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
