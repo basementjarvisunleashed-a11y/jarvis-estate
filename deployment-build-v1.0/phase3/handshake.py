@@ -518,6 +518,15 @@ class TrustRoot(planes.Component):
 
     def _verify_decision(self, decision_env: dict) -> dict:
         ok = seal.verify_envelope(self.keys["surface:watch"], decision_env)
+        # SAF-05: the watch key also seals the cards the trust root issues
+        # (origin "trust-root"), and the orchestrator chooses card bodies.
+        # Only an envelope the device itself sealed is a decision; the
+        # origin is inside the seal, so it cannot be relabelled. A device
+        # id of "trust-root" must not collapse the two origins.
+        origin = decision_env.get("origin")
+        ok = (ok and self.device is not None
+              and origin == self.device.device_id
+              and origin != "trust-root")
         body = decision_env.get("content", {}) if ok else {}
         valid = bool(
             ok
