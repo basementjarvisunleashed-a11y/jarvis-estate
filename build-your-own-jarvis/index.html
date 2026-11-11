@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Build Your Own Jarvis — J.A.R.V.I.S.</title>
+<meta name="description" content="Build your own Jarvis: the course, the build, and the website, in order. Two local brains, one router, a voice, a screen, and REA — on Kali Linux, on your own machine." />
+<meta name="estate-version" content="1.2.1" />
+<meta name="color-scheme" content="dark" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Build Your Own Jarvis — J.A.R.V.I.S." />
+<meta property="og:description" content="Two local brains, one router, a voice, a screen, and REA. The how-to, from the OPERATOR PRIME course and the Jarvis build." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23090c10'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%238ee7ff' stroke-width='2'/%3E%3Cpath d='M32 16 46 42H18Z' fill='%238ee7ff'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #090c10;
+    --bg-raise: #10161d;
+    --line: #243140;
+    --text: #e7eef4;
+    --muted: #93a3b3;
+    --cyan: #8ee7ff;
+    --cyan-dim: rgba(142, 231, 255, 0.12);
+    --amber: #e7c27a;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+    --sans: "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --max: 1080px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(900px 420px at 80% -10%, rgba(142, 231, 255, 0.08), transparent 60%),
+      radial-gradient(700px 380px at -10% 20%, rgba(231, 194, 122, 0.05), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  a { color: var(--cyan); text-underline-offset: 0.18em; }
+  a:hover { color: #fff; }
+  :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+  .skip {
+    position: absolute; left: 12px; top: -40px; background: var(--cyan); color: #041016;
+    padding: 8px 12px; z-index: 5;
+  }
+  .skip:focus { top: 12px; }
+  .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+  header.site {
+    position: sticky; top: 0; z-index: 4;
+    background: rgba(9, 12, 16, 0.9);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; min-height: 64px; flex-wrap: wrap; padding: 8px 0;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text); text-decoration: none; font-family: var(--mono);
+    letter-spacing: 0.14em; font-size: 13px;
+  }
+  .brand svg { width: 28px; height: 28px; }
+  nav { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  nav a {
+    color: var(--muted); text-decoration: none; font-size: 14px;
+    padding: 8px 0;
+  }
+  nav a:hover { color: var(--text); }
+  .hero { padding: 72px 0 28px; }
+  .kicker {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--amber); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 500; font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 16px; max-width: 16ch;
+  }
+  .hero-jarvis {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(64px, 12vw, 140px);
+    line-height: 0.95; letter-spacing: -0.03em; margin: 0 0 8px;
+    background: linear-gradient(180deg, #fff 0%, #8ee7ff 55%, #2a9dc4 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 60px rgba(142, 231, 255, 0.25);
+  }
+  .hero-expansion {
+    font-family: var(--mono); font-size: clamp(13px, 2vw, 18px);
+    letter-spacing: 0.08em; color: var(--cyan); margin: 0 0 20px;
+    text-transform: uppercase;
+  }
+  .hero-expansion b { color: #fff; }
+  .lede { font-size: 20px; color: var(--muted); max-width: 42rem; margin: 0 0 28px; }
+  .lede strong { color: var(--text); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+  .btn {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+    border-radius: 999px; text-decoration: none; font-size: 15px;
+  }
+  .btn.primary { background: var(--cyan); color: #041016; }
+  .btn.primary:hover { background: #fff; color: #041016; }
+  .btn.ghost { border: 1px solid var(--line); color: var(--text); }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 12px; list-style: none; }
+  .pills li {
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px;
+    background: var(--bg-raise);
+  }
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 4vw, 40px);
+    margin: 0 0 8px; letter-spacing: -0.02em;
+  }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 46rem; }
+  .grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) {
+    .grid.features { grid-template-columns: 1fr 1fr; }
+    .grid.docs { grid-template-columns: 1fr 1fr; }
+    .grid.roster { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 980px) {
+    .grid.features { grid-template-columns: 1fr 1fr 1fr; }
+    .grid.roster { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  article.card, .doc, .step, .rail li, .note, .research-item {
+    background: var(--bg-raise);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+  article.card { padding: 18px 18px 16px; }
+  article.card h3 { margin: 0 0 8px; font-size: 18px; }
+  article.card p { margin: 0; color: var(--muted); }
+  .rail { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  @media (min-width: 900px) {
+    .rail { grid-template-columns: repeat(6, 1fr); }
+    .rail.command { grid-template-columns: repeat(4, 1fr); }
+  }
+  article.card .persona {
+    font-family: var(--serif); color: var(--amber); font-size: 15px; margin: 0 0 8px;
+  }
+  .rail li { padding: 14px; }
+  .rail strong { display: block; font-family: var(--mono); font-size: 12px; color: var(--cyan); letter-spacing: 0.04em; }
+  .rail span { display: block; margin-top: 6px; color: var(--muted); font-size: 14px; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .step { padding: 16px 16px 16px 64px; position: relative; }
+  .step b {
+    position: absolute; left: 16px; top: 16px; width: 32px; height: 32px;
+    border-radius: 50%; display: grid; place-items: center;
+    background: var(--cyan-dim); color: var(--cyan); font-family: var(--mono); font-size: 13px;
+  }
+  .step p { margin: 6px 0 0; color: var(--muted); }
+  code, .mono { font-family: var(--mono); font-size: 0.92em; }
+  pre {
+    overflow: auto; background: #070a0e; border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px; font-size: 14px;
+  }
+  .note { padding: 16px 18px; border-left: 3px solid var(--amber); }
+  .note p { margin: 0; color: var(--muted); }
+  .doc { padding: 16px 18px; }
+  .doc h3 { margin: 0 0 6px; font-size: 16px; }
+  .doc p { margin: 0; color: var(--muted); font-size: 15px; }
+  .research-item { padding: 16px 18px; }
+  .research-item time { font-family: var(--mono); font-size: 12px; color: var(--amber); }
+  .research-item h3 { margin: 6px 0; font-size: 18px; font-weight: 600; }
+  .research-item p { margin: 0; color: var(--muted); }
+  #chronicle-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  #chronicle-list li {
+    display: grid; gap: 4px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  }
+  #chronicle-list time { font-family: var(--mono); font-size: 12px; color: var(--amber); }
+  #chronicle-list p { margin: 0; }
+  button.linkish {
+    margin-top: 16px; background: transparent; color: var(--cyan);
+    border: 1px solid var(--line); border-radius: 999px; min-height: 44px; padding: 0 16px;
+    font: inherit; cursor: pointer;
+  }
+  footer {
+    border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 14px;
+  }
+  footer p { margin: 0 0 6px; }
+  @media (max-width: 640px) {
+    .hero { padding-top: 40px; }
+    .lede { font-size: 18px; }
+  }
+</style>
+<style>
+  .steps ol { list-style: none; padding: 0; counter-reset: step; }
+  .steps li { counter-increment: step; margin: 0 0 28px; }
+  .steps li h3::before { content: counter(step) ". "; color: var(--cyan); }
+  pre { background: var(--bg-raise); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; overflow-x: auto; }
+  pre code { font-family: var(--mono); font-size: 15px; }
+  code { font-family: var(--mono); font-size: 0.92em; }
+  .guide-nav { margin-top: 28px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#guide">Skip to content</a>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="../#top">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="#8ee7ff" stroke-width="2"/><path d="M32 16 46 42H18Z" fill="#8ee7ff"/></svg>
+      J.A.R.V.I.S.
+    </a>
+    <nav aria-label="Page">
+      <a href="../#overview">Overview</a>
+      <a href="../#recent">Recent</a>
+      <a href="../#features">Features</a>
+      <a href="../#architecture">Architecture</a>
+      <a href="../#roster">Roster</a>
+      <a href="../#academy">Academy</a>
+      <a href="./" aria-current="page">Build your own</a>
+      <a href="../#download">Download</a>
+      <a href="../#docs">Docs</a>
+      <a href="../#research">Research</a>
+      <a href="../#chronicle">Chronicle</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero" id="guide">
+    <p class="kicker">Estate 1.2.1 · The how-to · OPERATOR PRIME · The basement lab</p>
+    <h1>Build your own Jarvis</h1>
+    <p class="hero-expansion"><b>J</b>oint <b>A</b>mbient <b>R</b>eady <b>V</b>ariance <b>I</b>ntelligence <b>S</b>ystem</p>
+    <p class="lede">Your own Jarvis is a local, private personal intelligence that lives on your machine: two local brains, one router, a voice, a screen, and REA (reverse engineering). Nothing leaves the house unless you choose it. This repository is the whole build. The course teaches you to operate it. This website is the public face.</p>
+    <div class="actions">
+      <a class="btn primary" href="../course/">Start with the course</a>
+      <a class="btn ghost" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/local-jarvis/SETUP.md">The run-it-yourself guide (SETUP.md)</a>
+      <a class="btn ghost" href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/BUILD-YOUR-OWN-JARVIS.md">The guide on GitHub</a>
+    </div>
+  </div>
+
+  <section id="three-things">
+    <div class="wrap">
+      <h2>The three things</h2>
+      <div class="grid features">
+        <article class="card">
+          <h3>🎓 The course</h3>
+          <p>OPERATOR PRIME — Full-Spectrum Operator Systems, taught by HGX Academy. Fifteen modules M0–M14, fifty labs L1–L50 (all locked for 1.0), twenty-one checkpoints, Project 25 proves the entire suite, assessment 40/25/15/20. This is how you learn to operate the machine. <a href="../course/">Course website</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/tree/main/course">Course files on GitHub</a>.</p>
+        </article>
+        <article class="card">
+          <h3>💻 The build</h3>
+          <p>The reference machine, documented file for file: Kali Linux, the two brains, the router, the voice loop, the dashboard, the GPU orchestrator, REA, and the plans behind them. The run-it-yourself guide is <code>local-jarvis/SETUP.md</code>. <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/local-jarvis/SETUP.md">SETUP.md</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/local-jarvis/STATE-2026-11-10.md">The exact moment</a>.</p>
+        </article>
+        <article class="card">
+          <h3>🌐 The website</h3>
+          <p>The public face: the hero, the basement lab, the Academy section, the build log, the papers. <a href="../">Main site</a> · <a href="../#chronicle">The build log</a>.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="what-you-need">
+    <div class="wrap">
+      <h2>What you need</h2>
+      <ul>
+        <li><strong>A machine like the reference.</strong> Acer Nitro: i7-10750H, 64 GB RAM, NVIDIA RTX 2060 (~6 GB VRAM), 512 GB NVMe. The RAM holds the big brain; the VRAM holds the fast brain; the NVMe holds everything. A close equivalent works — the guide names the reference so you know what each part is for, not so you must buy the same box.</li>
+        <li><strong>Kali Linux</strong>, installed on the internal drive. Everything in this build runs on Kali.</li>
+        <li><strong>Time.</strong> This is a build, not an install wizard. One step at a time, each verified before the next.</li>
+        <li><strong>The rules</strong> (below). They are not optional.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="the-build" class="steps">
+    <div class="wrap">
+      <h2>The build, in order</h2>
+      <ol>
+        <li>
+          <h3>Learn the spine — the course</h3>
+          <p>Start with OPERATOR PRIME. Modules M0–M14, labs L1–L20 first (L21–L50 are the year), the seventeen stacks in the syllabus (REA first), and Project 25 at the end, which proves the entire suite. You do not need to finish the course before you start building — but the course is where the discipline comes from: see, document, log, prevent.</p>
+        </li>
+        <li>
+          <h3>Set up the machine — <code>local-jarvis/SETUP.md</code></h3>
+          <p>The whole system from this repo alone, in order: Kali and drivers → Ollama → the brains → the router → the orchestrator → the voice loop → the dashboard → the GPU orchestrator → REA. Every component, every port, every verify step. If it is not in SETUP.md, it is not part of the setup.</p>
+        </li>
+        <li>
+          <h3>The two brains</h3>
+          <p><strong>The fast brain</strong> — <code>qwen9b-abliterated</code>, resident on VRAM (~6 GB), context 8192. The default. REA and the voice loop talk to this one. <strong>The hard brain</strong> — <code>huihui_ai/Qwen3.8-abliterated:27b</code>, on system RAM (~18 GB), context 4096, 100% CPU. Slow by design. Hard reasoning, long code, multi-step chains only. <strong>Never both generating at once.</strong> One brain answers; the other waits.</p>
+          <p>Models are named by tag only in this repo. <strong>No weights are shipped.</strong> You pull them yourself:</p>
+          <pre><code>ollama pull qwen9b-abliterated
+ollama pull huihui_ai/Qwen3.8-abliterated:27b</code></pre>
+        </li>
+        <li>
+          <h3>The router — one door (port 11435)</h3>
+          <p><code>local-jarvis/router/04-little-router.py</code> (stdlib only). One door for everything: easy work → the 9B, hard work → the 27B (ask for it, or a prompt over 8,000 characters), cloud → Grok (unconfigured — you bring your own key), free → FreeLLMAPI (parked). Every routing decision is logged. Ollama routes use native <code>/api/chat</code>, so <code>think</code> and <code>keep_alive</code> are honoured.</p>
+        </li>
+        <li>
+          <h3>The voice — Whisper, orchestrator, Piper (port 8080)</h3>
+          <p>Mic → faster-whisper <code>small.en</code> → orchestrator <code>:8080</code> → the 9B → Piper <code>en_GB-alan-medium</code>. Patch v5 is applied (deterministic dispatcher). On our reference machine, everybody is operator approved — anyone may talk to it. <strong>On yours, you decide who may command it.</strong> The voice loop is deliberately not auto-started; start it when you are ready to be heard.</p>
+        </li>
+        <li>
+          <h3>The screen — the dashboard (port 8899)</h3>
+          <p><code>local-jarvis/dashboard/v12/</code> — the current dashboard, live on the reference machine. GPU, temperatures, RAM, what's running, what each model is doing, REA status, the media tile (two media roots — the iPad Pro MP4 folder primary, the drive secondary — played in the tile or in VLC), the webcam beside the video player, and the live two-way conversation feed. Served on the tailnet so your phone sees it too.</p>
+        </li>
+        <li>
+          <h3>REA — reverse engineering (own devices only)</h3>
+          <p><code>rea-agents@6.7.0</code> + Ghidra guided workflows. Point it at your own apps and your own targets, and it takes them apart with evidence. The teardown plans (<code>local-jarvis/plans/</code>) show how: enumerate, watch it talk, make it work, document everything.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="the-swap">
+    <div class="wrap">
+      <h2>The swap — the GPU orchestrator (port 11436)</h2>
+      <p>The card holds one brain at a time. The orchestrator keeps the 9B resident on VRAM and the 27B on RAM, and swaps on demand: when ComfyUI needs the card, the 9B parks; when the next easy call arrives, the 9B comes straight back. Deployed and proven on the reference machine — the loop just happens.</p>
+    </div>
+  </section>
+
+  <section id="keeping-it-honest">
+    <div class="wrap">
+      <h2>Keeping it honest</h2>
+      <ul>
+        <li><strong>The state snapshot</strong> (<code>local-jarvis/STATE-2026-11-07.md</code>) is the exact moment: the whole system, as it stands. A new dated snapshot lands whenever the state changes.</li>
+        <li><strong>The transcripts</strong> (<code>local-jarvis/transcripts/</code>) document every model response — the 9B, the 27B, REA — scrubbed, one file per day. If a brain said it, it is on record.</li>
+        <li><strong>The build log</strong> on the website records every release, dated, with the facts. Nothing is claimed done before it is verified.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="hard-rules">
+    <div class="wrap">
+      <h2>The hard rules</h2>
+      <p>From the course, verbatim in spirit, binding on every build:</p>
+      <ul>
+        <li>Consenting adults. Controlled lab only. <strong>Own devices and own targets only.</strong></li>
+        <li>The spine: <strong>SEE → DOCUMENT → LOG → PREVENT.</strong></li>
+        <li>No face ID except consenting adults, lab only. Templates deleted. No family, no son, no strangers. Radio, drone, and laser rules as written in the course.</li>
+        <li>Nothing is deleted. Nothing is overwritten. Every change is versioned.</li>
+        <li>No personal data in public material — no real names, no credentials, no private paths, no family, no finances, no live location.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="honest-limits">
+    <div class="wrap">
+      <h2>Honest limits</h2>
+      <ul>
+        <li>No weights are shipped, and no backup is shipped. You pull the models and you keep your own backup.</li>
+        <li>The cloud brain is unconfigured out of the box; the free route is parked. Local first is the design, not a fallback.</li>
+        <li>ComfyUI (the picture brain) is parked on the reference machine — the 9B has the GPU. The iPad Kali build is parked too.</li>
+        <li>The 27B is slow on CPU by design (~1–3 tokens a second). That is the price of a big brain with no cloud.</li>
+        <li>The voice loop needs tuning on your machine — mics, levels, and the room itself are yours to get right.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="where-to-start">
+    <div class="wrap">
+      <h2>Where to start</h2>
+      <ol>
+        <li>Read the <a href="../course/">course website</a> — Start here, then modules, then labs.</li>
+        <li>Read <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/local-jarvis/SETUP.md">SETUP.md</a> — the whole build, in order.</li>
+        <li>Check <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate/blob/main/local-jarvis/STATE-2026-11-07.md">the exact moment</a> — so you know where the reference machine stands today.</li>
+      </ol>
+      <p>Then build it. One step at a time, each verified before the next. You have used computers your whole life. Now you operate them.</p>
+      <p class="guide-nav"><a href="../">← Back to the main site</a> · <a href="../course/">The course</a> · <a href="https://github.com/basementjarvisunleashed-a11y/jarvis-estate">The repository</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>@basementjarvisu · basementjarvisunleashed@gmail.com</strong></p>
+    <p>J.A.R.V.I.S. — Joint Ambient Ready Variance Intelligence System. Estate 1.2.1.</p>
+    <p>Code <a href="../LICENSE">MIT</a> · papers and docs <a href="../LICENSE-CC-BY-4.0">CC-BY-4.0</a> · <a href="../CONTRIBUTING.md">Contributing</a> · <a href="../CODE_OF_CONDUCT.md">Code of conduct</a></p>
+  </div>
+</footer>
+</body>
+</html>
