@@ -113,7 +113,12 @@ Qwen Code answers against the local 9B-32k model ("Hello!"). Item #6
 STARTED 20:13 ET: the overnight runner is running (PID 62402; CrackMe v9 +
 one BLA test; morning report tomorrow). Item #5 DONE 20:16 ET: the SAF
 sweep is complete — SAF-11 is a numbering gap, 14 exploits fixed, all merged,
-all live. Still to
+all live. Item #8 DONE 07:19 ET (2026-11-11): the local model is in use
+via a PATH shim (OpenMausBot restarted 06:37 ET; FCC restarted ~06:16 ET).
+Item #6 PARTIAL 22:27:42 ET: bla harden failed rc=1, BLA inconclusive,
+CrackMe not solved; no overnight run occurred; fix pending. REA
+laptop-check DONE 00:21:34 ET (all 4 analyses; no open remote-access ports).
+Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
