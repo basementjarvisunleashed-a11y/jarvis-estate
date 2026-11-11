@@ -19,6 +19,7 @@
 | 🔥 **Kali Linux** | Everything installed on the internal drive. All tools updated, graphics driver in, Bluetooth working, Wi-Fi working, login working. |
 | 🔬 **REA 6.7.0** | Reverse Engineer Anything, ready for local app analysis. `npx rea-agents analyze /path/to/app`. All 15 REA tools installed (2026-11-07); Ghidra in two copies (apt 12.1.4 + upstream 12.2); C270 15-tool breakdown CLOSED 2026-11-08 (stock, clean UVC device). |
 | 📺 **Dashboard v12** | Always-on screen, live on the Acer since 2026-11-08 — GPU, temperatures, RAM, media tile, live two-way conversation feed, webcam beside the player. Brains autostart installed, both brains load in ~41s at reboot. |
+| 🤖 **Coding agents — the Grok Bot** | Free Claude Code working via the local 9B-32k; Qwen Code 0.27.1 on local Ollama; OpenMausBot 0.1.151 (the open-source Grok Bot) running, its Claude bots loading the REA and BLA skills, Engines step to do. |
 | 💻 **The machine** | Acer Nitro AN515-55. i7-10750H. 64GB RAM. RTX 2060, about 6GB VRAM. 512GB NVMe. |
 | 🎓 **OPERATOR PRIME — HGX Academy** | The one-year open source course, taught by HGX Academy — HgX's own academy. Full-Spectrum Operator Systems. Labs L1–L50 locked. 531 course files: canon, Dean batches 1–3, student packs, year pack, professor pack, professor skill, Academy action log. [Course website](course/) · [Course index](course/README.md). |
 | 🛠️ **Build your own Jarvis** | The how-to: the course, the build, and the website, in order — the two brains, the router, the voice, the dashboard, REA, and the hard rules. [BUILD-YOUR-OWN-JARVIS.md](BUILD-YOUR-OWN-JARVIS.md). |
@@ -77,9 +78,37 @@ is the exact moment as of 2026-11-10 ~08:20 ET, and the run-it-yourself
 guide ([`local-jarvis/SETUP.md`](local-jarvis/SETUP.md)) and the stack
 record ([`local-jarvis/LOCAL-JARVIS-STACK.md`](local-jarvis/LOCAL-JARVIS-STACK.md))
 now carry the built dual brain, the installed stacks, and the dropped
-voice gate (everybody operator-approved since 2026-11-05). Still to
-land: the CrackMe v9 result (runner stopped, resumable), the C270
-consolidated report file, and the iPad Kali build (PARKED).
+voice gate (everybody operator-approved since 2026-11-05). Later the same day (15:30 ET): **"Build it all" is complete** —
+daytime Claude Code (9B-32k) + REA + tools, nighttime 27B + BLA
+overnight runners — and the **overnight runner v1** is installed (it
+resumes the CrackMe tonight, then runs one BLA red-vs-blue smoke
+test; HgX starts it before bed). **Qwen Code 0.27.1** is installed,
+pointed at the local 9B-32k (test run unconfirmed). **OpenMausBot
+0.1.151 — the Grok Bot** — is installed and running, its Claude bots
+loading the REA and BLA skills, with the Engines step (point Claude at
+fcc-claude) still to do. **PR #67 (SAF-01)** merged 15:19 ET: the voice
+orchestrator binds loopback by default. **PR #66 (Kali laptop build)**
+merged 19:10 ET (HgX resolved the conflicts): the REA toolset registry,
+the teach guide, the current 32k autostart scripts, and
+`projects/kali-laptop-build/` are now on main. **PR #68 (SAF-02)**
+merged 19:17 ET: mesh and config values on the orchestrator status page
+are escaped. **PR #69 (SAF-03)** merged 19:18 ET: a verdict is accepted
+only for the open card and a pinned watch. **PR #70 (SAF-04)** merged
+19:20 ET: the dashboard answers only loopback and tailnet peers. **PR #71
+(SAF-05)** merged 19:21 ET: a decision can mint only from an envelope the
+device itself sealed. **PR #72 (SAF-06)** merged 19:37 ET: only the control
+plane may ask governance for a seal. **PR #73 (SAF-07)** merged 19:42 ET:
+orchestrator file tools stay inside the allowed roots. **PR #74 (SAF-08)**
+merged 19:44 ET: ceremony keys are owner-only. **PR #75 (SAF-09)** merged
+19:46 ET: workflow actions pinned, release binaries verified. **PR #76
+(SAF-10)** merged 19:52 ET: sessions expire at the decision gate, unknown
+states refused. **PR #77 (SAF-12)** merged 19:54 ET: REA analysis stays
+inside the allowed roots, off npm. **PR #78 (SAF-13)** merged 19:55 ET: the
+LoRa replay counter is persisted under the state directory. **PR #79
+(SAF-14)** merged 19:57 ET: HTTP bodies capped before they are read.
+Still to
+land: the CrackMe v9 result (the overnight runner resumes it tonight),
+the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
 ### 2026-11-07 — GitHub reconciled with the laptop build
 

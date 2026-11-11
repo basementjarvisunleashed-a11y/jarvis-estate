@@ -32,6 +32,9 @@ environment. Without a key, a canned DEMO brief is served -- everything
 works end to end before any key is wired.
 """
 
+import html as _html
+import hmac
+import ipaddress
 import json
 import os
 import re
@@ -42,6 +45,11 @@ from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PORT = 8080
+# SAF-01: loopback by default. A non-loopback bind (watch on the same Wi-Fi)
+# needs JARVIS_TOKEN; remote callers must send "Authorization: Bearer <token>".
+HOST = os.environ.get("JARVIS_HOST", "127.0.0.1").strip()
+API_TOKEN = os.environ.get("JARVIS_TOKEN", "").strip()
+_LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 XAI_URL = "https://api.x.ai/v1/chat/completions"
 # If xAI renames models, check console.x.ai -- a wrong name just falls back
 # to the canned demo brief, nothing breaks.
@@ -64,6 +72,9 @@ MQTT_PASS = "CHANGE_ME"       # placeholder — set the broker password locally
 MQTT_CHANNEL = "mqtt"          # must match the secondary channel name on the node, EXACTLY
 MQTT_CHANNEL_INDEX = 1         # secondary channel index (0 = primary LongFast)
 MQTT_SUB = "msh/+/2/json/" + MQTT_CHANNEL + "/+"   # wildcard region + node
+# SAF-03: the public broker is shared by everyone. Only this node may speak
+# for the watch (e.g. "!a1b2c3d4"); with it unset the mesh path stays off.
+WATCH_NODE = os.environ.get("JARVIS_WATCH_NODE", "").strip().lower()
 
 # --- demo scenarios (rotated; everything is labeled DEMO) -------------------
 DEMO_CANNED = [
@@ -162,6 +173,10 @@ def get_brief():
     return card
 
 
+class StaleVerdict(Exception):
+    """SAF-03: a verdict that does not answer the card that is open now."""
+
+
 def record_verdict(brief_id, decision, lat=None, lon=None, source="http"):
     entry = {
         "ts": datetime.now().isoformat(timespec="seconds"),
@@ -171,7 +186,13 @@ def record_verdict(brief_id, decision, lat=None, lon=None, source="http"):
         "lon": lon,
         "source": source,  # "http" (Apple Watch) or "mesh" (T-Watch)
     }
+    # Check and consume the open card under one lock. A check-then-write
+    # lets two requests both pass, and the later one can clear a newer card.
     with _lock:
+        open_brief = _state["brief"]
+        if open_brief is None or str(brief_id) != open_brief["id"]:
+            raise StaleVerdict(
+                "verdict id %r does not match the open card" % str(brief_id))
         with open(LOG_PATH, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry) + "\n")
         _state["verdicts"] += 1
@@ -248,6 +269,8 @@ def _mqtt_on_message(client, userdata, msg):
     except Exception as e:
         print("MESH: ignoring unparsable packet (%s)" % e)
         return
+    if not WATCH_NODE or (node_id or "").lower() != WATCH_NODE:
+        return  # SAF-03: not our watch -- learn nothing, record nothing
 
     with _lock:
         m = _state["mqtt"]
@@ -295,7 +318,10 @@ def _mqtt_on_message(client, userdata, msg):
     if open_brief is None:
         print("MESH: verdict '%s' with no open brief -- ignored." % decision)
         return
-    entry = record_verdict(open_brief["id"], decision, source="mesh")
+    try:
+        entry = record_verdict(open_brief["id"], decision, source="mesh")
+    except StaleVerdict:
+        return
     print("VERDICT id=%s decision=%s (mesh)" % (entry["id"], entry["decision"]))
     # Mint the next card immediately and push it downlink.
     card = get_brief()
@@ -343,6 +369,10 @@ def mqtt_start():
     the one-line install and returns False -- HTTP keeps working.
     """
     global _mqtt_client
+    if not WATCH_NODE:
+        print("MESH: JARVIS_WATCH_NODE not set -- mesh path DISABLED (public broker; "
+              "any node could answer for the watch).")
+        return False
     try:
         import paho.mqtt.client as paho
     except ImportError:
@@ -419,6 +449,17 @@ else:
 
 ACTIONS_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "actions.log")
 
+# Response capture (2026-11-07): every Ollama call the voice loop makes is
+# logged in full to orchestrator-responses.jsonl (next to this file), one
+# JSON object per line -- time, model, the full prompt (messages), the full
+# reply, and the tool calls + tool results when present. Fail-open: a
+# logging failure never breaks a call. The publishing house scrubs each
+# batch before it reaches GitHub; raw logs never go to GitHub.
+RESPONSE_LOG_PATH = os.environ.get(
+    "ORCHESTRATOR_RESPONSES_LOG",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                 "orchestrator-responses.jsonl"))
+
 
 class _OllamaDown(Exception):
     pass
@@ -435,6 +476,46 @@ def _log_action(tool, args, result):
         print("actions.log write failed: %s" % e)
 
 
+def _confine(ap):
+    """SAF-07: resolve symlinks before the root check, so a link inside
+    Desktop/Documents/Downloads cannot point the file tools elsewhere."""
+    rp = os.path.realpath(ap)
+    for r in JARVIS_ROOTS:
+        rr = os.path.realpath(r)
+        if rp == rr or rp.startswith(rr.rstrip(os.sep) + os.sep):
+            return rp, None
+    return None, "refused: outside the allowed folders (%s)" % ", ".join(JARVIS_ROOTS)
+_NO_MODEL = object()  # sentinel: no model passed (use OLLAMA_MODEL)
+
+
+def _log_response(messages, response, tool_calls, tool_results,
+                  model=_NO_MODEL, fast_path=False, error=None):
+    """Append one response-capture entry (JSONL) to RESPONSE_LOG_PATH.
+
+    One entry per Ollama call (plus one per fast-path media command, which
+    makes no model call): time, model, the full prompt (messages), the FULL
+    reply text (whole, not summarized), and the tool calls + tool results
+    when present. Fail-open: a logging failure must never break a call, so
+    every failure path here is swallowed. The entry is written best-effort;
+    if the file cannot be written, the call still succeeds.
+    """
+    entry = {"ts": datetime.now().isoformat(timespec="seconds"),
+             "model": OLLAMA_MODEL if model is _NO_MODEL else model,
+             "messages": messages,
+             "response": response,
+             "tool_calls": tool_calls,
+             "tool_results": tool_results,
+             "fast_path": bool(fast_path),
+             "error": error or ""}
+    try:
+        with _lock:
+            with open(RESPONSE_LOG_PATH, "a", encoding="utf-8") as f:
+                f.write(json.dumps(entry) + "\n")
+                f.flush()
+    except Exception as e:
+        print("orchestrator-responses.jsonl write failed: %s" % e)
+
+
 def _safe_path(p):
     """Resolve p inside the allowed roots. Returns (abspath, None) or (None, err).
 
@@ -449,20 +530,16 @@ def _safe_path(p):
         bn = os.path.basename(os.path.normpath(r)).lower()
         pl = p.strip().lower()
         if pl == bn:
-            return os.path.abspath(r), None
+            return _confine(os.path.abspath(r))
         if pl.startswith(bn + "/"):
             # "Downloads/sub/..." -> <root>/sub/...  ('..' already refused above)
             rest = p.strip()[len(os.path.basename(os.path.normpath(r))) + 1:]
-            return os.path.abspath(os.path.join(r, rest.replace("\\", "/"))), None
+            return _confine(os.path.abspath(os.path.join(r, rest.replace("\\", "/"))))
     cand = os.path.expanduser(p.strip())
     if not os.path.isabs(cand):
         base = JARVIS_ROOTS[0] if JARVIS_ROOTS else os.getcwd()
         cand = os.path.join(base, cand)
-    ap = os.path.abspath(cand)
-    for r in JARVIS_ROOTS:
-        if ap == r or ap.startswith(r + os.sep):
-            return ap, None
-    return None, "refused: outside the allowed folders (%s)" % ", ".join(JARVIS_ROOTS)
+    return _confine(os.path.abspath(cand))
 
 
 # --- file tools --------------------------------------------------------------
@@ -477,8 +554,14 @@ def tool_file_list(args):
         out = []
         with os.scandir(ap) as it:
             for e in it:
-                out.append((e.name, e.is_dir(),
-                            0 if e.is_dir() else e.stat().st_size))
+                # SAF-07: do not stat or classify through a symlink. The
+                # link's target may sit outside the allowed roots.
+                if e.is_symlink():
+                    out.append((e.name, False, 0))
+                else:
+                    is_dir = e.is_dir(follow_symlinks=False)
+                    size = 0 if is_dir else e.stat(follow_symlinks=False).st_size
+                    out.append((e.name, is_dir, size))
                 if len(out) >= 100:
                     break
         out.sort(key=lambda x: (not x[1], x[0].lower()))
@@ -490,7 +573,7 @@ def tool_file_list(args):
 
 
 def tool_file_search(args):
-    import glob
+    import fnmatch
     d, pat = args.get("dir", ""), args.get("pattern", "*") or "*"
     ap, err = _safe_path(d or (JARVIS_ROOTS[0] if JARVIS_ROOTS else "."))
     if err:
@@ -498,12 +581,49 @@ def tool_file_search(args):
     if not os.path.isdir(ap):
         return "ERROR: not a folder: %s" % d
     try:
-        hits = glob.glob(os.path.join(ap, "**", pat), recursive=True)[:50]
-        rel = [os.path.relpath(h, ap) for h in hits]
+        # glob follows directory symlinks, so a link inside a root would
+        # list files outside it. Walk without following links instead.
+        root = os.path.realpath(ap)
+        hits = []
+        for dirpath, dirnames, filenames in os.walk(root, followlinks=False):
+            entries = []
+            kept_dirs = []
+            for n in dirnames:
+                full = os.path.join(dirpath, n)
+                if os.path.islink(full):
+                    continue
+                kept_dirs.append(n)
+                entries.append(full)
+            dirnames[:] = kept_dirs
+            for n in filenames:
+                full = os.path.join(dirpath, n)
+                if os.path.islink(full):
+                    continue
+                entries.append(full)
+            for full in entries:
+                rel_s = os.path.relpath(full, root).replace(os.sep, "/")
+                base = rel_s.rsplit("/", 1)[-1]
+                if fnmatch.fnmatch(base, pat) or fnmatch.fnmatch(rel_s, pat):
+                    hits.append(rel_s)
+                    if len(hits) >= 50:
+                        break
+            if len(hits) >= 50:
+                break
         return ("Found %d match(es) for '%s' under %s:\n%s"
-                % (len(rel), pat, ap, "\n".join(rel) if rel else "(none)"))
+                % (len(hits), pat, ap, "\n".join(hits) if hits else "(none)"))
     except Exception as e:
         return "ERROR: %s" % e
+
+
+MAX_BODY = int(os.environ.get("JARVIS_MAX_BODY", 64 * 1024))  # SAF-14
+
+
+def _body_len(headers, cap=None):
+    """SAF-14: Content-Length must be 0..cap; negative would mean read-to-EOF."""
+    n = int(headers.get("Content-Length") or 0)
+    if n < 0 or n > (MAX_BODY if cap is None else cap):
+        raise ValueError("request body too large or invalid length")
+    return n
 
 
 def tool_file_read(args):
@@ -667,7 +787,14 @@ def _vlc_watch():
         time.sleep(3)
 
 
-threading.Thread(target=_vlc_watch, daemon=True).start()
+def _start_vlc_watch():
+    """Start the VLC probe from main(), not at import.
+
+    A daemon thread that is inside a socket call at interpreter shutdown
+    can crash the process. Tests import this module and must be able to
+    exit cleanly.
+    """
+    threading.Thread(target=_vlc_watch, daemon=True).start()
 
 
 def _vlc_ping():
@@ -728,7 +855,8 @@ JARVIS_TOOLS = [
                                       "dst": {"type": "string"}},
                        "required": ["src", "dst"]}}},
 ]
-REA_NPX = r"C:\Program Files\nodejs\npx.cmd"
+# SAF-12: Kali binary, no Windows path, no `npx -y` fetch at call time.
+REA_BIN = os.environ.get("JARVIS_REA_BIN") or shutil.which("rea-agents") or ""
 REA_COMMANDS = ["analyze", "inspect-pe-imports", "inspect-pe-certificates",
                 "inspect-pe-resources", "inspect-pe-load-config", "analyze-javascript-application"]
 
@@ -742,8 +870,14 @@ def tool_rea_analyze(args):
         return "ERROR: command must be one of: " + ", ".join(REA_COMMANDS)
     if not target or not os.path.isabs(target) or not os.path.exists(target):
         return "ERROR: target must be an existing absolute path."
+    # SAF-12: same allowed-folder check as every other file tool.
+    target, err = _safe_path(target)
+    if err:
+        return "ERROR: " + err
+    if not REA_BIN:
+        return "ERROR: REA is not installed (set JARVIS_REA_BIN)."
     try:
-        cp = subprocess.run([REA_NPX, "-y", "rea-agents@6.8.0", cmd, target, "--json"],
+        cp = subprocess.run([REA_BIN, cmd, target, "--json"],
                             capture_output=True, text=True, encoding="utf-8", errors="replace",
                             timeout=120, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     except subprocess.TimeoutExpired:
@@ -834,17 +968,28 @@ def jarvis_ask(text):
         result = str(JARVIS_DISPATCH[name]({}))
         _log_action(name, {}, result)
         actions.append({"tool": name, "ok": not result.startswith("ERROR")})
+        _log_response([{"role": "user", "content": text}], result,
+                      [{"function": {"name": name, "arguments": "{}"}}],
+                      [{"tool": name, "arguments": {}, "result": result}],
+                      model=None, fast_path=True)
         return result, actions
     messages = [{"role": "system", "content": JARVIS_SYSTEM},
                 {"role": "user", "content": text}]
     for _ in range(JARVIS_MAX_STEPS):
-        data = _ollama_chat(messages)
+        sent = json.loads(json.dumps(messages))  # prompt as sent, deep-copied
+        try:
+            data = _ollama_chat(messages)
+        except _OllamaDown as e:
+            _log_response(sent, "", [], [], error="ollama-down: %s" % e)
+            raise
         msg = data.get("message") or {}
         calls = msg.get("tool_calls") or []
         if not calls:
+            _log_response(sent, msg.get("content") or "", [], [])
             return (msg.get("content") or "(no answer)").strip(), actions
         messages.append({"role": "assistant", "content": msg.get("content") or "",
                          "tool_calls": calls})
+        tool_results = []
         for tc in calls:
             fn = tc.get("function") or {}
             name = fn.get("name", "")
@@ -865,12 +1010,78 @@ def jarvis_ask(text):
                     result = "ERROR: tool crashed: %s" % e
             _log_action(name, fargs, result)
             actions.append({"tool": name, "ok": not result.startswith("ERROR")})
+            tool_results.append({"tool": name, "arguments": fargs, "result": result})
             messages.append({"role": "tool", "tool_name": name,
                              "content": result})
+        _log_response(sent, msg.get("content") or "", calls, tool_results)
         if all(((tc.get("function") or {}).get("name") in _SIMPLE_VLC) for tc in calls):
             return " ".join(x["content"] for x in messages[-len(calls):]), actions
     return ("I ran the tools but did not reach a final answer -- "
             f"try a simpler request, {OPERATOR_NAME}.", actions)
+
+
+def _e(v):
+    """SAF-02: every value from the mesh, Grok or the environment is text, never markup."""
+    return _html.escape(str(v), quote=True)
+def _allowed_hosts():
+    """Hostnames this process will answer. Compared case-insensitively.
+
+    The bind address is included when it is a name a client would send.
+    0.0.0.0 and :: are listen-all wildcards, not Host values.
+    """
+    hosts = set(_LOOPBACK)
+    bind = (HOST or "").strip().lower()
+    if bind and bind not in ("0.0.0.0", "::"):
+        hosts.add(bind)
+    for h in os.environ.get("JARVIS_ALLOWED_HOSTS", "").split(","):
+        item = h.strip().lower()
+        if item:
+            hosts.add(item)
+    return hosts
+
+
+def _peer_is_loopback(peer):
+    """True only for a loopback peer, including IPv4-mapped IPv6."""
+    try:
+        ip = ipaddress.ip_address(peer)
+    except ValueError:
+        return False
+    mapped = getattr(ip, "ipv4_mapped", None)
+    if mapped is not None:
+        ip = mapped
+    return bool(ip.is_loopback)
+
+
+def request_gate(handler, is_post):
+    """SAF-01: refuse before any work. Returns an error string or None.
+
+    * Host header must name this machine (blocks DNS rebinding).
+    * POST bodies must be application/json (blocks cross-site "simple"
+      form/text POSTs from any web page the operator visits).
+    * Callers that are not on loopback must present JARVIS_TOKEN.
+    """
+    host = (handler.headers.get("Host") or "").strip().lower()
+    if host.startswith("["):
+        hostname = host[1:].split("]", 1)[0]
+    else:
+        hostname = host.rsplit(":", 1)[0] if host.count(":") == 1 else host
+    if hostname not in _allowed_hosts():
+        return "host not allowed"
+    if is_post:
+        ctype = (handler.headers.get("Content-Type") or "").split(";", 1)[0].strip().lower()
+        if ctype != "application/json":
+            return "content-type must be application/json"
+    peer = handler.client_address[0] if handler.client_address else ""
+    # The whole 127.0.0.0/8 and ::1 are loopback. A string prefix on
+    # "::ffff:127." misses the hex form (::ffff:7f00:1) and is not how
+    # mapped addresses should be classified.
+    if not _peer_is_loopback(peer):
+        if not API_TOKEN:
+            return "remote callers need JARVIS_TOKEN set on the laptop"
+        got = (handler.headers.get("Authorization") or "").strip()
+        if not hmac.compare_digest(got.encode("utf-8"), ("Bearer " + API_TOKEN).encode("utf-8")):
+            return "unauthorized"
+    return None
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -885,6 +1096,11 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
+        err = request_gate(self, is_post=False)
+        if err:
+            self.close_connection = True
+            self._send_json({"ok": False, "error": err}, 403)
+            return
         if self.path == "/":
             key_set = bool(os.environ.get("XAI_API_KEY", "").strip())
             with _lock:
@@ -895,12 +1111,12 @@ class Handler(BaseHTTPRequestHandler):
                 mq = dict(_state["mqtt"])
             if pos:
                 pos_html = "<p>Last GPS position: %.4f, %.4f <i>(%s)</i></p>" % (
-                    pos["lat"], pos["lon"], pos["ts"])
+                    pos["lat"], pos["lon"], _e(pos["ts"]))
             else:
                 pos_html = "<p><i>No GPS position yet.</i></p>"
             if mq["ok"]:
                 mesh_html = "<p>Mesh link: <b>UP</b> (node %s, region %s, last rx %s)</p>" % (
-                    mq["watch_id"], mq["region"], mq["last_rx"])
+                    _e(mq["watch_id"]), _e(mq["region"]), _e(mq["last_rx"]))
             else:
                 mesh_html = ("<p>Mesh link: <i>down</i> -- is paho-mqtt installed and "
                              "has the watch sent anything yet?</p>")
@@ -908,10 +1124,10 @@ class Handler(BaseHTTPRequestHandler):
                            "{\"text\": \"...\"} -- Ollama <code>%s</code>, model "
                            "<code>%s</code>, %d tools, VLC remote: %s (port %d), "
                            "file roots: %s</p>"
-                           % (OLLAMA_URL, OLLAMA_MODEL, len(JARVIS_TOOLS),
+                           % (_e(OLLAMA_URL), _e(OLLAMA_MODEL), len(JARVIS_TOOLS),
                               ("<b>UP</b>" if _vlc_ping() else "<i>down</i>"),
                               VLC_HTTP_PORT,
-                              ", ".join(JARVIS_ROOTS) or "(none configured)"))
+                              _e(", ".join(JARVIS_ROOTS) or "(none configured)")))
             html = """<html><head><title>Bracelet PoC Orchestrator</title></head>
 <body style="font-family:sans-serif;max-width:640px;margin:40px auto">
 <h1>Bracelet PoC Orchestrator</h1>
@@ -923,10 +1139,10 @@ class Handler(BaseHTTPRequestHandler):
 %s
 <p><a href="/brief">/brief</a> (JSON) &middot; verdicts append to <code>verdicts.log</code> &middot; tool calls append to <code>actions.log</code></p>
 </body></html>""" % (
-                started, n, "SET" if key_set else "NOT SET (canned demo)",
+                _e(started), n, "SET" if key_set else "NOT SET (canned demo)",
                 mesh_html, pos_html, jarvis_html,
                 ("<p><b>%s</b> (id %s)</p><p>%s</p>" % (
-                    brief["title"], brief["id"], brief["body"]))
+                    _e(brief["title"]), _e(brief["id"]), _e(brief["body"])))
                 if brief else "<p><i>No card yet -- poll /brief.</i></p>")
             body = html.encode("utf-8")
             self.send_response(200)
@@ -940,10 +1156,20 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json({"ok": False, "error": "unknown path"}, 404)
 
     def do_POST(self):
+        err = request_gate(self, is_post=True)
+        if err:
+            # Drop the connection. The body is unread, so keep-alive would
+            # desynchronise the next request on this socket.
+            self.close_connection = True
+            self._send_json({"ok": False, "error": err}, 403)
+            return
         if self.path == "/jarvis":
             # Local Jarvis, the agentic wrist: {"text": "<utterance>"}.
             try:
-                length = int(self.headers.get("Content-Length", 0))
+                try:
+                    length = _body_len(self.headers)
+                except ValueError:
+                    self.close_connection = True; raise
                 data = json.loads(self.rfile.read(length).decode("utf-8"))
                 text = str(data.get("text", "")).strip()
                 if not text:
@@ -975,7 +1201,10 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json({"ok": False, "error": "unknown path"}, 404)
             return
         try:
-            length = int(self.headers.get("Content-Length", 0))
+            try:
+                length = _body_len(self.headers)
+            except ValueError:
+                self.close_connection = True; raise
             data = json.loads(self.rfile.read(length).decode("utf-8"))
             brief_id = str(data.get("id", "")).strip()
             decision = str(data.get("decision", "")).strip().lower()
@@ -996,7 +1225,11 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e:
             self._send_json({"ok": False, "error": str(e)}, 400)
             return
-        entry = record_verdict(brief_id, decision, lat, lon, source="http")
+        try:
+            entry = record_verdict(brief_id, decision, lat, lon, source="http")
+        except StaleVerdict as e:
+            self._send_json({"ok": False, "error": str(e)}, 409)
+            return
         if lat is not None:
             print("VERDICT id=%s decision=%s at %.4f,%.4f (http)" % (
                 entry["id"], entry["decision"], lat, lon))
@@ -1020,17 +1253,28 @@ def _lan_ip():
 
 
 def main():
+    _start_vlc_watch()
     print("=" * 60)
     print("Bracelet PoC orchestrator -- one brain, two surfaces")
     print("=" * 60)
     mesh_up = mqtt_start()
-    # Empty host binds every local interface (same as the unspecified
-    # address) without hardcoding a public IP. Loopback is still localhost.
-    server = ThreadingHTTPServer(("", PORT), Handler)
+    # SAF-01: loopback unless JARVIS_HOST says otherwise; a wider bind
+    # without JARVIS_TOKEN is refused (anyone on the network could drive
+    # the file tools).
+    if (HOST or "").strip().lower() not in _LOOPBACK and not API_TOKEN:
+        print("REFUSING to listen on %r without JARVIS_TOKEN set." % (HOST or "all interfaces"))
+        raise SystemExit(2)
+    server = ThreadingHTTPServer((HOST, PORT), Handler)
     print("-" * 60)
-    print("HTTP (Apple Watch path) on port %d" % PORT)
-    print("On this laptop:  http://localhost:%d" % PORT)
-    print("From iPhone/watch (same WiFi): http://%s:%d" % (_lan_ip(), PORT))
+    print("HTTP listening on %s:%d" % (HOST, PORT))
+    print("On this laptop:  http://127.0.0.1:%d" % PORT)
+    if (HOST or "").strip().lower() in _LOOPBACK:
+        print("Wi-Fi and the watch Shortcut cannot reach a loopback bind.")
+        print("To open it: set JARVIS_HOST, JARVIS_TOKEN, and JARVIS_ALLOWED_HOSTS.")
+        print("The Shortcut must send Authorization: Bearer <JARVIS_TOKEN>.")
+    else:
+        print("Non-loopback callers must send Authorization: Bearer <JARVIS_TOKEN>.")
+        print("If their Host is not the bind address, list it in JARVIS_ALLOWED_HOSTS.")
     if mesh_up:
         print("MESH (T-Watch path): waiting for the watch -- send READY from it.")
     else:

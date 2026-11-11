@@ -143,5 +143,38 @@ class TestIntentLog(unittest.TestCase):
         self.assertEqual(len(again), 1)
 
 
+
+class TestKeyFileModes(unittest.TestCase):
+    """SAF-08: ceremony key files are owner-only regardless of umask."""
+
+    def test_modes(self):
+        import stat
+        # umask 0 would leave a normal open() world-writable. The ceremony
+        # must still produce 0700/0600, and must not follow a key symlink.
+        old = os.umask(0)
+        parent = tempfile.mkdtemp()
+        try:
+            d = os.path.join(parent, "keys")
+            keys.ceremony_generate(d, surfaces=("watch",))
+            self.assertEqual(stat.S_IMODE(os.stat(d).st_mode), 0o700)
+            saw_key = False
+            for fn in os.listdir(d):
+                if fn.endswith(".key"):
+                    saw_key = True
+                    self.assertEqual(
+                        stat.S_IMODE(os.stat(os.path.join(d, fn)).st_mode),
+                        0o600, fn)
+            self.assertTrue(saw_key)
+            outside = os.path.join(parent, "stolen.key")
+            master = os.path.join(d, "master.key")
+            os.remove(master)
+            os.symlink(outside, master)
+            with self.assertRaises(OSError):
+                keys.ceremony_generate(d, surfaces=("watch",))
+            self.assertFalse(os.path.exists(outside))
+        finally:
+            os.umask(old)
+            shutil.rmtree(parent, ignore_errors=True)
+
 if __name__ == "__main__":
     unittest.main()

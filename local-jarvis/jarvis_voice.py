@@ -5,7 +5,7 @@ Does NOT auto-start. Usage (venv python):
 No delete capability by design."""
 import warnings; warnings.filterwarnings("ignore")
 import sys, os, re, json, time, subprocess, urllib.request, wave
-sys.path.insert(0, r"/home/hgx/Jarvis")
+sys.path.insert(0, os.path.expanduser("~/Jarvis"))
 import jarvis as J   # reuse dev(), transcribe(), MIC/SPK, VOICE (same Whisper, same devices)
 ORCH = "http://127.0.0.1:8080/jarvis"
 # SAF-15: Kali paths. The gate mode is explicit instead of "whatever happens
@@ -127,10 +127,10 @@ def _vlc_running():
 def _sopranos_dir():
     import glob
     import os as _os
-    neat = "/mnt/hgx/TV SHOWS/THE SOPRANOS/The Sopranos/"
+    neat = os.path.join(os.environ.get("MEDIA_DIR", "/mnt/media"), "TV SHOWS", "THE SOPRANOS", "The Sopranos")
     if _os.path.isdir(neat):
         return neat
-    for cand in glob.glob("/mnt/hgx/TV SHOWS/**/The Sopranos/", recursive=True):
+    for cand in glob.glob(os.path.join(os.environ.get("MEDIA_DIR", "/mnt/media"), "TV SHOWS", "**", "The Sopranos"), recursive=True):
         if _os.path.isdir(cand):
             return cand
     return None

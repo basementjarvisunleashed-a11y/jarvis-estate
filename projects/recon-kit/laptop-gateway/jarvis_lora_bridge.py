@@ -86,7 +86,11 @@ def crc16_ccitt(data: bytes, crc: int = 0xFFFF) -> int:
 # Anti-replay: every signed frame carries a monotonic counter (hex) BEFORE the MAC:
 #   JV1|msgid|type|seq|total|payload|ctr|mac|crc
 # TX counter and the highest RX counter seen are persisted outside synced trees.
-CTR_FILE = os.environ.get("JV_LORA_CTR_FILE", r"C:\JarvisData\lora\counters.json")
+# SAF-13: the old default was a Windows path; on Kali dirname() was "" so the
+# counter was never saved and reset to 0 on every restart (replay window).
+CTR_FILE = os.environ.get("JV_LORA_CTR_FILE") or os.path.join(
+    os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state"),
+    "jarvis-lora", "counters.json")
 _ctr_lock = threading.Lock()
 def _load_ctr():
     try:
@@ -96,12 +100,30 @@ def _load_ctr():
         return 0, 0
 _TX_CTR, _RX_CTR = _load_ctr()
 def _save_ctr():
+    """Persist both counters atomically (dir 0700, file 0600). False on failure."""
+    fd = -1
     try:
-        os.makedirs(os.path.dirname(CTR_FILE), exist_ok=True)
-        with open(CTR_FILE, "w", encoding="utf-8") as fh:
+        directory = os.path.dirname(os.path.abspath(CTR_FILE))
+        os.makedirs(directory, mode=0o700, exist_ok=True)
+        os.chmod(directory, 0o700)
+        flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC
+        if hasattr(os, "O_NOFOLLOW"):
+            flags |= os.O_NOFOLLOW
+        fd = os.open(CTR_FILE + ".tmp", flags, 0o600)
+        os.fchmod(fd, 0o600)
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fd = -1
             json.dump({"tx": _TX_CTR, "rx": _RX_CTR}, fh)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(CTR_FILE + ".tmp", CTR_FILE)
+        return True
     except Exception as e:  # noqa
         log.warning("counter persist failed: %s", type(e).__name__)
+        return False
+    finally:
+        if fd >= 0:
+            os.close(fd)
 def _next_tx():
     global _TX_CTR
     with _ctr_lock:
@@ -142,7 +164,12 @@ def parse_frame(line: str):
                 if ctr <= _RX_CTR:                          # replay / stale -> drop
                     log.warning("replayed/stale counter %d <= %d, dropping", ctr, _RX_CTR)
                     return None
-                _RX_CTR = ctr; _save_ctr()
+                prev = _RX_CTR
+                _RX_CTR = ctr
+                if not _save_ctr():                         # SAF-13: fail closed
+                    _RX_CTR = prev                       # watermark moves only once stored
+                    log.warning("counter not persisted, dropping frame")
+                    return None
         _magic, msgid, mtype, seq, total, payload = body.split("|", 5)
         return {"msgid": msgid, "type": mtype,
                 "seq": int(seq), "total": int(total), "payload": payload}
@@ -270,7 +297,18 @@ def start_push_server(send_text):
             if not PUSH_TOKEN or not hmac.compare_digest(tok, PUSH_TOKEN):   # shared secret, fail closed
                 log.warning("push rejected: auth")
                 self.send_response(401); self.send_header("Content-Length", "0"); self.end_headers(); return
-            n = min(int(self.headers.get("Content-Length", 0)), 2048)
+            try:
+                n = int(self.headers.get("Content-Length", 0))
+            except (TypeError, ValueError):
+                n = -1
+            # SAF-14: -1 would read until the client closes. Do not turn that
+            # into an empty push.
+            if n < 0 or n > 2048:
+                self.close_connection = True
+                self.send_response(413)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return
             try:
                 d = json.loads(self.rfile.read(n) or b"{}")
                 send_text(str(d.get("msgid", "0"))[:4] or "0", str(d.get("text", ""))[:MAX_REPLY_CHARS])

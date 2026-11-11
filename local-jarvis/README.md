@@ -334,6 +334,7 @@ does not match the password in VLC's Lua HTTP preferences.
 | `dashboard/v11/` | Applied 2026-11-07 evening, superseded by v12 — recorded as a version line only, files never sent. |
 | `dashboard/v12/` | Laptop camera stacked full-width below C270; CPU temp + GPU on top strip; whole page scrolls; REA tile shows the C270 breakdown; sports one NFL line. LIVE on the Acer since 2026-11-08. |
 | `crackme-v9/` | CrackMe v9 Sovereign runner v1 (script, README, start script, tests) — STOPPED / OPEN: stopped by HgX 2026-11-10 08:25 ET to free the CPU for Claude; license done, WASM task killed on attempt 2; resumable from the WASM task; no key recovered, no solve claimed. |
+| `overnight-runner/` | Overnight BLA + 27B runner v1 (script, README, start script) — INSTALLED 2026-11-10 at `~/overnight-27b-runner/`; resumes CrackMe to completion, then one BLA red-vs-blue smoke test; HgX starts it tonight before bed. |
 | `rea-tools/` | The 15 REA tools: teach guide (`rea-tool-usage-guide.md`, scrubbed) + BLA 3.2.3 counter-REA note. The registry (`rea-toolset.md`) lives on the Acer. |
 | `STATE-2026-11-10.md` | The exact moment, 2026-11-10 ~08:20 ET — the whole system, as it stands. |
 | `gpu-orchestrator/` | GPU brain manager (9B VRAM / 27B RAM). **DEPLOYED 2026-11-06, loop proven, keep-alive v2** (midnight run confirmed 2026-11-07 00:02). |

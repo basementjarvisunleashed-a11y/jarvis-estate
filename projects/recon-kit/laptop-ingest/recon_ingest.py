@@ -233,7 +233,14 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(401, {"error": "auth"})            # fail closed
         if self.path != "/look":
             return self._send(404, {"error": "not found"})
-        n = min(int(self.headers.get("Content-Length", 0)), 4096)
+        try:
+            n = int(self.headers.get("Content-Length", 0))
+        except (TypeError, ValueError):
+            n = -1
+        # SAF-14: -1 would read until the client closes.
+        if n < 0 or n > 4096:
+            self.close_connection = True
+            return self._send(413, {"error": "request body too large"})
         try:
             env = validate(json.loads(self.rfile.read(n) or b"{}"))
             if env["kind"] != "cmd" or env["src"] not in ("glasses", "watch"):

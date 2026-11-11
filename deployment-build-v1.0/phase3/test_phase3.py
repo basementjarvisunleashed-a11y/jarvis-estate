@@ -488,5 +488,27 @@ class TestPlaneEnforcement(Phase3Base):
         self.assertEqual(h.log_server.plane, "data")
 
 
+
+class TestCardIsNotADecision(Phase3Base):
+    """SAF-05: a card the trust root sealed is never accepted as the
+    principal's signed decision, so control cannot mint without a tap."""
+
+    def test_decision_shaped_card_cannot_mint(self):
+        h = self.h
+        evil = {"target": {"kind": "people", "count": 400},
+                "effect": "send_message", "content": "not approved"}
+        forged = {"device": "watch", "decision": "approve",
+                  "intent_digest": seal.intent_digest(evil),
+                  "expiry": h.clock.now() + 10 ** 6, "card_id": "forged"}
+        card = h.gateway.pull(h.orch, planes.Plane.GOVERNANCE,
+                              {"query": "issue_card", "card": forged},
+                              h.transport_key)["content"]["card"]
+        with self.assertRaises(HandshakeError):
+            h.gateway.pull(h.orch, planes.Plane.GOVERNANCE,
+                           {"query": "mint_token", "decision": card,
+                            "intent": evil, "edge": "edge"},
+                           h.transport_key)
+        self.assertEqual(h.trust.minted, {})
+
 if __name__ == "__main__":
     unittest.main()

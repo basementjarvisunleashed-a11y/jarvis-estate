@@ -78,6 +78,7 @@ per-camera state under "cams" (c270 + laptop); the top-level
 "streaming" is the main camera (C270 when it is live, else laptop).
 """
 
+import ipaddress
 import json
 import os
 import re
@@ -2419,9 +2420,66 @@ def _maybe_save_webcam_snapshot():
 
 
 # ---------------------------------------------------------------- HTTP
+# SAF-04: DASHBOARD_HOST=0.0.0.0 also answers on the home/hotel Wi-Fi and
+# any wired LAN, not only the tailnet. Only loopback and Tailscale peers
+# may talk to the dashboard (live webcams, media, status).
+_ALLOWED_NETS = [ipaddress.ip_network(n) for n in (
+    "127.0.0.0/8", "::1/128", "100.64.0.0/10", "fd7a:115c:a1e0::/48")]
+_EXTRA_HOSTS = {h.strip().lower() for h in os.environ.get(
+    "DASHBOARD_ALLOWED_HOSTS", "").split(",") if h.strip()}
+
+
+def peer_allowed(addr):
+    try:
+        ip = ipaddress.ip_address(addr)
+    except ValueError:
+        return False
+    if getattr(ip, "ipv4_mapped", None):
+        ip = ip.ipv4_mapped
+    return any(ip in net for net in _ALLOWED_NETS)
+
+
+def host_allowed(host_header):
+    """Blocks DNS rebinding.
+
+    The Host must be localhost, a loopback or tailnet address, a MagicDNS
+    name (ends with .ts.net), or an entry in DASHBOARD_ALLOWED_HOSTS.
+    Any other IP literal (a LAN or public address) is rejected: it is not
+    a name of this server.
+    """
+    h = (host_header or "").strip().lower()
+    if h.startswith("["):
+        name = h[1:].split("]", 1)[0]
+    else:
+        name = h.rsplit(":", 1)[0] if h.count(":") == 1 else h
+    if not name:
+        return False
+    if name == "localhost" or name.endswith(".ts.net") or name in _EXTRA_HOSTS:
+        return True
+    return peer_allowed(name)
+
+
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):  # keep the console quiet
         pass
+
+    def _gate(self, is_post):
+        """SAF-04: refuse before any work. Returns True when refused."""
+        if not peer_allowed(self.client_address[0]):
+            self.close_connection = True
+            self._send(403, "loopback and tailnet only", "text/plain")
+            return True
+        if not host_allowed(self.headers.get("Host")):
+            self.close_connection = True
+            self._send(403, "host not allowed", "text/plain")
+            return True
+        if is_post:
+            ctype = (self.headers.get("Content-Type") or "").split(";", 1)[0].strip().lower()
+            if ctype != "application/json":
+                self.close_connection = True
+                self._send(415, "content-type must be application/json", "text/plain")
+                return True
+        return False
 
     def _send(self, status, body, content_type):
         if isinstance(body, str):
@@ -2510,6 +2568,10 @@ class Handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length") or 0)
         except Exception:
             return None
+        # SAF-14: a negative length means read-until-EOF and hangs the client.
+        if length < 0 or length > 256 * 1024:
+            self.close_connection = True
+            return None
         try:
             raw = self.rfile.read(length) if length > 0 else b""
             return json.loads(raw.decode("utf-8")) if raw else {}
@@ -2573,6 +2635,8 @@ class Handler(BaseHTTPRequestHandler):
             grabber.release()
 
     def do_GET(self):
+        if self._gate(is_post=False):
+            return
         parsed = urlparse(self.path)
         path = parsed.path
         query = parse_qs(parsed.query)
@@ -2676,6 +2740,8 @@ class Handler(BaseHTTPRequestHandler):
             self._send(404, "not found", "text/plain")
 
     def do_POST(self):
+        if self._gate(is_post=True):
+            return
         parsed = urlparse(self.path)
         path = parsed.path
         if path == "/api/play":

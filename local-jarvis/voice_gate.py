@@ -6,13 +6,13 @@ CLI:  python voice_gate.py file.wav      -> prints JSON
 import warnings; warnings.filterwarnings("ignore")
 import os, sys, json
 # VG-1 2026-10-27: voice-profile data moved OUT of Downloads (which the orchestrator's file
-# tools can read/move) into C:\Jarvis\voiceprint (ACL: owner, SYSTEM, Administrators only).
+# tools can read/move) into ~/Jarvis\voiceprint (ACL: owner, SYSTEM, Administrators only).
 # profiles.json, take*.wav and pretrained_models must never leave this laptop.
-VOICEPRINT = r"C:\Jarvis\voiceprint"
+VOICEPRINT = os.path.join(os.path.expanduser("~/Jarvis"), "voiceprint")
 MODEL_DIR = os.path.join(VOICEPRINT, "pretrained_models", "spkrec-ecapa-voxceleb")
 PROFILE = os.path.join(VOICEPRINT, "profiles.json")
-CONFIG = r"C:\Jarvis\voice_gate.json"
-LOG = r"C:\Jarvis\voice_gate.log"
+CONFIG = os.path.join(os.path.expanduser("~/Jarvis"), "voice_gate.json")
+LOG = os.path.join(os.path.expanduser("~/Jarvis"), "voice_gate.log")
 _warn = None  # VG-2a: set when voice_gate.json is missing/corrupt; also reported in the "ready" line
 
 def _log_warning(msg):

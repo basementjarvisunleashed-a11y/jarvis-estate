@@ -555,5 +555,22 @@ class TestOrchestratorLoop(PullTestBase):
                 self.assertFalse(hasattr(obj, name))
 
 
+
+class TestNoSealOracle(unittest.TestCase):
+    """SAF-06: a surface (data plane) cannot get governance to seal for it."""
+
+    def test_surface_cannot_request_master_or_peer_seal(self):
+        h = Harness()
+        try:
+            for key_name in ("master", "surface:watch"):
+                with self.assertRaises(PlaneViolation):
+                    h.gateway.pull(h.client, Plane.GOVERNANCE,
+                                   {"op": "seal", "key_name": key_name,
+                                    "content": {"forged": True},
+                                    "origin": "intent-log", "ts": T0},
+                                   key=TRANSPORT_KEY)
+        finally:
+            shutil.rmtree(h.tmp, ignore_errors=True)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

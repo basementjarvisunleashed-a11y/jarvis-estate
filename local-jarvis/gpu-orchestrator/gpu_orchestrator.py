@@ -630,8 +630,16 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def _read_json(self):
-        length = int(self.headers.get("Content-Length") or 0)
-        if length <= 0:
+        try:
+            length = int(self.headers.get("Content-Length") or 0)
+        except (TypeError, ValueError):
+            length = -1
+        # SAF-14: negative Content-Length is read-until-EOF. None means
+        # "do not act"; {} is a real empty body and may proceed.
+        if length < 0 or length > 256 * 1024:
+            self.close_connection = True
+            return None
+        if length == 0:
             return {}
         try:
             return json.loads(self.rfile.read(length).decode("utf-8", "replace"))
@@ -667,6 +675,9 @@ class Handler(BaseHTTPRequestHandler):
             self._send(404, {"ok": False, "error": "unknown path %s" % self.path})
             return
         body = self._read_json()
+        if body is None:
+            self._send(413, {"ok": False, "error": "request body too large"})
+            return
         purpose = str(body.get("purpose", "llm")).lower()
         holder = str(body.get("holder", "unknown"))
         if purpose not in ("llm", "comfy"):
