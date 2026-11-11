@@ -1,7 +1,7 @@
 # REA Toolset — HgX's local reverse-engineering stack (Acer / Kali)
 # Source: the 15 repos from @N01ennn's X post (2026-11-07), installed one at a time.
 # Updated: 2026-11-11 — prove-out: 9 of 10 never-run tools VERIFIED (diec, capa, LIEF, angr, mitmproxy, ILSpy, asar, Apktool, jadx); objection CLI verified, live proof deferred; GhidraMCP VERIFIED LIVE on 8081; Wireshark GUI verified; usbmon fix permanent.
-# Cross-use with BLA: see REA-BLA-INTEGRATION.md — REA takes things apart, BLA shields them. On any project that needs a build, a shield, and a test of the shield, use both (build → shield → test).
+# Cross-use with BLA: see rea-bla-integration.md — REA takes things apart, BLA shields them. On any project that needs a build, a shield, and a test of the shield, use both (build → shield → test).
 # This file is the record for Jarvis, REA, the big model (27B), the small model (9B),
 # and the router — the local REA stack on the Acer. Not broadcast elsewhere.
 

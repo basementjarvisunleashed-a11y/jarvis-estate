@@ -2,7 +2,7 @@
 
 **Who this is for:** REA (the reverse-engineering agent on HgX's Acer Kali laptop), the 9B model (`qwen9b-abliterated`, fast, on GPU), the 27B model (`huihui_ai/Qwen3.8-abliterated:27b`, slow, on CPU RAM), and the little router (127.0.0.1:11435). Read this before starting any REA job. It is the operating manual for the 15 tools installed 2026-11-07 — every version, path, and quirk below is verified on this machine.
 
-**Cross-use with BLA:** see `REA-BLA-INTEGRATION.md` — BLA shields what REA takes apart. On any project that needs a build, a shield, and a test of the shield, use both (build → shield → test).
+**Cross-use with BLA:** see `rea-bla-integration.md` — BLA shields what REA takes apart. On any project that needs a build, a shield, and a test of the shield, use both (build → shield → test).
 
 **First rule of every job:** check the tool exists before you use it.
 
