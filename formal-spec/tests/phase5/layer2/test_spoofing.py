@@ -303,5 +303,33 @@ class TestSourceAllowlist(unittest.TestCase):
         self.assertTrue(result["current"])
 
 
+
+class TestSessionGateFailsClosed(unittest.TestCase):
+    """SAF-10: an expired session is refused even if nobody swept, and an
+    unrecognised state is refused rather than treated as active."""
+
+    def _active(self, expiry_seconds=60):
+        import estate
+        clock = estate.Clock()
+        reg = estate.SessionRegistry(clock, session_expiry_seconds=expiry_seconds)
+        reg.enroll("watch")
+        sid = list(reg.sessions)[0]
+        reg.complete_enrollment(sid)
+        return estate, clock, reg, sid
+
+    def test_unswept_expiry_refused(self):
+        estate, clock, reg, sid = self._active()
+        clock.advance(3600)
+        with self.assertRaises(estate.Refusal) as cm:
+            reg.require_active(sid)
+        self.assertEqual(cm.exception.cause, "expired-session")
+
+    def test_unknown_state_refused(self):
+        estate, clock, reg, sid = self._active()
+        reg.sessions[sid].state = "Revoked"
+        with self.assertRaises(estate.Refusal) as cm:
+            reg.require_active(sid)
+        self.assertEqual(cm.exception.cause, "unknown-state")
+
 if __name__ == "__main__":
     unittest.main()
