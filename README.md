@@ -94,7 +94,9 @@ the teach guide, the current 32k autostart scripts, and
 merged 19:17 ET: mesh and config values on the orchestrator status page
 are escaped. **PR #69 (SAF-03)** merged 19:18 ET: a verdict is accepted
 only for the open card and a pinned watch. **PR #70 (SAF-04)** merged
-19:20 ET: the dashboard answers only loopback and tailnet peers. Still to
+19:20 ET: the dashboard answers only loopback and tailnet peers. **PR #71
+(SAF-05)** merged 19:21 ET: a decision can mint only from an envelope the
+device itself sealed. Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
