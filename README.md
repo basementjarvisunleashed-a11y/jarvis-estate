@@ -100,7 +100,9 @@ device itself sealed. **PR #72 (SAF-06)** merged 19:37 ET: only the control
 plane may ask governance for a seal. **PR #73 (SAF-07)** merged 19:42 ET:
 orchestrator file tools stay inside the allowed roots. **PR #74 (SAF-08)**
 merged 19:44 ET: ceremony keys are owner-only. **PR #75 (SAF-09)** merged
-19:46 ET: workflow actions pinned, release binaries verified. Still to
+19:46 ET: workflow actions pinned, release binaries verified. **PR #76
+(SAF-10)** merged 19:52 ET: sessions expire at the decision gate, unknown
+states refused. Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
