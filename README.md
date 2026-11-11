@@ -51,6 +51,26 @@ full page on the website:
 
 ## Recent
 
+### 2026-11-11 — Morning: X-post 10 tools + inventory
+
+The morning's X-post 10 tools are all on the laptop and verified:
+FastAPI-MCP 0.4.0 installed, Shodan MCP 1.0.37 built and wired into
+Claude Code + Cursor, the awesome-mcp-servers catalog cloned (9,000+
+servers), and the catalog pointer in all 4 REA/BLA skill files — the
+Cursor REA pointer landed 10:18 ET, by HgX himself. Inventory 10:17 ET
+(his terminal output): all 15 REA tools present; both brains loaded
+(27B 18 GB, 100% CPU, ctx 4096, 22h left; 32k 7.1 GB, 32%/68% CPU/GPU,
+ctx 32768, 21h left); disk / 47% (239G free), /mnt/hgx 74% (980G free);
+services :8082 :49374 :8080 :3001 :11436 :11435 :11434 listening; :8081
+absent — GhidraMCP off because Ghidra was closed, not broken. New on
+disk, not loaded: 27B-omb-64k (17 GB, pulled ~11h ago). Still to do:
+TalkToFigma (Bun paste still not delivered) and ElevenLabs MCP; held:
+Blender, Unity, Apple MCP. The dated snapshot
+[`local-jarvis/STATE-2026-11-11.md`](local-jarvis/STATE-2026-11-11.md)
+is the exact moment as of 2026-11-11 ~10:17 ET, and the morning record
+is at
+[`local-jarvis/XPOST-10-TOOLS-2026-11-11.md`](local-jarvis/XPOST-10-TOOLS-2026-11-11.md).
+
 ### 2026-11-10 — The whole build, brought current
 
 The repo now matches the Acer again, three days on. Dashboard **v12
@@ -122,7 +142,7 @@ Item #6 DONE 08:07:45 ET (2026-11-11): the overnight runner v2 --redo-bla
 run finished; BLA verdict: not-recovered; CrackMe v9 still unsolved.
 Tonight's checklist is 8 of 8 complete. PR #81 MERGED 09:46 ET (2026-11-11, merge commit 97fae5f): the REA registry + integration update is on main — 9 tools + GhidraMCP verified 2026-11-11, BLA cross-reference pointer lowercase, 3 files (+70/−21). Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
-the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
+the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (8 of 8 complete): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner, Qwen confirm, OpenMausBot Engines step; new Current Build section on the website shows the same live status.
 
 ### 2026-11-07 — GitHub reconciled with the laptop build
 

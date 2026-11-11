@@ -4,7 +4,7 @@
 
 Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @basementjarvisu · basementjarvisunleashed@gmail.com.
 
-**Status rule for this document:** every item is marked BUILT or PENDING. A PENDING item is planned only — it is not claimed as installed, running, or verified until HgX confirms it built. This document is the single consolidated record of the local Jarvis stack as of 2026-11-10. Platform 1.2.1.
+**Status rule for this document:** every item is marked BUILT or PENDING. A PENDING item is planned only — it is not claimed as installed, running, or verified until HgX confirms it built. This document is the single consolidated record of the local Jarvis stack as of 2026-11-11. Platform 1.2.1.
 
 ---
 
@@ -45,7 +45,7 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 - Plain VLC commands (`pause`, `play`, `resume`, `stop`, `next`, `skip`, `previous`, with an optional "hey jarvis") match a regex and run without a model round trip.
 - VLC's HTTP remote and Ollama stay on localhost.
 
-**Dashboard — BUILT, live on the Acer (2026-11-06):**
+**Dashboard — BUILT, files on GitHub; live copy deleted from the laptop 2026-11-10:**
 
 - Always-on dashboard on port **8899** (iPhone/iPad over the tailnet): GPU,
   temperatures, RAM, what's running, what each model is doing, local weather,
@@ -59,7 +59,7 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
   the top strip; whole page scrolls; REA tile shows the C270 breakdown;
   sports shrunk to one NFL line. Applied from the published copy
   (`local-jarvis/dashboard/v12/`), v11 backed up to `dashboard.bak-v11`.
-  Confirmed live by terminal output (`/api/status` 200). The laptop
+  Confirmed live by terminal output (`/api/status` 200). Live copy deleted from the laptop 2026-11-10 (dashboard dir, backups, webcam app, task manager, night visuals, autostarts all off; :8899 + :8898 down); the v12 files stay on GitHub. Who deleted them is still unknown. The laptop
   camera shows color bars — a camera/firmware fault, not the dashboard;
   the thread is closed.
 - v11 was applied 2026-11-07 evening and superseded by v12; its files
@@ -88,7 +88,7 @@ Public identity: J.A.R.V.I.S. first and prominent. Operator: HgX. Contact: @base
 - v12 is built, verified (API endpoints present, all six v12 changes
   confirmed in the files), PUBLISHED here
   (`local-jarvis/dashboard/v12/`) and APPLIED to the Acer (2026-11-08,
-  v11 backed up). **v12 is the live dashboard.**
+  v11 backed up). **Live copy deleted from the laptop 2026-11-10; the v12 files stay on GitHub.**
 
 **GPU orchestrator — DEPLOYED on the Acer (2026-11-06 ~23:50 ET):**
 
@@ -128,8 +128,7 @@ JSON-body request gate; VLC probe starts from `main()`.
 - Deep analysis: Ghidra, guided reverse-engineering workflows installed.
 - **All 15 REA tools installed 2026-11-07:** Detect-It-Easy 4.0.0,
   capa v10.0.0, ImHex 1.38.1, LIEF 0.16.2, Ghidra (two copies: apt
-  12.1.4 + upstream 12.2), GhidraMCP 2.0 (port 8081, GUI verification
-  pending), angr 10.0.5, Frida 17.26.2, objection 1.12.5, jadx 1.5.6,
+  12.1.4 + upstream 12.2), GhidraMCP 2.0 (port 8081, VERIFIED LIVE 2026-11-11 — PR #81; listens only while Ghidra is open with a program loaded), angr 10.0.5, Frida 17.26.2, objection 1.12.5, jadx 1.5.6,
   Apktool 3.0.3, ILSpy ilspycmd 11.2.0.10050, asar 4.3.1, mitmproxy
   12.3.1, Wireshark 4.6.9. Teach guide:
   `local-jarvis/rea-tools/rea-tool-usage-guide.md`; registry
@@ -137,11 +136,23 @@ JSON-body request gate; VLC probe starts from `main()`.
 - **C270 15-tool breakdown — CLOSED 2026-11-08:** 373 functions
   decompiled, 6,037 packets / 233 MB live pcap, 83.0% isochronous.
   Verdict: stock, clean UVC device. Figures in
-  `local-jarvis/STATE-2026-11-10.md`; the full consolidated report
+  `local-jarvis/STATE-2026-11-11.md`; the full consolidated report
   lives on the Acer, not yet sent.
 - **BLA 3.2.3 (counter-REA defense, not a REA tool)** — installed
   2026-11-10; 14/14 benchmark (internal modeled estimates, caveated
-  in `STATE-2026-11-10.md`).
+  in `STATE-2026-11-11.md`).
+
+**X-post 10 MCP tools — morning 2026-11-11:** FastAPI-MCP 0.4.0
+installed (venv ~/opt/fastapi-mcp-venv, Python 3.14.10; library only);
+Shodan MCP 1.0.37 built (~/opt/mcp-shodan) and wired into Claude Code
++ Cursor (SHODAN_API_KEY set, never published; agents need a restart);
+awesome-mcp-servers catalog cloned (~/opt/awesome-mcp-servers, 43,159
+objects, 546.32 MiB, reference only); catalog pointer in all 4 REA/BLA
+skill files (Cursor REA pointer done 10:18 ET). Still to do: TalkToFigma
+(needs Bun first) and ElevenLabs MCP (repo archived/deprecated — hosted
+MCP recommended); held: Blender, Unity, Apple MCP. Full record:
+`local-jarvis/XPOST-10-TOOLS-2026-11-11.md`; state:
+`local-jarvis/STATE-2026-11-11.md`.
 - Status: REA is ready for local app analysis.
 
 **What REA is for here:** the basement laptop that can rip apart anything, then put it back together with evidence. Local app analysis only — own devices and own targets only, consenting adults, controlled lab only, spine SEE → DOCUMENT → LOG → PREVENT.
@@ -165,7 +176,9 @@ planned only — not claimed as installed until HgX confirms them built.**
 - **Large model, resident on system memory (slow high-end brain)** —
   BUILT. `huihui_ai/Qwen3.8-abliterated:27b`, ~18 GB loaded, 100% CPU,
   `num_gpu 0`, context 4096, for hard reasoning, long code, multi-step
-  chains, and context beyond the small model's range.
+  chains, and context beyond the small model's range. New on disk, not
+  loaded: `huihui_ai/Qwen3.8-abliterated:27b-omb-64k` (17 GB, pulled
+  ~11h ago, 2026-11-11).
 - **Switching logic (Usage Router + Model Router)** — BUILT. Default
   to the small VRAM model; escalate to the large RAM model on hard work
   or repeated failure; de-escalate afterwards. Never generating with
@@ -187,7 +200,7 @@ Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient o
 6. **Prism** — PENDING.
 7. **Macro, Kali only** — PENDING.
 8. **Hacking-Tools gaps, one by one** — PENDING. The hacking-tools catalog is a reference map, not 900 installs: not all 900 run at once, not every listed item runs locally, installs wait for the Kali phase, one tool at a time and only on his order.
-9. **Claude Plugins** — PARTIAL: Claude Code 2.1.322 installed via Free Claude Code 6.19.6 (2026-11-10, server :8082) and WORKING — first fcc-claude answer 2026-11-10 08:46 ET via the custom `qwen9b-abliterated-32k` model; the plugins themselves unconfirmed. **Qwen Code 0.27.1** installed 2026-11-10 (local Ollama 9B-32k config given, test run unconfirmed). **OpenMausBot 0.1.151 (the Grok Bot)** installed + running 2026-11-10 — Claude skills ON (REA + BLA skills load), MCP servers OFF, Engines step (point Claude at fcc-claude) still to do.
+9. **Claude Plugins** — PARTIAL: Claude Code 2.1.322 installed via Free Claude Code 6.19.6 (2026-11-10, server :8082) and WORKING — first fcc-claude answer 2026-11-10 08:46 ET via the custom `qwen9b-abliterated-32k` model; the plugins themselves unconfirmed. **Qwen Code 0.27.1** installed 2026-11-10 (local Ollama 9B-32k config given, test confirmed 2026-11-10 20:07 ET — item #7 DONE). **OpenMausBot 0.1.151 (the Grok Bot)** installed + running 2026-11-10 — Claude skills ON (REA + BLA skills load), MCP servers OFF, Engines step DONE via PATH shim 2026-11-11 07:19 ET (item #8 DONE); the GUI Engines step does not exist in this install.
 10. **VoiceStudio** — INSTALLED 0.5.7, launched once (home screen verified), not running.
 11. **GenOffice** — INSTALLED 0.12.852, launch not yet verified.
 12. **Reference libraries, last** — PENDING.
@@ -213,7 +226,7 @@ Syllabus v1.0.1 counts seventeen local-only software stacks, in this efficient o
 ## 5. Where this document lives
 
 - This file: `local-jarvis/LOCAL-JARVIS-STACK.md` — the consolidated stack record.
-- Current state snapshot: `local-jarvis/STATE-2026-11-10.md` — the exact moment, 2026-11-10 ~08:20 ET. (STATE-2026-11-07.md stays as history.)
+- Current state snapshot: `local-jarvis/STATE-2026-11-11.md` — the exact moment, 2026-11-11 ~10:17 ET. (STATE-2026-11-10.md + STATE-2026-11-07.md stay as history.)
 - Build plans: `local-jarvis/plans/` — the design records (dashboard, drive clean-out, C270 teardown, REA bench list).
 - Pi 500+ rig: `local-jarvis/pi500/` — top 10, software stack, accessories (ordered + paid 2026-11-05).
 - Platform record: `local-jarvis/PLATFORM-KALI.md` — the Kali + REA build record.

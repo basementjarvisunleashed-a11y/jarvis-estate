@@ -5,14 +5,14 @@ steps in order, and you end up with the same machine: a Kali laptop that
 listens, reasons on two local brains, shows everything on a dashboard, and
 renders pictures — with the GPU handed between them automatically.
 
-**Status: 2026-11-10.** This guide covers what is in the repo today: the
+**Status: 2026-11-11.** This guide covers what is in the repo today: the
 core voice stack, the dual brain (9B now at context 32768), REA with all
-15 tools installed, the C270 15-tool breakdown (closed), dashboard v12,
+15 tools installed, the C270 15-tool breakdown (closed), dashboard v12 (files on GitHub; live copy deleted from the laptop 2026-11-10),
 the GPU orchestrator (deployed), the voice-loop patch v5, brains
 autostart (installed + verified 2026-11-08), BLA 3.2.3 (counter-REA),
 Free Claude Code 6.19.6, Ghidra in two copies, Craft Anything 0.5.0,
-the CrackMe v9 runner (stopped 2026-11-10, resumable), the overnight
-BLA + 27B runner, Qwen Code 0.27.1, OpenMausBot 0.1.151 (the Grok Bot),
+the CrackMe v9 runner (still unsolved; v2 overnight run finished 2026-11-11, BLA not-recovered), the overnight
+BLA + 27B runner v2, Qwen Code 0.27.1 (test confirmed), OpenMausBot 0.1.151 (the Grok Bot, local model via PATH shim), the X-post 10 MCP tools (FastAPI-MCP, Shodan MCP, awesome-mcp-servers),
 the Acer setup scripts, the brain
 inventory/backup scripts, the iPad Kali plan, tonight's runbook, and
 the Acer source snapshot — the live router, orchestrator, voice loop,
@@ -20,8 +20,7 @@ autostart launchers, and C270 captures from the laptop (2026-11-06
 23:36 ET).
 Still to land: the iPad Kali downloads (UTM, Kali ISO, StikDebug —
 sources documented in the plan, installers never uploaded) and the
-CrackMe v9 result (the runner was stopped 2026-11-10; the overnight
-runner resumes it tonight). Nothing here is faked: a
+CrackMe v9 result (the v2 overnight run finished 2026-11-11 — BLA not-recovered, CrackMe still unsolved). Nothing here is faked: a
 step marked pending is pending, and a result marked in-progress is
 in-progress.
 
@@ -46,21 +45,22 @@ on your own machine. Do not commit the real values.
 | Dashboard v9 | `local-jarvis/dashboard/v9/` | Previous dashboard, kept as history (live until 2026-11-07 ~00:45 ET) | 8899 |
 | Dashboard v10 | `local-jarvis/dashboard/v10/` | Previous dashboard, kept as history (live until 2026-11-07 evening) | 8899 |
 | Dashboard v11 | — (files never sent) | Applied 2026-11-07 evening, superseded by v12 — recorded as a version line only | 8899 |
-| Dashboard v12 | `local-jarvis/dashboard/v12/` | LIVE on the reference machine since 2026-11-08 (v11 backed up) — two media roots: the iPad Pro MP4 folder primary, the drive secondary; laptop camera stacked full-width below C270 | 8899 |
+| Dashboard v12 | `local-jarvis/dashboard/v12/` | Files on GitHub; LIVE COPY DELETED from the laptop 2026-11-10 (dir, backups, webcam app, task manager, night visuals, autostarts all off; :8899 + :8898 down; who deleted them unknown) — v12 as built: two media roots, iPad Pro MP4 folder primary, drive secondary; laptop camera stacked full-width below C270 | 8899 (down) |
 | Brains autostart | `local-jarvis/autostart/` | INSTALLED + verified 2026-11-08 — both brains load in ~41s at reboot | — |
-| C270 15-tool breakdown | `local-jarvis/c270/` (captures) + figures in `STATE-2026-11-10.md` | CLOSED 2026-11-08 — 373 functions, 6,037 packets, 83.0% isochronous; stock, clean UVC device (full consolidated report lives on the Acer, not yet sent) | — |
-| 15 REA tools | `local-jarvis/rea-tools/` (teach guide) | ALL installed 2026-11-07 — versions in `STATE-2026-11-10.md` | CLI |
+| C270 15-tool breakdown | `local-jarvis/c270/` (captures) + figures in `STATE-2026-11-11.md` | CLOSED 2026-11-08 — 373 functions, 6,037 packets, 83.0% isochronous; stock, clean UVC device (full consolidated report lives on the Acer, not yet sent) | — |
+| 15 REA tools | `local-jarvis/rea-tools/` (teach guide) | ALL installed 2026-11-07 — versions in `STATE-2026-11-11.md` | CLI |
+| X-post 10 MCP tools (2026-11-11) | `local-jarvis/XPOST-10-TOOLS-2026-11-11.md` | FastAPI-MCP 0.4.0, Shodan MCP 1.0.37 (wired Claude+Cursor), awesome-mcp-servers catalog; skill pointers in all 4 files; TalkToFigma + ElevenLabs still to do; Blender/Unity/Apple held | — |
 | BLA 3.2.3 (counter-REA) | `local-jarvis/rea-tools/BLA-COUNTER-REA.md` | Installed 2026-11-10 — defense tool, not a REA tool; 14/14 benchmark (internal modeled estimates, see caveat) | CLI |
-| Free Claude Code 6.19.6 | — (service, documented in `STATE-2026-11-10.md`) | Installed + WORKING 2026-11-10 — server on :8082; first fcc-claude answer 08:46 ET via the custom `qwen9b-abliterated-32k` model | 8082 |
-| Ghidra (two copies) | — (documented in `STATE-2026-11-10.md`) | apt 12.1.4 + upstream 12.2, confirmed 2026-11-10 | CLI |
-| Craft Anything 0.5.0 | — (documented in `STATE-2026-11-10.md`) | Installed 2026-11-07, doctor healthy | CLI |
-| CrackMe v9 runner | `local-jarvis/crackme-v9/` | STOPPED / OPEN — stopped by HgX 2026-11-10 08:25 ET to free the CPU for Claude; license done, WASM task killed on attempt 2; resumable from the WASM task; no key recovered, no solve claimed | — |
-| Overnight BLA + 27B runner v1 | `local-jarvis/overnight-runner/` | INSTALLED 2026-11-10 — resumes CrackMe to completion, then one BLA red-vs-blue smoke test; morning report + status.txt; HgX starts it tonight before bed | — |
-| Qwen Code 0.27.1 | — (service, documented in `STATE-2026-11-10.md`) | Installed 2026-11-10 — CLI at `~/.local/bin/qwen`; local Ollama config given (9B-32k), test run unconfirmed | 11434 (Ollama) |
-| OpenMausBot 0.1.151 (the Grok Bot) | — (service, documented in `STATE-2026-11-10.md`) | Installed + RUNNING 2026-11-10 — App :5199 + Harness :8799; Claude skills ON, MCP servers OFF; Engines step (point Claude at fcc-claude) still to do | 5199, 8799 |
+| Free Claude Code 6.19.6 | — (service, documented in `STATE-2026-11-11.md`) | Installed + WORKING 2026-11-10 — server on :8082; first fcc-claude answer 08:46 ET via the custom `qwen9b-abliterated-32k` model | 8082 |
+| Ghidra (two copies) | — (documented in `STATE-2026-11-11.md`) | apt 12.1.4 + upstream 12.2, confirmed 2026-11-10 | CLI |
+| Craft Anything 0.5.0 | — (documented in `STATE-2026-11-11.md`) | Installed 2026-11-07, doctor healthy | CLI |
+| CrackMe v9 runner | `local-jarvis/crackme-v9/` | STOPPED / OPEN — stopped by HgX 2026-11-10 08:25 ET to free the CPU for Claude; license done, WASM task killed on attempt 2; resumable from the WASM task; v2 overnight run finished 2026-11-11 08:07:45 ET (BLA not-recovered); no key recovered, no solve claimed | — |
+| Overnight BLA + 27B runner v2 | `local-jarvis/overnight-runner/` | v2 run finished 2026-11-11 08:07:45 ET (--redo-bla; BLA verdict not-recovered; CrackMe still unsolved); zip overnight-bla-27b-2026-11-11.zip (17,589 B) filed in Dropbox; v1 failure was a runner usage bug (passed the file to `bla harden` → ENOTDIR), v2 passes the directory | — |
+| Qwen Code 0.27.1 | — (service, documented in `STATE-2026-11-11.md`) | Installed 2026-11-10 — CLI at `~/.local/bin/qwen`; local Ollama config given (9B-32k), test confirmed 2026-11-10 20:07 ET (item #7 DONE) | 11434 (Ollama) |
+| OpenMausBot 0.1.151 (the Grok Bot) | — (service, documented in `STATE-2026-11-11.md`) | Installed + RUNNING — App :5199 + Harness :8799 (restarted 2026-11-11 06:37 ET, main PID 363234); Claude skills ON, MCP servers OFF; Engines step DONE via PATH shim 2026-11-11 07:19 ET (item #8 DONE); the GUI Engines step does not exist in this install | 5199, 8799 |
 | GPU orchestrator | `local-jarvis/gpu-orchestrator/` | DEPLOYED on the reference machine 2026-11-06 ~23:50 ET, loop proven | 11436 |
 | Live orchestrator + voice loop | `local-jarvis/orchestrator.py`, `local-jarvis/jarvis_voice.py` | Live files from the Acer (Kali versions; voice loop carries patch v5) | 8080 |
-| Current state snapshot | `local-jarvis/STATE-2026-11-10.md` | The exact moment, 2026-11-10 ~08:20 ET — the whole system, as it stands | — |
+| Current state snapshot | `local-jarvis/STATE-2026-11-11.md` | The exact moment, 2026-11-11 ~10:17 ET — the whole system, as it stands | — |
 | Model responses | `local-jarvis/transcripts/` | The transcript archive: every model response (9B, 27B, REA), scrubbed, one file per day | — |
 | Day's recap | `local-jarvis/RECAP-2026-11-06.md` | The full day 2026-11-06 into 2026-11-07, state as of ~00:35 ET — done, in progress, parked, standing rules | — |
 | Autostart launchers | `local-jarvis/autostart/` | Live launchers (23:36 snapshot; keep-alive v2 superseded the ping at 23:46) | — |
@@ -125,18 +125,21 @@ actual model is the local 9B, free, no Anthropic billing.
 
 **BLA (counter-REA):** 3.2.3, CLIs `bla` / `bla-agents` /
 `bla-shield`; benchmark 14/14 (internal modeled estimates — see the
-caveat in `STATE-2026-11-10.md`).
+caveat in `STATE-2026-11-11.md`).
 
 **Ghidra:** two copies — apt 12.1.4 + upstream 12.2. **Craft
 Anything:** 0.5.0, doctor healthy. **CrackMe v9:** runner STOPPED by
 HgX 2026-11-10 08:25 ET (license done, WASM task killed on attempt 2;
-resumable; no key recovered). **Overnight runner v1:** installed at
-`~/overnight-27b-runner/` — resumes CrackMe, then one BLA red-vs-blue
-smoke test; HgX starts it tonight before bed. **Qwen Code:** 0.27.1,
-CLI at `~/.local/bin/qwen`, local Ollama 9B-32k config given,
-test run unconfirmed. **OpenMausBot (the Grok Bot):** 0.1.151, running
-(PID 334751), App :5199 + Harness :8799; Claude skills ON, MCP servers
-OFF; Engines step still to do (point Claude at fcc-claude); FCC server
+resumable; no key recovered); v2 overnight run finished 2026-11-11
+08:07:45 ET (BLA not-recovered); still unsolved. **Overnight runner
+v2:** run finished 2026-11-11 08:07:45 ET (BLA not-recovered; CrackMe
+still unsolved); installed at `~/overnight-27b-runner/`. **Qwen Code:**
+0.27.1, CLI at `~/.local/bin/qwen`, local Ollama 9B-32k config given,
+test confirmed 2026-11-10 20:07 ET (item #7 DONE). **OpenMausBot (the
+Grok Bot):** 0.1.151, running (restarted 2026-11-11 06:37 ET, main PID
+363234), App :5199 + Harness :8799; Claude skills ON, MCP servers
+OFF; Engines step DONE via PATH shim 2026-11-11 07:19 ET (item #8
+DONE); the GUI Engines step does not exist in this install; FCC server
 must be running and is NOT autostarted.
 
 **Voice:** faster-whisper `small.en` for speech-to-text, Piper
@@ -276,10 +279,11 @@ npx rea-agents analyze /path/to/app
 workflows — plus all 15 REA tools installed 2026-11-07 (Detect-It-Easy,
 capa, ImHex, LIEF, Ghidra, GhidraMCP, angr, Frida, objection, jadx,
 Apktool, ILSpy, asar, mitmproxy, Wireshark; versions in
-`STATE-2026-11-10.md`). Teach guide:
+`STATE-2026-11-11.md`). Teach guide:
 `local-jarvis/rea-tools/rea-tool-usage-guide.md`. Ghidra in two copies
-(apt 12.1.4 + upstream 12.2); GhidraMCP 2.0's port-8081 GUI steps are
-still unconfirmed. BLA 3.2.3 is the counter-REA defense, not a REA
+(apt 12.1.4 + upstream 12.2); GhidraMCP 2.0 VERIFIED LIVE on :8081
+2026-11-11 (PR #81); the server listens only while Ghidra is open
+with a program loaded. BLA 3.2.3 is the counter-REA defense, not a REA
 tool — see `local-jarvis/rea-tools/BLA-COUNTER-REA.md`. Local app
 analysis only — own devices and own targets only, consenting adults,
 controlled lab only, spine SEE → DOCUMENT → LOG → PREVENT. See
@@ -287,8 +291,10 @@ controlled lab only, spine SEE → DOCUMENT → LOG → PREVENT. See
 
 ### 6. Dashboard v12 (port 8899)
 
-**v12 is live** on the reference machine since 2026-11-08
-(applied from `local-jarvis/dashboard/v12/`, v11 backed up to
+**v12 is NOT running** — the live copy was deleted from the laptop
+2026-11-10 (dashboard dir, backups, webcam app, task manager, night
+visuals, autostarts all off; :8899 + :8898 down); the v12 files stay on
+GitHub (applied from `local-jarvis/dashboard/v12/`, v11 backed up to
 `dashboard.bak-v11`). Install it the same way below, from the v12
 folder. v11, v10, v9, v8, and v7 stay in the repo as history (v11 as a
 version line only — its files were never sent).
@@ -410,10 +416,10 @@ nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 | 8080 | Orchestrator (voice-loop brain) |
 | 8090 | VLC HTTP remote |
 | 8188 | ComfyUI (only in COMFY mode) |
-| 8899 | Dashboard v12 (live; v11/v10/v9/v8/v7 history) |
-| 8081 | GhidraMCP (pending GUI verification) |
+| 8899 | Dashboard v12 (DOWN — live copy deleted from the laptop 2026-11-10; files on GitHub; v11/v10/v9/v8/v7 history) |
+| 8081 | GhidraMCP (verified live 2026-11-11; listens only while Ghidra is open) |
 | 8082 | Free Claude Code server |
-| 8898 | Webcam app, both cameras (built 2026-11-07) |
+| 8898 | Webcam app, both cameras (built 2026-11-07; DOWN — deleted with the dashboard cleanup 2026-11-10) |
 | 11434 | Ollama |
 | 11435 | Router |
 | 11436 | GPU orchestrator |
