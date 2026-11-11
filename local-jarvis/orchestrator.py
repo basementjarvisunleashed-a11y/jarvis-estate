@@ -476,6 +476,15 @@ def _log_action(tool, args, result):
         print("actions.log write failed: %s" % e)
 
 
+def _confine(ap):
+    """SAF-07: resolve symlinks before the root check, so a link inside
+    Desktop/Documents/Downloads cannot point the file tools elsewhere."""
+    rp = os.path.realpath(ap)
+    for r in JARVIS_ROOTS:
+        rr = os.path.realpath(r)
+        if rp == rr or rp.startswith(rr.rstrip(os.sep) + os.sep):
+            return rp, None
+    return None, "refused: outside the allowed folders (%s)" % ", ".join(JARVIS_ROOTS)
 _NO_MODEL = object()  # sentinel: no model passed (use OLLAMA_MODEL)
 
 
@@ -521,20 +530,16 @@ def _safe_path(p):
         bn = os.path.basename(os.path.normpath(r)).lower()
         pl = p.strip().lower()
         if pl == bn:
-            return os.path.abspath(r), None
+            return _confine(os.path.abspath(r))
         if pl.startswith(bn + "/"):
             # "Downloads/sub/..." -> <root>/sub/...  ('..' already refused above)
             rest = p.strip()[len(os.path.basename(os.path.normpath(r))) + 1:]
-            return os.path.abspath(os.path.join(r, rest.replace("\\", "/"))), None
+            return _confine(os.path.abspath(os.path.join(r, rest.replace("\\", "/"))))
     cand = os.path.expanduser(p.strip())
     if not os.path.isabs(cand):
         base = JARVIS_ROOTS[0] if JARVIS_ROOTS else os.getcwd()
         cand = os.path.join(base, cand)
-    ap = os.path.abspath(cand)
-    for r in JARVIS_ROOTS:
-        if ap == r or ap.startswith(r + os.sep):
-            return ap, None
-    return None, "refused: outside the allowed folders (%s)" % ", ".join(JARVIS_ROOTS)
+    return _confine(os.path.abspath(cand))
 
 
 # --- file tools --------------------------------------------------------------
@@ -549,8 +554,14 @@ def tool_file_list(args):
         out = []
         with os.scandir(ap) as it:
             for e in it:
-                out.append((e.name, e.is_dir(),
-                            0 if e.is_dir() else e.stat().st_size))
+                # SAF-07: do not stat or classify through a symlink. The
+                # link's target may sit outside the allowed roots.
+                if e.is_symlink():
+                    out.append((e.name, False, 0))
+                else:
+                    is_dir = e.is_dir(follow_symlinks=False)
+                    size = 0 if is_dir else e.stat(follow_symlinks=False).st_size
+                    out.append((e.name, is_dir, size))
                 if len(out) >= 100:
                     break
         out.sort(key=lambda x: (not x[1], x[0].lower()))
@@ -562,7 +573,7 @@ def tool_file_list(args):
 
 
 def tool_file_search(args):
-    import glob
+    import fnmatch
     d, pat = args.get("dir", ""), args.get("pattern", "*") or "*"
     ap, err = _safe_path(d or (JARVIS_ROOTS[0] if JARVIS_ROOTS else "."))
     if err:
@@ -570,10 +581,36 @@ def tool_file_search(args):
     if not os.path.isdir(ap):
         return "ERROR: not a folder: %s" % d
     try:
-        hits = glob.glob(os.path.join(ap, "**", pat), recursive=True)[:50]
-        rel = [os.path.relpath(h, ap) for h in hits]
+        # glob follows directory symlinks, so a link inside a root would
+        # list files outside it. Walk without following links instead.
+        root = os.path.realpath(ap)
+        hits = []
+        for dirpath, dirnames, filenames in os.walk(root, followlinks=False):
+            entries = []
+            kept_dirs = []
+            for n in dirnames:
+                full = os.path.join(dirpath, n)
+                if os.path.islink(full):
+                    continue
+                kept_dirs.append(n)
+                entries.append(full)
+            dirnames[:] = kept_dirs
+            for n in filenames:
+                full = os.path.join(dirpath, n)
+                if os.path.islink(full):
+                    continue
+                entries.append(full)
+            for full in entries:
+                rel_s = os.path.relpath(full, root).replace(os.sep, "/")
+                base = rel_s.rsplit("/", 1)[-1]
+                if fnmatch.fnmatch(base, pat) or fnmatch.fnmatch(rel_s, pat):
+                    hits.append(rel_s)
+                    if len(hits) >= 50:
+                        break
+            if len(hits) >= 50:
+                break
         return ("Found %d match(es) for '%s' under %s:\n%s"
-                % (len(rel), pat, ap, "\n".join(rel) if rel else "(none)"))
+                % (len(hits), pat, ap, "\n".join(hits) if hits else "(none)"))
     except Exception as e:
         return "ERROR: %s" % e
 
