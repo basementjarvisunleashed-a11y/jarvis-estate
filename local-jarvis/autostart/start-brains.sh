@@ -15,7 +15,7 @@ for i in $(seq 1 30); do
   sleep 2
 done
 echo "=== $(date '+%Y-%m-%d %H:%M:%S') start-brains: ollama up, loading 9B (GPU) ==="
-curl -s -m 180 http://127.0.0.1:11434/api/chat -d '{"model":"qwen9b-abliterated","messages":[{"role":"user","content":"Hello"}],"stream":false,"think":false,"keep_alive":"24h","options":{"num_ctx":8192}}'
+curl -s -m 180 http://127.0.0.1:11434/api/chat -d '{"model":"qwen9b-abliterated-32k","messages":[{"role":"user","content":"Hello"}],"stream":false,"think":false,"keep_alive":"24h","options":{"num_ctx":32768}}'
 echo ""
 echo "=== $(date '+%Y-%m-%d %H:%M:%S') start-brains: 9B done, loading 27B (RAM) ==="
 curl -s -m 900 http://127.0.0.1:11434/api/chat -d '{"model":"huihui_ai/Qwen3.8-abliterated:27b","messages":[{"role":"user","content":"Hello"}],"stream":false,"think":false,"keep_alive":"24h","options":{"num_ctx":4096,"num_gpu":0}}'

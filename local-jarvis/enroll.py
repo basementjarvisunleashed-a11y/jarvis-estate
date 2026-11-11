@@ -24,8 +24,8 @@ import sys
 SAMPLE_RATE = 16000
 TAKES = 5
 DURATION = 3.0
-# VG-1 2026-10-27: all voice-profile data lives in C:\Jarvis\voiceprint (not Downloads).
-VOICEPRINT = r"C:\Jarvis\voiceprint"
+# VG-1 2026-10-27: all voice-profile data lives in ~/Jarvis\voiceprint (not Downloads).
+VOICEPRINT = os.path.join(os.path.expanduser("~/Jarvis"), "voiceprint")
 os.makedirs(VOICEPRINT, exist_ok=True)
 PROFILE_FILE = os.path.join(VOICEPRINT, "profiles.json")
 MODEL = "speechbrain/spkrec-ecapa-voxceleb"

@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""Fake `ollama` CLI for the GPU orchestrator tests.
+
+Implements only what the orchestrator uses:
+  ollama ps            list loaded models (from the shared models.json)
+  ollama stop <model>  unload a model (removes it, frees its VRAM)
+
+The orchestrator calls `ollama stop` (the proven command) to park the
+9B. This fake mirrors the real one's quiet success (no output, exit 0)
+and logs the call to ollama_calls.log so the test can verify it.
+
+Usage: place this file on PATH as `ollama` (executable) with
+FAKE_STATE_DIR set to the shared test state directory.
+"""
+
+import json
+import os
+import sys
+import time
+
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import fake_gpu  # noqa: E402
+
+
+def main(argv):
+    if len(argv) < 2:
+        print("Usage: ollama <ps|stop> [model]", file=sys.stderr)
+        return 1
+    cmd = argv[1]
+    if cmd == "ps":
+        models = fake_gpu.read_models()
+        print(
+            "%-40s %-15s %-10s %-20s %-10s"
+            % ("NAME", "ID", "SIZE", "PROCESSOR", "CONTEXT")
+        )
+        for name, info in models.items():
+            print(
+                "%-40s %-15s %-10s %-20s %-10s"
+                % (
+                    name,
+                    "fakeid123456",
+                    info.get("size", ""),
+                    info.get("processor", ""),
+                    info.get("context", ""),
+                )
+            )
+        return 0
+    if cmd == "stop":
+        if len(argv) < 3:
+            print("Usage: ollama stop <model>", file=sys.stderr)
+            return 1
+        model = argv[2]
+        models = fake_gpu.read_models()
+        if model in models:
+            del models[model]
+            fake_gpu.write_models(models)
+            if model == fake_gpu.NINE_B:
+                fake_gpu.adjust_vram(-fake_gpu.VRAM_NINE_B_MIB)
+        fake_gpu.append_log(
+            "ollama_calls.log",
+            {"t": time.time(), "model": model, "action": "stop", "num_gpu": None, "keep_alive": None},
+        )
+        return 0
+    print("unknown command %s" % cmd, file=sys.stderr)
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

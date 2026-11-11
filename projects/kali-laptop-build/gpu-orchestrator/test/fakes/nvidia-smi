@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Fake `nvidia-smi` for the GPU orchestrator tests.
+
+The orchestrator calls:
+  nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits
+
+This fake ignores its arguments and prints "<used>, <total>" from the
+shared vram.json, which the fake Ollama server and fake ComfyUI keep
+up to date as models load/unload and ComfyUI starts/stops.
+
+Usage: place this file on PATH as `nvidia-smi` (executable) with
+FAKE_STATE_DIR set to the shared test state directory.
+"""
+
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import fake_gpu  # noqa: E402
+
+
+def main(_argv):
+    vram = fake_gpu.read_vram()
+    print("%s, %s" % (vram.get("used_mib", 132), vram.get("total_mib", 6144)))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

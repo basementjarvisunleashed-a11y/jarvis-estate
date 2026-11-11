@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.A.R.V.I.S. — Webcam</title>
+<style>
+  :root{
+    --bg:#020509; --bg2:#050b12; --tile1:#0a1622; --tile2:#0d1d2e;
+    --line:rgba(0,212,255,.22); --cyan:#00d4ff; --cyan-dim:#00a8cc;
+    --ink:#e8f4fa; --mut:#8fb3c7; --amber:#ffb020; --red:#ff4d4d;
+    --green:#2fe07a; --radius:12px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    background-image:radial-gradient(900px 340px at 50% -80px, rgba(0,168,204,.28), transparent 70%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    overflow:hidden;
+  }
+  .app{height:100vh; display:flex; flex-direction:column; padding:12px 16px; gap:12px}
+  /* ---------- header ---------- */
+  header{display:flex; align-items:center; gap:16px; padding:2px 4px}
+  .mark{width:34px; height:34px; border-radius:50%; border:2px solid var(--cyan);
+    display:flex; align-items:center; justify-content:center; color:var(--cyan);
+    font-size:18px; box-shadow:0 0 14px rgba(0,212,255,.45), inset 0 0 10px rgba(0,212,255,.25)}
+  h1{font-size:22px; letter-spacing:.14em; font-weight:300; color:#fff;
+    text-shadow:0 0 14px rgba(0,212,255,.5)}
+  h1 b{font-weight:600; color:var(--cyan)}
+  .sub{color:var(--mut); font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  .spacer{flex:1}
+  .pill{display:inline-flex; align-items:center; gap:7px; padding:6px 12px; border-radius:999px;
+    border:1px solid var(--line); background:rgba(0,212,255,.08); font-size:12px; letter-spacing:.06em; white-space:nowrap}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 8px var(--green)}
+  .dot.amber{background:var(--amber); box-shadow:0 0 8px var(--amber)}
+  .dot.red{background:var(--red); box-shadow:0 0 8px var(--red)}
+  #clock{font-size:20px; font-weight:300; color:#fff; text-shadow:0 0 10px rgba(0,212,255,.4);
+    font-variant-numeric:tabular-nums}
+  /* ---------- feeds ---------- */
+  .feeds{flex:1; min-height:0; display:flex; gap:12px}
+  .feeds.focus-laptop .pane-c270{flex:1}
+  .feeds.focus-laptop .pane-laptop{flex:2}
+  .pane{flex:2; min-width:0; display:flex; flex-direction:column; border-radius:var(--radius);
+    background:linear-gradient(180deg,var(--tile1),var(--tile2));
+    border:1px solid var(--line); box-shadow:0 4px 22px rgba(0,0,0,.5), inset 0 1px 0 rgba(0,212,255,.12);
+    overflow:hidden; transition:flex .25s ease}
+  .pane-laptop{flex:1}
+  .pane-head{display:flex; align-items:center; gap:10px; padding:10px 14px}
+  .pane-head .name{font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#fff}
+  .pane-head .dev{font-size:11px; color:var(--mut); font-family:ui-monospace,Menlo,monospace}
+  .badge{margin-left:auto; font-size:11px; letter-spacing:.08em; padding:4px 9px; border-radius:999px;
+    border:1px solid var(--line); background:rgba(0,212,255,.08); color:var(--cyan); white-space:nowrap}
+  .badge.live{background:rgba(47,224,122,.14); border-color:rgba(47,224,122,.4); color:var(--green)}
+  .badge.dark{background:rgba(255,176,32,.14); border-color:rgba(255,176,32,.45); color:var(--amber)}
+  .badge.off{background:rgba(255,77,77,.12); border-color:rgba(255,77,77,.4); color:var(--red)}
+  .feed-wrap{flex:1; min-height:0; position:relative; background:#000}
+  .feed-wrap img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+  .feed-wrap .empty{position:absolute; inset:0; display:flex; flex-direction:column; gap:8px;
+    align-items:center; justify-content:center; color:var(--mut); font-size:14px; text-align:center; padding:20px}
+  .feed-wrap .empty[hidden]{display:none}
+  .feed-wrap .empty .big{font-size:30px; color:var(--cyan-dim)}
+  .feed-wrap .rec-ind{position:absolute; top:10px; right:12px; display:none; align-items:center; gap:6px;
+    background:rgba(0,0,0,.6); border:1px solid rgba(255,77,77,.5); color:#fff;
+    font-size:12px; padding:4px 10px; border-radius:999px; font-variant-numeric:tabular-nums}
+  .feed-wrap .rec-ind.on{display:inline-flex}
+  .feed-wrap .rec-ind .rdot{width:9px; height:9px; border-radius:50%; background:var(--red);
+    box-shadow:0 0 8px var(--red); animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:.25}}
+  .pane-foot{display:flex; align-items:center; gap:8px; padding:10px 12px}
+  .btn{border:1px solid var(--line); background:linear-gradient(180deg,#0e2233,#0a1826); color:var(--cyan);
+    border-radius:8px; padding:8px 14px; font-size:13px; cursor:pointer; letter-spacing:.04em}
+  .btn:hover{border-color:var(--cyan); box-shadow:0 0 10px rgba(0,212,255,.35)}
+  .btn.primary{background:linear-gradient(180deg,#00a8cc,#007a99); color:#fff; border-color:#00d4ff}
+  .btn.danger{border-color:rgba(255,77,77,.5); color:#ff8080}
+  .btn.danger.on{background:rgba(255,77,77,.2); color:#fff; border-color:var(--red)}
+  .btn:disabled{opacity:.4; cursor:default; box-shadow:none}
+  .pane-msg{font-size:12px; color:var(--mut); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .pane-msg.ok{color:var(--green)}
+  .pane-msg.err{color:var(--red)}
+  /* ---------- dashboard strip ---------- */
+  .strip{flex:0 0 330px; display:grid; grid-template-columns:1.1fr 1.2fr 1.4fr; gap:12px; min-height:0}
+  .panel{border-radius:var(--radius); background:linear-gradient(180deg,var(--tile1),var(--tile2));
+    border:1px solid var(--line); box-shadow:0 4px 22px rgba(0,0,0,.5), inset 0 1px 0 rgba(0,212,255,.12);
+    padding:12px 14px; min-height:0; overflow:hidden; display:flex; flex-direction:column}
+  .panel h2{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--cyan); text-shadow:0 0 10px rgba(0,212,255,.4); margin-bottom:10px}
+  .kv{display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-size:13px}
+  .kv dt{color:var(--mut)}
+  .kv dd{color:var(--ink); text-align:right; font-variant-numeric:tabular-nums; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .cam-block{margin-bottom:10px}
+  .cam-block .t{font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#fff; margin-bottom:4px}
+  .cam-block .t .st{float:right; font-size:11px; letter-spacing:.06em}
+  .st.live{color:var(--green)} .st.standby{color:var(--cyan)} .st.unavailable{color:var(--red)} .st.dark{color:var(--amber)}
+  /* controls */
+  .ctl-row{display:grid; grid-template-columns:92px 1fr 44px; align-items:center; gap:10px; margin-bottom:8px; font-size:13px}
+  .ctl-row label{color:var(--mut); text-transform:capitalize}
+  .ctl-row output{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink)}
+  input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:5px; border-radius:3px;
+    background:linear-gradient(90deg,var(--cyan-dim),var(--cyan)); outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; appearance:none; width:16px; height:16px;
+    border-radius:50%; background:#fff; border:2px solid var(--cyan); box-shadow:0 0 8px rgba(0,212,255,.6); cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:14px; height:14px; border-radius:50%; background:#fff;
+    border:2px solid var(--cyan); cursor:pointer}
+  .ctl-head{display:flex; align-items:center; gap:8px; margin-bottom:10px}
+  .ctl-head select{background:#0a1826; color:var(--ink); border:1px solid var(--line); border-radius:7px; padding:6px 8px; font-size:13px}
+  .ctl-note{font-size:12px; color:var(--mut); margin-top:2px}
+  .ctl-note.err{color:var(--red)}
+  /* gallery */
+  .gal-head{display:flex; align-items:baseline; gap:10px}
+  .gal-head .counts{margin-left:auto; font-size:12px; color:var(--mut)}
+  .gal-grid{flex:1; min-height:0; overflow-y:auto; display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(104px,1fr)); gap:8px; align-content:start; padding-right:2px}
+  .gal-item{border:1px solid var(--line); border-radius:8px; overflow:hidden; cursor:pointer; background:#000; position:relative}
+  .gal-item img,.gal-item video{width:100%; height:64px; object-fit:cover; display:block}
+  .gal-item .cap{font-size:10px; color:var(--mut); padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:#08131d}
+  .gal-item .tag{position:absolute; top:4px; left:4px; font-size:9px; letter-spacing:.06em; padding:2px 6px;
+    border-radius:999px; background:rgba(0,0,0,.65); color:var(--cyan); border:1px solid var(--line)}
+  .gal-empty{color:var(--mut); font-size:13px; padding:8px 2px}
+  /* lightbox */
+  #lightbox{position:fixed; inset:0; background:rgba(0,0,0,.86); display:none; align-items:center; justify-content:center; z-index:50; padding:24px}
+  #lightbox.open{display:flex}
+  #lightbox img,#lightbox video{max-width:96vw; max-height:88vh; border-radius:10px; border:1px solid var(--line)}
+  #lightbox .cap{position:absolute; bottom:18px; left:0; right:0; text-align:center; color:var(--mut); font-size:13px}
+  #toast{position:fixed; left:50%; bottom:18px; transform:translateX(-50%); background:#0a1826;
+    border:1px solid var(--line); color:var(--ink); padding:9px 16px; border-radius:999px; font-size:13px;
+    display:none; z-index:60; box-shadow:0 4px 18px rgba(0,0,0,.6)}
+  #toast.show{display:block}
+  .banner{display:none; margin:0 4px; padding:10px 14px; border-radius:10px; font-size:13px;
+    background:rgba(255,77,77,.12); border:1px solid rgba(255,77,77,.4); color:#ffb3b3}
+  .banner.show{display:block}
+  @media (max-width:900px){
+    body{overflow:auto}
+    .app{height:auto; min-height:100vh}
+    .feeds{flex-direction:column; flex:none}
+    .pane,.pane-laptop{flex:none; height:300px}
+    .feeds.focus-laptop .pane-c270,.feeds.focus-laptop .pane-laptop{flex:none}
+    .strip{grid-template-columns:1fr; flex:none}
+    .panel{min-height:220px}
+    h1{font-size:18px}
+    #clock{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="mark">▲</div>
+    <div>
+      <h1>J.A.R.V.I.S. <b>WEBCAM</b></h1>
+      <div class="sub">Dual cameras &middot; C270 main &middot; laptop #2</div>
+    </div>
+    <div class="spacer"></div>
+    <span class="pill"><span class="dot" id="overall-dot"></span><span id="overall-text">starting&hellip;</span></span>
+    <span id="clock">--:--:--</span>
+  </header>
+  <div class="banner" id="no-cam-banner">No camera found — connect the C270 or open the laptop lid and reload.</div>
+
+  <section class="feeds focus-c270" id="feeds">
+    <div class="pane pane-c270" data-cam="c270">
+      <div class="pane-head">
+        <span class="name">Logitech C270</span><span class="dev">/dev/video2 &middot; main</span>
+        <span class="badge" id="badge-c270">standby</span>
+      </div>
+      <div class="feed-wrap">
+        <img id="img-c270" alt="Logitech C270 live feed">
+        <div class="empty" id="empty-c270" hidden><div class="big">◉</div><div>Logitech C270 not connected</div><div style="font-size:12px">Plug it into a USB 2.0 port and reload.</div></div>
+        <span class="rec-ind" id="rec-c270"><span class="rdot"></span>REC <span class="rect">0:00</span></span>
+      </div>
+      <div class="pane-foot">
+        <button class="btn primary" data-act="snap" data-cam="c270">Snapshot</button>
+        <button class="btn danger" data-act="rec" data-cam="c270">● Record</button>
+        <button class="btn" data-act="focus" data-cam="c270">Focus</button>
+        <span class="pane-msg" id="msg-c270"></span>
+      </div>
+    </div>
+    <div class="pane pane-laptop" data-cam="laptop">
+      <div class="pane-head">
+        <span class="name">Laptop built-in</span><span class="dev">/dev/video0 &middot; #2</span>
+        <span class="badge" id="badge-laptop">standby</span>
+      </div>
+      <div class="feed-wrap">
+        <img id="img-laptop" alt="Laptop built-in live feed">
+        <div class="empty" id="empty-laptop" hidden><div class="big">◉</div><div>Laptop camera not connected</div><div style="font-size:12px">It is the fallback when the C270 is absent.</div></div>
+        <span class="rec-ind" id="rec-laptop"><span class="rdot"></span>REC <span class="rect">0:00</span></span>
+      </div>
+      <div class="pane-foot">
+        <button class="btn primary" data-act="snap" data-cam="laptop">Snapshot</button>
+        <button class="btn danger" data-act="rec" data-cam="laptop">● Record</button>
+        <button class="btn" data-act="focus" data-cam="laptop">Focus</button>
+        <span class="pane-msg" id="msg-laptop"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="panel">
+      <h2>Camera status</h2>
+      <div id="status-body"><div class="gal-empty">Loading camera status&hellip;</div></div>
+    </div>
+    <div class="panel">
+      <h2>Picture controls</h2>
+      <div class="ctl-head">
+        <select id="ctl-cam">
+          <option value="c270">Logitech C270</option>
+          <option value="laptop">Laptop built-in</option>
+        </select>
+        <button class="btn" id="ctl-reset" style="margin-left:auto">Reset to defaults</button>
+      </div>
+      <div id="ctl-body"><div class="gal-empty">Loading controls&hellip;</div></div>
+      <div class="ctl-note" id="ctl-note"></div>
+    </div>
+    <div class="panel">
+      <h2>Recent captures</h2>
+      <div class="gal-head"><span class="counts" id="gal-counts"></span></div>
+      <div class="gal-grid" id="gal-grid" style="margin-top:8px"><div class="gal-empty">No snapshots or recordings yet.</div></div>
+    </div>
+  </section>
+</div>
+
+<div id="lightbox"><div id="lb-inner"></div><div class="cap" id="lb-cap"></div></div>
+<div id="toast"></div>
+<canvas id="dark-canvas" width="32" height="24" style="display:none"></canvas>
+
+<script>
+"use strict";
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
+const CAMS = ["c270", "laptop"];
+const LABELS = {c270: "Logitech C270", laptop: "Laptop built-in"};
+let status = null;            // last /api/status payload
+let focused = "c270";
+let imgFailed = {c270: false, laptop: false};
+let dark = {c270: false, laptop: false};
+let ctlCam = "c270";
+let ctlTimer = null;
+let recStart = {c270: null, laptop: null};
+
+function fmtClock(d){ return d.toLocaleTimeString("en-CA", {hour12:false}); }
+function fmtDur(s){ s = Math.max(0, Math.floor(s||0)); return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0"); }
+function fmtSize(n){ if (n >= 1048576) return (n/1048576).toFixed(1)+" MB"; if (n >= 1024) return (n/1024).toFixed(0)+" KB"; return n+" B"; }
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"), 3500); }
+function paneMsg(cam, msg, kind){ const el = $("#msg-"+cam); el.textContent = msg; el.className = "pane-msg" + (kind ? " "+kind : ""); }
+
+async function api(path, opts){
+  const r = await fetch(path, opts);
+  const t = await r.text();
+  let j = null; try { j = JSON.parse(t); } catch(e) {}
+  if (!r.ok) { const err = new Error((j && j.error) || ("HTTP " + r.status)); err.status = r.status; err.body = j; throw err; }
+  return j;
+}
+
+/* ---------- feeds ---------- */
+function startFeeds(){
+  for (const cam of CAMS){
+    const img = $("#img-"+cam);
+    img.onerror = () => { imgFailed[cam] = true; };
+    img.onload = () => { imgFailed[cam] = false; };
+    // Cache-bust so a retried stream is a fresh request.
+    img.src = "/api/stream?cam=" + cam + "&t=" + Date.now();
+  }
+  // If a feed errored (camera down), retry it every 6 s so it comes
+  // back on its own when the camera is plugged in / the lid opens.
+  setInterval(() => {
+    for (const cam of CAMS){
+      if (!imgFailed[cam]) continue;
+      const img = $("#img-"+cam);
+      imgFailed[cam] = false;
+      img.src = "/api/stream?cam=" + cam + "&t=" + Date.now();
+    }
+  }, 6000);
+}
+
+function setFocus(cam){
+  focused = cam;
+  $("#feeds").classList.remove("focus-c270", "focus-laptop");
+  $("#feeds").classList.add("focus-" + cam);
+}
+
+/* ---------- darkness (lid closed?) ---------- */
+function sampleDarkness(){
+  const cv = $("#dark-canvas");
+  const ctx = cv.getContext("2d", {willReadFrequently:true});
+  for (const cam of CAMS){
+    const img = $("#img-"+cam);
+    if (!img.complete || !img.naturalWidth) { dark[cam] = false; continue; }
+    try {
+      ctx.drawImage(img, 0, 0, cv.width, cv.height);
+      const d = ctx.getImageData(0, 0, cv.width, cv.height).data;
+      let sum = 0, n = 0;
+      for (let i = 0; i < d.length; i += 16){ sum += 0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2]; n++; }
+      dark[cam] = (sum / n) < 12;
+    } catch(e) { dark[cam] = false; }
+  }
+}
+
+/* ---------- status ---------- */
+function camByKey(key){ return (status && status.cameras || []).find(c => c.key === key) || null; }
+
+function renderStatus(){
+  if (!status) return;
+  const now = new Date();
+  $("#clock").textContent = fmtClock(now);
+  const cams = status.cameras || [];
+  const live = cams.filter(c => c.streaming).length;
+  const dot = $("#overall-dot"), txt = $("#overall-text");
+  if (live === 2){ dot.className = "dot"; txt.textContent = "both cameras live"; }
+  else if (live === 1){ dot.className = "dot amber"; txt.textContent = "one camera live"; }
+  else { dot.className = "dot red"; txt.textContent = "no camera live"; }
+  $("#no-cam-banner").classList.toggle("show", cams.length > 0 && !cams.some(c => c.present));
+
+  let html = "";
+  for (const c of cams){
+    const isDark = dark[c.key];
+    const st = isDark ? "dark" : c.state;
+    const stTxt = isDark ? "dark — lid may be closed" : c.state_label;
+    const rec = (status.recording || {})[c.key] || {};
+    html += '<div class="cam-block"><div class="t">' + c.name +
+      ' <span class="st ' + st + '">' + stTxt + '</span></div>' +
+      '<dl class="kv">' +
+      '<dt>Device</dt><dd>' + c.device + '</dd>' +
+      '<dt>Picture</dt><dd>' + c.resolution + ' &middot; ' + c.format + '</dd>' +
+      '<dt>Frame rate</dt><dd>' + c.fps.toFixed(1) + ' fps</dd>' +
+      '<dt>Uptime</dt><dd>' + fmtDur(c.uptime_s) + '</dd>' +
+      '<dt>Recording</dt><dd>' + (rec.recording ? "● recording " + fmtDur(rec.duration_s) : "not recording") + '</dd>' +
+      '</dl></div>';
+  }
+  $("#status-body").innerHTML = html || '<div class="gal-empty">No cameras found.</div>';
+
+  // Pane badges + empty states + record indicators.
+  for (const cam of CAMS){
+    const c = camByKey(cam);
+    const badge = $("#badge-"+cam), empty = $("#empty-"+cam), img = $("#img-"+cam);
+    const rec = (status.recording || {})[cam] || {};
+    const ind = $("#rec-"+cam);
+    if (rec.recording){
+      ind.classList.add("on");
+      ind.querySelector(".rect").textContent = fmtDur(rec.duration_s);
+      if (!recStart[cam]) recStart[cam] = Date.now();
+    } else {
+      ind.classList.remove("on");
+      recStart[cam] = null;
+    }
+    const recBtn = document.querySelector('[data-act="rec"][data-cam="' + cam + '"]');
+    recBtn.classList.toggle("on", !!rec.recording);
+    recBtn.textContent = rec.recording ? "■ Stop" : "● Record";
+    if (!c){ badge.textContent = "unknown"; badge.className = "badge off"; empty.hidden = false; continue; }
+    if (!c.present){ badge.textContent = "not connected"; badge.className = "badge off"; empty.hidden = false; img.removeAttribute("src"); continue; }
+    empty.hidden = true;
+    if (dark[cam]){ badge.textContent = "dark — lid may be closed"; badge.className = "badge dark"; }
+    else if (c.streaming){ badge.textContent = "● live"; badge.className = "badge live"; }
+    else { badge.textContent = "standby"; badge.className = "badge"; }
+  }
+  const counts = status.counts || {};
+  $("#gal-counts").textContent = (counts.snapshots||0) + " snapshots · " + (counts.recordings||0) + " recordings";
+}
+
+async function pollStatus(){
+  try { status = await api("/api/status"); renderStatus(); }
+  catch(e){ /* keep the last good status; the page stays up */ }
+}
+
+/* ---------- gallery ---------- */
+function renderGallery(g){
+  const grid = $("#gal-grid");
+  const files = g.files || [];
+  if (!files.length){ grid.innerHTML = '<div class="gal-empty">No snapshots or recordings yet.</div>'; return; }
+  grid.innerHTML = files.map(f => {
+    const when = new Date(f.mtime * 1000).toLocaleString("en-CA", {month:"short", day:"numeric", hour:"2-digit", minute:"2-digit", hour12:false});
+    const inner = f.kind === "snapshot"
+      ? '<img src="' + f.url + '" alt="' + f.name + '" loading="lazy">'
+      : '<video src="' + f.url + '" preload="metadata" muted></video>';
+    return '<div class="gal-item" data-url="' + f.url + '" data-kind="' + f.kind + '" data-name="' + f.name + '">' +
+      '<span class="tag">' + f.kind + '</span>' + inner +
+      '<div class="cap">' + f.name.replace("webcam-","") + '<br>' + when + ' · ' + fmtSize(f.size) + '</div></div>';
+  }).join("");
+  $$(".gal-item").forEach(el => el.addEventListener("click", () => openLightbox(el.dataset.url, el.dataset.kind, el.dataset.name)));
+}
+
+async function pollGallery(){
+  try { renderGallery(await api("/api/gallery")); }
+  catch(e){ /* gallery is nice-to-have; the feeds matter more */ }
+}
+
+function openLightbox(url, kind, name){
+  const lb = $("#lightbox"), inner = $("#lb-inner");
+  inner.innerHTML = kind === "snapshot"
+    ? '<img src="' + url + '" alt="' + name + '">'
+    : '<video src="' + url + '" controls autoplay></video>';
+  $("#lb-cap").textContent = name;
+  lb.classList.add("open");
+}
+$("#lightbox").addEventListener("click", () => {
+  $("#lightbox").classList.remove("open");
+  $("#lb-inner").innerHTML = "";
+});
+
+/* ---------- snapshot / record ---------- */
+async function doSnapshot(cam){
+  const btn = document.querySelector('[data-act="snap"][data-cam="' + cam + '"]');
+  btn.disabled = true;
+  try {
+    const r = await api("/api/snapshot", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({cam})});
+    paneMsg(cam, "Saved " + r.file, "ok");
+    toast("Snapshot saved — " + r.file);
+    pollGallery();
+  } catch(e){ paneMsg(cam, "Snapshot failed: " + e.message, "err"); }
+  finally { btn.disabled = false; }
+}
+async function doRecord(cam){
+  const btn = document.querySelector('[data-act="rec"][data-cam="' + cam + '"]');
+  btn.disabled = true;
+  try {
+    const rec = (status && status.recording && status.recording[cam]) || {};
+    if (rec.recording){
+      const r = await api("/api/record/stop", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({cam})});
+      paneMsg(cam, "Recording saved — " + r.file + " (" + fmtDur(r.duration_s) + ")", "ok");
+      toast("Recording saved — " + r.file);
+    } else {
+      const r = await api("/api/record/start", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({cam})});
+      paneMsg(cam, "Recording… " + r.file, "ok");
+    }
+    pollStatus(); pollGallery();
+  } catch(e){ paneMsg(cam, "Record failed: " + e.message, "err"); }
+  finally { btn.disabled = false; }
+}
+$$("[data-act]").forEach(b => b.addEventListener("click", () => {
+  const cam = b.dataset.cam, act = b.dataset.act;
+  if (act === "snap") doSnapshot(cam);
+  else if (act === "rec") doRecord(cam);
+  else if (act === "focus") setFocus(cam);
+}));
+
+/* ---------- v4l2 controls ---------- */
+const SLIDERS = ["brightness", "contrast", "saturation", "gain", "sharpness"];
+async function loadControls(){
+  const body = $("#ctl-body"), note = $("#ctl-note");
+  body.innerHTML = '<div class="gal-empty">Loading controls&hellip;</div>';
+  note.textContent = "";
+  try {
+    const r = await api("/api/controls?cam=" + ctlCam);
+    if (!r.available){ body.innerHTML = ""; note.textContent = r.error || "Controls unavailable for this camera."; note.classList.add("err"); return; }
+    note.classList.remove("err");
+    let html = "";
+    for (const name of SLIDERS){
+      const c = r.controls[name];
+      if (!c) continue;
+      html += '<div class="ctl-row"><label for="ctl-' + name + '">' + name + '</label>' +
+        '<input type="range" id="ctl-' + name + '" data-ctl="' + name + '" min="' + (c.min ?? 0) + '" max="' + (c.max ?? 255) + '" step="' + (c.step ?? 1) + '" value="' + (c.value ?? c.default ?? 0) + '">' +
+        '<output id="out-' + name + '">' + (c.value ?? c.default ?? 0) + '</output></div>';
+    }
+    const wb = r.controls["white_balance_temperature_auto"];
+    if (wb){
+      html += '<div class="ctl-row"><label>White balance auto</label>' +
+        '<input type="checkbox" id="ctl-wb" data-ctl="white_balance_temperature_auto" ' + (wb.value ? "checked" : "") + ' style="justify-self:start; width:18px; height:18px; accent-color:#00d4ff">' +
+        '<output id="out-wb">' + (wb.value ? "auto" : "manual") + '</output></div>';
+    }
+    const extra = Object.keys(r.controls).filter(n => !SLIDERS.includes(n) && n !== "white_balance_temperature_auto");
+    if (extra.length){
+      html += '<div class="ctl-note">Also on this camera: ' + extra.map(n => n + " = " + r.controls[n].value).join(", ") + '</div>';
+    }
+    body.innerHTML = html || '<div class="gal-empty">No adjustable controls on this camera.</div>';
+    $$("#ctl-body input[type=range]").forEach(inp => inp.addEventListener("input", () => {
+      $("#out-" + inp.dataset.ctl).textContent = inp.value;
+      clearTimeout(ctlTimer);
+      ctlTimer = setTimeout(() => applyControl(inp.dataset.ctl, parseInt(inp.value, 10)), 250);
+    }));
+    const wbEl = $("#ctl-wb");
+    if (wbEl) wbEl.addEventListener("change", () => {
+      $("#out-wb").textContent = wbEl.checked ? "auto" : "manual";
+      applyControl("white_balance_temperature_auto", wbEl.checked ? 1 : 0);
+    });
+    note.textContent = "Controls apply live to " + LABELS[ctlCam] + ".";
+  } catch(e){
+    body.innerHTML = "";
+    note.textContent = "Controls failed to load: " + e.message;
+    note.classList.add("err");
+  }
+}
+async function applyControl(name, value){
+  try {
+    await api("/api/controls", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({cam: ctlCam, values: {[name]: value}})});
+  } catch(e){ $("#ctl-note").textContent = "Could not set " + name + ": " + e.message; $("#ctl-note").classList.add("err"); }
+}
+$("#ctl-cam").addEventListener("change", (e) => { ctlCam = e.target.value; loadControls(); });
+$("#ctl-reset").addEventListener("click", async () => {
+  try {
+    const r = await api("/api/controls/reset", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({cam: ctlCam})});
+    toast("Controls reset — " + Object.keys(r.applied || {}).join(", "));
+    loadControls();
+  } catch(e){ $("#ctl-note").textContent = "Reset failed: " + e.message; $("#ctl-note").classList.add("err"); }
+});
+
+/* ---------- boot ---------- */
+startFeeds();
+pollStatus(); pollGallery(); loadControls();
+setInterval(pollStatus, 2000);
+setInterval(pollGallery, 10000);
+setInterval(sampleDarkness, 5000);
+setInterval(() => { $("#clock").textContent = fmtClock(new Date()); }, 1000);
+</script>
+</body>
+</html>
