@@ -90,7 +90,9 @@ fcc-claude) still to do. **PR #67 (SAF-01)** merged 15:19 ET: the voice
 orchestrator binds loopback by default. **PR #66 (Kali laptop build)**
 merged 19:10 ET (HgX resolved the conflicts): the REA toolset registry,
 the teach guide, the current 32k autostart scripts, and
-`projects/kali-laptop-build/` are now on main. Still to
+`projects/kali-laptop-build/` are now on main. **PR #68 (SAF-02)**
+merged 19:17 ET: mesh and config values on the orchestrator status page
+are escaped. Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
