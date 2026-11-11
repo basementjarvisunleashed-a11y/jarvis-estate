@@ -98,7 +98,8 @@ only for the open card and a pinned watch. **PR #70 (SAF-04)** merged
 (SAF-05)** merged 19:21 ET: a decision can mint only from an envelope the
 device itself sealed. **PR #72 (SAF-06)** merged 19:37 ET: only the control
 plane may ask governance for a seal. **PR #73 (SAF-07)** merged 19:42 ET:
-orchestrator file tools stay inside the allowed roots. Still to
+orchestrator file tools stay inside the allowed roots. **PR #74 (SAF-08)**
+merged 19:44 ET: ceremony keys are owner-only. Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
