@@ -143,6 +143,9 @@ def native_to_openai(native, model):
     }
 
 
+MAX_BODY = int(os.environ.get("ROUTER_MAX_BODY", 1024 * 1024))  # SAF-14: chat histories
+
+
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args):  # keep stdout quiet
         pass
@@ -184,7 +187,14 @@ class Handler(BaseHTTPRequestHandler):
         if self.path != "/v1/chat/completions":
             self._send_json(404, {"error": "not found"})
             return
-        length = int(self.headers.get("Content-Length", 0))
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+        except ValueError:
+            length = -1
+        if not 0 <= length <= MAX_BODY:          # SAF-14
+            self.close_connection = True
+            self._send_json(413, {"error": "request body too large"})
+            return
         raw = self.rfile.read(length)
         try:
             body = json.loads(raw.decode("utf-8"))

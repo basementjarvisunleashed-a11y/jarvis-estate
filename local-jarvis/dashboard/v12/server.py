@@ -2568,6 +2568,10 @@ class Handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length") or 0)
         except Exception:
             return None
+        # SAF-14: a negative length means read-until-EOF and hangs the client.
+        if length < 0 or length > 256 * 1024:
+            self.close_connection = True
+            return None
         try:
             raw = self.rfile.read(length) if length > 0 else b""
             return json.loads(raw.decode("utf-8")) if raw else {}
