@@ -72,6 +72,9 @@ MQTT_PASS = "CHANGE_ME"       # placeholder — set the broker password locally
 MQTT_CHANNEL = "mqtt"          # must match the secondary channel name on the node, EXACTLY
 MQTT_CHANNEL_INDEX = 1         # secondary channel index (0 = primary LongFast)
 MQTT_SUB = "msh/+/2/json/" + MQTT_CHANNEL + "/+"   # wildcard region + node
+# SAF-03: the public broker is shared by everyone. Only this node may speak
+# for the watch (e.g. "!a1b2c3d4"); with it unset the mesh path stays off.
+WATCH_NODE = os.environ.get("JARVIS_WATCH_NODE", "").strip().lower()
 
 # --- demo scenarios (rotated; everything is labeled DEMO) -------------------
 DEMO_CANNED = [
@@ -170,6 +173,10 @@ def get_brief():
     return card
 
 
+class StaleVerdict(Exception):
+    """SAF-03: a verdict that does not answer the card that is open now."""
+
+
 def record_verdict(brief_id, decision, lat=None, lon=None, source="http"):
     entry = {
         "ts": datetime.now().isoformat(timespec="seconds"),
@@ -179,7 +186,13 @@ def record_verdict(brief_id, decision, lat=None, lon=None, source="http"):
         "lon": lon,
         "source": source,  # "http" (Apple Watch) or "mesh" (T-Watch)
     }
+    # Check and consume the open card under one lock. A check-then-write
+    # lets two requests both pass, and the later one can clear a newer card.
     with _lock:
+        open_brief = _state["brief"]
+        if open_brief is None or str(brief_id) != open_brief["id"]:
+            raise StaleVerdict(
+                "verdict id %r does not match the open card" % str(brief_id))
         with open(LOG_PATH, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry) + "\n")
         _state["verdicts"] += 1
@@ -256,6 +269,8 @@ def _mqtt_on_message(client, userdata, msg):
     except Exception as e:
         print("MESH: ignoring unparsable packet (%s)" % e)
         return
+    if not WATCH_NODE or (node_id or "").lower() != WATCH_NODE:
+        return  # SAF-03: not our watch -- learn nothing, record nothing
 
     with _lock:
         m = _state["mqtt"]
@@ -303,7 +318,10 @@ def _mqtt_on_message(client, userdata, msg):
     if open_brief is None:
         print("MESH: verdict '%s' with no open brief -- ignored." % decision)
         return
-    entry = record_verdict(open_brief["id"], decision, source="mesh")
+    try:
+        entry = record_verdict(open_brief["id"], decision, source="mesh")
+    except StaleVerdict:
+        return
     print("VERDICT id=%s decision=%s (mesh)" % (entry["id"], entry["decision"]))
     # Mint the next card immediately and push it downlink.
     card = get_brief()
@@ -351,6 +369,10 @@ def mqtt_start():
     the one-line install and returns False -- HTTP keeps working.
     """
     global _mqtt_client
+    if not WATCH_NODE:
+        print("MESH: JARVIS_WATCH_NODE not set -- mesh path DISABLED (public broker; "
+              "any node could answer for the watch).")
+        return False
     try:
         import paho.mqtt.client as paho
     except ImportError:
@@ -1142,7 +1164,11 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e:
             self._send_json({"ok": False, "error": str(e)}, 400)
             return
-        entry = record_verdict(brief_id, decision, lat, lon, source="http")
+        try:
+            entry = record_verdict(brief_id, decision, lat, lon, source="http")
+        except StaleVerdict as e:
+            self._send_json({"ok": False, "error": str(e)}, 409)
+            return
         if lat is not None:
             print("VERDICT id=%s decision=%s at %.4f,%.4f (http)" % (
                 entry["id"], entry["decision"], lat, lon))
