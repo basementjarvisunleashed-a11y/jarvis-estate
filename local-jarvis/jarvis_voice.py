@@ -8,8 +8,12 @@ import sys, os, re, json, time, subprocess, urllib.request, wave
 sys.path.insert(0, os.path.expanduser("~/Jarvis"))
 import jarvis as J   # reuse dev(), transcribe(), MIC/SPK, VOICE (same Whisper, same devices)
 ORCH = "http://127.0.0.1:8080/jarvis"
-GATE_PY = r"C:\Users\<user>\AppData\Local\Programs\Python\Python313\python.exe"  # has SpeechBrain
-GATE = os.path.expanduser("~/Jarvis/voice_gate.py")
+# SAF-15: Kali paths. The gate mode is explicit instead of "whatever happens
+# when a Windows path fails": off = the 2026-11-05 decision (pass-through,
+# the default); on = enforce, and refuse everyone if the gate cannot start.
+GATE_PY = os.environ.get("JARVIS_GATE_PY") or sys.executable  # needs SpeechBrain
+GATE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voice_gate.py")
+GATE_MODE = (os.environ.get("JARVIS_VOICE_GATE") or "off").strip().lower()
 OUT = os.path.join(J.BASE, "out")
 # jarvis.py tries CUDA first, but cublas64_12.dll is missing on this laptop, so it fails at first use.
 # Preload the same Whisper (small.en) on CPU unless JARVIS_WHISPER_DEVICE=cuda.
@@ -24,19 +28,24 @@ _whisper()
 
 class Gate:
     def __init__(self):
-        # The voice gate was dropped (HgX, 2026-11-05): if its program is
-        # missing (GATE_PY still points at Windows), the gate becomes a
-        # pass-through that approves everything instead of crashing the loop.
+        # Dropped on 2026-11-05. JARVIS_VOICE_GATE=off keeps that pass-through.
+        self.p = None
+        self.enforce = GATE_MODE != "off"
+        if not self.enforce:
+            self.info = {"gate": "off", "why": "voice gate off; every speaker is approved"}
+            print("Voice gate OFF: every speaker is approved (JARVIS_VOICE_GATE=on to enforce).", file=sys.stderr)
+            return
         try:
             self.p = subprocess.Popen([GATE_PY, GATE, "--serve"], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                       stderr=subprocess.DEVNULL, text=True, bufsize=1)
             self.info = json.loads(self.p.stdout.readline())
         except Exception:
             self.p = None
-            self.info = {"gate": "disabled"}
+            self.info = {"gate": "failed", "enforce": True}   # fail closed
+            print("Voice gate could not start: refusing every speaker.", file=sys.stderr)
     def check(self, path):
         if self.p is None:
-            return True, 1.0
+            return (False, 0.0) if self.enforce else (True, 1.0)
         self.p.stdin.write(path + "\n"); self.p.stdin.flush()
         r = json.loads(self.p.stdout.readline()); return r["ok"], r["score"]
     def close(self):
