@@ -120,7 +120,7 @@ CrackMe not solved; no overnight run occurred; fix pending. REA
 laptop-check DONE 00:21:34 ET (all 4 analyses; no open remote-access ports).
 Item #6 DONE 08:07:45 ET (2026-11-11): the overnight runner v2 --redo-bla
 run finished; BLA verdict: not-recovered; CrackMe v9 still unsolved.
-Tonight's checklist is 8 of 8 complete. Still to
+Tonight's checklist is 8 of 8 complete. PR #81 MERGED 09:46 ET (2026-11-11, merge commit 97fae5f): the REA registry + integration update is on main — 9 tools + GhidraMCP verified 2026-11-11, BLA cross-reference pointer lowercase, 3 files (+70/−21). Still to
 land: the CrackMe v9 result (the overnight runner resumes it tonight),
 the C270 consolidated report file, and the iPad Kali build (PARKED). Tonight's work — live checklist (4 of 8 — ask script, workers' instructions, sudo installs + dashboard cleanup done): [`local-jarvis/TONIGHT-2026-11-10.md`](local-jarvis/TONIGHT-2026-11-10.md) — ask script, workers' instructions, sudo installs, laptop-only dashboard cleanup, SAF merges, overnight runner; new Current Build section on the website shows the same live status.
 
