@@ -33,6 +33,8 @@ works end to end before any key is wired.
 """
 
 import html as _html
+import hmac
+import ipaddress
 import json
 import os
 import re
@@ -43,6 +45,11 @@ from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PORT = 8080
+# SAF-01: loopback by default. A non-loopback bind (watch on the same Wi-Fi)
+# needs JARVIS_TOKEN; remote callers must send "Authorization: Bearer <token>".
+HOST = os.environ.get("JARVIS_HOST", "127.0.0.1").strip()
+API_TOKEN = os.environ.get("JARVIS_TOKEN", "").strip()
+_LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 XAI_URL = "https://api.x.ai/v1/chat/completions"
 # If xAI renames models, check console.x.ai -- a wrong name just falls back
 # to the canned demo brief, nothing breaks.
@@ -420,6 +427,17 @@ else:
 
 ACTIONS_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "actions.log")
 
+# Response capture (2026-11-07): every Ollama call the voice loop makes is
+# logged in full to orchestrator-responses.jsonl (next to this file), one
+# JSON object per line -- time, model, the full prompt (messages), the full
+# reply, and the tool calls + tool results when present. Fail-open: a
+# logging failure never breaks a call. The publishing house scrubs each
+# batch before it reaches GitHub; raw logs never go to GitHub.
+RESPONSE_LOG_PATH = os.environ.get(
+    "ORCHESTRATOR_RESPONSES_LOG",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                 "orchestrator-responses.jsonl"))
+
 
 class _OllamaDown(Exception):
     pass
@@ -434,6 +452,37 @@ def _log_action(tool, args, result):
                 f.write(json.dumps(entry) + "\n")
     except Exception as e:
         print("actions.log write failed: %s" % e)
+
+
+_NO_MODEL = object()  # sentinel: no model passed (use OLLAMA_MODEL)
+
+
+def _log_response(messages, response, tool_calls, tool_results,
+                  model=_NO_MODEL, fast_path=False, error=None):
+    """Append one response-capture entry (JSONL) to RESPONSE_LOG_PATH.
+
+    One entry per Ollama call (plus one per fast-path media command, which
+    makes no model call): time, model, the full prompt (messages), the FULL
+    reply text (whole, not summarized), and the tool calls + tool results
+    when present. Fail-open: a logging failure must never break a call, so
+    every failure path here is swallowed. The entry is written best-effort;
+    if the file cannot be written, the call still succeeds.
+    """
+    entry = {"ts": datetime.now().isoformat(timespec="seconds"),
+             "model": OLLAMA_MODEL if model is _NO_MODEL else model,
+             "messages": messages,
+             "response": response,
+             "tool_calls": tool_calls,
+             "tool_results": tool_results,
+             "fast_path": bool(fast_path),
+             "error": error or ""}
+    try:
+        with _lock:
+            with open(RESPONSE_LOG_PATH, "a", encoding="utf-8") as f:
+                f.write(json.dumps(entry) + "\n")
+                f.flush()
+    except Exception as e:
+        print("orchestrator-responses.jsonl write failed: %s" % e)
 
 
 def _safe_path(p):
@@ -842,17 +891,28 @@ def jarvis_ask(text):
         result = str(JARVIS_DISPATCH[name]({}))
         _log_action(name, {}, result)
         actions.append({"tool": name, "ok": not result.startswith("ERROR")})
+        _log_response([{"role": "user", "content": text}], result,
+                      [{"function": {"name": name, "arguments": "{}"}}],
+                      [{"tool": name, "arguments": {}, "result": result}],
+                      model=None, fast_path=True)
         return result, actions
     messages = [{"role": "system", "content": JARVIS_SYSTEM},
                 {"role": "user", "content": text}]
     for _ in range(JARVIS_MAX_STEPS):
-        data = _ollama_chat(messages)
+        sent = json.loads(json.dumps(messages))  # prompt as sent, deep-copied
+        try:
+            data = _ollama_chat(messages)
+        except _OllamaDown as e:
+            _log_response(sent, "", [], [], error="ollama-down: %s" % e)
+            raise
         msg = data.get("message") or {}
         calls = msg.get("tool_calls") or []
         if not calls:
+            _log_response(sent, msg.get("content") or "", [], [])
             return (msg.get("content") or "(no answer)").strip(), actions
         messages.append({"role": "assistant", "content": msg.get("content") or "",
                          "tool_calls": calls})
+        tool_results = []
         for tc in calls:
             fn = tc.get("function") or {}
             name = fn.get("name", "")
@@ -873,8 +933,10 @@ def jarvis_ask(text):
                     result = "ERROR: tool crashed: %s" % e
             _log_action(name, fargs, result)
             actions.append({"tool": name, "ok": not result.startswith("ERROR")})
+            tool_results.append({"tool": name, "arguments": fargs, "result": result})
             messages.append({"role": "tool", "tool_name": name,
                              "content": result})
+        _log_response(sent, msg.get("content") or "", calls, tool_results)
         if all(((tc.get("function") or {}).get("name") in _SIMPLE_VLC) for tc in calls):
             return " ".join(x["content"] for x in messages[-len(calls):]), actions
     return ("I ran the tools but did not reach a final answer -- "
@@ -884,6 +946,65 @@ def jarvis_ask(text):
 def _e(v):
     """SAF-02: every value from the mesh, Grok or the environment is text, never markup."""
     return _html.escape(str(v), quote=True)
+def _allowed_hosts():
+    """Hostnames this process will answer. Compared case-insensitively.
+
+    The bind address is included when it is a name a client would send.
+    0.0.0.0 and :: are listen-all wildcards, not Host values.
+    """
+    hosts = set(_LOOPBACK)
+    bind = (HOST or "").strip().lower()
+    if bind and bind not in ("0.0.0.0", "::"):
+        hosts.add(bind)
+    for h in os.environ.get("JARVIS_ALLOWED_HOSTS", "").split(","):
+        item = h.strip().lower()
+        if item:
+            hosts.add(item)
+    return hosts
+
+
+def _peer_is_loopback(peer):
+    """True only for a loopback peer, including IPv4-mapped IPv6."""
+    try:
+        ip = ipaddress.ip_address(peer)
+    except ValueError:
+        return False
+    mapped = getattr(ip, "ipv4_mapped", None)
+    if mapped is not None:
+        ip = mapped
+    return bool(ip.is_loopback)
+
+
+def request_gate(handler, is_post):
+    """SAF-01: refuse before any work. Returns an error string or None.
+
+    * Host header must name this machine (blocks DNS rebinding).
+    * POST bodies must be application/json (blocks cross-site "simple"
+      form/text POSTs from any web page the operator visits).
+    * Callers that are not on loopback must present JARVIS_TOKEN.
+    """
+    host = (handler.headers.get("Host") or "").strip().lower()
+    if host.startswith("["):
+        hostname = host[1:].split("]", 1)[0]
+    else:
+        hostname = host.rsplit(":", 1)[0] if host.count(":") == 1 else host
+    if hostname not in _allowed_hosts():
+        return "host not allowed"
+    if is_post:
+        ctype = (handler.headers.get("Content-Type") or "").split(";", 1)[0].strip().lower()
+        if ctype != "application/json":
+            return "content-type must be application/json"
+    peer = handler.client_address[0] if handler.client_address else ""
+    # The whole 127.0.0.0/8 and ::1 are loopback. A string prefix on
+    # "::ffff:127." misses the hex form (::ffff:7f00:1) and is not how
+    # mapped addresses should be classified.
+    if not _peer_is_loopback(peer):
+        if not API_TOKEN:
+            return "remote callers need JARVIS_TOKEN set on the laptop"
+        got = (handler.headers.get("Authorization") or "").strip()
+        if not hmac.compare_digest(got.encode("utf-8"), ("Bearer " + API_TOKEN).encode("utf-8")):
+            return "unauthorized"
+    return None
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -898,6 +1019,11 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
+        err = request_gate(self, is_post=False)
+        if err:
+            self.close_connection = True
+            self._send_json({"ok": False, "error": err}, 403)
+            return
         if self.path == "/":
             key_set = bool(os.environ.get("XAI_API_KEY", "").strip())
             with _lock:
@@ -953,6 +1079,13 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json({"ok": False, "error": "unknown path"}, 404)
 
     def do_POST(self):
+        err = request_gate(self, is_post=True)
+        if err:
+            # Drop the connection. The body is unread, so keep-alive would
+            # desynchronise the next request on this socket.
+            self.close_connection = True
+            self._send_json({"ok": False, "error": err}, 403)
+            return
         if self.path == "/jarvis":
             # Local Jarvis, the agentic wrist: {"text": "<utterance>"}.
             try:
@@ -1038,13 +1171,23 @@ def main():
     print("Bracelet PoC orchestrator -- one brain, two surfaces")
     print("=" * 60)
     mesh_up = mqtt_start()
-    # Empty host binds every local interface (same as the unspecified
-    # address) without hardcoding a public IP. Loopback is still localhost.
-    server = ThreadingHTTPServer(("", PORT), Handler)
+    # SAF-01: loopback unless JARVIS_HOST says otherwise; a wider bind
+    # without JARVIS_TOKEN is refused (anyone on the network could drive
+    # the file tools).
+    if (HOST or "").strip().lower() not in _LOOPBACK and not API_TOKEN:
+        print("REFUSING to listen on %r without JARVIS_TOKEN set." % (HOST or "all interfaces"))
+        raise SystemExit(2)
+    server = ThreadingHTTPServer((HOST, PORT), Handler)
     print("-" * 60)
-    print("HTTP (Apple Watch path) on port %d" % PORT)
-    print("On this laptop:  http://localhost:%d" % PORT)
-    print("From iPhone/watch (same WiFi): http://%s:%d" % (_lan_ip(), PORT))
+    print("HTTP listening on %s:%d" % (HOST, PORT))
+    print("On this laptop:  http://127.0.0.1:%d" % PORT)
+    if (HOST or "").strip().lower() in _LOOPBACK:
+        print("Wi-Fi and the watch Shortcut cannot reach a loopback bind.")
+        print("To open it: set JARVIS_HOST, JARVIS_TOKEN, and JARVIS_ALLOWED_HOSTS.")
+        print("The Shortcut must send Authorization: Bearer <JARVIS_TOKEN>.")
+    else:
+        print("Non-loopback callers must send Authorization: Bearer <JARVIS_TOKEN>.")
+        print("If their Host is not the bind address, list it in JARVIS_ALLOWED_HOSTS.")
     if mesh_up:
         print("MESH (T-Watch path): waiting for the watch -- send READY from it.")
     else:

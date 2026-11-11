@@ -5,11 +5,11 @@ Does NOT auto-start. Usage (venv python):
 No delete capability by design."""
 import warnings; warnings.filterwarnings("ignore")
 import sys, os, re, json, time, subprocess, urllib.request, wave
-sys.path.insert(0, r"/home/hgx/Jarvis")
+sys.path.insert(0, os.path.expanduser("~/Jarvis"))
 import jarvis as J   # reuse dev(), transcribe(), MIC/SPK, VOICE (same Whisper, same devices)
 ORCH = "http://127.0.0.1:8080/jarvis"
 GATE_PY = r"C:\Users\<user>\AppData\Local\Programs\Python\Python313\python.exe"  # has SpeechBrain
-GATE = r"/home/hgx/Jarvis\voice_gate.py"
+GATE = os.path.expanduser("~/Jarvis/voice_gate.py")
 OUT = os.path.join(J.BASE, "out")
 # jarvis.py tries CUDA first, but cublas64_12.dll is missing on this laptop, so it fails at first use.
 # Preload the same Whisper (small.en) on CPU unless JARVIS_WHISPER_DEVICE=cuda.
@@ -118,10 +118,10 @@ def _vlc_running():
 def _sopranos_dir():
     import glob
     import os as _os
-    neat = "/mnt/hgx/TV SHOWS/THE SOPRANOS/The Sopranos/"
+    neat = os.path.join(os.environ.get("MEDIA_DIR", "/mnt/media"), "TV SHOWS", "THE SOPRANOS", "The Sopranos")
     if _os.path.isdir(neat):
         return neat
-    for cand in glob.glob("/mnt/hgx/TV SHOWS/**/The Sopranos/", recursive=True):
+    for cand in glob.glob(os.path.join(os.environ.get("MEDIA_DIR", "/mnt/media"), "TV SHOWS", "**", "The Sopranos"), recursive=True):
         if _os.path.isdir(cand):
             return cand
     return None

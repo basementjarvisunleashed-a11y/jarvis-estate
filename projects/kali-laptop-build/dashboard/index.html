@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.A.R.V.I.S. — Acer Dashboard</title>
+<style>
+  :root {
+    --bg: #020509;
+    --panel: #0a1622;
+    --panel-2: #0d1d2e;
+    --panel-border: rgba(0, 212, 255, 0.14);
+    --panel-border-soft: rgba(148, 196, 220, 0.10);
+    --cyan: #00d4ff;
+    --cyan-bright: #7de8ff;
+    --blue: #2f7bff;
+    --green: #2bff88;
+    --amber: #ffb454;
+    --red: #ff5f6b;
+    --text: #d8eef8;
+    --text-dim: #9db8c6;
+    --muted: #5f8296;
+    --muted-2: #7fa3b5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 520px at 50% -12%, rgba(0, 120, 180, 0.22), transparent 62%),
+      linear-gradient(180deg, #030a12 0%, #020509 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    padding: 14px;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  header h1 {
+    margin: 0;
+    color: var(--cyan);
+    letter-spacing: 4px;
+    font-size: 26px;
+    font-weight: 600;
+    text-shadow: 0 0 22px rgba(0, 212, 255, 0.45), 0 0 4px rgba(0, 212, 255, 0.30);
+  }
+  header h1 span { color: var(--blue); font-size: 14px; letter-spacing: 2px; }
+  #clock { text-align: right; }
+  #clock .time { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 30px; color: var(--cyan); text-shadow: 0 0 16px rgba(0, 212, 255, 0.35); }
+  #clock .date { color: var(--muted); font-size: 13px; }
+  #banner {
+    display: none;
+    background: #2a1215;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    border-radius: 6px;
+  }
+  /* v12 — TOP STRIP: CPU temperature + GPU, first thing on the page.
+     A single compact row (~64px) with large readable numbers. It is
+     the only fixed-height element: it fits in any viewport without
+     scrolling, and the page below it scrolls. */
+  #top-strip {
+    display: flex; gap: 12px; align-items: stretch;
+    margin-bottom: 12px;
+  }
+  #top-strip .top-cell {
+    flex: 1; display: flex; align-items: baseline; gap: 14px;
+    background: linear-gradient(180deg, rgba(13, 29, 46, 0.92), rgba(8, 19, 31, 0.92));
+    border: 1px solid var(--panel-border); border-radius: 10px;
+    padding: 8px 16px; min-height: 56px;
+  }
+  #top-strip .top-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--cyan); font-weight: 600; white-space: nowrap;
+  }
+  #top-strip .top-num {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 30px; font-weight: 300; color: #f2fbff;
+    text-shadow: 0 0 16px rgba(0, 212, 255, 0.25); white-space: nowrap;
+  }
+  #top-strip .top-num.hot { color: var(--amber); }
+  #top-strip .top-sub { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .tile {
+    background: linear-gradient(180deg, rgba(13, 29, 46, 0.88), rgba(8, 19, 31, 0.88));
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    min-height: 110px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+  .tile.wide { grid-column: span 2; }
+  .tile h2 {
+    margin: 0 0 10px 0;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    font-weight: 600;
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.35);
+  }
+  .big {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    color: #f2fbff;
+    text-shadow: 0 0 16px rgba(0, 212, 255, 0.25);
+  }
+  .num, td, .mono {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  .sub { color: var(--muted); font-size: 13px; }
+  .unavail { color: var(--muted); font-style: italic; }
+  .ok { color: var(--green); }
+  .warn { color: var(--amber); }
+  .bad { color: var(--red); }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+  .dot.on { background: var(--green); box-shadow: 0 0 8px var(--green), 0 0 2px var(--green); }
+  .dot.off { background: var(--red); box-shadow: 0 0 6px rgba(255, 95, 107, 0.55); }
+  /* Honest health tones (v8): amber = parked by design, blue =
+     installed tool (not a service) — neither is a fault, so neither
+     is red. */
+  .dot.amber { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+  .dot.blue { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td, th { padding: 4px 6px; text-align: left; border-bottom: 1px solid rgba(13, 32, 48, 0.8); }
+  th { color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: 1px; }
+  ul { margin: 4px 0; padding-left: 16px; }
+  li { margin-bottom: 4px; font-size: 13px; }
+  li .t { color: var(--muted); }
+  .bar { height: 8px; background: #0d2030; border-radius: 4px; overflow: hidden; margin: 6px 0 2px 0; }
+  .bar > div { height: 100%; background: linear-gradient(90deg, #00a8cc, var(--cyan)); box-shadow: 0 0 8px rgba(0, 212, 255, 0.35); }
+  .bar > div.hot { background: linear-gradient(90deg, #cc7a1a, var(--amber)); box-shadow: 0 0 8px rgba(255, 180, 84, 0.35); }
+  #picture-img { width: 100%; border-radius: 8px; display: block; border: 1px solid rgba(0, 212, 255, 0.10); }
+  .logline { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 12px; white-space: pre-wrap; word-break: break-word; }
+  /* Conversation glow: the whole dashboard frame lights up while talking.
+     Cyan while HgX is speaking (listening), gold while Jarvis is speaking. */
+  body.listening { animation: glow-cyan 1.4s ease-in-out infinite; }
+  body.speaking { animation: glow-amber 1.4s ease-in-out infinite; }
+  @keyframes glow-cyan {
+    0%, 100% { box-shadow: inset 0 0 0 3px rgba(0,212,255,.7), inset 0 0 30px rgba(0,212,255,.25); }
+    50% { box-shadow: inset 0 0 0 3px rgba(0,212,255,1), inset 0 0 70px rgba(0,212,255,.55); }
+  }
+  @keyframes glow-amber {
+    0%, 100% { box-shadow: inset 0 0 0 3px rgba(255,180,84,.7), inset 0 0 30px rgba(255,180,84,.25); }
+    50% { box-shadow: inset 0 0 0 3px rgba(255,180,84,1), inset 0 0 70px rgba(255,180,84,.55); }
+  }
+  #conv-log { max-height: 260px; overflow-y: auto; font-size: 14px; }
+  .conv-line { margin-bottom: 9px; line-height: 1.45; }
+  .conv-line .who { font-weight: 700; letter-spacing: 1px; }
+  .conv-line.hgx .who { color: var(--cyan); }
+  .conv-line.jarvis .who { color: var(--amber); }
+  .conv-line .t { color: var(--muted); font-size: 11px; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+  .state-pill {
+    float: right; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--panel-border); border-radius: 10px; padding: 2px 8px;
+    background: rgba(0, 212, 255, 0.04);
+  }
+  .state-pill.listening { color: var(--cyan); border-color: var(--cyan); }
+  .state-pill.speaking { color: var(--amber); border-color: var(--amber); }
+  /* Media tile: the video plays in one quarter of the dashboard. */
+  .tile.media { grid-column: span 2; }
+  .media-video { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; display: block; border: 1px solid rgba(0, 212, 255, 0.12); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); }
+  .btn { background: linear-gradient(180deg, #10283d, #0b1c2c); color: var(--text); border: 1px solid var(--panel-border); border-radius: 6px; padding: 5px 12px; font-size: 12px; cursor: pointer; margin-right: 6px; transition: border-color .15s ease, color .15s ease, box-shadow .15s ease; }
+  .btn:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 10px rgba(0, 212, 255, 0.25); }
+  .btn.primary { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 8px rgba(0, 212, 255, 0.18); }
+  .btn:disabled { opacity: 0.4; cursor: default; }
+  .btn:disabled:hover { border-color: var(--panel-border); color: var(--text); }
+  .show-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid rgba(13, 32, 48, 0.8); }
+  /* The four show controls (Watch here / Play in VLC app / VLC app /
+     Episodes) are a wrapping flex row: on a narrow phone screen they
+     drop to a second line instead of running off the right edge where
+     the "VLC app" and "Episodes" buttons could not be reached. */
+  .show-btns { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+  .show-btns .btn { margin: 0; }
+  .slot-empty { border: 1px dashed var(--panel-border); border-radius: 8px; padding: 8px; color: var(--muted); text-align: center; margin: 5px 0; font-size: 13px; background: rgba(0, 212, 255, 0.03); }
+  .ep-list { margin: 2px 0 8px 14px; font-size: 13px; }
+  .ep-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 3px 0; border-bottom: 1px solid #0a1a28; }
+  /* Theater fallback: when the browser blocks requestFullscreen without a
+     click, the player covers the whole screen with CSS instead. */
+  .theater { position: fixed !important; inset: 0; z-index: 9999; background: #000; }
+  .theater video { width: 100% !important; height: 100% !important; }
+  /* In theater mode the media controls float over the bottom of the screen,
+     so pause / next / volume keep working by touch as well as by voice. */
+  #tile-media.theater-on #media-controls {
+    position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+    z-index: 10001; background: rgba(2,5,9,.88);
+    border: 1px solid var(--panel-border); border-radius: 10px; padding: 8px 10px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+  }
+  footer { margin-top: 14px; color: var(--muted); font-size: 12px; text-align: center; letter-spacing: 0.5px; }
+  /* v12 — Sports, much smaller: Bengals only, one compact line.
+     The tile is a single short row, not a multi-league block. */
+  #tile-sports { padding: 10px 12px; }
+  #tile-sports h2 { margin-bottom: 4px; }
+  #tile-sports #sports-body { font-size: 12px; line-height: 1.4; }
+  /* v12 — REA latest work: a highlighted entry at the top of the
+     REA tile, above the polled history. Static HTML (the JS only
+     rewrites #rea-body), so it survives the 3 s status poll. */
+  #rea-latest {
+    border-left: 3px solid var(--cyan); background: rgba(0, 212, 255, 0.05);
+    border-radius: 0 6px 6px 0; padding: 8px 10px; margin-bottom: 10px;
+    font-size: 13px; line-height: 1.5;
+  }
+  #rea-latest .rea-latest-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--cyan); font-weight: 600;
+  }
+  #rea-latest b { color: #f2fbff; }
+  /* One responsive dashboard: laptop, iPad, iPhone — not three pages. */
+  @media (max-width: 720px) {
+    body { padding: 8px; }
+    header { flex-wrap: wrap; }
+    header h1 { font-size: 18px; letter-spacing: 2px; }
+    #clock .time { font-size: 20px; }
+    .grid { grid-template-columns: 1fr; }
+    .tile.wide, .tile.media { grid-column: span 1; }
+    .tile { min-height: 0; }
+    .big { font-size: 24px; }
+    #media-controls { display: flex; flex-wrap: wrap; gap: 4px; }
+    .btn { margin: 0 4px 4px 0; }
+    /* v12: top strip stacks vertically on a phone so the two big
+       numbers never squeeze side by side. */
+    #top-strip { flex-direction: column; }
+    #top-strip .top-num { font-size: 24px; }
+  }
+  .live-pill { font-size: 12px; letter-spacing: 1px; color: #39ff88; text-align: right; margin-top: 2px; text-shadow: 0 0 10px rgba(57, 255, 136, 0.5); }
+  .live-pill.off { color: #ff5555; }
+  .live-pill.stale { color: var(--amber); }
+  /* Webcams beside the media player (v9 single feed, v11 dual, v12
+     stacked): BOTH live feeds sit in the media tile, next to the
+     video — no separate floating panel any more. The video takes the
+     wide share, the webcams a fixed column; on a narrow screen the
+     webcams wrap below the video instead of overflowing. The Logitech
+     C270 is the MAIN feed (large, on top); the laptop built-in is
+     secondary, stacked BELOW the C270 at full column width (v12 —
+     the v11 120 px picture-in-picture was too small to see, and a
+     dark feed in it was invisible on the dark page). If the C270 is
+     absent, the laptop is promoted to the main slot and the C270
+     feed is hidden. */
+  .media-top { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; margin: 8px 0; }
+  .media-player-wrap { flex: 1 1 0; min-width: 280px; }
+  .media-webcam-wrap { flex: 0 1 270px; min-width: 220px; }
+  .media-webcam-wrap .mw-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .media-webcam-wrap .mw-title { flex: 1; font-size: 12px; letter-spacing: 2px; color: var(--cyan); text-transform: uppercase; font-weight: 600; text-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+  .media-webcam-wrap .mw-state { font-size: 11px; letter-spacing: 1px; color: var(--green); text-shadow: 0 0 8px rgba(43, 255, 136, 0.45); }
+  .media-webcam-wrap .mw-state.off { color: var(--red); text-shadow: none; }
+  .media-webcam-wrap .mw-state.part { color: var(--amber); text-shadow: 0 0 8px rgba(255, 176, 32, 0.4); }
+  .mw-feed { position: relative; }
+  .mw-feed img { width: 100%; border-radius: 8px; display: block; background: #000; aspect-ratio: 4 / 3; border: 1px solid rgba(0, 212, 255, 0.12); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); }
+  .mw-feed .mw-tag { position: absolute; top: 6px; left: 6px; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--cyan); background: rgba(2, 5, 9, 0.72); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 4px; padding: 2px 6px; }
+  .mw-feed .mw-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 12px; text-align: center; padding: 8px; }
+  /* Secondary (laptop) feed (v12): stacked below the C270 at full
+     column width (~270 px) — clearly visible, not a 120 px PiP. A
+     dark laptop feed (closed lid) is still a live feed: it shows
+     dark, not an error — and the amber dark badge (see below) says
+     so plainly, so a dark feed reads as "live but dark" instead of
+     looking missing. */
+  .mw-feed.mw-sub { width: 100%; margin: 10px 0 0 0; }
+  .mw-feed.mw-sub img { border-color: rgba(0, 212, 255, 0.35); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7); }
+  .mw-sub-status { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  /* Dark-laptop badge (v12): shown over the laptop feed when its
+     mean frame luminance is below 12 (same threshold as the
+     standalone webcam app) — amber, so a dark feed is unmistakable. */
+  .mw-dark-badge {
+    position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%);
+    font-size: 11px; letter-spacing: 1px; color: var(--amber);
+    background: rgba(2, 5, 9, 0.85); border: 1px solid var(--amber);
+    border-radius: 4px; padding: 3px 8px; white-space: nowrap;
+    text-shadow: 0 0 8px rgba(255, 180, 84, 0.4);
+  }
+  /* C270 absent: the laptop is promoted to the main slot and the
+     C270 feed is hidden. (The laptop is already full width in v12,
+     so promotion only hides the C270 feed.) */
+  .media-webcam-wrap.mw-laptop-main #mw-feed-c270 { display: none; }
+  .media-webcam-wrap.mw-laptop-main #mw-feed-laptop { margin-top: 0; }
+  .media-webcam-wrap.mw-laptop-main .mw-sub-status { display: none; }
+  .media-webcam-wrap .mw-btns { display: flex; gap: 6px; margin-top: 6px; }
+  .media-webcam-wrap .mw-btns .btn { margin: 0; }
+  /* v12 — TOP FITS, PAGE SCROLLS. This reverses v8's "one screen, no
+     scroll": the top strip (CPU temp + GPU) is compact and fits in
+     the viewport, but the WHOLE page below it scrolls — the body no
+     longer hides overflow, the grid is no longer locked to 4 equal
+     rows, and tiles no longer scroll inside themselves. The grid
+     keeps its 6-column desktop placement; rows size to their
+     content and the page grows + scrolls naturally. Below 1200px
+     (tablet/phone) nothing changes — it scrolled there already.
+     v9: the webcam left the grid (it lives beside the media player
+     now), so Picture Brain spans the webcam's old cell in row 4. */
+  @media (min-width: 1200px) {
+    body { padding: 10px 12px 8px 12px; }
+    header { padding-bottom: 8px; margin-bottom: 10px; }
+    header h1 { font-size: 22px; }
+    #clock .time { font-size: 24px; }
+    #clock .date { font-size: 12px; }
+    .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+    .tile { padding: 12px 14px; }
+    .tile h2 { margin-bottom: 6px; }
+    #tile-conv { grid-column: 1 / 4; grid-row: 1; }
+    #tile-media { grid-column: 4 / 7; grid-row: 1 / 3; }
+    #tile-sports { grid-column: 1 / 4; grid-row: 2; }
+    #tile-system { grid-column: 1 / 3; grid-row: 3; }
+    #tile-models { grid-column: 3 / 5; grid-row: 3; }
+    #tile-health { grid-column: 5 / 6; grid-row: 3; }
+    #tile-weather { grid-column: 6 / 7; grid-row: 3; }
+    #tile-rea { grid-column: 1 / 2; grid-row: 4; }
+    #tile-proc { grid-column: 2 / 3; grid-row: 4; }
+    #tile-network { grid-column: 3 / 4; grid-row: 4; }
+    #tile-picture { grid-column: 4 / 6; grid-row: 4; }
+    #tile-audio { grid-column: 6 / 7; grid-row: 4; }
+    footer { margin-top: 8px; }
+    #conv-log { max-height: 132px; }
+    .media-video { max-height: 260px; width: auto; max-width: 100%; margin: 0 auto; }
+    #media-shows { max-height: 132px; overflow-y: auto; }
+    .tile .sub-block { margin-top: 8px; }
+    .tile .sub-block:first-child { margin-top: 0; }
+    .tile .sub-head { font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>J.A.R.V.I.S. <span>ACER &middot; KALI</span></h1>
+  <div id="clock">
+    <div class="time" id="clock-time">--:--:--</div>
+    <div class="date" id="clock-date">&nbsp;</div>
+    <div id="live-pill" class="live-pill">&#9679; LIVE</div>
+  </div>
+</header>
+<!-- v12 — TOP STRIP: CPU temperature + GPU, first thing on the page.
+     One compact row; the values are filled by renderStatus every 3 s. -->
+<div id="top-strip">
+  <div class="top-cell"><span class="top-label">CPU temp</span><span class="top-num" id="top-cpu-temp">&ndash;&ndash;</span><span class="top-sub" id="top-cpu-load">load &ndash;</span></div>
+  <div class="top-cell"><span class="top-label">GPU</span><span class="top-num" id="top-gpu-temp">&ndash;&ndash;</span><span class="top-sub" id="top-gpu-info">RTX 2060</span></div>
+</div>
+<div id="banner">Dashboard server unreachable — showing last data.</div>
+
+<div class="grid">
+  <div class="tile wide" id="tile-conv">
+    <h2>Conversation <span id="conv-state" class="state-pill">idle</span></h2>
+    <div id="conv-log"><span class="unavail">quiet &mdash; speak and the dashboard will type it out.</span></div>
+  </div>
+
+  <div class="tile wide media" id="tile-media">
+    <h2>Media &middot; TV &amp; Movies</h2>
+    <div id="media-now" class="sub">not playing</div>
+    <div class="media-top">
+      <div class="media-player-wrap">
+        <div id="media-player"><video id="media-video" class="media-video" controls preload="metadata" playsinline></video></div>
+      </div>
+      <div class="media-webcam-wrap" id="media-webcam">
+        <div class="mw-head">
+          <span id="mw-dot" class="dot on"></span>
+          <span class="mw-title">Webcams</span>
+          <span class="mw-state" id="mw-state">LIVE</span>
+        </div>
+        <div class="mw-feed mw-main" id="mw-feed-c270">
+          <img id="mw-img-c270" alt="Logitech C270 live feed">
+          <span class="mw-tag" id="mw-tag-c270">C270 &middot; main</span>
+          <div id="mw-msg-c270" class="mw-msg" style="display:none">C270 unavailable</div>
+        </div>
+        <div class="mw-feed mw-sub" id="mw-feed-laptop">
+          <img id="mw-img-laptop" alt="laptop built-in live feed">
+          <span class="mw-tag" id="mw-tag-laptop">laptop</span>
+          <span class="mw-dark-badge" id="mw-dark-laptop" style="display:none">dark &mdash; lid may be closed?</span>
+          <div id="mw-msg-laptop" class="mw-msg" style="display:none">laptop unavailable</div>
+        </div>
+        <div class="mw-sub-status" id="mw-laptop-status">laptop &middot; standby</div>
+        <div class="mw-btns">
+          <button class="btn" id="mw-hide" type="button">Hide</button>
+        </div>
+      </div>
+    </div>
+    <div id="media-controls" style="margin-bottom: 6px;">
+      <button class="btn" id="media-stop">Stop</button>
+      <button class="btn" id="media-prev" title="Previous episode">&#9198; Prev</button>
+      <button class="btn" id="media-pause-btn" title="Pause / resume">Pause</button>
+      <button class="btn" id="media-next" title="Next episode">Next &#9199;</button>
+      <button class="btn" id="media-vol-down" title="Volume down">Vol &minus;</button>
+      <button class="btn" id="media-vol-up" title="Volume up">Vol +</button>
+      <button class="btn" id="media-fs">Fullscreen</button>
+      <button class="btn" id="media-refresh">Refresh shows</button>
+      <button class="btn" id="mw-show" type="button" style="display:none">Show webcams</button>
+    </div>
+    <div id="media-shows"><span class="unavail">loading&hellip;</span></div>
+  </div>
+
+  <div class="tile wide" id="tile-sports">
+    <h2>Sports &middot; Scores</h2>
+    <div id="sports-body"><span class="unavail">loading&hellip;</span></div>
+  </div>
+
+  <div class="tile" id="tile-system">
+    <h2>System &middot; GPU / CPU / RAM</h2>
+    <div class="sub-block"><div class="sub-head">GPU &middot; RTX 2060</div><div id="gpu-body"><span class="unavail">loading&hellip;</span></div></div>
+    <div class="sub-block"><div class="sub-head">CPU &middot; Load &amp; Temps</div><div id="cpu-body"><span class="unavail">loading&hellip;</span></div></div>
+    <div class="sub-block"><div class="sub-head">RAM &middot; Disk</div><div id="ram-body"><span class="unavail">loading&hellip;</span></div></div>
+  </div>
+
+  <div class="tile wide" id="tile-models">
+    <h2>Models &middot; Ollama &amp; Router</h2>
+    <div class="sub-block"><div id="models-body"><span class="unavail">loading&hellip;</span></div></div>
+    <div class="sub-block"><div class="sub-head">Router &middot; Last Decisions</div><div id="router-body"><span class="unavail">loading&hellip;</span></div></div>
+  </div>
+
+  <div class="tile" id="tile-health">
+    <h2>Health &amp; Heat</h2>
+    <div id="health-body"><span class="unavail">loading&hellip;</span></div>
+  </div>
+
+  <div class="tile" id="tile-rea">
+    <h2>REA &middot; Status &amp; History</h2>
+    <!-- v12 — LATEST REA WORK (hardcoded 2026-11-08): the Logitech C270
+         breakdown just finished. Static HTML, outside #rea-body, so
+         the 3 s status poll (which rewrites #rea-body) never wipes it. -->
+    <div id="rea-latest">
+      <div class="rea-latest-label">Latest &middot; 2026-11-08</div>
+      <b>Logitech C270 breakdown</b> &mdash; 15 tools used &middot; 373 functions decompiled
+      (Ghidra, all OK, 0 failed) &middot; live USB pcap captured (6,037 packets, 233 MB,
+      83.0% isochronous, ~16.7/frame) &middot; Frida trace done &middot; ImHex pattern done &middot;
+      report 31K &middot; verdict: stock, clean UVC device, no hidden tricks.
+    </div>
+    <div id="rea-body"><span class="unavail">loading&hellip;</span></div>
+  </div>
+
+  <div class="tile" id="tile-proc">
+    <h2>What&rsquo;s Running</h2>
+    <div id="proc-body"><span class="unavail">loading&hellip;</span></div>
+  </div>
+
+  <div class="tile" id="tile-weather">
+    <h2>Weather &middot; Markham, ON</h2>
+    <div id="weather-body"><span class="unavail">loading&hellip;</span></div>
+  </div>
+
+  <div class="tile" id="tile-network">
+    <h2>Network &middot; Wi-Fi / Tailscale</h2>
+    <div class="sub-block"><div id="wifi-body"><span class="unavail">loading&hellip;</span></div></div>
+    <div class="sub-block"><div class="sub-head">Tailscale &middot; Tailnet</div><div id="tailscale-body"><span class="unavail">loading&hellip;</span></div></div>
+  </div>
+
+  <div class="tile" id="tile-picture">
+    <h2>Picture Brain</h2>
+    <div id="picture-body"><span class="unavail">loading&hellip;</span></div>
+    <img id="picture-img" alt="latest ComfyUI picture" style="display:none">
+  </div>
+
+  <div class="tile" id="tile-audio">
+    <h2>Audio &middot; mics</h2>
+    <div id="audio-body"><span class="unavail">loading&hellip;</span></div>
+  </div>
+</div>
+
+<footer>J.A.R.V.I.S. dashboard &middot; status every 3s &middot; conversation + now playing + media control every 1s &middot; media every 30s &middot; <span id="updated"></span></footer>
+
+<script>
+(function () {
+  "use strict";
+  var banner = document.getElementById("banner");
+
+  // What is currently shown, so the picture is only re-fetched when a
+  // new one appears (the old code re-downloaded it on every 3 s poll).
+  var lastPicName = null;
+  // Media player state shared between the video element, the
+  // now-playing poll and the fullscreen button.
+  var mediaMode = null;        // "here" | "vlc" | null
+  var mediaVideoError = null;  // HTML hint for the now-playing line while the current video is failed
+  var mediaVideoExt = "";      // extension of the video currently in the tile
+
+  function el(id) { return document.getElementById(id); }
+  function esc(s) {
+    // Escape quotes too: names and paths go into data-* attributes as
+    // well as text, and a folder name with a " in it would break the
+    // attribute (and the row) without it.
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+  function unavail(msg) { return '<span class="unavail">' + esc(msg || "unavailable") + "</span>"; }
+
+  function render(d) {
+    // Clock
+    el("clock-time").textContent = d.time.display;
+    el("clock-date").textContent = d.time.date + " · America/Toronto";
+    el("updated").textContent = "last update " + d.time.display + (d.snapshot_age_s != null ? " · snapshot " + d.snapshot_age_s + "s old" : "");
+    lastServerTime = new Date(d.time.iso);
+    lastServerAt = Date.now();
+    // Stale snapshot: the server answered, but its data is old (a
+    // collector is hung). Say so plainly instead of showing LIVE —
+    // a successful HTTP reply is not the same as fresh data.
+    var pill = el("live-pill");
+    if (d.snapshot_age_s != null && d.snapshot_age_s > 15) {
+      if (pill) { pill.textContent = "● STALE"; pill.classList.remove("off"); pill.classList.add("stale"); }
+      el("updated").textContent += " · snapshot stale";
+    } else if (pill) {
+      pill.classList.remove("stale");
+    }
+
+    // GPU
+    var g = d.gpu;
+    if (!g.available) {
+      el("gpu-body").innerHTML = unavail("no GPU detected (nvidia-smi unavailable)");
+    } else {
+      var pct = g.utilization_pct;
+      var hot = g.temp_c >= 80 ? " hot" : "";
+      el("gpu-body").innerHTML =
+        '<div class="big">' + pct + '% <span class="sub">util</span></div>' +
+        '<div class="bar"><div class="' + hot.trim() + '" style="width:' + Math.min(100, pct) + '%"></div></div>' +
+        '<div class="mono">' + esc(g.name) + '</div>' +
+        '<div>VRAM <span class="mono">' + g.mem_used_gb + ' / ' + g.mem_total_gb + ' GB</span> &middot; ' +
+        '<span class="mono">' + g.temp_c + '&deg;C</span> &middot; <span class="mono">' + g.power_w + ' W</span></div>';
+    }
+
+    // CPU
+    var c = d.cpu;
+    var tempTxt = (c.temp_c == null) ? "temp n/a" : c.temp_c + "&deg;C";
+    el("cpu-body").innerHTML =
+      '<div class="big"><span class="mono">' + (c.load_1 == null ? "?" : c.load_1.toFixed(2)) +
+      '</span> <span class="sub">load 1m &middot; ' + (c.cores || "?") + ' cores</span></div>' +
+      '<div>load 5m <span class="mono">' + (c.load_5 == null ? "?" : c.load_5.toFixed(2)) +
+      '</span> &middot; 15m <span class="mono">' + (c.load_15 == null ? "?" : c.load_15.toFixed(2)) + '</span></div>' +
+      '<div>CPU temp <span class="mono">' + tempTxt + '</span> &middot; uptime <span class="mono">' +
+      esc(c.uptime || "n/a") + '</span></div>';
+
+    // Top strip (v12): CPU temp + GPU — the first thing on the page.
+    // textContent, not innerHTML: no HTML to escape here.
+    var tsCpuTemp = el("top-cpu-temp"), tsCpuLoad = el("top-cpu-load"),
+        tsGpuTemp = el("top-gpu-temp"), tsGpuInfo = el("top-gpu-info");
+    if (tsCpuTemp) { tsCpuTemp.textContent = (c.temp_c == null) ? "n/a" : c.temp_c + "°C"; tsCpuTemp.classList.toggle("hot", c.temp_c != null && c.temp_c >= 80); }
+    if (tsCpuLoad) { tsCpuLoad.textContent = "load " + (c.load_1 == null ? "?" : c.load_1.toFixed(2)); }
+    if (tsGpuTemp) { tsGpuTemp.textContent = (!g.available) ? "n/a" : g.temp_c + "°C"; tsGpuTemp.classList.toggle("hot", g.available && g.temp_c >= 80); }
+    if (tsGpuInfo) { tsGpuInfo.textContent = (!g.available) ? "no GPU detected" : g.name + " · " + g.utilization_pct + "% util · " + g.mem_used_gb + "/" + g.mem_total_gb + " GB VRAM"; }
+
+    // RAM + disk
+    var m = d.memory;
+    var usedPct = (m.total_gb && m.used_gb != null) ? Math.round(100 * m.used_gb / m.total_gb) : 0;
+    var diskHtml = "";
+    (m.disks || []).forEach(function (dk) {
+      if (dk.unmounted) {
+        diskHtml += '<div>' + esc(dk.path) + ' <span class="mono">unmounted</span></div>';
+        return;
+      }
+      var dpct = Math.round(100 * dk.used_gb / dk.total_gb);
+      diskHtml += '<div>' + esc(dk.path) + ' <span class="mono">' + dk.used_gb + ' / ' + dk.total_gb +
+        ' GB (' + dpct + '%)</span></div>';
+    });
+    el("ram-body").innerHTML =
+      '<div class="big"><span class="mono">' + (m.used_gb == null ? "?" : m.used_gb) + ' / ' +
+      (m.total_gb == null ? "?" : m.total_gb) + ' GB</span></div>' +
+      '<div class="bar"><div style="width:' + usedPct + '%"></div></div>' +
+      '<div>RAM used <span class="mono">' + usedPct + '%</span> &middot; swap <span class="mono">' +
+      (m.swap_used_gb == null ? "?" : m.swap_used_gb) + ' / ' + (m.swap_total_gb == null ? "?" : m.swap_total_gb) +
+      ' GB</span></div>' + diskHtml;
+
+    // Models
+    var mo = d.models;
+    if (!mo.available) {
+      el("models-body").innerHTML = unavail("Ollama not responding");
+    } else if (!mo.models.length) {
+      el("models-body").innerHTML = unavail("no models in Ollama");
+    } else {
+      var rows = mo.models.map(function (mod) {
+        var dot = mod.loaded
+          ? '<span class="dot on"></span><span class="ok">online</span>'
+          : '<span class="dot off"></span><span class="bad">offline</span>';
+        var loc = mod.loaded ? esc(mod.location || "") + (mod.processor ? " · " + esc(mod.processor) : "") : "&mdash;";
+        // What is each model doing? Ollama does not expose the live prompt
+        // being processed, so the last routed task + loaded state is the
+        // best available signal.
+        var act = "&mdash;";
+        if (mod.loaded) {
+          act = "";
+          if (mod.until) { act += "until " + esc(mod.until); }
+          if (mod.last_task) { act += (act ? "<br>" : "") + '<span class="sub">last: ' + esc(String(mod.last_task).slice(0, 90)) + "</span>"; }
+          if (!act) { act = "&mdash;"; }
+        }
+        return "<tr><td>" + esc(mod.name) + "</td><td>" + esc(mod.size) + "</td><td>" + dot +
+          "</td><td>" + loc + "</td><td>" + act + "</td></tr>";
+      }).join("");
+      el("models-body").innerHTML =
+        '<table><tr><th>MODEL</th><th>SIZE</th><th>STATUS</th><th>RUNS ON</th><th>ACTIVITY</th></tr>' + rows + "</table>";
+    }
+
+    // Router — availability is the /health endpoint now (v8), not a
+    // log file: a router with no log file is online, not offline.
+    var r = d.models.router;
+    if (!r.available) {
+      el("router-body").innerHTML = unavail("router offline — /health not answering");
+    } else if (!r.tail.length) {
+      el("router-body").innerHTML = '<span class="ok">router online</span> <span class="sub">&mdash; no log file (set ROUTER_LOG to see last decisions)</span>';
+    } else {
+      el("router-body").innerHTML = r.tail.map(function (ln) {
+        return '<div class="logline">' + esc(ln) + "</div>";
+      }).join("");
+    }
+
+    // REA
+    var rea = d.rea;
+    var svc = d.processes.services;
+    // REA is a skill, not a service (v8): "installed", never "idle".
+    var reaState = (svc.rea && svc.rea.running)
+      ? '<span class="ok">REA running</span>'
+      : (rea.installed
+        ? '<span class="ok">REA installed</span> <span class="sub">&mdash; a skill, not a service</span>'
+        : '<span class="bad">REA not installed</span>');
+    var hist = "";
+    if (!rea.runs.length) {
+      hist = unavail("no REA runs yet — log one with log-rea.sh");
+    } else {
+      hist = "<ul>" + rea.runs.slice().reverse().map(function (run) {
+        return "<li><span class='t'>" + esc(run.time || "") + "</span> — <b>" + esc(run.target || "") +
+          "</b><br>" + esc(run.summary || "") + "</li>";
+      }).join("") + "</ul>";
+    }
+    el("rea-body").innerHTML = "<div>" + reaState + ' &middot; <span class="sub">' + rea.total +
+      " runs logged</span></div>" + hist;
+
+    // Processes
+    var labels = { ollama: "Ollama", router: "Little router", comfyui: "ComfyUI", rea: "REA", locally_uncensored: "Locally Uncensored" };
+    // Honest states (v8): "parked" for ComfyUI, "installed" for the
+    // tools — the server sends state + tone per service.
+    var toneDot = { green: "on", amber: "amber", blue: "blue", red: "off" };
+    var svcHtml = Object.keys(labels).map(function (k) {
+      var s = svc[k] || { running: false, count: 0, state: "down", tone: "red" };
+      var dotCls = toneDot[s.tone] || (s.running ? "on" : "off");
+      var extra = s.running ? " (" + s.count + ")" : "";
+      return '<div><span class="dot ' + dotCls + '"></span>' + labels[k] +
+        ' <span class="sub">' + esc(s.state || (s.running ? "running" : "down")) + extra + "</span></div>";
+    }).join("");
+    var topHtml = "";
+    if (d.processes.top_cpu.length) {
+      topHtml = '<table><tr><th>PID</th><th>PROC</th><th>CPU%</th><th>MEM%</th></tr>' +
+        d.processes.top_cpu.map(function (p) {
+          return "<tr><td>" + p.pid + "</td><td>" + esc(p.comm) + "</td><td>" + p.cpu_pct +
+            "</td><td>" + p.mem_pct + "</td></tr>";
+        }).join("") + "</table>";
+    }
+    el("proc-body").innerHTML = svcHtml + topHtml;
+
+    // Weather
+    var w = d.weather;
+    if (!w.available) {
+      el("weather-body").innerHTML = unavail("weather unavailable (offline?)");
+    } else {
+      el("weather-body").innerHTML =
+        '<div class="big">' + esc(w.temp_c) + '&deg;C <span class="sub">' + esc(w.desc || "") + "</span></div>" +
+        '<div>feels like <span class="mono">' + esc(w.feels_like_c) + '&deg;C</span> &middot; humidity ' +
+        '<span class="mono">' + esc(w.humidity) + '%</span> &middot; wind <span class="mono">' +
+        esc(w.wind_kmph) + ' km/h</span></div>';
+    }
+
+    // Wi-Fi
+    var wf = d.wifi;
+    if (!wf.available) {
+      el("wifi-body").innerHTML = unavail("Wi-Fi unavailable");
+    } else {
+      el("wifi-body").innerHTML =
+        '<div class="big">' + esc(wf.ssid || "—") + '</div>' +
+        '<div>signal <span class="mono">' + (wf.signal == null ? "n/a" : wf.signal + "%") +
+        '</span> &middot; IP <span class="mono">' + esc(wf.ip || "n/a") + "</span></div>";
+    }
+
+    // Sports — v12: Bengals only, one compact line. (v8 was already
+    // one line per league; v12 cuts it to the NFL/Bengals line alone
+    // so the tile is a fraction of its old height. To bring the other
+    // leagues back, render every league again instead of just `nfl`.)
+    var sp = d.sports;
+    if (!sp || !sp.available) {
+      el("sports-body").innerHTML = unavail("scores unavailable (offline?)");
+    } else {
+      var nfl = null;
+      (sp.leagues || []).forEach(function (lg) {
+        if (!nfl && lg.label && String(lg.label).toUpperCase().indexOf("NFL") === 0) { nfl = lg; }
+      });
+      if (!nfl && (sp.leagues || []).length) { nfl = (sp.leagues || [])[0]; }
+      var sHtml = "";
+      if (!nfl) {
+        sHtml = unavail("no leagues");
+      } else if (!nfl.available) {
+        sHtml = "<div><b>" + esc(nfl.label) + '</b> <span class="sub">&mdash; unavailable</span></div>';
+      } else {
+        var mt = nfl.my_team;
+        if (mt && mt.has_game) {
+          var sc = (mt.my_score != null && mt.opp_score != null)
+            ? ' <span class="mono">' + esc(mt.my_score) + " &ndash; " + esc(mt.opp_score) + "</span>" : "";
+          sHtml = "<div><b>" + esc(nfl.label) + "</b> &middot; " + esc(mt.name) + " vs " + esc(mt.opponent) + sc +
+            ' <span class="sub">' + esc(mt.status || "") + "</span></div>";
+        } else {
+          sHtml = "<div><b>" + esc(nfl.label) + "</b> &middot; " + esc(mt ? mt.name : nfl.label) +
+            ' <span class="sub">&mdash; ' + esc(nfl.note || "no game") + "</span></div>";
+        }
+      }
+      el("sports-body").innerHTML = sHtml;
+    }
+
+    // Tailscale — this node + online peers.
+    var ts = d.tailscale;
+    if (!ts || !ts.available) {
+      el("tailscale-body").innerHTML = unavail("Tailscale unavailable");
+    } else {
+      var tHtml = '<div><span class="dot ' + (ts.self.online ? "on" : "off") + '"></span><b>' +
+        esc(ts.self.name || "this node") + '</b> <span class="mono">' + esc(ts.self.ip || "") + "</span>" +
+        (ts.self.os ? ' <span class="sub">' + esc(ts.self.os) + "</span>" : "") + "</div>";
+      if (ts.peers && ts.peers.length) {
+        tHtml += '<div class="sub" style="margin-top:6px;">Peers</div>' + ts.peers.map(function (p) {
+          return '<div><span class="dot ' + (p.online ? "on" : "off") + '"></span>' + esc(p.name) +
+            ' <span class="mono">' + esc(p.ip || "") + "</span>" +
+            (p.os ? ' <span class="sub">' + esc(p.os) + "</span>" : "") + "</div>";
+        }).join("");
+      }
+      el("tailscale-body").innerHTML = tHtml;
+    }
+
+    // Health & Heat — a dot per subsystem, heat bars for the two temps.
+    var h = d.health;
+    if (!h) {
+      el("health-body").innerHTML = unavail("health data unavailable");
+    } else {
+      // Tones (v8): green online, amber parked, blue installed,
+      // red a real fault — and the state in words, so "parked" and
+      // "installed" never read as a red "offline".
+      var toneDot = { green: "on", amber: "amber", blue: "blue", red: "off" };
+      var dots = (h.items || []).map(function (it) {
+        var cls = toneDot[it.tone] || (it.ok ? "on" : "off");
+        return '<span style="display:inline-block;margin:0 10px 4px 0;"><span class="dot ' +
+          cls + '"></span>' + esc(it.name) + ' <span class="sub">' + esc(it.state || (it.ok ? "online" : "offline")) + "</span></span>";
+      }).join("");
+      function heatBar(label, temp) {
+        if (temp == null) { return "<div>" + label + ' <span class="sub">n/a</span></div>'; }
+        var col = temp < 60 ? "var(--green)" : temp <= 80 ? "var(--amber)" : "var(--red)";
+        return "<div>" + label + ' <span class="mono">' + temp + "&deg;C</span></div>" +
+          '<div class="bar"><div style="width:' + Math.min(100, temp) + '%;background:' + col + '"></div></div>';
+      }
+      el("health-body").innerHTML = dots + heatBar("GPU", h.gpu_temp_c) + heatBar("CPU", h.cpu_temp_c);
+    }
+
+    // Picture brain
+    var pic = d.picture;
+    var pimg = el("picture-img");
+    if (pic.available) {
+      el("picture-body").innerHTML = '<div><span class="' + (pic.comfyui_running ? "ok" : "warn") + '">' +
+        (pic.comfyui_running ? "ComfyUI running" : "ComfyUI parked") + "</span> &middot; <span class='sub'>" +
+        esc(pic.name) + "</span></div>";
+      pimg.style.display = "block";
+      // Reload only when a NEW picture appears. The old code re-fetched
+      // the whole image on every 3 s poll (the ?t= cache-buster always
+      // differed) — a needless download every 3 s, worst on the phone
+      // over the tailnet.
+      if (pic.name !== lastPicName) {
+        lastPicName = pic.name;
+        pimg.src = "/api/picture?t=" + encodeURIComponent(pic.name || "");
+      }
+    } else {
+      el("picture-body").innerHTML = "<div>" + (pic.comfyui_running
+        ? '<span class="ok">ComfyUI running</span> — no pictures yet'
+        : '<span class="warn">ComfyUI parked</span> — picture brain idle until the 9B gives the GPU back') + "</div>";
+      lastPicName = null;
+      pimg.style.display = "none";
+      pimg.removeAttribute("src");
+    }
+
+    // Webcams — beside the media player (v9 single feed, v11 dual).
+    // Honest state (v8): live while someone is viewing them, standby
+    // the rest of the time. Never a bare "idle" that reads like a
+    // fault: the cameras are ready, and the streams start on the
+    // first viewer. The head state pill is the summary; the laptop
+    // row carries its own state. A dark laptop feed (closed lid) is
+    // still live — it shows dark, not an error.
+    var wc = d.webcam || {};
+    var wcCams = wc.cams || {};
+    var c270Live = !!(wcCams.c270 && wcCams.c270.streaming);
+    var lapLive = !!(wcCams.laptop && wcCams.laptop.streaming);
+    // Watchdog (v11): a feed that was loaded but the server now
+    // reports as not streaming died mid-stream — the <img> will not
+    // say so itself. mwSyncFromStatus notices and fails it (with
+    // retry + laptop promotion); a feed that never loaded is left
+    // alone, so page load is not a false failure.
+    if (typeof mwSyncFromStatus === "function") { mwSyncFromStatus(wcCams); }
+    var mwState = el("mw-state");
+    if (mwState) {
+      if (c270Live && lapLive) {
+        mwState.textContent = "LIVE";
+        mwState.classList.remove("off", "part");
+      } else if (c270Live || lapLive) {
+        mwState.textContent = "1 LIVE";
+        mwState.classList.remove("off");
+        mwState.classList.add("part");
+      } else {
+        mwState.textContent = "standby";
+        mwState.classList.remove("part");
+        mwState.classList.add("off");
+      }
+    }
+    var mwDot = el("mw-dot");
+    if (mwDot) { mwDot.classList.toggle("off", !(c270Live || lapLive)); }
+    // The laptop row status: live / standby / unavailable (the
+    // unavailable wording is set by the feed's own error handler
+    // and left alone here, so the two never fight).
+    var lapStatus = el("mw-laptop-status");
+    if (lapStatus && !mwLaptopFailed) {
+      lapStatus.textContent = lapLive ? "laptop \u00b7 live"
+        : "laptop \u00b7 standby \u2014 live when viewed";
+    }
+    // The main feed tag follows the fallback: when the C270 is down
+    // the laptop is promoted to main (see the feed handlers below).
+    var tagC270 = el("mw-tag-c270");
+    if (tagC270 && !mwC270Failed) { tagC270.innerHTML = "C270 &middot; main"; }
+
+    // Audio — microphones (active / idle / not connected) + speaker + cameras
+    var au = d.audio;
+    var camHtml = "";
+    (d.cameras.cameras || []).forEach(function (cm) {
+      var cdot = cm.present ? '<span class="dot on"></span>' : '<span class="dot off"></span>';
+      camHtml += "<div>" + cdot + esc(cm.name) + ' <span class="sub">' + esc(cm.priority) +
+        " &middot; " + esc(cm.device) + " &middot; " + (cm.present ? "present" : "not connected") + "</span></div>";
+    });
+    if (!au.available) {
+      el("audio-body").innerHTML = unavail("pactl unavailable — audio state unknown") + camHtml;
+    } else {
+      // "ready", not "idle" (v8): a present mic that is not capturing
+      // is available and waiting — the voice loop is parked, so
+      // nothing is capturing, and that is normal, not a fault.
+      var micHtml = au.mics.map(function (mc) {
+        var dot = mc.state === "active"
+          ? '<span class="dot on"></span><span class="ok">ACTIVE</span>'
+          : mc.state === "ready"
+          ? '<span class="dot blue"></span><span class="ok">READY</span> <span class="sub">&mdash; available, not capturing</span>'
+          : '<span class="dot off"></span><span class="bad">not connected</span>';
+        return "<div>" + dot + " " + esc(mc.name) + ' <span class="sub">' + esc(mc.priority) + "</span></div>";
+      }).join("");
+      var spk = au.speaker ? '<div>Speaker <span class="mono">' + esc(au.speaker.name) + "</span>" +
+        (au.speaker.volume != null ? ' &middot; vol <span class="mono">' + Math.round(au.speaker.volume * 100) + "%</span>" : "") + "</div>" : "";
+      el("audio-body").innerHTML = micHtml + spk + camHtml;
+    }
+  }
+
+  function poll() {
+    fetch("/api/status", { cache: "no-store" })
+      .then(function (resp) { if (!resp.ok) { throw new Error("HTTP " + resp.status); } return resp.json(); })
+      .then(function (d) { banner.style.display = "none"; var p = el("live-pill"); if (p) { p.textContent = "● LIVE"; p.classList.remove("off"); } render(d); })
+      .catch(function () {
+        banner.style.display = "block";
+        var p = el("live-pill");
+        if (p) { p.textContent = "● OFFLINE"; p.classList.add("off"); p.classList.remove("stale"); }
+        // The footer otherwise keeps showing the last good update as
+        // if it were current. Say the server is unreachable, and when
+        // the last good update was.
+        var last = lastServerTime
+          ? ("last update " + pad2(lastServerTime.getHours()) + ":" + pad2(lastServerTime.getMinutes()) + ":" + pad2(lastServerTime.getSeconds()))
+          : "no update yet";
+        el("updated").textContent = "server unreachable — " + last;
+      });
+  }
+
+  // Local 1s clock tick: the watch moves every second, not just on the 3s poll.
+  var lastServerTime = null, lastServerAt = 0;
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+  function tickClock() {
+    if (!lastServerTime) { return; }
+    // Do not keep ticking on a dead server: the clock would look live
+    // while the data behind it is old. Freeze at the last server time
+    // once no poll has succeeded for 10 s; the LIVE pill already says
+    // OFFLINE.
+    if (Date.now() - lastServerAt > 10000) { return; }
+    var t = new Date(lastServerTime.getTime() + (Date.now() - lastServerAt));
+    el("clock-time").textContent = pad2(t.getHours()) + ":" + pad2(t.getMinutes()) + ":" + pad2(t.getSeconds());
+  }
+  setInterval(tickClock, 1000);
+
+  // Live conversation: 1s poll, separate from the 3s status poll.
+  var convLog = el("conv-log");
+  var lastConvKey = "";
+  function renderVoice(v) {
+    // Glow: cyan while HgX is talking, gold while Jarvis is talking.
+    document.body.classList.toggle("listening", v.state === "listening");
+    document.body.classList.toggle("speaking", v.state === "speaking");
+    var pill = el("conv-state");
+    pill.textContent = v.state;
+    pill.className = "state-pill " + v.state;
+    var key = JSON.stringify(v.events);
+    if (key === lastConvKey) { return; }
+    lastConvKey = key;
+    if (!v.events.length) {
+      convLog.innerHTML = '<span class="unavail">quiet &mdash; speak and the dashboard will type it out.</span>';
+      return;
+    }
+    convLog.innerHTML = v.events.map(function (ev) {
+      var cls = (ev.speaker === "Jarvis") ? "jarvis" : "hgx";
+      var t = "";
+      if (ev.time) {
+        var m = String(ev.time).match(/T(\d\d:\d\d:\d\d)/);
+        t = m ? m[1] : String(ev.time);
+      }
+      return '<div class="conv-line ' + cls + '"><span class="who">' + esc(ev.speaker) + '</span> ' +
+        '<span class="t">' + esc(t) + '</span><br>' + esc(ev.text) + '</div>';
+    }).join("");
+    convLog.scrollTop = convLog.scrollHeight;
+  }
+  function pollVoice() {
+    fetch("/api/voice", { cache: "no-store" })
+      .then(function (resp) { if (!resp.ok) { throw new Error("HTTP " + resp.status); } return resp.json(); })
+      .then(renderVoice)
+      .catch(function () { /* keep the last transcript; glow stays as-is */ });
+  }
+
+  // ---- Media: the dashboard tile IS the player ("Watch here"). ----
+  // "Play in VLC app" opens the separate VLC app instead, and Stop kills
+  // every VLC process by name, so no audio can survive it.
+  var mediaVideo = el("media-video");
+  var mediaPlayer = el("media-player");
+  var mediaData = { mounted: false, shows: [], pinned: [], slots: [], recent: [] };
+  var lastMediaKey = "";
+  var mediaQueue = [];   // [{name, path}] for the show being watched in-page
+  var mediaQi = 0;
+  var fsApplied = false; // last fullscreen flag value applied by this page
+
+  function mediaShowByName(name) {
+    // Case-insensitive: the drive folders are "THE SOPRANOS" but the
+    // pinned name is "The Sopranos" — they are the same show.
+    var want = String(name).toLowerCase();
+    for (var i = 0; i < mediaData.shows.length; i++) {
+      if (mediaData.shows[i].name.toLowerCase() === want) { return mediaData.shows[i]; }
+    }
+    return null;
+  }
+  function vlcUrl(path) {
+    // Tap on iOS: opens the episode in the VLC app. The in-page player
+    // stays the default for mp4/webm/mov; Safari cannot play .mkv in a
+    // <video> element, which is why this link matters.
+    return "vlc://" + window.location.origin + "/api/stream?path=" + encodeURIComponent(path);
+  }
+  function postJson(url, body) {
+    return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  }
+  function showRow(name) {
+    var show = mediaShowByName(name);
+    var n = show ? show.episodes.length : 0;
+    var avail = show ? "" : ' <span class="unavail">(not on drive)</span>';
+    var dis = show ? "" : "disabled";
+    var vlcLink = (show && show.episodes.length)
+      ? ' <a class="btn" href="' + esc(vlcUrl(show.episodes[0].path)) + '">VLC app</a>' : "";
+    return '<div class="show-row"><span><b>' + esc(name) + '</b> <span class="sub">' + n +
+      ' episodes</span>' + avail + '</span><span class="show-btns">' +
+      '<button class="btn primary" data-watch-show="' + esc(name) + '" ' + dis + '>Watch here</button>' +
+      '<button class="btn" data-play-show="' + esc(name) + '" ' + dis + '>Play in VLC app</button>' + vlcLink +
+      '<button class="btn" data-toggle-show="' + esc(name) + '" ' + dis + '>Episodes</button></span></div>' +
+      '<div class="ep-list" data-eps="' + esc(name) + '" style="display:none"></div>';
+  }
+  function episodeListHtml(show) {
+    return show.episodes.map(function (ep) {
+      return '<div class="ep-row"><span>' + esc(ep.name) + '</span><span class="show-btns">' +
+        '<button class="btn primary" data-watch-ep="' + esc(ep.path) + '" data-show="' + esc(show.name) + '">Watch here</button>' +
+        '<button class="btn" data-play-ep="' + esc(ep.path) + '">Play in VLC app</button>' +
+        ' <a class="btn" href="' + esc(vlcUrl(ep.path)) + '">VLC app</a></span></div>';
+    }).join("");
+  }
+  var allShowsOpen = false; // the full library stays collapsed until asked for (v8)
+  function recentRow(r) {
+    return '<div class="ep-row"><span><b>' + esc(r.show || "") + "</b> &mdash; " + esc(r.episode || "") +
+      (r.time ? ' <span class="sub">' + esc(r.time) + "</span>" : "") + '</span><span class="show-btns">' +
+      '<button class="btn primary" data-watch-ep="' + esc(r.path) + '" data-show="' + esc(r.show || "") + '">Watch here</button>' +
+      '<button class="btn" data-play-ep="' + esc(r.path) + '">Play in VLC app</button></span></div>';
+  }
+  function renderMedia() {
+    var box = el("media-shows");
+    if (!mediaData.mounted) {
+      box.innerHTML = '<span class="unavail">Media drive unmounted &mdash; mount it first.</span>';
+      return;
+    }
+    var seen = {};
+    function markSeen(n) { seen[String(n).toLowerCase()] = true; }
+    function isSeen(n) { return !!seen[String(n).toLowerCase()]; }
+    var html = '<div class="sub" style="margin: 6px 0 2px 0;">Pinned shows</div>';
+    (mediaData.pinned || []).forEach(function (name) {
+      if (isSeen(name)) { return; }
+      markSeen(name);
+      html += showRow(name);
+    });
+    (mediaData.slots || []).forEach(function (s) {
+      if (s) {
+        if (isSeen(s)) { return; }
+        markSeen(s);
+        html += showRow(s);
+      } else {
+        html += '<div class="slot-empty">+ add show &mdash; edit media-slots.json</div>';
+      }
+    });
+    // Recent — the last few plays, newest first (v8). The server
+    // tracks them in recent.json, so they survive a restart.
+    var recent = mediaData.recent || [];
+    if (recent.length) {
+      html += '<div class="sub" style="margin: 8px 0 2px 0;">Recent</div>';
+      recent.forEach(function (r) { html += recentRow(r); });
+    }
+    // The full library lives behind a collapsed toggle (v8): the tile
+    // shows the pinned shows, the slots and Recent — not all 43 shows.
+    var others = mediaData.shows.filter(function (s) { return !isSeen(s.name); });
+    if (others.length) {
+      html += '<div style="margin-top:8px;"><button class="btn" data-toggle-all-shows="1">All shows (' + others.length + ") " + (allShowsOpen ? "&#9662;" : "&#9656;") + "</button></div>";
+      html += '<div data-all-shows="1" style="display:' + (allShowsOpen ? "block" : "none") + '">';
+      others.forEach(function (s) { html += showRow(s.name); });
+      html += "</div>";
+    }
+    if (mediaData.stale) {
+      html += '<div class="sub" style="margin-top:6px;">showing last good list — the drive rescan failed, retrying&hellip;</div>';
+    }
+    box.innerHTML = html;
+  }
+  function renderMediaIfChanged() {
+    var key = JSON.stringify(mediaData);
+    if (key === lastMediaKey) { return; }
+    lastMediaKey = key;
+    renderMedia();
+  }
+  function toggleEpisodes(name) {
+    var divs = document.querySelectorAll("[data-eps]");
+    for (var i = 0; i < divs.length; i++) {
+      if (divs[i].getAttribute("data-eps") === name) {
+        var div = divs[i];
+        if (div.style.display === "none") {
+          var show = mediaShowByName(name);
+          if (show) { div.innerHTML = episodeListHtml(show); }
+          div.style.display = "block";
+        } else {
+          div.style.display = "none";
+        }
+      }
+    }
+  }
+  function stopInPageVideo() {
+    // Silence the tile's own player: pause, drop the source, empty the
+    // queue. Used before VLC-app play (no double audio) and whenever the
+    // server says nothing is playing any more.
+    mediaVideoError = null;
+    mediaVideo.pause();
+    mediaVideo.removeAttribute("src");
+    mediaVideo.load();
+    mediaQueue = [];
+  }
+  // A newer play supersedes an older one still waiting on its POST:
+  // only the latest answer may set the video source.
+  var playSeq = 0;
+  function playInPage(ep, queue, qi) {
+    // queue/qi is the playlist the click offered (a whole show, or
+    // one episode). It is adopted ONLY once the server says the file
+    // plays here: a click on a file the browser cannot play must
+    // not poison the queue — the old code committed the new queue
+    // before the probe answered, so when the previous video ended
+    // the tile auto-advanced into the unplayable show's first
+    // episode and showed ITS hint for a file nobody picked.
+    var seq = ++playSeq;
+    mediaVideoError = null; // a new video is being tried
+    mediaVideoExt = (ep.path.split(".").pop() || "").toLowerCase();
+    // Ask the server FIRST (v8): it probes the file's codecs, and a
+    // file the browser cannot play (DivX-era MPEG-4, AC3/DTS sound,
+    // .avi) comes back needs_vlc instead of being recorded as
+    // "playing" while the tile sits black or silent. Only a playable
+    // file ever reaches the <video> element. This also keeps the
+    // server's now-playing in step when the video auto-advances at
+    // the end of an episode — the old code never told it.
+    postJson("/api/play", { mode: "here", path: ep.path, loop: true })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (seq !== playSeq) { return; }
+        if (d.needs_vlc) {
+          // Silence the tile and let the hint stand on its own: the
+          // previous show must not keep playing behind a hint about
+          // a different file, and the ended handler must not
+          // auto-advance into this show.
+          stopInPageVideo();
+          mediaVideoError = '<span class="warn">' + esc(d.hint || "This browser can't play this file in the page — use the VLC app.") + "</span>";
+          el("media-now").innerHTML = mediaVideoError;
+          return;
+        }
+        if (d.error) {
+          stopInPageVideo();
+          mediaVideoError = '<span class="bad">' + esc(d.error) + "</span>";
+          el("media-now").innerHTML = mediaVideoError;
+          return;
+        }
+        if (queue) { mediaQueue = queue; mediaQi = (typeof qi === "number") ? qi : 0; }
+        mediaVideo.src = "/api/stream?path=" + encodeURIComponent(ep.path);
+        var p = mediaVideo.play();
+        if (p && p.catch) { p.catch(function () { /* browser wants a click first */ }); }
+        el("media-now").innerHTML = 'Now playing: <b>' + esc(ep.name) + '</b> <span class="sub">(in dashboard &middot; looping)</span>';
+      })
+      .catch(function () {
+        if (seq !== playSeq) { return; }
+        el("media-now").innerHTML = '<span class="bad">could not reach the dashboard server.</span>';
+      });
+  }
+  function watchShow(name) {
+    var show = mediaShowByName(name);
+    if (!show || !show.episodes.length) { return; }
+    var queue = show.episodes.slice();
+    playInPage(queue[0], queue, 0);
+  }
+  function watchEpisode(path, showName) {
+    var show = mediaShowByName(showName);
+    if (!show) {
+      // A Recent entry whose show is no longer in the scan (the drive
+      // changed, or the episode sits outside a show folder): play the
+      // single episode on its own instead of doing nothing.
+      var name = path.split("/").pop();
+      var queue = [{ name: name, path: path }];
+      playInPage(queue[0], queue, 0);
+      return;
+    }
+    var queue = show.episodes.slice();
+    var qi = 0;
+    for (var i = 0; i < queue.length; i++) {
+      if (queue[i].path === path) { qi = i; break; }
+    }
+    playInPage(queue[qi], queue, qi);
+  }
+  mediaVideo.addEventListener("ended", function () {
+    if (!mediaQueue.length) { return; }
+    mediaQi = (mediaQi + 1) % mediaQueue.length; // loop continuously, back to the start
+    playInPage(mediaQueue[mediaQi]);
+  });
+  // iOS (iPhone/iPad): the "VLC app" link plays the show ON this device,
+  // in the VLC app. "Play in VLC app" is the server-side button — it plays
+  // the show on the LAPTOP, not here. Never point an iPhone user at the
+  // laptop button as the way to watch on the phone.
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  mediaVideo.addEventListener("error", function () {
+    if (!mediaVideo.getAttribute("src")) { return; } // cleared on purpose
+    // The browser itself cannot play this file in a <video> element
+    // (.avi, and .mkv whose sound is AC3/DTS) — say so plainly instead
+    // of leaving a black tile, and name the right way to watch it.
+    // Anything else that fails to load (.mp4, .webm, .mov) is almost
+    // certainly the server or the file, not the codec, so say that
+    // instead of pointing at VLC. The hint is kept in mediaVideoError
+    // (and not overwritten by the now-playing poll) until the user
+    // picks another episode or presses Stop.
+    var hint;
+    if (mediaVideoExt === "avi" || mediaVideoExt === "mkv") {
+      hint = isIOS
+        ? 'This browser can\'t play this file in the page &mdash; tap the "VLC app" link to play it on this device (VLC app required). "Play in VLC app" plays it on the laptop instead.'
+        : 'This browser can\'t play this file in the page &mdash; tap the "VLC app" link to play it on this device, or "Play in VLC app" to play it on the laptop.';
+    } else {
+      hint = 'Could not load this file in the page &mdash; the dashboard server may be unreachable, or the file may have moved. Try "Refresh shows", or "Play in VLC app".';
+    }
+    mediaVideoError = '<span class="warn">' + hint + '</span>';
+    el("media-now").innerHTML = mediaVideoError;
+  });
+  // It loads after all (a transient network wobble): clear the error.
+  mediaVideo.addEventListener("loadedmetadata", function () {
+    mediaVideoError = null;
+  });
+  function playShowVLC(name) {
+    // VLC-app play: the tile's own player must be silent first, or the
+    // show plays twice (once in the tile, once in the app).
+    stopInPageVideo();
+    postJson("/api/play", { show: name, loop: true })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.playing) {
+          el("media-now").innerHTML = 'Now playing: <b>' + esc(d.playing) + '</b> <span class="sub">(in VLC app &middot; looping)</span>';
+        } else if (d.error) {
+          stopInPageVideo();
+          el("media-now").innerHTML = '<span class="bad">' + esc(d.error) + '</span>';
+        }
+      })
+      .catch(function () { el("media-now").innerHTML = '<span class="bad">could not reach the dashboard server.</span>'; });
+  }
+  function playEpisodeVLC(path) {
+    stopInPageVideo();
+    postJson("/api/play", { path: path, loop: true })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.playing) {
+          el("media-now").innerHTML = 'Now playing: <b>' + esc(d.playing) + '</b> <span class="sub">(in VLC app &middot; looping)</span>';
+        } else if (d.error) {
+          stopInPageVideo();
+          el("media-now").innerHTML = '<span class="bad">' + esc(d.error) + '</span>';
+        }
+      })
+      .catch(function () {});
+  }
+  function exitFs() {
+    if (!document.fullscreenElement) { return; }
+    try {
+      var ex = document.exitFullscreen();
+      if (ex && ex.catch) { ex.catch(function () {}); }
+    } catch (e) { /* older browser */ }
+  }
+  function setTheater(on) {
+    // Theater mode: the player covers the screen AND the media controls
+    // float over the bottom of it, so touch still works while fullscreen.
+    mediaPlayer.classList.toggle("theater", on);
+    el("tile-media").classList.toggle("theater-on", on);
+  }
+  function applyFullscreen(on, mode) {
+    if (on === fsApplied) { return; }
+    fsApplied = on;
+    if (!on) {
+      setTheater(false);
+      exitFs();
+      return;
+    }
+    if (mode !== "here") { return; } // VLC handles its own fullscreen (server relaunched it)
+    var p = mediaVideo.requestFullscreen ? mediaVideo.requestFullscreen() : null;
+    if (p && p.catch) { p.catch(function () { setTheater(true); }); }
+    else if (!document.fullscreenElement) { setTheater(true); }
+  }
+  function fmtTime(s) {
+    if (!isFinite(s) || s < 0) { return "0:00"; }
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var ss = (sec < 10 ? "0" : "") + sec;
+    return h ? h + ":" + (m < 10 ? "0" : "") + m + ":" + ss : m + ":" + ss;
+  }
+  function pollNowPlaying() {
+    fetch("/api/now-playing", { cache: "no-store" })
+      .then(function (resp) { if (!resp.ok) { throw new Error("HTTP " + resp.status); } return resp.json(); })
+      .then(function (np) {
+        mediaMode = np.mode || null;
+        if (typeof np.paused === "boolean") { mediaPaused = np.paused; updatePauseBtn(); }
+        if (np.playing) {
+          if (mediaVideoError) {
+            // The browser could not play this file: keep the hint up
+            // instead of claiming it is playing (the server still
+            // records mode "here", so without this the 1 s poll would
+            // overwrite the hint within a second of it appearing).
+            el("media-now").innerHTML = mediaVideoError;
+          } else {
+            var where = (np.mode === "vlc") ? "in VLC app" : "in dashboard";
+            var ep = (np.episode && np.episode !== np.playing) ? " &mdash; " + esc(np.episode) : "";
+            var when = "";
+            if (np.mode === "here" && isFinite(mediaVideo.duration) && mediaVideo.duration > 0) {
+              when = " &middot; " + fmtTime(mediaVideo.currentTime) + " / " + fmtTime(mediaVideo.duration);
+            }
+            el("media-now").innerHTML = 'Now playing: <b>' + esc(np.playing) + '</b>' + ep +
+              ' <span class="sub">(' + where + (np.loop ? " &middot; looping" : "") +
+              (np.paused ? " &middot; paused" : "") + when + ")</span>";
+          }
+        } else {
+          mediaVideoError = null; // nothing playing — clear any stale error
+          el("media-now").textContent = "not playing";
+          // The server says nothing is playing — make the tile agree,
+          // even if Stop came from another tab or the voice loop. A
+          // video left running here would keep playing with no line
+          // saying so, which is the bug that started this fix.
+          if (mediaVideo.getAttribute("src")) { stopInPageVideo(); }
+        }
+        applyFullscreen(!!np.fullscreen, np.mode);
+      })
+      .catch(function () { /* keep the last now-playing line */ });
+  }
+
+  // ---- Media voice controls: "next episode", "pause", "volume up" ----
+  // The voice loop calls POST /api/media-control; for the in-page player
+  // the server writes the action to media-control.json and this page
+  // applies it on the next 1 s poll. The same path is used by the
+  // on-screen buttons below, so voice and touch can never disagree.
+  // Polling runs on timers, so controls keep working in fullscreen and
+  // theater mode too.
+  var lastControlSeq = 0;
+  var mediaPaused = false;
+
+  function applyControlAction(a) {
+    if (!a || !a.action) { return; }
+    if (a.action === "next" || a.action === "previous") {
+      var show = a.show ? mediaShowByName(a.show) : null;
+      if (show && show.episodes.length) {
+        mediaQueue = show.episodes.slice();
+        var idx = (typeof a.index === "number") ? a.index : 0;
+        if (idx < 0) { idx = 0; }
+        if (idx >= mediaQueue.length) { idx = mediaQueue.length - 1; }
+        mediaQi = idx;
+        playInPage(mediaQueue[mediaQi]);
+      } else if (a.path) {
+        mediaQueue = [{ name: a.episode || a.path, path: a.path }];
+        mediaQi = 0;
+        playInPage(mediaQueue[0]);
+      }
+      return;
+    }
+    if (a.action === "pause") { mediaVideo.pause(); mediaPaused = true; updatePauseBtn(); return; }
+    if (a.action === "resume") {
+      var p = mediaVideo.play();
+      if (p && p.catch) { p.catch(function () {}); }
+      mediaPaused = false; updatePauseBtn();
+      return;
+    }
+    if (a.action === "volume-up" || a.action === "volume-down") {
+      if (typeof a.volume === "number") {
+        mediaVideo.volume = Math.max(0, Math.min(1, a.volume));
+      }
+    }
+  }
+  function handleControlFlag(a) {
+    if (!a || typeof a.seq !== "number" || a.seq === lastControlSeq) { return; }
+    if (typeof a.ts === "number" && (Date.now() / 1000 - a.ts) > 15) { return; } // stale flag
+    lastControlSeq = a.seq;
+    applyControlAction(a);
+    postJson("/api/media-control", { action: "clear" }).catch(function () {});
+  }
+  function pollControl() {
+    fetch("/api/media-control", { cache: "no-store" })
+      .then(function (resp) { if (!resp.ok) { throw new Error("HTTP " + resp.status); } return resp.json(); })
+      .then(function (d) { if (d.pending) { handleControlFlag(d.pending); } })
+      .catch(function () { /* keep polling next second */ });
+  }
+  function updatePauseBtn() {
+    el("media-pause-btn").textContent = mediaPaused ? "Resume" : "Pause";
+  }
+  // The <video> has native controls too: if HgX pauses or resumes
+  // from those, keep the dashboard Pause/Resume button in step. Only
+  // when a video is actually loaded — after Stop the src is gone and
+  // the server (not the element) owns the paused state.
+  mediaVideo.addEventListener("pause", function () {
+    if (mediaVideo.getAttribute("src")) { mediaPaused = true; updatePauseBtn(); }
+  });
+  mediaVideo.addEventListener("play", function () {
+    if (mediaVideo.getAttribute("src")) { mediaPaused = false; updatePauseBtn(); }
+  });
+  function controlButton(action) {
+    postJson("/api/media-control", { action: action })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.error && !d.playing) {
+          el("media-now").innerHTML = '<span class="bad">' + esc(d.error) + '</span>';
+          return;
+        }
+        if (typeof d.paused === "boolean") { mediaPaused = d.paused; updatePauseBtn(); }
+        if (d.control) { handleControlFlag(d.control); } // apply at once, don't wait for the poll
+        if (d.playing) {
+          el("media-now").innerHTML = 'Now playing: <b>' + esc(d.playing) + '</b>' +
+            (d.paused ? ' <span class="warn">(paused)</span>' : "");
+        }
+      })
+      .catch(function () { /* server unreachable; the 1 s polls will retry */ });
+  }
+  el("media-prev").addEventListener("click", function () { controlButton("previous"); });
+  el("media-next").addEventListener("click", function () { controlButton("next"); });
+  el("media-pause-btn").addEventListener("click", function () { controlButton(mediaPaused ? "resume" : "pause"); });
+  el("media-vol-up").addEventListener("click", function () { controlButton("volume-up"); });
+  el("media-vol-down").addEventListener("click", function () { controlButton("volume-down"); });
+  function pollMedia(force) {
+    fetch("/api/media", { cache: "no-store" })
+      .then(function (resp) { if (!resp.ok) { throw new Error("HTTP " + resp.status); } return resp.json(); })
+      .then(function (d) {
+        mediaData = d;
+        if (force) { lastMediaKey = ""; }
+        renderMediaIfChanged();
+      })
+      .catch(function () { el("media-shows").innerHTML = '<span class="unavail">could not reach the dashboard server.</span>'; });
+  }
+  el("media-shows").addEventListener("click", function (e) {
+    var t = e.target;
+    if (t.hasAttribute("data-toggle-all-shows")) { allShowsOpen = !allShowsOpen; renderMedia(); }
+    else if (t.hasAttribute("data-play-show")) { playShowVLC(t.getAttribute("data-play-show")); }
+    else if (t.hasAttribute("data-watch-show")) { watchShow(t.getAttribute("data-watch-show")); }
+    else if (t.hasAttribute("data-toggle-show")) { toggleEpisodes(t.getAttribute("data-toggle-show")); }
+    else if (t.hasAttribute("data-play-ep")) { playEpisodeVLC(t.getAttribute("data-play-ep")); }
+    else if (t.hasAttribute("data-watch-ep")) { watchEpisode(t.getAttribute("data-watch-ep"), t.getAttribute("data-show")); }
+  });
+  el("media-stop").addEventListener("click", function () {
+    // ONE Stop: the server kills every VLC process by name AND clears
+    // the state; the tile's own player is silenced here too. It works
+    // even if the VLC window was already closed.
+    postJson("/api/stop", {}).catch(function () {});
+    stopInPageVideo();
+    el("media-now").textContent = "not playing";
+  });
+  el("media-fs").addEventListener("click", function () {
+    if (document.fullscreenElement || mediaPlayer.classList.contains("theater")) {
+      postJson("/api/fullscreen", { on: false }).catch(function () {});
+      setTheater(false);
+      exitFs();
+      fsApplied = false;
+    } else {
+      postJson("/api/fullscreen", { on: true }).catch(function () {});
+      fsApplied = true;
+      // In VLC mode the separate app handles its own fullscreen (the
+      // server relaunched it); fullscreening the tile's empty video
+      // here would only show a black screen over it.
+      if (mediaMode === "vlc") { return; }
+      var p = mediaVideo.requestFullscreen ? mediaVideo.requestFullscreen() : null;
+      if (p && p.catch) { p.catch(function () { setTheater(true); }); }
+      else if (!document.fullscreenElement) { setTheater(true); }
+    }
+  });
+  el("media-refresh").addEventListener("click", function () { pollMedia(true); });
+  // Leaving fullscreen with Esc settles the flag so it can be turned on again.
+  document.addEventListener("fullscreenchange", function () {
+    if (!document.fullscreenElement && fsApplied) {
+      fsApplied = false;
+      setTheater(false);
+      postJson("/api/fullscreen", { on: false }).catch(function () {});
+    }
+  });
+
+  // LIVE webcams, beside the media player (v9 single feed, v11 dual).
+  // MJPEG streams in plain <img> tags — the format iOS Safari plays,
+  // so the feeds are live on iPhone/iPad too. The Logitech C270 is
+  // the MAIN feed (large, on top); the laptop built-in is secondary
+  // (stacked below at full column width, v12 — the v11 120 px PiP
+  // was too small to see). Each
+  // feed asks for its OWN camera (?nofallback=1): a failed camera
+  // reads "unavailable" instead of silently showing the other camera
+  // in both feeds. If the C270 is absent, the laptop is promoted to
+  // the main slot (the fallback). A dark laptop feed (closed lid) is
+  // still a live feed — it shows dark, not an error (and v12 shows
+  // an amber dark badge over it, so dark reads as live-but-dark).
+  var mwHidden = false;
+  var mwC270Failed = false, mwLaptopFailed = false;
+  var mwC270Loaded = false, mwLaptopLoaded = false;
+  var mwRetryC270 = null, mwRetryLaptop = null;
+  // Last moment each feed was (re)started or loaded a frame. The
+  // watchdog (below) only fails a feed that has been quiet for
+  // longer than the snapshot staleness window — see mwSyncFromStatus.
+  var mwC270LastLive = 0, mwLaptopLastLive = 0;
+  var mwWrap = el("media-webcam"), mwShowBtn = el("mw-show"),
+      mwDot = el("mw-dot"), mwState = el("mw-state"),
+      mwImgC270 = el("mw-img-c270"), mwMsgC270 = el("mw-msg-c270"),
+      mwImgLaptop = el("mw-img-laptop"), mwMsgLaptop = el("mw-msg-laptop"),
+      mwFeedLaptop = el("mw-feed-laptop"), mwLapStatus = el("mw-laptop-status"),
+      mwTagLaptop = el("mw-tag-laptop");
+  function mwStreamUrl(cam) {
+    return "/api/webcam-stream?cam=" + cam + "&nofallback=1&t=" + Date.now();
+  }
+  function mwSetHead() {
+    // Head pill + dot from the two feeds' own state (the status poll
+    // refreshes the same text from the server every 3 s; this keeps
+    // it truthful between polls).
+    if (mwC270Loaded && mwLaptopLoaded) {
+      mwState.textContent = "LIVE";
+      mwState.classList.remove("off", "part");
+    } else if (mwC270Loaded || mwLaptopLoaded) {
+      mwState.textContent = "1 LIVE";
+      mwState.classList.remove("off");
+      mwState.classList.add("part");
+    } else {
+      mwState.textContent = "standby";
+      mwState.classList.remove("part");
+      mwState.classList.add("off");
+    }
+    mwDot.classList.toggle("off", !(mwC270Loaded || mwLaptopLoaded));
+  }
+  function mwPromoteLaptop(on) {
+    // C270 absent: the laptop takes the main slot (full width).
+    mwWrap.classList.toggle("mw-laptop-main", !!on);
+    if (on) { mwTagLaptop.innerHTML = "laptop &middot; main"; }
+    else { mwTagLaptop.textContent = "laptop"; }
+  }
+  function mwStartC270() {
+    if (mwHidden) { return; }
+    mwMsgC270.style.display = "none";
+    mwC270LastLive = Date.now();
+    mwImgC270.src = mwStreamUrl("c270");
+  }
+  function mwStartLaptop() {
+    if (mwHidden) { return; }
+    mwMsgLaptop.style.display = "none";
+    mwLaptopLastLive = Date.now();
+    mwImgLaptop.src = mwStreamUrl("laptop");
+  }
+  function mwFailC270() {
+    mwC270Loaded = false;
+    mwC270Failed = true;
+    mwImgC270.removeAttribute("src");  // stop the failed stream
+    mwMsgC270.style.display = "flex";
+    mwMsgC270.textContent = "C270 unavailable";
+    mwSetHead();
+    // Fallback: if the laptop is live, it takes the main slot.
+    if (mwLaptopLoaded) { mwPromoteLaptop(true); }
+    if (mwRetryC270) { return; }
+    mwRetryC270 = setTimeout(function () {
+      mwRetryC270 = null;
+      mwC270Failed = false;
+      mwStartC270();
+    }, 5000);
+  }
+  function mwFailLaptop() {
+    mwLaptopLoaded = false;
+    mwLaptopFailed = true;
+    mwImgLaptop.removeAttribute("src");
+    mwMsgLaptop.style.display = "flex";
+    mwMsgLaptop.textContent = "laptop unavailable";
+    if (mwLapStatus) { mwLapStatus.textContent = "laptop \u00b7 unavailable"; }
+    mwSetHead();
+    if (mwRetryLaptop) { return; }
+    mwRetryLaptop = setTimeout(function () {
+      mwRetryLaptop = null;
+      mwLaptopFailed = false;
+      mwStartLaptop();
+    }, 5000);
+  }
+  // Watchdog, driven by the status poll (every 3 s): an <img> does
+  // NOT fire an error when a live MJPEG stream simply stops — the
+  // browser keeps the last frame and stays quiet. So a feed that was
+  // loaded but the server now reports as not streaming has died
+  // mid-stream, and this is what notices it. The guard (a feed must
+  // have loaded at least once) keeps the first seconds after page
+  // load — before the first frame arrives — from reading as a
+  // failure. The grace (8 s since the feed was last started or
+  // loaded a frame) covers the snapshot staleness: the server's
+  // status snapshot is up to ~3 s old and the poll runs every 3 s,
+  // so a healthy feed that has just (re)connected can still read as
+  // "not streaming" for up to ~6 s. Without the grace the watchdog
+  // kills a healthy reconnect and the feed oscillates fail/recover.
+  // The error event (a 503 on (re)connect) still fails a feed at
+  // once — the grace only gates this poll-driven path.
+  var MW_WATCHDOG_GRACE_MS = 8000;
+  function mwSyncFromStatus(cams) {
+    if (mwHidden) { return; }
+    if (cams) {
+      if (mwC270Loaded && cams.c270 && !cams.c270.streaming
+          && Date.now() - mwC270LastLive > MW_WATCHDOG_GRACE_MS) { mwFailC270(); }
+      if (mwLaptopLoaded && cams.laptop && !cams.laptop.streaming
+          && Date.now() - mwLaptopLastLive > MW_WATCHDOG_GRACE_MS) { mwFailLaptop(); }
+    }
+  }
+  // Dark-laptop badge (v12): the laptop feed is often dark (closed lid /
+  // dark ceiling) and a small black feed is invisible on a dark page.
+  // Sample the live frame to a small offscreen canvas (same-origin, so
+  // readback is allowed) and show an amber "dark" badge when the mean
+  // luminance is below 12 — the same threshold the standalone webcam
+  // app uses. Guarded: any failure just hides the badge, never breaks
+  // the page. Only runs while the laptop feed has loaded a frame.
+  var mwDarkBadge = el("mw-dark-laptop");
+  var mwDarkCanvas = document.createElement("canvas");
+  function mwCheckLaptopDark() {
+    if (!mwDarkBadge) { return; }
+    if (!mwLaptopLoaded || !mwImgLaptop) { mwDarkBadge.style.display = "none"; return; }
+    try {
+      var w = 32, h = 24;
+      mwDarkCanvas.width = w; mwDarkCanvas.height = h;
+      var ctx = mwDarkCanvas.getContext("2d");
+      if (!ctx) { return; }
+      ctx.drawImage(mwImgLaptop, 0, 0, w, h);
+      var data = ctx.getImageData(0, 0, w, h).data;
+      var sum = 0, n = w * h;
+      for (var i = 0; i < data.length; i += 4) { sum += (data[i] + data[i + 1] + data[i + 2]) / 3; }
+      mwDarkBadge.style.display = (sum / n < 12) ? "block" : "none";
+    } catch (e) { mwDarkBadge.style.display = "none"; }
+  }
+  setInterval(mwCheckLaptopDark, 5000);
+  mwImgC270.addEventListener("load", function () {
+    mwC270Loaded = true;
+    mwC270Failed = false;
+    mwC270LastLive = Date.now();
+    mwMsgC270.style.display = "none";
+    if (mwRetryC270) { clearTimeout(mwRetryC270); mwRetryC270 = null; }
+    mwPromoteLaptop(false);  // C270 is back: it is main again
+    mwSetHead();
+  });
+  mwImgC270.addEventListener("error", mwFailC270);
+  mwImgLaptop.addEventListener("load", function () {
+    mwLaptopLoaded = true;
+    mwLaptopFailed = false;
+    mwLaptopLastLive = Date.now();
+    mwMsgLaptop.style.display = "none";
+    if (mwRetryLaptop) { clearTimeout(mwRetryLaptop); mwRetryLaptop = null; }
+    if (mwLapStatus) { mwLapStatus.textContent = "laptop \u00b7 live"; }
+    if (mwC270Failed && mwLaptopLoaded) { mwPromoteLaptop(true); }
+    mwSetHead();
+  });
+  mwImgLaptop.addEventListener("error", mwFailLaptop);
+  el("mw-hide").addEventListener("click", function () {
+    mwHidden = true;
+    mwC270Loaded = false;
+    mwLaptopLoaded = false;
+    mwWrap.style.display = "none";
+    mwShowBtn.style.display = "inline-block";
+    if (mwRetryC270) { clearTimeout(mwRetryC270); mwRetryC270 = null; }
+    if (mwRetryLaptop) { clearTimeout(mwRetryLaptop); mwRetryLaptop = null; }
+    mwImgC270.removeAttribute("src");  // dropping the src closes the streams
+    mwImgLaptop.removeAttribute("src");
+  });
+  mwShowBtn.addEventListener("click", function () {
+    mwHidden = false;
+    mwShowBtn.style.display = "none";
+    mwWrap.style.display = "block";
+    mwC270Failed = false;
+    mwLaptopFailed = false;
+    mwStartC270();
+    mwStartLaptop();
+  });
+  mwStartC270();
+  mwStartLaptop();
+
+  poll();
+  setInterval(poll, 3000);
+  pollVoice();
+  setInterval(pollVoice, 1000);
+  pollMedia();
+  setInterval(pollMedia, 30000);
+  pollNowPlaying();
+  setInterval(pollNowPlaying, 1000);
+  pollControl();
+  setInterval(pollControl, 1000);
+  updatePauseBtn();
+})();
+</script>
+</body>
+</html>
