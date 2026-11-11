@@ -32,6 +32,7 @@ environment. Without a key, a canned DEMO brief is served -- everything
 works end to end before any key is wired.
 """
 
+import html as _html
 import hmac
 import ipaddress
 import json
@@ -942,6 +943,9 @@ def jarvis_ask(text):
             f"try a simpler request, {OPERATOR_NAME}.", actions)
 
 
+def _e(v):
+    """SAF-02: every value from the mesh, Grok or the environment is text, never markup."""
+    return _html.escape(str(v), quote=True)
 def _allowed_hosts():
     """Hostnames this process will answer. Compared case-insensitively.
 
@@ -1030,12 +1034,12 @@ class Handler(BaseHTTPRequestHandler):
                 mq = dict(_state["mqtt"])
             if pos:
                 pos_html = "<p>Last GPS position: %.4f, %.4f <i>(%s)</i></p>" % (
-                    pos["lat"], pos["lon"], pos["ts"])
+                    pos["lat"], pos["lon"], _e(pos["ts"]))
             else:
                 pos_html = "<p><i>No GPS position yet.</i></p>"
             if mq["ok"]:
                 mesh_html = "<p>Mesh link: <b>UP</b> (node %s, region %s, last rx %s)</p>" % (
-                    mq["watch_id"], mq["region"], mq["last_rx"])
+                    _e(mq["watch_id"]), _e(mq["region"]), _e(mq["last_rx"]))
             else:
                 mesh_html = ("<p>Mesh link: <i>down</i> -- is paho-mqtt installed and "
                              "has the watch sent anything yet?</p>")
@@ -1043,10 +1047,10 @@ class Handler(BaseHTTPRequestHandler):
                            "{\"text\": \"...\"} -- Ollama <code>%s</code>, model "
                            "<code>%s</code>, %d tools, VLC remote: %s (port %d), "
                            "file roots: %s</p>"
-                           % (OLLAMA_URL, OLLAMA_MODEL, len(JARVIS_TOOLS),
+                           % (_e(OLLAMA_URL), _e(OLLAMA_MODEL), len(JARVIS_TOOLS),
                               ("<b>UP</b>" if _vlc_ping() else "<i>down</i>"),
                               VLC_HTTP_PORT,
-                              ", ".join(JARVIS_ROOTS) or "(none configured)"))
+                              _e(", ".join(JARVIS_ROOTS) or "(none configured)")))
             html = """<html><head><title>Bracelet PoC Orchestrator</title></head>
 <body style="font-family:sans-serif;max-width:640px;margin:40px auto">
 <h1>Bracelet PoC Orchestrator</h1>
@@ -1058,10 +1062,10 @@ class Handler(BaseHTTPRequestHandler):
 %s
 <p><a href="/brief">/brief</a> (JSON) &middot; verdicts append to <code>verdicts.log</code> &middot; tool calls append to <code>actions.log</code></p>
 </body></html>""" % (
-                started, n, "SET" if key_set else "NOT SET (canned demo)",
+                _e(started), n, "SET" if key_set else "NOT SET (canned demo)",
                 mesh_html, pos_html, jarvis_html,
                 ("<p><b>%s</b> (id %s)</p><p>%s</p>" % (
-                    brief["title"], brief["id"], brief["body"]))
+                    _e(brief["title"]), _e(brief["id"]), _e(brief["body"])))
                 if brief else "<p><i>No card yet -- poll /brief.</i></p>")
             body = html.encode("utf-8")
             self.send_response(200)
