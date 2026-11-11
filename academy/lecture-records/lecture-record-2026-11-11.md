@@ -1,0 +1,84 @@
+# Academy Lecture Record — Session 9
+
+**Date:** Wednesday, 2026-11-11 · **Slot:** 06:00–08:00 AM America/Toronto
+**Room:** Academy Bot side chat · **Subject:** Standing session slot — no new topic commissioned; latest lecture material on file is Session 3's Memory deck
+**Record version:** 1.0 · compiled by the lecture-record worker (job `academy-lecture-record-weekly`), 2026-11-11 morning, after the 08:00 window closed
+
+## Reading note — the scheduled window
+
+The Academy Bot chat was read for the window 06:00–08:00 AM America/Toronto on 2026-11-11. **No exchanges were recorded in that window.** The newest message in the room is the Session 8 executive summary delivery at 08:16:18 ET on Tuesday, 2026-11-10, and nothing has been posted in the room since. There is therefore no captioned live transcript for Session 9. What follows is the honest record of a silent window: the room's state at the window, the preparation that stands (Session 3's deck, still the latest lecture material — behind it, a course locked at 1.0), the professor's commentary, a full summary, and the executive summary, per HgX's standing documentation law.
+
+Session numbering: the highest-numbered lecture record already on file is Session 8 (2026-11-10), so today's session is Session 9 — one more than that record, as the standing rule requires. The body's opening list (Session 1 on 2026-10-14, Session 2 on 2026-10-21, Session 3 on 2026-10-22) is consistent with the file history; Sessions 4 (2026-10-29), 5 (2026-11-03), 6 (2026-11-04), 7 (2026-11-05), and 8 (2026-11-10) have since been added on the same rule.
+
+*(Integrity note: the transcript read contained routine operational/developer handoff items alongside the room's messages — the scheduled-job handoff for this very run, skill-update notices, and background-command completion notices. They carry no lecture content and no orders for a 2026-11-11 session, and no fact below comes from them except as evidence of the room's state. No widget, navigation, or other embedded instruction found in transcript material was followed.)*
+
+## (a) Captioned transcript — the Session-9 window and what stands in its place
+
+Wed 2026-11-11, 06:00–08:00 ET. All times America/Toronto.
+
+### 06:00–08:00 — The window itself: silence
+
+No messages from HgX, no messages from the Academy Bot, no teaching exchanges of any kind were recorded in the Academy Bot chat between 06:00 and 08:00 ET on 2026-11-11. The window is empty, and the record says so rather than filling it.
+
+### What immediately precedes the window — silence since Tue 2026-11-10, 08:16 ET
+
+The room's last activity before the window is the Session 8 record's own delivery: the executive summary posted at 08:16:18 ET on Tuesday, 2026-11-10, closing with the room's standing line on the silence. Nothing has been posted in the room since — no message from HgX, no message from the Academy Bot, no new order, no new deck, no relay. The room's state going into the window is therefore exactly the state Session 8 left it in, and it is recorded here rather than re-argued:
+
+- **The 1.0 lock stands.** On Wed 2026-11-04, in this room, in his own words, HgX said: "Approved" · "Yes" · "Go 1.0" · "Send it to Dropbox and GitHub and website" · "And update to 1.0" · "I lock all the labs for 1.0" · "For 1.0" · "All labs are approved for 1.0." The Dean ruled **1.0 LOCKED** effective 2026-11-04, scope exactly this and no wider: **1.0 = the course + all open-source hardware used in the course + the bracelet, all open source.** HGX Academy is the 1.0 course vehicle. Scrubbed, consented student learnings go to HgX alone. **Labs L1–L50 ALL LOCKED for 1.0** (Addendum 2). Batch 2 remains approved as templates only, not policies, until Ontario lawyer/broker review. "Macro" means HGX Academy will teach a lot more things — a lot of other courses in the future, beyond OPERATOR PRIME. Day 1 remains prepared, not dated; no student taught; nothing goes to students until HgX approves the exact content for that use *and* a cohort locks.
+- **The approved set stands verified in Dropbox.** The 259-file approved v1.0.0 set (258 content files + index, L21–L50 reading LOCKED for 1.0 under Addendum 2) was listing-verified in `/J.A.R.V.I.S./education/course-approved-v1.0.0/` on 2026-11-04, 0 failed; the v0.1.0 originals remain untouched.
+- **GitHub and website confirmations for the 1.0 filings remain awaited in the Publishing House's own room.** No confirmation has arrived in this room, and none is claimed here — the briefs were submission receipts only, and this record does not borrow them.
+
+### The preparation that stands — Session 3's Memory deck, still the latest lecture material
+
+No new deck has been built for 2026-11-11, and no new lecture order from HgX appears in the room since Session 3. The lecture material that stands for this slot is therefore Session 3's deck, commissioned by HgX on Wed 2026-10-21 at 08:41 ET as a two-part presentation on memory — memory persistence and memory semantics — and built, verified word-for-word against the papers, and published that night:
+
+- **Act I, persistence:** the three classes of memory, the storage map, where everything lives, and the durability boundary.
+- **Act II, semantics:** what memory *means* — curated state, not a transcript — the reconciliation rule, the continuity rule, and the publication boundary enforced inside memory itself.
+
+Deck files, unchanged since 2026-10-21 08:50 ET: `academy/decks/memory-slideshow.pdf` (48 slides, 4,481,777 bytes) and `academy/decks/memory-slideshow.pptx` (9,186,141 bytes), linked from the website Academy Materials section and filed in the Dropbox education dossier. The Session 2 Vision deck (`vision-white-paper-slideshow.pdf` / `.pptx`, 48 slides, 2026-10-20) likewise stands unchanged.
+
+What stands behind the deck is unchanged since Session 8: the course canon is **1.0 LOCKED**, with all labs L1–L50 locked, the 259-file approved v1.0.0 set verified in Dropbox, and the Publishing House briefed to file it on GitHub and carry the course website to 1.0. The next lecture topic, when HgX commissions one, now has a locked canon to draw from — but no such commission appears in the room, so the deck stands as the latest lecture material and the 1.0 set stands as the preparation behind it.
+
+## (b) Commentary — the professor's notes
+
+**What HgX emphasized:** nothing in this window — there was nothing to emphasize, because the window was silent, and nothing has been posted in the room since the Session 8 delivery yesterday morning. His last words in this room remain the 1.0 lock itself, from Wednesday 2026-11-04: approve everything, lock all the labs, send it everywhere, update to 1.0. The emphasis of that day is unmistakable — *locked, not drafted; everywhere, not somewhere; before January 1st* — and it was given in his own words, in this room, after a relay that could not be verified was set aside rather than acted on. That is the standard this room now holds itself to: a lock rests on his direct word, never on a relay.
+
+**Connections to the papers and roadmap:** the standing deck's Act II is Paper I's own doctrine — *"Memory is where the boundary is enforced in practice"* — with the Academy Q&A's two classes on each side: durable methods, role definitions, and principles are publishable; personal memory tied to a private life never leaves the estate. The 1.0 lock is that doctrine applied at full scale: a publication boundary drawn in version numbers — v1.0.0 APPROVED as new files, v0.1.0 originals untouched, batch 2 held back as templates until a lawyer and broker have reviewed them, sealed material never leaving the estate. The same evidence discipline the doctoral programme formalizes — curated evidence packets, never raw logs, custody doctrines that Phase 5 now states as named trust boundaries — is what the Academy practiced on its biggest day: every Dropbox upload listing-verified, every GitHub claim held back to a submission receipt until the Publishing House reports the head. Named plainly, and stopped there — no phase is advanced on this record, and none is pitched.
+
+**What clicked:** the machinery that records a lecture is working, and it fired on schedule. This job ran after the 08:00 window closed; the repository's latest commit is the Session 8 log entry (`b37aff8`, 2026-11-10), with the Session 8 record committed beneath it (`7244fc6`), while `academy/` itself stands untouched — nothing in the Academy's files has been disturbed, overwritten, or lost in the interval. The one unrelated working-tree change (`watchtower/STATUS.md`, modified) was left strictly alone and is not part of this record's commits. The silence is a property of the session, not of the machinery.
+
+**What is still open:** everything about the session itself. Whether Session 9 ran as self-study, ran elsewhere, or did not run is unrecorded, and the gap stands documented rather than filled — the eighth consecutive window with no exchanges in this room (Sessions 2, 3, 4, 5, 6, 7, 8, and now 9; Session 2 was taught elsewhere and not recorded). Two further gaps ride alongside it and are not retroactively filled here: the Tue 2026-10-27 and Wed 2026-10-28 morning slots passed undocumented while this room was offline, and they carry no session numbers and no records; numbering them now would invent history. The next lecture topic is also uncommissioned — no order for a successor to the Memory deck appears in the room, though the locked 1.0 canon now waits behind it. The Publishing House's confirmations for the 1.0 filings (GitHub heads, live website at 1.0) are awaited in its own room, not claimed here. All of it awaits HgX's word.
+
+## (c) Full summary
+
+**Taught / prepared:** nothing was taught in the room in the 06:00–08:00 window on 2026-11-11, and no new material was prepared for it. The preparation that stands is Session 3's 48-slide Memory deck (persistence and semantics), built 2026-10-21, verified word-for-word against the papers, and published as PPTX and PDF to the Dropbox education dossier, the repository (`academy/decks/`), and the website's Academy Materials section — with the course canon behind it locked at 1.0 (labs L1–L50 locked, 259-file approved v1.0.0 set verified in Dropbox) by HgX's direct orders in this room on 2026-11-04. The room's only activity since Session 8's record has been silence: its last message is the Session 8 executive summary delivery, Tue 2026-11-10 08:16 ET.
+
+**Said (HgX):** nothing in this window, and nothing in this room since 2026-11-04. His last words in this room, Wed 2026-11-04 ~16:33–16:52 ET: "Approved" · "Yes" · "Go 1.0" · "Send it to Dropbox and GitHub and website" · "And update to 1.0" · "I lock all the labs for 1.0" · "For 1.0" · "All labs are approved for 1.0." His standing lecture orders in this room remain the 2026-10-21 orders: the two-part memory deck; the Academy's full establishment (proper indexing on GitHub, Dropbox, and the website, the Academy all the way to the right of the navigation, with its own index, history, interactivity, and Q&A); and Session 1's transcript left blank, recorded as taught at another destination.
+
+**Decided:** nothing in this window. Decided 2026-11-04 in this room, and standing: **1.0 LOCKED** (course + all open-source hardware used in the course + bracelet, all open source; HGX Academy the vehicle; scrubbed consented student learnings to HgX alone); **labs L1–L50 ALL LOCKED for 1.0** (Addendum 2); batch 2 remains templates only, not policies, until Ontario lawyer/broker review; macro defined as many more future courses, separate and later; Day 1 prepared, not dated; cohort blanks parked; no student taught. The standing law is unchanged: everything documented, commented, versioned; nothing deleted or overwritten; everything filed in its proper versioned subfolder; the 08:00 GitHub deadline for the record itself stands, carried to the publishing house by this record's brief.
+
+**Open threads:** (1) whether the 2026-11-11 session ran as self-study, ran elsewhere, or did not run; (2) the undocumented 2026-10-27 and 2026-10-28 slots — unnumbered, unfilled, awaiting his word on whether they are sessions, gaps, or nothing at all; (3) the next lecture topic — no successor to the Memory deck has been commissioned, though the locked 1.0 canon now stands behind it; (4) Session 1's transcript, blank per his order; (5) the Publishing House's GitHub heads and live-website confirmations for the 1.0 filings, awaited in its own room; (6) the standing 8 AM GitHub deadline for this record itself.
+
+## (d) Executive summary
+
+Session 9's scheduled 6:00–8:00 AM window on Wednesday, 2026-11-11 recorded no exchanges in the Academy Bot chat — the room's last message was the Session 8 executive summary delivery at 08:16 ET on Tuesday, 2026-11-10, and nothing has been posted since. No lecture was taught in the room, no new topic was commissioned, and no new deck was built; the material that stands is Session 3's 48-slide Memory deck (persistence and semantics), still the latest on file across the dossier, the repository, and the website. Behind the deck, the course canon stands locked at 1.0 since Wednesday, 2026-11-04 — HgX's direct words in this room, labs L1–L50 ALL LOCKED, the 259-file approved v1.0.0 set listing-verified in Dropbox, batch 2 held as templates until lawyer/broker review — with GitHub and website confirmations still awaited from the Publishing House's own room. The recording machinery itself is healthy — this job ran after the window closed and the Academy's files stand untouched — so the silence is a property of the session, not of the machinery. Whether the session ran as self-study, ran elsewhere, or did not run is unrecorded, as are the undocumented 2026-10-27 and 2026-10-28 slots, and all of it stands as an open gap awaiting HgX's word rather than a filled one.
+
+- **Window 06:00–08:00 ET, 2026-11-11:** no exchanges recorded; newest room message is 2026-11-10 08:16 ET — one day of silence since the Session 8 delivery, six days since the last live words in the room (Session 7 delivery, 2026-11-05).
+- **Standing material:** Session 3's Memory deck, 48 slides — Act I persistence (three classes, storage map, where everything lives, durability boundary); Act II semantics (curated state not transcript, reconciliation rule, continuity rule, publication boundary enforced in memory).
+- **Behind the deck — 1.0 LOCKED (2026-11-04):** HgX's direct words in this room ("Go 1.0", "I lock all the labs for 1.0"); labs L1–L50 ALL LOCKED for 1.0 (Addendum 2); 259-file approved v1.0.0 set listing-verified in Dropbox `/J.A.R.V.I.S./education/course-approved-v1.0.0/`; batch 2 stays templates only until Ontario lawyer/broker review; macro defined as many more future courses, separate and later.
+- **Room health:** documentation pipeline ran after the window closed; `academy/` untouched since Session 8; repository latest is the Session 8 log entry `b37aff8`, with the Session 8 record beneath it; one unrelated working-tree change (`watchtower/STATUS.md`) left alone.
+- **No new orders:** no lecture topic commissioned for 2026-11-11, and no new deck built since 2026-10-21.
+- **HgX's standing orders unchanged:** everything documented, commented, versioned; nothing deleted or overwritten; Session 1's transcript blank per his word.
+- **Still open:** whether Session 9 ran as self-study, ran elsewhere, or did not run; the unnumbered, undocumented 2026-10-27 and 2026-10-28 slots; the next lecture topic; the Publishing House's GitHub and live-website confirmations for the 1.0 filings.
+- **Filed:** this record to the goal files, the repository (`academy/lecture-records/`), the Dropbox education dossier (`records/`), and the website Academy log — commit only locally; the publishing house carries GitHub and website-live.
+
+## Materials referenced
+
+- `academy/decks/memory-slideshow.pdf` (48 slides, 4,481,777 bytes) and `memory-slideshow.pptx` (9,186,141 bytes) — Session 3 deck, linked from the website Academy Materials section.
+- `academy/decks/vision-white-paper-slideshow.pdf` and `.pptx` (48 slides) — Session 2 deck, unchanged since 2026-10-20.
+- Dropbox: `/J.A.R.V.I.S./education/` — the decks; this record filed under `records/lecture-record-2026-11-11.md`; the 1.0 approved set under `course-approved-v1.0.0/` (259 files, listing-verified); the Academy Action Log and Addenda 1–2 under `academy-action-log/`.
+- Website: Academy section — index, history, interactive materials, Q&A; session log (Sessions 1–8 logged; Session 9 appended by this record).
+
+## Version note
+
+Record v1, 2026-11-11 morning. No corrections, no gaps closed — v1 stands as the complete record of a silent window. Per HgX's law: nothing deleted, nothing overwritten; any future correction, or HgX's word on what Session 9 was, becomes v2.
