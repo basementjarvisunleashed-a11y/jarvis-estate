@@ -11,9 +11,10 @@
 # route (the router's previous behaviour), so the free route will get
 # "Invalid API key" from the gateway until the key is available.
 #
-# Assumption: Get-GatewayKey.ps1 outputs the key and nothing else, so
-# its output can be captured into a variable. If that script's
-# interface differs, this launcher needs the matching read.
+# Get-GatewayKey.ps1 only DEFINES the Get-GatewayKey function; running
+# the file alone outputs nothing. This launcher dot-sources it and calls
+# the function, taking the key from its return value (proven on the
+# laptop 2026-11-13).
 #
 # Run:  powershell -ExecutionPolicy Bypass -File .\start-router.ps1
 # Stop: Ctrl+C in this window.
@@ -33,11 +34,12 @@ $env:FREELLM_API_KEY = ""
 $KeyScript = "C:\Users\hgx\.freellmapi\Get-GatewayKey.ps1"
 if (Test-Path $KeyScript) {
     try {
-        $key = (& $KeyScript | Out-String).Trim()
+        . $KeyScript
+        $key = Get-GatewayKey
         if ($key) {
-            $env:FREELLM_API_KEY = $key
+            $env:FREELLM_API_KEY = ([string]$key).Trim()
         } else {
-            Write-Warning "Get-GatewayKey.ps1 returned nothing; router starts without a gateway key."
+            Write-Warning "Get-GatewayKey returned nothing; router starts without a gateway key."
         }
     } catch {
         Write-Warning "Could not read the FreeLLMAPI key; router starts without it."
