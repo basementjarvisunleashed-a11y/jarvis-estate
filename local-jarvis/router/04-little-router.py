@@ -3,7 +3,7 @@
 
 Listens on 127.0.0.1:11435 and exposes an OpenAI-compatible
 /v1/chat/completions endpoint. It picks the brain:
-  - default (easy work) -> RESIDENT_MODEL: the 9B abliterated on VRAM
+  - default (easy work) -> RESIDENT_MODEL: the 4B abliterated on VRAM
   - hard work           -> HEAVY_MODEL: the 27B on system RAM
   - "model": "cloud"    -> CLOUD_JARVIS: Cloud Jarvis, the Grokbot
                            (remote, Grok-powered)
@@ -30,14 +30,15 @@ Cloud Jarvis needs CLOUD_JARVIS_URL + CLOUD_JARVIS_KEY (Grok tokens);
 if the key is missing, the cloud route answers 503 "not configured"
 instead of breaking. The default URL is xAI's API base; confirm the
 model name and the key at home. FreeLLMAPI needs FREELLM_URL (default
-http://127.0.0.1:3001); if it is down, the free route answers 502.
-Confirm the free model name at home.
+http://127.0.0.1:3001) and FREELLM_API_KEY when the gateway requires a
+key; if it is down, the free route answers 502. When the key is empty
+the free route sends no Authorization header, as before.
 
 Stdlib only — no dependencies. Run:  python3 04-little-router.py
 Config via environment: ROUTER_PORT, OLLAMA_URL, RESIDENT_MODEL,
 HEAVY_MODEL, HARD_CHAR_THRESHOLD, ROUTER_LOG, KEEP_ALIVE_EASY,
 KEEP_ALIVE_HARD, CLOUD_JARVIS_URL, CLOUD_JARVIS_KEY,
-CLOUD_JARVIS_MODEL, FREELLM_URL, FREELLM_MODEL.
+CLOUD_JARVIS_MODEL, FREELLM_URL, FREELLM_MODEL, FREELLM_API_KEY.
 """
 import json
 import os
@@ -48,8 +49,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PORT = int(os.environ.get("ROUTER_PORT", "11435"))
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
-RESIDENT_MODEL = os.environ.get("RESIDENT_MODEL", "qwen9b-abliterated")
-HEAVY_MODEL = os.environ.get("HEAVY_MODEL", "huihui_ai/Qwen3.8-abliterated:27b")
+RESIDENT_MODEL = os.environ.get("RESIDENT_MODEL", "qwen3-4b-rea:latest")
+HEAVY_MODEL = os.environ.get("HEAVY_MODEL", "gemma3-27b-rea:latest")
 HARD_CHAR_THRESHOLD = int(os.environ.get("HARD_CHAR_THRESHOLD", "8000"))
 LOG_PATH = os.environ.get(
     "ROUTER_LOG",
@@ -62,7 +63,8 @@ CLOUD_JARVIS_URL = os.environ.get("CLOUD_JARVIS_URL", "https://api.x.ai/v1").rst
 CLOUD_JARVIS_KEY = os.environ.get("CLOUD_JARVIS_KEY", "")
 CLOUD_JARVIS_MODEL = os.environ.get("CLOUD_JARVIS_MODEL", "grok-4")
 FREELLM_URL = os.environ.get("FREELLM_URL", "http://127.0.0.1:3001").rstrip("/")
-FREELLM_MODEL = os.environ.get("FREELLM_MODEL", "free")
+FREELLM_MODEL = os.environ.get("FREELLM_MODEL", "auto")
+FREELLM_API_KEY = os.environ.get("FREELLM_API_KEY", "")
 
 
 def log_decision(route, model, prompt_chars, stream):
@@ -210,6 +212,8 @@ class Handler(BaseHTTPRequestHandler):
             return
         extra = ({"Authorization": "Bearer " + CLOUD_JARVIS_KEY}
                  if needs_key else None)
+        if route == "free" and FREELLM_API_KEY:
+            extra = {"Authorization": "Bearer " + FREELLM_API_KEY}
         if native:
             path = "/api/chat"
             fwd_body = to_native(body, model, keep_alive, stream)
@@ -302,6 +306,7 @@ if __name__ == "__main__":
     print(f"  hard  -> {HEAVY_MODEL} (system RAM, on demand, keep_alive {KEEP_ALIVE_HARD})")
     print(f"  cloud -> {CLOUD_JARVIS_MODEL} (Cloud Jarvis / Grokbot) "
           f"[{'configured' if CLOUD_JARVIS_KEY else 'NOT CONFIGURED'}]")
-    print(f"  free  -> {FREELLM_MODEL} (FreeLLMAPI {FREELLM_URL})")
+    print(f"  free  -> {FREELLM_MODEL} (FreeLLMAPI {FREELLM_URL}) "
+          f"[{'key set' if FREELLM_API_KEY else 'NO KEY — sends no auth'}]")
     print(f"  log   -> {LOG_PATH}")
     ThreadingHTTPServer(("127.0.0.1", PORT), Handler).serve_forever()
