@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The Little Router — one door for everything on the Acer.
 
-Listens on 127.0.0.1:11435 and exposes an OpenAI-compatible
+Listens on 0.0.0.0:11435 (all interfaces) and exposes an OpenAI-compatible
 /v1/chat/completions endpoint. It picks the brain:
   - default (easy work) -> RESIDENT_MODEL: the 4B abliterated on VRAM
   - hard work           -> HEAVY_MODEL: the 27B on system RAM
@@ -48,6 +48,7 @@ import urllib.error
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PORT = int(os.environ.get("ROUTER_PORT", "11435"))
+HOST = os.environ.get("ROUTER_HOST", "0.0.0.0")
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
 RESIDENT_MODEL = os.environ.get("RESIDENT_MODEL", "qwen3-4b-rea:latest")
 HEAVY_MODEL = os.environ.get("HEAVY_MODEL", "gemma3-27b-rea:latest")
@@ -301,7 +302,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    print(f"Little Router on 127.0.0.1:{PORT} -> {OLLAMA_URL}")
+    print(f"Little Router on {HOST}:{PORT} -> {OLLAMA_URL}")
     print(f"  easy  -> {RESIDENT_MODEL} (VRAM resident, keep_alive {KEEP_ALIVE_EASY})")
     print(f"  hard  -> {HEAVY_MODEL} (system RAM, on demand, keep_alive {KEEP_ALIVE_HARD})")
     print(f"  cloud -> {CLOUD_JARVIS_MODEL} (Cloud Jarvis / Grokbot) "
@@ -309,4 +310,4 @@ if __name__ == "__main__":
     print(f"  free  -> {FREELLM_MODEL} (FreeLLMAPI {FREELLM_URL}) "
           f"[{'key set' if FREELLM_API_KEY else 'NO KEY — sends no auth'}]")
     print(f"  log   -> {LOG_PATH}")
-    ThreadingHTTPServer(("127.0.0.1", PORT), Handler).serve_forever()
+    ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()
