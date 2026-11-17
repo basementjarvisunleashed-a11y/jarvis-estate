@@ -16,6 +16,7 @@ Rubric v1.0 — see `README.md`. History appended, never rewritten.
 | 2026-W44 | 100   | Pages site live; identity clean; 0 corrections in W44 to date |
 | 2026-W45 | 100   | Pages site live; identity clean; 0 corrections in W45 to date |
 | 2026-W46 | 100   | Pages site live (now Estate 1.2.1); identity clean; 0 corrections in W46 to date; 2 late-caught corrections logged (dated W44/W45) |
+| 2026-W47 | 100   | Pages site live (Estate 1.2.1); identity clean; 0 corrections in W47 to date; 2 late-caught corrections logged (dated W46, 2026-11-15) |
 | 2026-10 (monthly) | 100 | rollup of W43–W44; month-end factors all 1.0; weeklies mean 92.5 |
 
 ## 2026-W44 (2026-10-26)
@@ -61,4 +62,18 @@ Rubric v1.0 — see `README.md`. History appended, never rewritten.
   this audit — 2026-10-31 drive names, 2026-11-08 Madrid — and do not
   count against this week's factor; W44/W45 history entries stand as
   recorded, never rewritten)
+- **Score: 100**
+
+## 2026-W47 (2026-11-16)
+
+- audit_pass: 1.0 (1/1) · evidence_complete: 1.0 (6/6 local PROVEN claims)
+  · identity_clean: 1.0 (0 hits) · publish_health: 1.0 (GitHub Pages
+  public site live, verified 2026-11-16, serving Estate 1.2.1;
+  artifact hub share still absent under the standing FULL STOP — see
+  audit 2026-W47, F-001 scope note)
+  · correction_stability: 1.0 (0 corrections dated in W47 to date,
+  2026-11-16; two corrections dated in W46 were logged late by
+  this audit — 2026-11-15 Stop-MpScan, 2026-11-15 scan-still-running
+  claim — and do not count against this week's factor; W46 history
+  entry stands as recorded, never rewritten)
 - **Score: 100**
